@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4a012bab-3566-47f3-aca0-e88294e25b13}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\generated">
+      <UniqueIdentifier>{5d980bd3-897b-4f74-a83e-da7831a9ebf9}</UniqueIdentifier>
+      <Extensions>moc_*.cpp</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{19864bd0-15bf-4e0b-89ed-bf3491bf0cd9}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Header Files\generated">
+      <UniqueIdentifier>{47297490-fbea-4774-ad3f-f8aa695e089c}</UniqueIdentifier>
+      <Extensions>ui_*.h</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{f1d5bbcb-8b02-40e1-bd74-73dae114870d}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{2350f9a8-7a61-4060-9b4c-5c36d16e9df1}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Sounds">
+      <UniqueIdentifier>{323fdecc-e9ac-44c9-873c-3ae4d8d32d59}</UniqueIdentifier>
+      <Extensions>wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="soundconfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sounduser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_sound.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_soundconfig.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_sounduser.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ui_soundconfigbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_sounduserbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="sound.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Uic Include="soundconfigbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="sounduserbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+  </ItemGroup>
+  <ItemGroup>
+    <Ogg Include="sounds\added.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\alert.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\auth.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\authrequest.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\contactrequest.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\contacts.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\deleted.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\error.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\file.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\filedone.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\mailpager.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\message.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\msgsent.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\refused.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\sms.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\startup.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\startup2.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\startup3.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\url.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\vip-online.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+    <Ogg Include="sounds\web.ogg">
+      <Filter>Sounds</Filter>
+    </Ogg>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="sound.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="soundconfig.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="sounduser.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

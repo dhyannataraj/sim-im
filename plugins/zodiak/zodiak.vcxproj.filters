@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{ff48c9cd-4cbf-42c7-b703-55ad22dd1466}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{80c10adc-195f-435b-ba60-902a3f332100}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{b94f593d-3884-4be3-b04a-22d39709d074}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="xpm">
+      <UniqueIdentifier>{f3ee499a-2618-46d2-b337-e6aa206d7163}</UniqueIdentifier>
+      <Extensions>*.xpm</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="moc_zodiak.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zodiak.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="zodiak.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xpm\1.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\10.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\11.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\12.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\2.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\3.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\4.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\5.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\6.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\7.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\8.xpm">
+      <Filter>xpm</Filter>
+    </None>
+    <None Include="xpm\9.xpm">
+      <Filter>xpm</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="zodiak.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

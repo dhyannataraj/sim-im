@@ -866,6 +866,7 @@ del /Q $(IntDir)jisp\*.*
 rmdir /Q $(IntDir)jisp
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)icons\gpl.jisp;%(Outputs)</Outputs>
+      <SubType>Designer</SubType>
     </CustomBuild>
     <None Include="GPL-Icons\icq_offline.png" />
     <None Include="GPL-Icons\icq_online.png" />

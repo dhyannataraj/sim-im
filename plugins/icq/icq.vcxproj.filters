@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="authorizationsnachandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bartsnachandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="buddysnachandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bytearraybuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bytearrayparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clientcapabilitiesregistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clientcapability.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icbmsnachandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icq.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqclient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqcontact.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqcontactlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqgroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqmessageeditorfactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqmessagefactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqstatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqstatusconverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqstatuswidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="locationsnachandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="metainfosnachandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="oscarsocket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="privacysnachandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rateinfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="servicesnachandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snac.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ssisnachandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="standardoscarsocket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tlv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tlvlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\moc_aboutinfo.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\moc_workinfo.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_bartsnachandler.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_buddysnachandler.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\moc_homeinfo.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_icbmsnachandler.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_icqclient.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\moc_icqconfigwidgetcreator.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_icqcontact.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="events\moc_icqcontactupdate.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\moc_icqinfo.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\moc_icqpicture.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_icqstatuswidget.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\moc_interestsinfo.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_locationsnachandler.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\moc_moreinfo.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_oscarsocket.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\moc_pastinfo.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_privacysnachandler.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_servicesnachandler.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_snac.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_ssisnachandler.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\moc_standardicqrequestmanager.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_standardoscarsocket.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="icq_pch.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\aboutinfo.cpp">
+      <Filter>Source Files\icqconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\workinfo.cpp">
+      <Filter>Source Files\icqconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\bartsnac\bartsnacavatarrequest.cpp">
+      <Filter>Source Files\requests\bartsnac</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\buddysnac\buddysnacrightsrequest.cpp">
+      <Filter>Source Files\requests\buddysnac</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\homeinfo.cpp">
+      <Filter>Source Files\icqconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\icbmsnac\icbmsnacparametersrequest.cpp">
+      <Filter>Source Files\requests\icmbsnac</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\icbmsnac\icbmsnacsendmessagerequest.cpp">
+      <Filter>Source Files\requests\icmbsnac</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\icbmsnac\icbmsnacsendparametersrequest.cpp">
+      <Filter>Source Files\requests\icmbsnac</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\icqconfigwidgetcreator.cpp">
+      <Filter>Source Files\icqconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="events\icqcontactupdate.cpp">
+      <Filter>Source Files\events</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\icqinfo.cpp">
+      <Filter>Source Files\icqconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\icqpicture.cpp">
+      <Filter>Source Files\icqconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\icqrequest.cpp">
+      <Filter>Source Files\requests</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\icqrequestmanager.cpp">
+      <Filter>Source Files\requests</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\interestsinfo.cpp">
+      <Filter>Source Files\icqconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\locationsnac\locationsnacrightsrequest.cpp">
+      <Filter>Source Files\requests\locationsnac</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\locationsnac\locationsnacsetuserinforequest.cpp">
+      <Filter>Source Files\requests\locationsnac</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\moreinfo.cpp">
+      <Filter>Source Files\icqconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="icqconfig\pastinfo.cpp">
+      <Filter>Source Files\icqconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\servicesnac\servicesnacservicerequest.cpp">
+      <Filter>Source Files\requests\servicesnac</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\standardicqrequestmanager.cpp">
+      <Filter>Source Files\requests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ui_aboutinfobase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_workinfobase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_advsearchbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_aimconfigbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_aiminfobase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_aimsearchbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_encodingdlgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_homeinfobase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_icqconfigbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_icqinfobase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="icqconfig\ui_icqinfobase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_icqpicturebase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_icqsearchbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_icqsecurebase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_interestsinfobase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_moreinfobase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_pastinfobase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_securedlgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_verifydlgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_warndlgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="advsearch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bytearrayparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bytearraybuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clientcapabilitiesregistry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clientcapability.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="icq.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="icq_defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="icqcontactlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="icqgroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="icqmessageeditorfactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="icqmessagefactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="icqstatusconverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="metainfosnachandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rateinfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tlv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tlvlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="icq_events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="requests\bartsnac\bartsnacavatarrequest.h">
+      <Filter>Header Files\requests\bartsnac</Filter>
+    </ClInclude>
+    <ClInclude Include="requests\buddysnac\buddysnacrightsrequest.h">
+      <Filter>Header Files\requests\buddysnac</Filter>
+    </ClInclude>
+    <ClInclude Include="requests\icbmsnac\icbmsnacparametersrequest.h">
+      <Filter>Header Files\requests\icmbsnac</Filter>
+    </ClInclude>
+    <ClInclude Include="requests\icbmsnac\icbmsnacsendmessagerequest.h">
+      <Filter>Header Files\requests\icmbsnac</Filter>
+    </ClInclude>
+    <ClInclude Include="requests\icbmsnac\icbmsnacsendparametersrequest.h">
+      <Filter>Header Files\requests\icmbsnac</Filter>
+    </ClInclude>
+    <ClInclude Include="requests\icqrequest.h">
+      <Filter>Header Files\requests</Filter>
+    </ClInclude>
+    <ClInclude Include="requests\icqrequestmanager.h">
+      <Filter>Header Files\requests</Filter>
+    </ClInclude>
+    <ClInclude Include="requests\locationsnac\locationsnacrightsrequest.h">
+      <Filter>Header Files\requests\locationsnac</Filter>
+    </ClInclude>
+    <ClInclude Include="requests\locationsnac\locationsnacsetuserinforequest.h">
+      <Filter>Header Files\requests\locationsnac</Filter>
+    </ClInclude>
+    <ClInclude Include="requests\servicesnac\servicesnacservicerequest.h">
+      <Filter>Header Files\requests\servicesnac</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="icqconfig\moreinfo.h">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="bartsnachandler.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="buddysnachandler.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="authorizationsnachandler.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icbmsnachandler.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqclient.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqcontact.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqstatus.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqstatuswidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="locationsnachandler.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="oscarsocket.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="privacysnachandler.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="servicesnachandler.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="snac.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ssisnachandler.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="standardoscarsocket.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqconfig\aboutinfo.h">
+      <Filter>Header Files\icqconfig</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqconfig\workinfo.h">
+      <Filter>Header Files\icqconfig</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqconfig\homeinfo.h">
+      <Filter>Header Files\icqconfig</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqconfig\icqconfigwidgetcreator.h">
+      <Filter>Header Files\icqconfig</Filter>
+    </CustomBuild>
+    <CustomBuild Include="events\icqcontactupdate.h">
+      <Filter>Header Files\events</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqconfig\icqinfo.h">
+      <Filter>Header Files\icqconfig</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqconfig\icqpicture.h">
+      <Filter>Header Files\icqconfig</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqconfig\interestsinfo.h">
+      <Filter>Header Files\icqconfig</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icqconfig\pastinfo.h">
+      <Filter>Header Files\icqconfig</Filter>
+    </CustomBuild>
+    <CustomBuild Include="requests\standardicqrequestmanager.h">
+      <Filter>Header Files\requests</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Uic Include="icqconfig\aboutinfobase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="aimsearchbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="advsearchbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="aimconfigbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="aiminfobase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="encodingdlgbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqconfig\homeinfobase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqconfigbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqconfig\icqinfobase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqconfig\icqpicturebase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqsearchbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqsecurebase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqconfig\interestsinfobase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqconfig\moreinfobase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqconfig\pastinfobase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="securedlgbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="verifydlgbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="warndlgbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqconfig\workinfobase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{74b01002-9e07-4d97-9ceb-48a10166d19d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated">
+      <UniqueIdentifier>{76280db1-8c4c-40e7-97a9-ce9572dc663c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{828b39b5-8694-47db-a2e5-da9cae249694}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated">
+      <UniqueIdentifier>{9d4cbabd-8988-4595-a018-22fad2f25d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{ac95ff80-8726-4678-96a0-945bfe5b7df8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{026ae41c-658f-47c7-8c8e-1b96801f85c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\events">
+      <UniqueIdentifier>{f55ad967-f696-4044-af7e-408dec8b5dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\icqconfig">
+      <UniqueIdentifier>{2ac42af6-f73e-4fa8-a82e-e74becbed489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\requests">
+      <UniqueIdentifier>{582ccc33-3264-47e8-9021-83b2fbcedf58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\events">
+      <UniqueIdentifier>{eee7421c-8a80-4b2a-b23c-1d3c2bb00b4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\icqconfig">
+      <UniqueIdentifier>{ccdb87d6-aa4a-4697-b2c6-6b10a4f14965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\requests">
+      <UniqueIdentifier>{d9257128-4a68-4aa5-85c4-38600593848a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\requests\bartsnac">
+      <UniqueIdentifier>{0254b1e4-65a1-4e7b-8086-9635ff4abca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\requests\buddysnac">
+      <UniqueIdentifier>{9c446907-32a9-4016-92a3-c153c88c0402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\requests\icmbsnac">
+      <UniqueIdentifier>{07e94da6-e63b-4d0a-9c68-34e063b09cf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\requests\locationsnac">
+      <UniqueIdentifier>{792cc0ec-dc83-4391-b01b-aef3f0588c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\requests\servicesnac">
+      <UniqueIdentifier>{e78133ec-bdf6-4399-94f3-5c7bd740cf78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\requests\bartsnac">
+      <UniqueIdentifier>{3760f6cd-63fb-4cde-8c7b-4441169a4585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\requests\buddysnac">
+      <UniqueIdentifier>{9f47104e-643a-43e4-bf54-02a1a7f2bf06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\requests\icmbsnac">
+      <UniqueIdentifier>{2ab43f78-caed-4ebf-a8ca-d5f995cdb8e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\requests\locationsnac">
+      <UniqueIdentifier>{503b2e42-dd98-4678-b00a-18de29a6ee62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\requests\servicesnac">
+      <UniqueIdentifier>{4cc8d105-f4ea-4f8a-b8e9-5c0152f5908d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icq.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

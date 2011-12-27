@@ -1,0 +1,786 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="commonstatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core_pch.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msgedit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msgview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="profileselectdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwinactions\moc_actioncommonstatus.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="container\moc_userwnd.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_commonstatus.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="events\moc_commonstatusevent.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="container\moc_container.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="container\moc_containercontroller.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="container\moc_containermanager.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_core.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="container\moc_iuserwnd.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_mainwin.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_msgedit.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_msgview.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_profileselectdialog.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="userconfig\moc_standarduserconfig.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="container\moc_standarduserwndcontroller.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="userconfig\moc_usercfg.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="roster\moc_userview.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="roster\moc_userviewmodel.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="userconfig\standarduserconfig.cpp">
+      <Filter>Source Files\userconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="userconfig\usercfg.cpp">
+      <Filter>Source Files\userconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="userconfig\userconfigcontext.cpp">
+      <Filter>Source Files\userconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="userconfig\userconfigcontroller.cpp">
+      <Filter>Source Files\userconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="roster\userview.cpp">
+      <Filter>Source Files\roster</Filter>
+    </ClCompile>
+    <ClCompile Include="roster\userviewmodel.cpp">
+      <Filter>Source Files\roster</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwinactions\actioncommonstatus.cpp">
+      <Filter>Source Files\mainwinactions</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwinactions\actionmenucommonstatus.cpp">
+      <Filter>Source Files\mainwinactions</Filter>
+    </ClCompile>
+    <ClCompile Include="events\commonstatusevent.cpp">
+      <Filter>Source Files\events</Filter>
+    </ClCompile>
+    <ClCompile Include="container\avatarbar.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\userwndcontroller.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\container.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\containercontroller.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\containermanager.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\icontainer.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\icontainermanager.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\iuserwnd.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\receivemessageprocessor.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\sendmessageprocessor.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\standarduserwndcontroller.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+    <ClCompile Include="container\userwnd.cpp">
+      <Filter>Source Files\container</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_autoreplybase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="container\ui_userwnd.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_cfgdlgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_connectionsettingsbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_connectwndbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_declinedlgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_editmailbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_editphonebase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_filecfgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_filetransferbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_historycfgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_interfacecfgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_logindlgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_maininfobase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_managerbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_msgcfgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_newprotocolbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_nonimbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_pagerbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_phonebase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_plugincfgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_prefcfgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_searchallbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_searchbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_smscfgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_toolsetupbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_userhistorycfgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_userviewcfgbase.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="container\userwndcontroller.h">
+      <Filter>Header Files\container</Filter>
+    </ClInclude>
+    <ClInclude Include="mainwinactions\actionmenucommonstatus.h">
+      <Filter>Header Files\mainwinactions</Filter>
+    </ClInclude>
+    <ClInclude Include="container\avatarbar.h">
+      <Filter>Header Files\container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\icontainer.h">
+      <Filter>Header Files\container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\icontainercontroller.h">
+      <Filter>Header Files\container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\icontainermanager.h">
+      <Filter>Header Files\container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\receivemessageprocessor.h">
+      <Filter>Header Files\container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\sendmessageprocessor.h">
+      <Filter>Header Files\container</Filter>
+    </ClInclude>
+    <ClInclude Include="userconfig\userconfigcontext.h">
+      <Filter>Header Files\userconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="userconfig\userconfigcontroller.h">
+      <Filter>Header Files\userconfig</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="styles\Separated.2.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\SIM.5.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\Separated.3.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\Separated.4.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\Separated.5.(2+3).xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\Separated.6.(2+4).xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\Separated.7.(3+4).xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\Separated.8.(2+3+4).xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\Separated.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\SIM.2.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\SIM.3.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\SIM.4.(2+3).xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\SIM.5.2.2.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\SIM.5.2.3.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\SIM.5.2.4.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\SIM.5.2.5.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\SIM.5.2.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\SIM.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\additional.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\apple_ichat.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\amibulb.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="commonstatus.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="core.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="pict\connect.gif">
+      <Filter>CrystalClear</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\gants.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\icq5.1.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\icq5.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\icqlite.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\lovenmoney.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwin.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="msgedit.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="msgview.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\msn.jisp">
+      <Filter>CrystalClear</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GPL-Icons\icondef.xml">
+      <Filter>CrystalClear</Filter>
+    </CustomBuild>
+    <CustomBuild Include="profileselectdialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\SIM-icons-Crystal-full.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\SIM-icons-Nuvola-full.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\SIM-icons-XP-full.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\sim.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\sim2.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\smiles.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\yahoo.jisp">
+      <Filter>emoticons_prebuilt</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\XChat.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\XChat3fullDate.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="styles\XChat2seconds.xsl">
+      <Filter>styles</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwinactions\actioncommonstatus.h">
+      <Filter>Header Files\mainwinactions</Filter>
+    </CustomBuild>
+    <CustomBuild Include="events\commonstatusevent.h">
+      <Filter>Header Files\events</Filter>
+    </CustomBuild>
+    <CustomBuild Include="container\container.h">
+      <Filter>Header Files\container</Filter>
+    </CustomBuild>
+    <CustomBuild Include="container\containercontroller.h">
+      <Filter>Header Files\container</Filter>
+    </CustomBuild>
+    <CustomBuild Include="container\containermanager.h">
+      <Filter>Header Files\container</Filter>
+    </CustomBuild>
+    <CustomBuild Include="container\iuserwnd.h">
+      <Filter>Header Files\container</Filter>
+    </CustomBuild>
+    <CustomBuild Include="userconfig\standarduserconfig.h">
+      <Filter>Header Files\userconfig</Filter>
+    </CustomBuild>
+    <CustomBuild Include="container\standarduserwndcontroller.h">
+      <Filter>Header Files\container</Filter>
+    </CustomBuild>
+    <CustomBuild Include="userconfig\usercfg.h">
+      <Filter>Header Files\userconfig</Filter>
+    </CustomBuild>
+    <CustomBuild Include="roster\userview.h">
+      <Filter>Header Files\roster</Filter>
+    </CustomBuild>
+    <CustomBuild Include="roster\userviewmodel.h">
+      <Filter>Header Files\roster</Filter>
+    </CustomBuild>
+    <CustomBuild Include="container\userwnd.h">
+      <Filter>Header Files\container</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GPL-Icons\1downarrow.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\1uparrow.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\1leftarrow.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\1rightarrow.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\aim_online.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\auth.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\button_cancel.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\collapsed.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\button_ok.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\cell.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\configure.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\gadu_online.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\contacts.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\def_status_away.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\def_status_dnd.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\def_status_ffc.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\def_status_na.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\def_status_occupied.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\empty.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\error.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\exit.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\expanded.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\fax.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\file.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\fileopen.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\filesave.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\find_user.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\fonts.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\gadu_away.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\gadu_dnd.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\gadu_invisible.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\gadu_offline.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\home.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\group_collapsed.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\group_expanded.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\grp_create.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\grp_off.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\grp_on.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\grp_rename.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\icq_offline.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\network.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\icq_online.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\jabber.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\jabber_offline.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\mail_generic.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\message.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\msn_online.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\no_phone.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\yahoo_online.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\non-im-contact.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\online_off.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\online_on.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\pager.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\phone.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\remove.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\run.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\security.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\sim.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\sms.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\url.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\webpress.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\work.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\yahoo_away.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\yahoo_dnd.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\yahoo_invisible.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\yahoo_na.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+    <None Include="GPL-Icons\yahoo_offline.png">
+      <Filter>CrystalClear</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Uic Include="cfgdlgbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="profileselectdialog.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="container\userwnd.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+  </ItemGroup>
+  <ItemGroup>
+    <TS Include="..\..\ts\bg.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\ca.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\cs.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\de.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\el.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\es.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\fr.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\he.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\hu.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\it.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\nl.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\pl.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\pt_BR.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\ru.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\sk.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\sv.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\sw.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\th.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\tr.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\uk.ts">
+      <Filter>lang</Filter>
+    </TS>
+    <TS Include="..\..\ts\zh_TW.ts">
+      <Filter>lang</Filter>
+    </TS>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="styles">
+      <UniqueIdentifier>{217fc334-9773-4ff7-9360-86e76947a739}</UniqueIdentifier>
+      <Extensions>xsl</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{736514b0-60ff-43e0-b337-a35450fc1b47}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{1a2732d3-4333-46bd-8ef5-cda5121a6055}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{70536cc5-49b4-47aa-abc2-ecff61a117e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated">
+      <UniqueIdentifier>{e37c85e1-0632-435c-aaf4-40a216769324}</UniqueIdentifier>
+      <Extensions>*base.cpp;moc_*.cpp</Extensions>
+    </Filter>
+    <Filter Include="emoticons_prebuilt">
+      <UniqueIdentifier>{27000346-6223-4788-9c09-c1f55535a146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lang">
+      <UniqueIdentifier>{115dd416-2a10-4adb-8e6c-ee33a6c686e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{c22ebbfc-3164-4a7c-99eb-277c1f83cbda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CrystalClear">
+      <UniqueIdentifier>{6d40c624-7fcb-4628-b8fc-2de19a81a972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated">
+      <UniqueIdentifier>{ab1a45f8-a223-4282-8d02-576db82f00dd}</UniqueIdentifier>
+      <Extensions>ui_*.h</Extensions>
+    </Filter>
+    <Filter Include="Source Files\userconfig">
+      <UniqueIdentifier>{c57e0a48-f019-4bf7-820b-ca9350865700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\roster">
+      <UniqueIdentifier>{25ca99d2-93fb-4d1d-a5a0-52ad04a60b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mainwinactions">
+      <UniqueIdentifier>{097e4b2c-9bf6-4319-a047-2d67f6d15ad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\events">
+      <UniqueIdentifier>{2710fd50-17d8-49f3-bd92-00ac0226c2f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\container">
+      <UniqueIdentifier>{6338eca3-cc98-4a6b-9d49-8655b55b3b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\userconfig">
+      <UniqueIdentifier>{a014fffb-7864-4c33-acc5-4294dfe7e8d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\roster">
+      <UniqueIdentifier>{55ca5a40-7f61-4c2f-8d56-e72e57bddfea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mainwinactions">
+      <UniqueIdentifier>{321fc67f-95ec-4825-9544-b211103b37c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\events">
+      <UniqueIdentifier>{ab510553-f764-4052-8b56-a770d7dc2037}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\container">
+      <UniqueIdentifier>{8583923b-ba4d-4d51-9448-712f212bdebe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="core.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
