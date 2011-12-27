@@ -234,6 +234,16 @@
     <Uic Include="jidadvsearchbase.ui" />
     <Uic Include="jidsearchbase.ui" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\sim.vcxproj">
+      <Project>{c152ffe3-3c84-4957-bdcc-63334e6ffa9e}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\_core\_core.vcxproj">
+      <Project>{438ecb60-e207-4db8-a46a-1ec2ea9a714a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\..\sim\win32\uic.targets" />

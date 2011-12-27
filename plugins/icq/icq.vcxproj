@@ -349,7 +349,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <ClInclude Include="icqconfig\ui_icqinfobase.h" />
     <CustomBuild Include="icqconfig\workinfo.h">
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
@@ -358,6 +357,14 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h</Command>
     </CustomBuild>
+    <ClInclude Include="icqconfig\ui_aboutinfobase.h" />
+    <ClInclude Include="icqconfig\ui_homeinfobase.h" />
+    <ClInclude Include="icqconfig\ui_icqinfobase.h" />
+    <ClInclude Include="icqconfig\ui_icqpicturebase.h" />
+    <ClInclude Include="icqconfig\ui_interestsinfobase.h" />
+    <ClInclude Include="icqconfig\ui_moreinfobase.h" />
+    <ClInclude Include="icqconfig\ui_pastinfobase.h" />
+    <ClInclude Include="icqconfig\ui_workinfobase.h" />
     <ClInclude Include="icqmessageeditorfactory.h" />
     <ClInclude Include="icqmessagefactory.h" />
     <ClInclude Include="metainfosnachandler.h" />
@@ -485,25 +492,18 @@
     </CustomBuild>
     <ClInclude Include="tlv.h" />
     <ClInclude Include="tlvlist.h" />
-    <ClInclude Include="ui_aboutinfobase.h" />
     <ClInclude Include="ui_advsearchbase.h" />
     <ClInclude Include="ui_aimconfigbase.h" />
     <ClInclude Include="ui_aiminfobase.h" />
     <ClInclude Include="ui_aimsearchbase.h" />
     <ClInclude Include="ui_encodingdlgbase.h" />
-    <ClInclude Include="ui_homeinfobase.h" />
     <ClInclude Include="ui_icqconfigbase.h" />
     <ClInclude Include="ui_icqinfobase.h" />
-    <ClInclude Include="ui_icqpicturebase.h" />
     <ClInclude Include="ui_icqsearchbase.h" />
     <ClInclude Include="ui_icqsecurebase.h" />
-    <ClInclude Include="ui_interestsinfobase.h" />
-    <ClInclude Include="ui_moreinfobase.h" />
-    <ClInclude Include="ui_pastinfobase.h" />
     <ClInclude Include="ui_securedlgbase.h" />
     <ClInclude Include="ui_verifydlgbase.h" />
     <ClInclude Include="ui_warndlgbase.h" />
-    <ClInclude Include="ui_workinfobase.h" />
     <ClInclude Include="requests\icqrequest.h" />
     <ClInclude Include="requests\icqrequestmanager.h" />
     <CustomBuild Include="requests\standardicqrequestmanager.h">

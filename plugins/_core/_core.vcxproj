@@ -866,6 +866,7 @@ del /Q $(IntDir)jisp\*.*
 rmdir /Q $(IntDir)jisp
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)icons\gpl.jisp;%(Outputs)</Outputs>
+      <SubType>Designer</SubType>
     </CustomBuild>
     <None Include="GPL-Icons\icq_offline.png" />
     <None Include="GPL-Icons\icq_online.png" />
@@ -895,6 +896,17 @@ rmdir /Q $(IntDir)jisp
     <None Include="GPL-Icons\yahoo_na.png" />
     <None Include="GPL-Icons\yahoo_offline.png" />
     <None Include="GPL-Icons\yahoo_online.png" />
+    <CustomBuild Include="styles\SIM.7.xsl">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy /Y "%(FullPath)" "$(OutDir)styles\%(Filename)%(Extension)"
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy /Y "%(FullPath)" "$(OutDir)styles\%(Filename)%(Extension)"
+</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copy %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copy %(FullPath)</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)styles\%(Filename)%(Extension);%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)styles\%(Filename)%(Extension);%(Outputs)</Outputs>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <TS Include="..\..\ts\bg.ts" />
