@@ -1386,26 +1386,43 @@ QString MsgView::makeFooter()
 
 QString MsgView::printMessage(const MessagePtr& message)
 {
-    IMContactPtr source = message->sourceContact().toStrongRef();
-    IMContactPtr target = message->targetContact().toStrongRef();
-    // TODO verify pointers
+    IMContactPtr source = message->sourceContact().toStrongRef(); // TODO verify pointers
+    //IMContactPtr target = message->targetContact().toStrongRef(); //uninteresting here, because given by context ;)
 
+    //Date, Time, Icon right?
+       
+    QDateTime dt(message->timestamp());
+    QTime t(dt.time());
+
+    QString info =  
+        QString("\n\t<icon>%1</icon>\n").arg( message->icon().name() ) + 
+        QString("\t<time>\n\t\t<date>%1</date>\n\t\t<hour>%2</hour>\n\t\t<minute>%3</minute>\n\t\t<second>%4</second>\n\t</time>")
+        .arg( dt.date().toString()        )
+        .arg( t.hour())   
+        .arg( t.minute()  )
+        .arg( t.second()  );
+       
+
+    //QString options(QString(" direction='%1' ").arg(message->flag())); //we need a function returning 1 if servertext and 0 if not servertext, is this right Denis? ;)
+    QString options(" direction='0' "); 
     QString result;
-    result.append(" <message>\n");
-    result.append("  <source>\n");
-    result.append("   <contact_id>").append(QString::number(source->parentContactId())).append("</contact_id>\n");
-    result.append("   <contact_name>").append(quoteXml(source->name())).append("</contact_name>\n");
-    result.append("   <imcontact_id>").append(quoteXml(source->id().toString())).append("</imcontact_id>\n");
-    result.append("  </source>\n");
-    result.append("  <target>\n");
-    result.append("   <contact_id>").append(QString::number(target->parentContactId())).append("</contact_id>\n");
-    result.append("   <contact_name>").append(quoteXml(target->name())).append("</contact_name>\n");
-    result.append("   <imcontact_id>").append(quoteXml(target->id().toString())).append("</imcontact_id>\n");
-    result.append("  </target>\n");
-    result.append("  <messagetext>\n");
-    result.append(quoteXml(message->toXml()));
-    result.append("  </messagetext>\n");
-    result.append(" </message>\n");
+    //bool direction=false;
+    result += 
+        QString(" <message %1>%2\n").arg(options).arg(info)
+
+        //.append("  <source>\n")
+        .append(QString("   <contact_id>%1</contact_id>\n").arg(source->parentContactId()))
+        .append(QString("   <from>%1</from>\n").arg(quoteXml(source->name()))) 
+        .append(QString("   <imcontact_id>%1</imcontact_id>\n").arg(quoteXml(source->id().toString())))
+        //.append("  </source>\n")
+    /*
+        .append("  <target>\n")
+        .append("   <contact_id>").append(QString::number(target->parentContactId())).append("</contact_id>\n")
+        .append("   <contact_name>").append(quoteXml(target->name())).append("</contact_name>\n")
+        .append("   <imcontact_id>").append(quoteXml(target->id().toString())).append("</imcontact_id>\n")
+        .append("  </target>\n")*/
+    .append(QString("  <body>%1</body>\n").arg(quoteXml(message->toXml())))
+    .append(" </message>\n");
     return result;
 }
 
@@ -1415,3 +1432,4 @@ QString MsgView::quoteXml(const QString& text)
     result.replace("&", "&amp;");
     return result;
 }
+

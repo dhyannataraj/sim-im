@@ -136,7 +136,7 @@ void Container::init()
 
 //    m_childs.clear();
 
-//    loadState();
+    loadState();
 
 //    if (m_tabBar->count() == 0)
 //        QTimer::singleShot(0, this, SLOT(close()));
@@ -147,15 +147,15 @@ void Container::init()
 
 QShortcut* Container::makeShortcut(unsigned int key, unsigned int id)
 {
-	QShortcut* shortcut = new QShortcut(QKeySequence(key), this);
-	shortcut->setProperty("id", id);
+    QShortcut* shortcut = new QShortcut(QKeySequence(key), this);
+    shortcut->setProperty("id", id);
     connect(shortcut, SIGNAL(activated()), this, SLOT(accelActivated()));
-	return shortcut;
+    return shortcut;
 }
 
 void Container::setupAccel()
 {
-	m_shortcuts.clear();
+    m_shortcuts.clear();
     m_shortcuts.append(makeShortcut(Qt::Key_1 + Qt::ALT, 1));
     m_shortcuts.append(makeShortcut(Qt::Key_2 + Qt::ALT, 2));
     m_shortcuts.append(makeShortcut(Qt::Key_3 + Qt::ALT, 3));
@@ -528,183 +528,183 @@ void Container::flash()
 /*
 bool Container::processEvent(Event *e)
 {
-	if (m_tabBar == NULL)
-		return false;
-	switch (e->type()){
-		case eEventMessageReceived:
-			{
-				EventMessage *em = static_cast<EventMessage*>(e);
-				Message *msg = em->msg();
-				if (msg->type() == MessageStatus){
-					Contact *contact = getContacts()->contact(msg->contact());
-					if (contact)
-						contactChanged(contact);
-					return false;
-				}
-				if (msg->getFlags() & MESSAGE_NOVIEW)
-					return false;
-				if (CorePlugin::instance()->getContainerMode())
-				{
-					if (isActiveWindow() && !isMinimized())
-					{
-						UserWnd *userWnd = m_tabBar->currentWnd();
-						if (userWnd && (userWnd->id() == msg->contact()))
-							userWnd->markAsRead();
-					}
-					else
-					{
-						UserWnd *userWnd = wnd(msg->contact());
-						if (userWnd)
-							QTimer::singleShot(0, this, SLOT(flash()));
-					}
-				}
-				// no break here - otherwise we have to duplicate the code below...
-			}
-		case eEventMessageRead:
-			{
-				EventMessage *em = static_cast<EventMessage*>(e);
-				Message *msg = em->msg();
-				UserWnd *userWnd = wnd(msg->contact());
-				if (userWnd){
-					bool bHighlight = false;
-					for (list<msg_id>::iterator it = CorePlugin::instance()->unread.begin(); it != CorePlugin::instance()->unread.end(); ++it){
-						if (it->contact != msg->contact())
-							continue;
-						bHighlight = true;
-						break;
-					}
-					m_tabBar->setHighlighted(msg->contact(), bHighlight);
-				}
-				break;
-			}
-		case eEventActiveContact:
-			{
-				EventActiveContact *eac = static_cast<EventActiveContact*>(e);
-				if (!isActiveWindow())
-					return false;
-				UserWnd *userWnd = m_tabBar->currentWnd();
-				if (userWnd) {
-					eac->setContactID(userWnd->id());
-					return true;
-				}
-				break;
-			}
-		case eEventContact:
-			{
-				EventContact *ec = static_cast<EventContact*>(e);
-				Contact *contact = ec->contact();
-				UserWnd *userWnd = wnd(contact->id());
-				if(!userWnd)
-					break;
-				switch(ec->action())
-				{
-					case EventContact::eDeleted:
-						{
-							removeUserWnd(userWnd);
-							break;
-						}
-					case EventContact::eChanged:
-						{
-							if (contact->getIgnore()){
-								removeUserWnd(userWnd);
-								break;
-							}
-							m_tabBar->changeTab(contact->id());
-							contactChanged(contact);
-							break;
-						}
-					case EventContact::eStatus:
-						{
-							unsigned style = 0;
-							QSet<QString> wrkIcons;
-							QString statusIcon;
-							contact->contactInfo(style, statusIcon, &wrkIcons);
-							bool bTyping = wrkIcons.contains("typing");
-							if (userWnd->m_bTyping != bTyping)
-							{
-								userWnd->m_bTyping = bTyping;
-								if (bTyping){
-									userWnd->setStatus(g_i18n("%1 is typing", contact) .arg(contact->getName()));
-								}else{
-									userWnd->setStatus("");
-								}
-								userWnd = m_tabBar->currentWnd();
-								if (userWnd && (contact->id() == userWnd->id()))
+    if (m_tabBar == NULL)
+        return false;
+    switch (e->type()){
+        case eEventMessageReceived:
+            {
+                EventMessage *em = static_cast<EventMessage*>(e);
+                Message *msg = em->msg();
+                if (msg->type() == MessageStatus){
+                    Contact *contact = getContacts()->contact(msg->contact());
+                    if (contact)
+                        contactChanged(contact);
+                    return false;
+                }
+                if (msg->getFlags() & MESSAGE_NOVIEW)
+                    return false;
+                if (CorePlugin::instance()->getContainerMode())
+                {
+                    if (isActiveWindow() && !isMinimized())
+                    {
+                        UserWnd *userWnd = m_tabBar->currentWnd();
+                        if (userWnd && (userWnd->id() == msg->contact()))
+                            userWnd->markAsRead();
+                    }
+                    else
+                    {
+                        UserWnd *userWnd = wnd(msg->contact());
+                        if (userWnd)
+                            QTimer::singleShot(0, this, SLOT(flash()));
+                    }
+                }
+                // no break here - otherwise we have to duplicate the code below...
+            }
+        case eEventMessageRead:
+            {
+                EventMessage *em = static_cast<EventMessage*>(e);
+                Message *msg = em->msg();
+                UserWnd *userWnd = wnd(msg->contact());
+                if (userWnd){
+                    bool bHighlight = false;
+                    for (list<msg_id>::iterator it = CorePlugin::instance()->unread.begin(); it != CorePlugin::instance()->unread.end(); ++it){
+                        if (it->contact != msg->contact())
+                            continue;
+                        bHighlight = true;
+                        break;
+                    }
+                    m_tabBar->setHighlighted(msg->contact(), bHighlight);
+                }
+                break;
+            }
+        case eEventActiveContact:
+            {
+                EventActiveContact *eac = static_cast<EventActiveContact*>(e);
+                if (!isActiveWindow())
+                    return false;
+                UserWnd *userWnd = m_tabBar->currentWnd();
+                if (userWnd) {
+                    eac->setContactID(userWnd->id());
+                    return true;
+                }
+                break;
+            }
+        case eEventContact:
+            {
+                EventContact *ec = static_cast<EventContact*>(e);
+                Contact *contact = ec->contact();
+                UserWnd *userWnd = wnd(contact->id());
+                if(!userWnd)
+                    break;
+                switch(ec->action())
+                {
+                    case EventContact::eDeleted:
+                        {
+                            removeUserWnd(userWnd);
+                            break;
+                        }
+                    case EventContact::eChanged:
+                        {
+                            if (contact->getIgnore()){
+                                removeUserWnd(userWnd);
+                                break;
+                            }
+                            m_tabBar->changeTab(contact->id());
+                            contactChanged(contact);
+                            break;
+                        }
+                    case EventContact::eStatus:
+                        {
+                            unsigned style = 0;
+                            QSet<QString> wrkIcons;
+                            QString statusIcon;
+                            contact->contactInfo(style, statusIcon, &wrkIcons);
+                            bool bTyping = wrkIcons.contains("typing");
+                            if (userWnd->m_bTyping != bTyping)
+                            {
+                                userWnd->m_bTyping = bTyping;
+                                if (bTyping){
+                                    userWnd->setStatus(g_i18n("%1 is typing", contact) .arg(contact->getName()));
+                                }else{
+                                    userWnd->setStatus("");
+                                }
+                                userWnd = m_tabBar->currentWnd();
+                                if (userWnd && (contact->id() == userWnd->id()))
                                     m_status->showMessage(userWnd->status());
-							}
-						}
-					default:
-						break;
-				}
-				break;
-			}
-		case eEventClientsChanged:
-			setupAccel();
-			break;
-		case eEventContactClient:
-			{
-				EventContactClient *ecc = static_cast<EventContactClient*>(e);
-				contactChanged(ecc->contact());
-				break;
-			}
-		case eEventCommandExec:
-			{
-				EventCommandExec *ece = static_cast<EventCommandExec*>(e);
-				CommandDef *cmd = ece->cmd();
-				UserWnd *userWnd = m_tabBar->currentWnd();
-				if (userWnd && ((unsigned long)(cmd->param) == userWnd->id())){
-					if (cmd->menu_id == MenuContainerContact){
-						m_tabBar->raiseTab(cmd->id);
-						return true;
-					}
-					if (cmd->id == CmdClose){
-						delete userWnd;
-						return true;
-					}
-					if (cmd->id == CmdInfo && cmd->menu_id != MenuContact){
-						CommandDef c = *cmd;
-						c.menu_id = MenuContact;
-						c.param   = (void*)userWnd->id();
-						EventCommandExec(&c).process();
-						return true;
-					}
-				}
-				break;
-			}
-		case eEventCheckCommandState:
-			{
-				EventCheckCommandState *ecs = static_cast<EventCheckCommandState*>(e);
-				CommandDef *cmd = ecs->cmd();
-				UserWnd *userWnd = m_tabBar->currentWnd();
-				if (userWnd && ((unsigned long)(cmd->param) == userWnd->id()) &&
-						(cmd->menu_id == MenuContainerContact) &&
-						(cmd->id == CmdContainerContacts)){
-					list<UserWnd*> userWnds = m_tabBar->windows();
-					CommandDef *cmds = new CommandDef[userWnds.size() + 1];
-					unsigned n = 0;
-					for (list<UserWnd*>::iterator it = userWnds.begin(); it != userWnds.end(); ++it){
-						cmds[n].id = (*it)->id();
-						cmds[n].flags = COMMAND_DEFAULT;
-						cmds[n].text_wrk = (*it)->getName();
-						cmds[n].icon  = (*it)->getIcon();
-						cmds[n].text  = "_";
-						cmds[n].menu_id = n + 1;
-						if (n < sizeof(accels) / sizeof(const char*))
-							cmds[n].accel = accels[n];
-						if (*it == m_tabBar->currentWnd())
-							cmds[n].flags |= COMMAND_CHECKED;
-						n++;
-					}
-					cmd->param = cmds;
-					cmd->flags |= COMMAND_RECURSIVE;
-					return true;
-				}
-				break;
-			}
-		default:
-			break;
-	}
-	return false;
+                            }
+                        }
+                    default:
+                        break;
+                }
+                break;
+            }
+        case eEventClientsChanged:
+            setupAccel();
+            break;
+        case eEventContactClient:
+            {
+                EventContactClient *ecc = static_cast<EventContactClient*>(e);
+                contactChanged(ecc->contact());
+                break;
+            }
+        case eEventCommandExec:
+            {
+                EventCommandExec *ece = static_cast<EventCommandExec*>(e);
+                CommandDef *cmd = ece->cmd();
+                UserWnd *userWnd = m_tabBar->currentWnd();
+                if (userWnd && ((unsigned long)(cmd->param) == userWnd->id())){
+                    if (cmd->menu_id == MenuContainerContact){
+                        m_tabBar->raiseTab(cmd->id);
+                        return true;
+                    }
+                    if (cmd->id == CmdClose){
+                        delete userWnd;
+                        return true;
+                    }
+                    if (cmd->id == CmdInfo && cmd->menu_id != MenuContact){
+                        CommandDef c = *cmd;
+                        c.menu_id = MenuContact;
+                        c.param   = (void*)userWnd->id();
+                        EventCommandExec(&c).process();
+                        return true;
+                    }
+                }
+                break;
+            }
+        case eEventCheckCommandState:
+            {
+                EventCheckCommandState *ecs = static_cast<EventCheckCommandState*>(e);
+                CommandDef *cmd = ecs->cmd();
+                UserWnd *userWnd = m_tabBar->currentWnd();
+                if (userWnd && ((unsigned long)(cmd->param) == userWnd->id()) &&
+                        (cmd->menu_id == MenuContainerContact) &&
+                        (cmd->id == CmdContainerContacts)){
+                    list<UserWnd*> userWnds = m_tabBar->windows();
+                    CommandDef *cmds = new CommandDef[userWnds.size() + 1];
+                    unsigned n = 0;
+                    for (list<UserWnd*>::iterator it = userWnds.begin(); it != userWnds.end(); ++it){
+                        cmds[n].id = (*it)->id();
+                        cmds[n].flags = COMMAND_DEFAULT;
+                        cmds[n].text_wrk = (*it)->getName();
+                        cmds[n].icon  = (*it)->getIcon();
+                        cmds[n].text  = "_";
+                        cmds[n].menu_id = n + 1;
+                        if (n < sizeof(accels) / sizeof(const char*))
+                            cmds[n].accel = accels[n];
+                        if (*it == m_tabBar->currentWnd())
+                            cmds[n].flags |= COMMAND_CHECKED;
+                        n++;
+                    }
+                    cmd->param = cmds;
+                    cmd->flags |= COMMAND_RECURSIVE;
+                    return true;
+                }
+                break;
+            }
+        default:
+            break;
+    }
+    return false;
 }
 */
 

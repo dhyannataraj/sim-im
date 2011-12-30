@@ -382,6 +382,6 @@ QList<int> UserWnd::multisendContacts() const
 void UserWnd::updateStyleSheet()
 {
     // TODO selection
-    XSL* xsl = new XSL("SIM");
+    XSL* xsl = new XSL("SIM.7");
     m_ui->msgView->setXSL(xsl);
 }
