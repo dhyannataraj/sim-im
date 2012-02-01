@@ -44,8 +44,6 @@ SET(sim_LIB_SRCS
         messaging/messageprocessor.cpp
         messaging/messageoutpipe.cpp
         messaging/standardmessageoutpipe.cpp
-        history/historystorage.cpp
-        history/sqlitehistorystorage.cpp
 		misc.cpp
 		paths.cpp
 		plugins.cpp
@@ -127,8 +125,6 @@ SET(sim_LIB_HDRS
         messaging/messageprocessor.h
         messaging/messageoutpipe.h
         messaging/standardmessageoutpipe.h
-        history/historystorage.h
-        history/sqlitehistorystorage.h
 		misc.h
 		paths.h
 		plugins.h

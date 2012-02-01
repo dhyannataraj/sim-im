@@ -143,7 +143,7 @@ bool IcbmSnacHandler::handleIncomingTextMessage(const Tlv& messageTlv, const QBy
     QString encoding = sourceContact->getEncoding();
     QString message = parseMessageBlock(messageBlockData, encoding);
 
-    log(L_DEBUG, "handleIncomingTextMessage: %s/%s/%s/%s", name.data(), sourceContact.data(), qPrintable(encoding), qPrintable(message));
+    log(L_DEBUG, "handleIncomingTextMessage: %s/%s/%s", name.data(), qPrintable(encoding), qPrintable(message));
 
     SIM::MessagePtr msg = SIM::MessagePtr(new SIM::GenericMessage(sourceContact, m_client->ownerContact(), message));
     SIM::getMessagePipe()->pushMessage(msg);
