@@ -25,6 +25,7 @@
 #include "contacts/protocolmanager.h"
 #include "log.h"
 #include "imagestorage/imagestorage.h"
+#include "clientmanager.h"
 
 #include <QPixmap>
 #include <QPushButton>
@@ -36,6 +37,7 @@ using namespace SIM;
 
 NewProtocol::NewProtocol(const QString& profileName, QWidget *parent) :
 		QDialog(parent),
+		m_connectionParameters(NULL),
 		m_profileName(profileName),
 		m_ui(new Ui::NewProtocol)
 {
@@ -73,6 +75,11 @@ void NewProtocol::accept()
 	getProfileManager()->selectProfile(m_profileName);
 	ProfilePtr profile = getProfileManager()->currentProfile();
 	profile->enablePlugin(protocol->plugin()->name());
+
+	ClientPtr client = protocol->createClientWithLoginWidget(m_connectionParameters);
+	getClientManager()->addClient(client);
+	getClientManager()->sync();
+
 	QDialog::accept();
 }
 
@@ -98,7 +105,11 @@ void NewProtocol::fillProtocolsCombobox()
 
 void NewProtocol::destroyProtocolParametersWidget()
 {
-
+	if(m_connectionParameters)
+	{
+		delete m_connectionParameters;
+		m_connectionParameters = 0;
+	}
 }
 
 SIM::ProtocolPtr NewProtocol::protocolByIndex(int index)
@@ -108,7 +119,10 @@ SIM::ProtocolPtr NewProtocol::protocolByIndex(int index)
 
 void NewProtocol::NewProtocol::setProtocolParametersWidget(QWidget* widget)
 {
-
+	widget->setParent(this);
+	m_ui->connectionParametersLayout->addWidget(widget);
+	widget->show();
+	m_connectionParameters = widget;
 }
 
 // vim: set expandtab:

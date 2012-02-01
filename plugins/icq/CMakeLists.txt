@@ -16,6 +16,7 @@ SET(icq_SRCS
         events/icqcontactupdate.cpp
         icbmsnachandler.cpp
         icq.cpp
+        icqloginwidget.cpp
 #        icqbos.cpp
 #        icqbuddy.cpp
 #        icqbuffer.cpp
@@ -95,6 +96,7 @@ SET(icq_HDRS
         events/icqcontactupdate.h
         icbmsnachandler.h
         icq.h
+        icqloginwidget.h
 #        icqbuffer.h
         icqclient.h
         icqcontact.h
@@ -165,6 +167,7 @@ SET(icq_UICS
 #        icqconfigbase.ui
         icqconfig/icqinfobase.ui
         icqconfig/icqpicturebase.ui
+        icqloginwidget.ui
 #        icqsearchbase.ui
 #        icqsecurebase.ui
         icqconfig/interestsinfobase.ui

@@ -49,6 +49,7 @@ public:
     virtual QString iconId();
     virtual SIM::ClientPtr createClient(const QString& name);
     virtual QWidget* createLoginWidget();
+    virtual SIM::ClientPtr createClientWithLoginWidget(QWidget* widget);
 
 private:
 	void initStatuses();

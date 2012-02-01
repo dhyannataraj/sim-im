@@ -22,6 +22,7 @@
 #include "imagestorage/imagestorage.h"
 #include "contacts/protocolmanager.h"
 #include "icqclient.h"
+#include "icqloginwidget.h"
 
 using namespace SIM;
 
@@ -78,7 +79,21 @@ SIM::ClientPtr ICQProtocol::createClient(const QString& name)
 
 QWidget* ICQProtocol::createLoginWidget()
 {
-	return 0;
+	return new IcqLoginWidget();
+}
+
+SIM::ClientPtr ICQProtocol::createClientWithLoginWidget(QWidget* widget)
+{
+	IcqLoginWidget* loginwidget = static_cast<IcqLoginWidget*>(widget);
+	if(!loginwidget)
+		return SIM::ClientPtr();
+
+	QString name = this->name() + '.' + loginwidget->name();
+	QString password = loginwidget->password();
+	ICQClient* client = new ICQClient(this, name, false);
+	client->setPassword(password);
+
+	return SIM::ClientPtr(client);
 }
 
 void ICQProtocol::initStatuses()

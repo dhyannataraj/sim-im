@@ -54,7 +54,7 @@ private:
 	SIM::ProtocolPtr protocolByIndex(int index);
 	void setProtocolParametersWidget(QWidget* widget);
 
-
+	QWidget* m_connectionParameters;
 	QList<SIM::PluginPtr> m_protocolPlugins;
 	QString m_profileName;
 	Ui::NewProtocol* m_ui;

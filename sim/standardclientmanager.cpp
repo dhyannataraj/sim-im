@@ -248,6 +248,7 @@ ConfigPtr StandardClientManager::config()
 
     m_loadedProfile = getProfileManager()->currentProfileName();
     QString cfgName = getProfileManager()->profilePath() + QDir::separator() + "clients.xml";
+    log(L_DEBUG, "Creating config: %s", qPrintable(cfgName));
     m_config = ConfigPtr(new Config(cfgName));
 
     m_config->readFromFile();

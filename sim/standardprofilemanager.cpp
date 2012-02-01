@@ -29,8 +29,8 @@ QStringList StandardProfileManager::enumProfiles()
     for(QStringList::iterator it = list.begin(); it != list.end(); ++it)
     {
         QString entry = *it;
-        QString fname = QString(m_rootPath) + QDir::separator() + entry + QDir::separator() + "clients.conf";
-        QString fname2 = QString(m_rootPath) + QDir::separator() + entry + QDir::separator() + "profile.conf";
+        QString fname = QString(m_rootPath) + QDir::separator() + entry + QDir::separator() + "clients.xml";
+        QString fname2 = QString(m_rootPath) + QDir::separator() + entry + QDir::separator() + "profile.xml";
         QFile f(fname);
         QFile f2(fname2);
         if(f.exists() || f2.exists())
@@ -61,7 +61,6 @@ bool StandardProfileManager::selectProfile(const QString& name)
     log(L_DEBUG, "Selecting profile:  %s", profile_conf.toUtf8().data());
     ConfigPtr config = ConfigPtr(new Config(profile_xml));
 
-    //config->load_old();
     if (!config->readFromFile())
     {
         config->mergeOldConfig(old_config);
@@ -121,6 +120,9 @@ bool StandardProfileManager::newProfile(const QString& name)
         d.mkdir(m_rootPath);
     if(!d.mkdir(name))
         return false;
+    QFile f(m_rootPath + QDir::separator() + name + QDir::separator() + "clients.xml");
+    f.open(QIODevice::WriteOnly);
+    f.close();
     return true;
 }
 

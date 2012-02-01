@@ -25,6 +25,8 @@ namespace SIM
         virtual QString iconId() = 0;
         virtual QSharedPointer<Client> createClient(const QString& name) = 0;
         virtual QWidget* createLoginWidget() = 0;
+        virtual QSharedPointer<Client> createClientWithLoginWidget(QWidget* widget) = 0;
+
         enum Flag
         {
             flNoAuth = 0,
