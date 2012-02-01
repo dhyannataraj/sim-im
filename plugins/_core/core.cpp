@@ -64,6 +64,7 @@ email                : vovan@shutoff.ru
 #include "profileselectdialog.h"
 #include "commonstatus.h"
 #include "container/containermanager.h"
+#include "newprotocol.h"
 
 #include "mainwinactions/actioncommonstatus.h"
 #include "mainwinactions/actionmenucommonstatus.h"
@@ -3093,6 +3094,12 @@ void CorePlugin::eventInit()
 ////	}
 //}
 
+void CorePlugin::createNewProfile(const QString& name)
+{
+	NewProtocol dlg(name, NULL);
+	dlg.exec();
+}
+
 bool CorePlugin::init()
 {
     log(L_DEBUG, "CorePlugin::init");
@@ -3103,23 +3110,6 @@ bool CorePlugin::init()
 
     QAction* configureAction = getCommandHub()->action("configure");
     connect(configureAction, SIGNAL(triggered()), this, SLOT(cmdSetup()));
-
-    // FIXME:
-    /*
-    EventArg e1("-profile:", I18N_NOOP("Use specified profile"));
-    e1.process();
-    QString cmd_line_profile = e1.value();
-    if (!cmd_line_profile.isEmpty()){
-        bCmdLineProfile = true;
-        setProfile(QString::null);
-        QString profileDir = user_file(cmd_line_profile);
-        QDir d(profileDir);
-        if (d.exists()) {
-            bCmdLineProfile = false;
-            setProfile(cmd_line_profile);
-        }
-    }
-    */
 
     QString profile = settings->rootHub()->value("Profile").toString();
     bool noshow = settings->rootHub()->value("NoShow").toBool();
@@ -3138,6 +3128,11 @@ bool CorePlugin::init()
             return false;
 
         profile = dlg.profile();
+
+        if(profile.isEmpty())
+		{
+			createNewProfile(dlg.newProfileName());
+		}
     }
     else
     {

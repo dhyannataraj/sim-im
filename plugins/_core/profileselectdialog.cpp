@@ -290,3 +290,8 @@ void ProfileSelectDialog::saveState()
     settings->rootHub()->setValue("SavePasswd",m_ui->chkSave->isChecked());
     settings->rootHub()->setValue("NoShow",m_ui->chkNoShow->isChecked());
 }
+
+QString ProfileSelectDialog::newProfileName() const
+{
+	return m_ui->e_newName->text();
+}

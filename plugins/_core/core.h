@@ -187,6 +187,8 @@ public:
 protected:
     void registerEvents();
     void subscribeToEvents();
+    void createNewProfile(const QString& name);
+
 //    virtual bool processEvent(SIM::Event*);
 //    virtual QByteArray getConfig();
 //    virtual QWidget *createConfigWindow(QWidget *parent);

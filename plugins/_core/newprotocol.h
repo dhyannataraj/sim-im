@@ -35,38 +35,29 @@ namespace SIM
 	class Protocol;
 }
 
-class NewProtocol
-    : public QWizard
-    , public Ui::NewProtocolBase
-    , public SIM::EventReceiver
+class NewProtocol : public QDialog
 {
     Q_OBJECT
 public:
-    NewProtocol(QWidget *parent,int default_protocol=0, bool bConnect=false);
+    NewProtocol(const QString& profileName, QWidget *parent);
     ~NewProtocol();
-    SIM::ClientPtr m_client;
-    bool	connected() { return m_bConnected; }
-signals:
-    void apply();
+
 protected slots:
-    void protocolChanged(int);
-    void okEnabled(bool);
-    void pageChanged(int);
-    void loginComplete();
+	void accept();
+	void currentProtocolChanged(int index);
+
 private:
-    virtual bool processEvent(SIM::Event*);
-    virtual void reject();
-    std::vector<SIM::ProtocolPtr> m_protocols;
-    ConnectWnd	*m_connectWnd;
-    QWidget *m_setup;
-    QWizardPage *m_setupPage;
-    QHBoxLayout *m_setupLayout;
-    QWizardPage *m_last;
-    bool	m_bConnect;
-    bool	m_bConnected;
-    bool	m_bStart;
-    QList<SIM::PluginPtr> m_protocolPlugins;
-	SIM::ProtocolPtr m_protocol;
+
+	void loadProtocolPlugins();
+	void fillProtocolsCombobox();
+	void destroyProtocolParametersWidget();
+	SIM::ProtocolPtr protocolByIndex(int index);
+	void setProtocolParametersWidget(QWidget* widget);
+
+
+	QList<SIM::PluginPtr> m_protocolPlugins;
+	QString m_profileName;
+	Ui::NewProtocol* m_ui;
 };
 
 #endif

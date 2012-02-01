@@ -49,7 +49,7 @@ SET(_core_SRCS
 #        msgurl.cpp
         msgview.cpp
 #        msgview_menu.cpp
-#        newprotocol.cpp
+        newprotocol.cpp
 #        nonim.cpp
 #        pagerdetails.cpp
 #        phonedetails.cpp
@@ -140,7 +140,7 @@ SET(_core_HDRS
 #        msgsms.h
 #        msgurl.h
         msgview.h
-#        newprotocol.h
+        newprotocol.h
 #        nonim.h
 #        pagerdetails.h
 #        phonedetails.h
@@ -188,7 +188,7 @@ SET(_core_UICS
 #        maininfobase.ui
 #        managerbase.ui
 #        msgcfgbase.ui
-#        newprotocolbase.ui
+        newprotocolbase.ui
 #        nonimbase.ui
 #        pagerbase.ui
 #        phonebase.ui

@@ -76,6 +76,11 @@ SIM::ClientPtr ICQProtocol::createClient(const QString& name)
     return icq;
 }
 
+QWidget* ICQProtocol::createLoginWidget()
+{
+	return 0;
+}
+
 void ICQProtocol::initStatuses()
 {
 //    m_states.clear();

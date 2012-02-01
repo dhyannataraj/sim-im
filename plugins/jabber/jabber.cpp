@@ -55,6 +55,11 @@ JabberProtocol::~JabberProtocol()
 {
 }
 
+QWidget* JabberProtocol::createLoginWidget()
+{
+	return 0;
+}
+
 //void JabberProtocol::initStatuses()
 //{
 //    addStatus(JabberStatusPtr(new JabberStatus("online", "Online", true, "", Icon("Jabber_online"), QString::null, QString::null)));
