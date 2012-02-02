@@ -117,7 +117,7 @@ SIM::ProtocolPtr NewProtocol::protocolByIndex(int index)
 	return getProtocolManager()->protocol(index);
 }
 
-void NewProtocol::NewProtocol::setProtocolParametersWidget(QWidget* widget)
+void NewProtocol::setProtocolParametersWidget(QWidget* widget)
 {
 	widget->setParent(this);
 	m_ui->connectionParametersLayout->addWidget(widget);

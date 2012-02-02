@@ -13,6 +13,8 @@ public:
     GenericMessage(const QString& fromName, const QString& toName, const QString& clientId, const QString& htmlText);
     virtual ~GenericMessage();
 
+    void setTimestamp(const QDateTime& t);
+
     virtual QString type() const;
 
     virtual Client* client();
@@ -39,6 +41,7 @@ private:
     QString m_sourceContactName;
     QString m_originatingClientId;
     QString m_text;
+    QDateTime m_timestamp;
 };
 
 } // namespace SIM

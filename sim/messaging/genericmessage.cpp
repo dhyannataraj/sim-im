@@ -31,6 +31,11 @@ GenericMessage::~GenericMessage()
 {
 }
 
+void GenericMessage::setTimestamp(const QDateTime& t)
+{
+	m_timestamp = t;
+}
+
 QString GenericMessage::type() const
 {
     return "generic";
@@ -68,7 +73,7 @@ QString GenericMessage::sourceContactName() const
 
 QDateTime GenericMessage::timestamp()
 {
-    return QDateTime();
+    return m_timestamp;
 }
 
 QString GenericMessage::toXml()

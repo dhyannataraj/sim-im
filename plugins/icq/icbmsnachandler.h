@@ -39,6 +39,7 @@ public:
     static const int TlvServerAck = 0x0003;
     static const int TlvSendOffline = 0x0006;
     static const int TlvOnlineStatus = 0x0006;
+    static const int TlvTimestamp = 0x0016;
     static const int MessageBlockInfo = 0x0101;
 
     static const int CharsetUtf16be = 0x0002;
@@ -52,7 +53,7 @@ private:
     QByteArray generateCookie();
     bool handleIncomingMessage(const QByteArray & data);
     QString parseMessageBlock(const QByteArray & block, const QString& contactEncoding);
-    bool handleIncomingTextMessage(const Tlv& messageTlv, const QByteArray& name);
+    bool handleIncomingTextMessage(const Tlv& messageTlv, const QByteArray& name, time_t timestamp);
 
     int m_channel;
     IcbmParameters m_params;
