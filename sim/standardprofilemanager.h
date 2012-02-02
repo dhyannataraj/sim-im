@@ -42,7 +42,9 @@ public:
     virtual PropertyHubPtr getPropertyHub(const QString& name);
 
     virtual ConfigPtr config();
+
 private:
+    void enableDefaultPlugins(const ProfilePtr& profile);
     QString m_rootPath;
     ProfilePtr m_currentProfile;
     ConfigPtr m_managerConfig;

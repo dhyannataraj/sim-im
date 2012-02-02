@@ -123,6 +123,10 @@ bool StandardProfileManager::newProfile(const QString& name)
     QFile f(m_rootPath + QDir::separator() + name + QDir::separator() + "clients.xml");
     f.open(QIODevice::WriteOnly);
     f.close();
+
+    selectProfile(name);
+    ProfilePtr profile = currentProfile();
+    enableDefaultPlugins(profile);
     return true;
 }
 
@@ -185,6 +189,18 @@ ConfigPtr StandardProfileManager::config()
     m_managerConfig->readFromFile();
 
     return m_managerConfig;
+}
+
+void StandardProfileManager::enableDefaultPlugins(const ProfilePtr& profile)
+{
+    QStringList plugins = getPluginManager()->enumPlugins();
+    foreach(const QString& plugin, plugins)
+    {
+        if(getPluginManager()->isPluginLoadByDefault(plugin))
+        {
+            profile->enablePlugin(plugin);
+        }
+    }
 }
 
 } /* namespace SIM */

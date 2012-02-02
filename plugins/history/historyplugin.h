@@ -12,8 +12,9 @@
 #include "messaging/messageprocessor.h"
 #include "historystorage.h"
 
-class HistoryPlugin : public SIM::Plugin, public SIM::MessageProcessor
+class HistoryPlugin : public QObject, public SIM::Plugin, public SIM::MessageProcessor
 {
+	Q_OBJECT
 public:
     HistoryPlugin();
     virtual ~HistoryPlugin();
@@ -22,6 +23,9 @@ public:
     virtual ProcessResult process(const SIM::MessagePtr& message);
 
     void setHistoryStorage(const HistoryStoragePtr& storage);
+
+protected slots:
+	void save();
 
 private:
     HistoryStoragePtr m_historyStorage;

@@ -149,7 +149,9 @@ void GenericMessageEditor::send()
 
     m_edit->clear();
 
-    emit messageSendRequest(SIM::MessagePtr(new GenericMessage(m_from, m_to, text)));
+    GenericMessage* message = new GenericMessage(m_from, m_to, text);
+    message->setTimestamp(QDateTime::currentDateTime());
+    emit messageSendRequest(SIM::MessagePtr(message));
 }
 
 void GenericMessageEditor::textChanged()

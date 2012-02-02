@@ -13,6 +13,9 @@
       <UniqueIdentifier>{8f9be51f-062a-41b5-8d03-fd236967a0b2}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="Source Files\generated">
+      <UniqueIdentifier>{100d8670-fde6-48dc-9cc9-371223f7a824}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="history.rc">
@@ -29,16 +32,21 @@
     <ClCompile Include="sqlitehistorystorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="moc_historyplugin.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="historyplugin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="historystorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sqlitehistorystorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="historyplugin.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

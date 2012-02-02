@@ -16,6 +16,7 @@ public:
 
 private:
     void init();
+    void createTables();
 
     QSqlDatabase m_db;
 };

@@ -68,6 +68,7 @@ namespace SIM
 
         bool isPluginAlwaysEnabled(const QString& pluginname);
         bool isPluginProtocol(const QString& pluginname);
+        bool isPluginLoadByDefault(const QString& pluginname);
 
         PluginInfo* getPluginInfo(const QString& pluginname);
 

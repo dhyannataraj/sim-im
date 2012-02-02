@@ -151,10 +151,20 @@
   <ItemGroup>
     <ClCompile Include="historyplugin.cpp" />
     <ClCompile Include="historystorage.cpp" />
+    <ClCompile Include="moc_historyplugin.cpp" />
     <ClCompile Include="sqlitehistorystorage.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="historyplugin.h" />
+    <CustomBuild Include="historyplugin.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="historystorage.h" />
     <ClInclude Include="sqlitehistorystorage.h" />
   </ItemGroup>

@@ -128,7 +128,7 @@ QByteArray IcbmSnacHandler::generateCookie()
     return cookie;
 }
 
-bool IcbmSnacHandler::handleIncomingTextMessage(const Tlv& messageTlv, const QByteArray& name)
+bool IcbmSnacHandler::handleIncomingTextMessage(const Tlv& messageTlv, const QByteArray& name, time_t timestamp)
 {
     ICQContactList *contactList = m_client->contactList();
     Q_ASSERT(contactList);
@@ -145,7 +145,9 @@ bool IcbmSnacHandler::handleIncomingTextMessage(const Tlv& messageTlv, const QBy
 
     log(L_DEBUG, "handleIncomingTextMessage: %s/%s/%s", name.data(), qPrintable(encoding), qPrintable(message));
 
-    SIM::MessagePtr msg = SIM::MessagePtr(new SIM::GenericMessage(sourceContact, m_client->ownerContact(), message));
+    SIM::GenericMessage* genericmessage = new SIM::GenericMessage(sourceContact, m_client->ownerContact(), message);
+    genericmessage->setTimestamp(QDateTime::fromTime_t(timestamp));
+    SIM::MessagePtr msg = SIM::MessagePtr(genericmessage);
     SIM::getMessagePipe()->pushMessage(msg);
 
     return true;
@@ -164,10 +166,12 @@ bool IcbmSnacHandler::handleIncomingMessage(const QByteArray& data)
     parser.readWord(); // tlv count
     TlvList list = TlvList::fromByteArray(parser.readAll());
 
+    time_t timestamp = list.firstTlv(TlvTimestamp).toUint32();
+
     Tlv messageTlv = list.firstTlv(TlvMessage);
     if(messageTlv.isValid())
     {
-        return handleIncomingTextMessage(messageTlv, name);
+        return handleIncomingTextMessage(messageTlv, name, timestamp);
     }
 
     return true;
