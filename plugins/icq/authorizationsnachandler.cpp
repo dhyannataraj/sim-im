@@ -80,6 +80,7 @@ bool AuthorizationSnacHandler::handleAuthKeyResponse(const QByteArray& data)
 
         tlvs.append(Tlv(0x01, client()->clientPersistentData->getUin().toAscii()));
 
+        //log(L_DEBUG, "HAHAHA LOOK EVERYBODY HIS PASSWORD IS: %s", client()->password().toAscii().data());
         QByteArray hash = QCryptographicHash::hash(md5_key +
                                                    client()->password().toAscii() +
                                                    magicHashString(), QCryptographicHash::Md5);

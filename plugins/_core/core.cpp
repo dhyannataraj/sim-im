@@ -3122,6 +3122,7 @@ bool CorePlugin::init()
 
     if(!noshow)
     {
+    	log(L_DEBUG, "!noshow");
         ProfileSelectDialog dlg;
         dlg.setModal(true);
         if(dlg.exec() != QDialog::Accepted)

@@ -53,11 +53,13 @@ protected slots:
     void adjust();
     void newNameChanged( const QString &text );
     void saveState();
+    virtual void accept();
 
 protected:
     void makeInputs(const SIM::ClientPtr& client);
     void clearInputs();
     void updateProfilesList();
+    bool selectedNewProfile();
 
 private:
     QString m_profile;

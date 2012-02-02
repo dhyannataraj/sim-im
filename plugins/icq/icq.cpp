@@ -92,6 +92,8 @@ SIM::ClientPtr ICQProtocol::createClientWithLoginWidget(QWidget* widget)
 	QString password = loginwidget->password();
 	ICQClient* client = new ICQClient(this, name, false);
 	client->setPassword(password);
+	client->setScreen(loginwidget->name());
+	client->setUin(loginwidget->name().toULong());
 
 	return SIM::ClientPtr(client);
 }

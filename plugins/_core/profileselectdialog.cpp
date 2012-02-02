@@ -72,6 +72,21 @@ ProfileSelectDialog::~ProfileSelectDialog()
 {
 }
 
+void ProfileSelectDialog::accept()
+{
+	if(selectedNewProfile())
+	{
+		m_profile = QString::null;
+	}
+	QDialog::accept();
+}
+
+bool ProfileSelectDialog::selectedNewProfile()
+{
+	int index = m_ui->cmbProfile->currentIndex();
+	return (index == m_ui->cmbProfile->count() - 1);
+}
+
 void ProfileSelectDialog::updateProfilesList()
 {
     QStringList profiles = getProfileManager()->enumProfiles();
