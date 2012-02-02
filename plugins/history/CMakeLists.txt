@@ -5,6 +5,8 @@ SET(history_SRCS
 	historyplugin.cpp
 	historystorage.cpp
 	sqlitehistorystorage.cpp
+	
+	${CMAKE_SOURCE_DIR}/sqlite/sqlite3.c
 )
 
 SET(history_HDRS
@@ -21,7 +23,6 @@ SET_TARGET_PROPERTIES(history PROPERTIES DEFINE_SYMBOL HISTORY_EXPORTS)
 
 SET(history_test_headers
     tests/qt-gtest.h
-
 
 )
 

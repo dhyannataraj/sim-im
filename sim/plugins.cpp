@@ -67,6 +67,7 @@ namespace SIM
             QString description;
             bool alwaysEnabled;
             bool protocolPlugin;
+            bool enabledByDefault;
             PluginWeakPtr plugin;
             QString filePath;
             PluginInfo *info;
@@ -162,6 +163,7 @@ namespace SIM
             QString pluginDescription(const QString& pluginname);
             bool isPluginAlwaysEnabled(const QString& pluginname);
             bool isPluginProtocol(const QString& pluginname);
+            bool isPluginLoadByDefault(const QString& pluginname);
 
             void abortInit();
 
@@ -259,6 +261,14 @@ namespace SIM
             return getInfo(pluginname)->protocolPlugin; 
         else 
             return false;
+    }
+
+    bool PluginManagerPrivate::isPluginLoadByDefault(const QString& pluginname)
+    {
+    	if (getInfo(pluginname))
+			return !(getInfo(pluginname)->enabledByDefault & PLUGIN_NOLOAD_DEFAULT);
+		else
+			return true;
     }
 
     PluginInfo* PluginManagerPrivate::getPluginInfo(const QString &name)
@@ -413,6 +423,7 @@ namespace SIM
 			    info.title = info.info->title; 
                 info.description = info.info->description;
                 info.protocolPlugin = ( info.info->flags & PLUGIN_PROTOCOL ) == PLUGIN_PROTOCOL;
+                info.enabledByDefault = (info.info->flags & PLUGIN_NOLOAD_DEFAULT) != PLUGIN_NOLOAD_DEFAULT;
             }
             
             
@@ -784,6 +795,11 @@ namespace SIM
     bool PluginManager::isPluginProtocol(const QString& pluginname)
     {
         return p->isPluginProtocol(pluginname);
+    }
+
+    bool PluginManager::isPluginLoadByDefault(const QString& pluginname)
+    {
+    	return p->isPluginLoadByDefault(pluginname);
     }
 
     PluginInfo* PluginManager::getPluginInfo(const QString& pluginname)

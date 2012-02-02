@@ -6,10 +6,13 @@
 
 #include "historyplugin.h"
 #include "messaging/messagepipe.h"
+#include "sqlitehistorystorage.h"
 
 SIM::Plugin* createHistoryPlugin()
 {
-    return new HistoryPlugin();
+    HistoryPlugin* plugin = new HistoryPlugin();
+    plugin->setHistoryStorage(HistoryStoragePtr(new SQLiteHistoryStorage()));
+    return plugin;
 }
 
 static SIM::PluginInfo info =
@@ -52,4 +55,8 @@ SIM::MessageProcessor::ProcessResult HistoryPlugin::process(const SIM::MessagePt
 void HistoryPlugin::setHistoryStorage(const HistoryStoragePtr& storage)
 {
     m_historyStorage = storage;
+}
+
+void HistoryPlugin::save()
+{
 }
