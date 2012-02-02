@@ -35,7 +35,6 @@ void SQLiteHistoryStorage::addMessage(const SIM::MessagePtr& message)
 
 	query.exec();
 
-	SIM::log(SIM::L_DEBUG, "sql: %s", qPrintable(query.lastQuery()));
 }
 
 QList<SIM::MessagePtr> SQLiteHistoryStorage::getMessages(const QString& sourceContactId, const QString& targetContactId,
