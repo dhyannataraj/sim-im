@@ -348,9 +348,6 @@
     <ClCompile Include="sim\network\tcpasyncsocket.cpp" />
     <ClCompile Include="sim\network\moc_asyncsocket.cpp" />
     <ClCompile Include="sim\network\moc_tcpasyncsocket.cpp" />
-    <ClCompile Include="sim\history\historystorage.cpp" />
-    <ClCompile Include="sim\history\sqlitehistorystorage.cpp" />
-    <ClCompile Include="sim\history\moc_sqlitehistorystorage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sim\aboutdata.h" />
@@ -692,17 +689,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="sim\network\tcpasyncsocket.h">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Filename).h ...</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
-    </CustomBuild>
-    <ClInclude Include="sim\history\historystorage.h" />
-    <CustomBuild Include="sim\history\sqlitehistorystorage.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
 </Command>

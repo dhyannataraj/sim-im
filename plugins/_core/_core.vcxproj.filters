@@ -139,6 +139,12 @@
     <ClCompile Include="container\userwnd.cpp">
       <Filter>Source Files\container</Filter>
     </ClCompile>
+    <ClCompile Include="newprotocol.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_newprotocol.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core_api.h">
@@ -434,6 +440,9 @@
     <CustomBuild Include="styles\SIM.7.xsl">
       <Filter>styles</Filter>
     </CustomBuild>
+    <CustomBuild Include="newprotocol.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="GPL-Icons\1downarrow.png">
@@ -646,6 +655,9 @@
       <Filter>Interfaces</Filter>
     </Uic>
     <Uic Include="container\userwnd.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="newprotocolbase.ui">
       <Filter>Interfaces</Filter>
     </Uic>
   </ItemGroup>

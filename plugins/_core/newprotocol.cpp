@@ -55,7 +55,7 @@ NewProtocol::~NewProtocol()
 void NewProtocol::loadProtocolPlugins()
 {
 	QStringList plugins = getPluginManager()->enumPlugins();
-	for(const QString& s: plugins)
+	foreach(const QString& s, plugins)
 	{
 		if(getPluginManager()->isPluginProtocol(s))
 		{
@@ -117,7 +117,7 @@ SIM::ProtocolPtr NewProtocol::protocolByIndex(int index)
 	return getProtocolManager()->protocol(index);
 }
 
-void NewProtocol::NewProtocol::setProtocolParametersWidget(QWidget* widget)
+void NewProtocol::setProtocolParametersWidget(QWidget* widget)
 {
 	widget->setParent(this);
 	m_ui->connectionParametersLayout->addWidget(widget);

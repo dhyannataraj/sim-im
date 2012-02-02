@@ -149,8 +149,10 @@
     <ClCompile Include="container\moc_standarduserwndcontroller.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="mainwin.cpp" />
+    <ClCompile Include="moc_newprotocol.cpp" />
     <ClCompile Include="msgedit.cpp" />
     <ClCompile Include="msgview.cpp" />
+    <ClCompile Include="newprotocol.cpp" />
     <ClCompile Include="profileselectdialog.cpp" />
     <ClCompile Include="moc_commonstatus.cpp" />
     <ClCompile Include="moc_core.cpp" />
@@ -212,6 +214,16 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Filename).h ...</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h</Command>
+    </CustomBuild>
+    <CustomBuild Include="newprotocol.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="userconfig\userconfigcontext.h" />
     <ClInclude Include="userconfig\userconfigcontroller.h" />
@@ -425,6 +437,7 @@
   </ItemGroup>
   <ItemGroup>
     <Uic Include="cfgdlgbase.ui" />
+    <Uic Include="newprotocolbase.ui" />
     <Uic Include="profileselectdialog.ui" />
     <Uic Include="container\userwnd.ui" />
   </ItemGroup>
