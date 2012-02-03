@@ -20,6 +20,7 @@ SET(sim_LIB_SRCS
         commands/menuaction.cpp
         commands/simtoolbar.cpp
 		country.cpp
+		events/actioncollectionevent.cpp
         events/eventdata.cpp
         events/eventhub.cpp
         events/nulleventdata.cpp
@@ -101,6 +102,7 @@ SET(sim_LIB_HDRS
         commands/menuaction.h
         commands/simtoolbar.h
 		country.h
+		events/actioncollectionevent.h
         events/eventdata.h
         events/eventhub.h
         events/nulleventdata.h
