@@ -7,6 +7,9 @@
 #include "historyplugin.h"
 #include "messaging/messagepipe.h"
 #include "sqlitehistorystorage.h"
+#include "imagestorage/imagestorage.h"
+#include "events/eventhub.h"
+#include <QAction>
 
 SIM::Plugin* createHistoryPlugin()
 {
@@ -33,6 +36,8 @@ HistoryPlugin::HistoryPlugin() : SIM::Plugin()
 {
     SIM::getMessagePipe()->addMessageProcessor(this);
     SIM::getOutMessagePipe()->addMessageProcessor(this);
+
+    SIM::getEventHub()->getEvent("contact_menu")->connectTo(this, SLOT(contactMenu(SIM::ActionList*)));
 }
 
 HistoryPlugin::~HistoryPlugin()
@@ -59,4 +64,11 @@ void HistoryPlugin::setHistoryStorage(const HistoryStoragePtr& storage)
 
 void HistoryPlugin::save()
 {
+}
+
+void HistoryPlugin::contactMenu(SIM::ActionList* list)
+{
+	QAction* history = new QAction(SIM::getImageStorage()->icon("history"), tr("History"), NULL);
+	history->setProperty("contact_id", list->context);
+	list->actions.append(history);
 }

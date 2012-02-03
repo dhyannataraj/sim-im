@@ -28,7 +28,7 @@
 #include "imagestorage/imagestorage.h"
 #include "clientmanager.h"
 #include "container/userwnd.h"
-#include "events/menuitemcollectionevent.h"
+#include "events/actioncollectionevent.h"
 
 
 #include "userconfig/userconfigcontext.h"
@@ -275,14 +275,15 @@ void MainWindow::raiseContactMenu(const QPoint& pos, int contactId)
     connect(contactInfoAction, SIGNAL(triggered()), this, SLOT(contactInfo()));
     menu.addAction(contactInfoAction);
 
-    SIM::MenuItemCollectionEventDataPtr data = SIM::MenuItemCollectionEventData::create("contact");
-    getEventHub()->triggerEvent("menu_event", data);
+    auto data = SIM::ActionCollectionEventData::create("contact_menu", QString::number(contact->id()));
+    getEventHub()->triggerEvent("contact_menu", data);
 
-    if(data->actions().length() > 0)
+    if(data->actions()->actions.length() > 0)
     {
-        QAction* a = new QAction(&menu);
-        a->setSeparator(true);
-        menu.addAction(a);
+    	foreach(QAction* action, data->actions()->actions)
+		{
+    		menu.addAction(action);
+		}
     }
 
     menu.exec(pos);

@@ -31,7 +31,7 @@ public:
 
 	virtual QString eventId() const;
 
-	const ActionList* actions() const;
+	ActionList* actions();
 
 	static ActionCollectionEventDataPtr create(const QString& id, const QString& context);
 
@@ -55,7 +55,7 @@ public:
 	static IEventPtr create(const QString& eventId);
 
 signals:
-	void eventTriggered(const SIM::ActionList* actions);
+	void eventTriggered(SIM::ActionList* actions);
 
 public slots:
 	virtual void triggered(const EventDataPtr& data);

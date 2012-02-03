@@ -24,7 +24,7 @@ QString ActionCollectionEvent::id()
 
 bool ActionCollectionEvent::connectTo(QObject *receiver, const char *receiverSlot)
 {
-	return connect(this, SIGNAL(eventTriggered(const SIM::ActionList*)), receiver, receiverSlot);
+	return connect(this, SIGNAL(eventTriggered(SIM::ActionList*)), receiver, receiverSlot);
 }
 
 IEventPtr ActionCollectionEvent::create(const QString & eventId)
@@ -55,7 +55,7 @@ QString ActionCollectionEventData::eventId() const
 	return m_id;
 }
 
-const ActionList* ActionCollectionEventData::actions() const
+ActionList* ActionCollectionEventData::actions()
 {
 	return &m_list;
 }

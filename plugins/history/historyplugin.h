@@ -11,6 +11,7 @@
 #include "messaging/message.h"
 #include "messaging/messageprocessor.h"
 #include "historystorage.h"
+#include "events/actioncollectionevent.h"
 
 class HistoryPlugin : public QObject, public SIM::Plugin, public SIM::MessageProcessor
 {
@@ -25,6 +26,7 @@ public:
     void setHistoryStorage(const HistoryStoragePtr& storage);
 
 protected slots:
+	void contactMenu(SIM::ActionList* list);
 	void save();
 
 private:
