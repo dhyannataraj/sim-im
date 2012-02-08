@@ -27,6 +27,7 @@ public:
 
 protected slots:
 	void contactMenu(SIM::ActionList* list);
+	void contactHistoryRequest();
 	void save();
 
 private:

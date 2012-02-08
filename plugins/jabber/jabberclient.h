@@ -361,6 +361,7 @@ public:
 	virtual QString retrievePasswordLink();
     virtual SIM::IMContactPtr createIMContact();
     virtual void addIMContact(const SIM::IMContactPtr& contact);
+    virtual SIM::IMContactPtr getIMContact(const SIM::IMContactId& id);
     virtual SIM::IMGroupPtr createIMGroup();
 
     virtual QWidget* createSetupWidget(const QString& id, QWidget* parent);

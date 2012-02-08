@@ -24,6 +24,8 @@
 #include <QTextEdit>
 #include <QMenu>
 
+
+#include "core_api.h"
 #include "messaging/message.h"
 
 class CorePlugin;
@@ -31,21 +33,8 @@ class XSL;
 
 using namespace std;
 
-struct CutHistory
-{
-    unsigned    contact;
-    QString     client;
-    unsigned    from;
-    unsigned    size;
-};
 
-struct Msg_Id
-{
-    unsigned    id;
-    QString     client;
-};
-
-class MsgView : public QTextEdit
+class CORE_EXPORT MsgView : public QTextEdit
 {
     Q_OBJECT
 public:

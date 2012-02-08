@@ -412,6 +412,11 @@ void JabberClient::addIMContact(const SIM::IMContactPtr& contact)
 
 }
 
+SIM::IMContactPtr JabberClient::getIMContact(const SIM::IMContactId& id)
+{
+	return SIM::IMContactPtr();
+}
+
 IMGroupPtr JabberClient::createIMGroup()
 {
     return IMGroupPtr(new JabberGroup(this));

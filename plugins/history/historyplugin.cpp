@@ -9,7 +9,9 @@
 #include "sqlitehistorystorage.h"
 #include "imagestorage/imagestorage.h"
 #include "events/eventhub.h"
+#include "historybrowser.h"
 #include <QAction>
+#include "log.h"
 
 SIM::Plugin* createHistoryPlugin()
 {
@@ -68,7 +70,27 @@ void HistoryPlugin::save()
 
 void HistoryPlugin::contactMenu(SIM::ActionList* list)
 {
+	SIM::log(SIM::L_DEBUG, "History::contactMenu: contactId: %s", qPrintable(list->context));
 	QAction* history = new QAction(SIM::getImageStorage()->icon("history"), tr("History"), NULL);
-	history->setProperty("contact_id", list->context);
+	history->setProperty("contact_id", list->context.toInt());
+	connect(history, SIGNAL(triggered()), this, SLOT(contactHistoryRequest()));
 	list->actions.append(history);
+}
+
+void HistoryPlugin::contactHistoryRequest()
+{
+	QObject* s = sender();
+	if(!s)
+	{
+		SIM::log(SIM::L_WARN, "!sender");
+		return;
+	}
+	int contactId = s->property("contact_id").toInt();
+	if(contactId == 0)
+		return;
+
+	SIM::log(SIM::L_DEBUG, "contactId = %d", contactId);
+
+	HistoryBrowser browser(m_historyStorage, contactId);
+	browser.exec();
 }

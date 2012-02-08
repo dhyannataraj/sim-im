@@ -945,6 +945,13 @@ void ICQClient::addIMContact(const SIM::IMContactPtr& contact)
     contactList()->addContact(c);
 }
 
+SIM::IMContactPtr ICQClient::getIMContact(const SIM::IMContactId& id)
+{
+	if(id.clientSpecificId() == ownerContact()->id().clientSpecificId())
+		return ownerContact();
+	return contactList()->contactByScreen(id.clientSpecificId());
+}
+
 SIM::IMGroupPtr ICQClient::createIMGroup()
 {
     return SIM::IMGroupPtr(new ICQGroup(this));

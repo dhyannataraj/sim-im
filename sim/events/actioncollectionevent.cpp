@@ -67,7 +67,7 @@ ActionCollectionEventDataPtr ActionCollectionEventData::create(const QString & i
 
 ActionCollectionEventData::ActionCollectionEventData(const QString & id, const QString & context) : m_id(id)
 {
-	m_list.context = id;
+	m_list.context = context;
 }
 
 }
