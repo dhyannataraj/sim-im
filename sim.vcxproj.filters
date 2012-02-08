@@ -121,21 +121,6 @@
     <Filter Include="network\Header Files\generated">
       <UniqueIdentifier>{ad43bbca-63ee-4871-bfc8-d608facc50f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="history">
-      <UniqueIdentifier>{4770995e-5261-4530-a8d7-a8b003966fa7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="history\Source Files">
-      <UniqueIdentifier>{2a2a34d9-6467-48ca-9ad1-37cf993c3d4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="history\Source Files\generated">
-      <UniqueIdentifier>{5363ac81-36ea-47fe-9763-da71e0aec91f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="history\Header Files">
-      <UniqueIdentifier>{29715db6-cdc3-41a8-8c88-d0f47285ee7a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="history\Header Files\generated">
-      <UniqueIdentifier>{5e2adaec-a764-4b69-8f9d-816bd049529b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="events\Source Files">
       <UniqueIdentifier>{b4a21088-e89b-475f-9f65-d2b1acea4e81}</UniqueIdentifier>
     </Filter>
@@ -432,15 +417,6 @@
     <ClCompile Include="sim\network\moc_tcpasyncsocket.cpp">
       <Filter>network\Source Files\generated</Filter>
     </ClCompile>
-    <ClCompile Include="sim\history\historystorage.cpp">
-      <Filter>history\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\history\sqlitehistorystorage.cpp">
-      <Filter>history\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\history\moc_sqlitehistorystorage.cpp">
-      <Filter>history\Source Files\generated</Filter>
-    </ClCompile>
     <ClCompile Include="sim\sim_pch.h">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -629,9 +605,6 @@
     <ClInclude Include="sim\imagestorage\standardimagestorage.h">
       <Filter>imagestore\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sim\history\historystorage.h">
-      <Filter>history\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sim\messaging\messagetypedescriptor.h">
       <Filter>messaging\Header Files</Filter>
     </ClInclude>
@@ -730,9 +703,6 @@
     </CustomBuild>
     <CustomBuild Include="sim\network\tcpasyncsocket.h">
       <Filter>network\Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="sim\history\sqlitehistorystorage.h">
-      <Filter>history\Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="sim\events\menuitemcollectionevent.h">
       <Filter>events\Header Files</Filter>

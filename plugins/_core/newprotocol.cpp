@@ -55,7 +55,7 @@ NewProtocol::~NewProtocol()
 void NewProtocol::loadProtocolPlugins()
 {
 	QStringList plugins = getPluginManager()->enumPlugins();
-	for(const QString& s: plugins)
+	foreach(const QString& s, plugins)
 	{
 		if(getPluginManager()->isPluginProtocol(s))
 		{

@@ -193,14 +193,14 @@ ConfigPtr StandardProfileManager::config()
 
 void StandardProfileManager::enableDefaultPlugins(const ProfilePtr& profile)
 {
-	QStringList plugins = getPluginManager()->enumPlugins();
-	for(const QString& plugin : plugins)
-	{
-		if(getPluginManager()->isPluginLoadByDefault(plugin))
-		{
-			profile->enablePlugin(plugin);
-		}
-	}
+    QStringList plugins = getPluginManager()->enumPlugins();
+    foreach(const QString& plugin, plugins)
+    {
+        if(getPluginManager()->isPluginLoadByDefault(plugin))
+        {
+            profile->enablePlugin(plugin);
+        }
+    }
 }
 
 } /* namespace SIM */

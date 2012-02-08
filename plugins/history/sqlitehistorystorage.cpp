@@ -1,6 +1,6 @@
 #include "sqlitehistorystorage.h"
 #include "profilemanager.h"
-#include "sqlite3.h"
+//#include "sqlite3.h"
 #include "log.h"
 #include "contacts/imcontact.h"
 #include <QDir>

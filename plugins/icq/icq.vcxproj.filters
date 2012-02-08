@@ -226,6 +226,12 @@
     <ClCompile Include="requests\standardicqrequestmanager.cpp">
       <Filter>Source Files\requests</Filter>
     </ClCompile>
+    <ClCompile Include="icqloginwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_icqloginwidget.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_advsearchbase.h">
@@ -369,6 +375,9 @@
     <ClInclude Include="icqconfig\ui_workinfobase.h">
       <Filter>Header Files\generated</Filter>
     </ClInclude>
+    <ClInclude Include="ui_icqloginwidget.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="icqconfig\moreinfo.h">
@@ -449,6 +458,9 @@
     <CustomBuild Include="requests\standardicqrequestmanager.h">
       <Filter>Header Files\requests</Filter>
     </CustomBuild>
+    <CustomBuild Include="icqloginwidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Uic Include="icqconfig\aboutinfobase.ui">
@@ -506,6 +518,9 @@
       <Filter>Interfaces</Filter>
     </Uic>
     <Uic Include="icqconfig\workinfobase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="icqloginwidget.ui">
       <Filter>Interfaces</Filter>
     </Uic>
   </ItemGroup>
