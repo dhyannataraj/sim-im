@@ -69,6 +69,9 @@ private slots:
     void contactMenuRequested(const QPoint& pos, int contactId);
     void sendMessageRequested();
 
+    void mainMenuRequested();
+    void showClientsDialog();
+
     void contactInfo();
     void systrayActivated(QSystemTrayIcon::ActivationReason reason);
     void quitApp();
@@ -80,6 +83,7 @@ private:
     void populateMainToolbar();
     void loadDefaultMainToolbar();
     void createTrayIcon(QStringList actions);
+    void addClientsDialogAction(QMenu* menu);
 
     void loadSettings();
     void saveSettings();

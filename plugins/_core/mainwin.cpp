@@ -29,7 +29,7 @@
 #include "clientmanager.h"
 #include "container/userwnd.h"
 #include "events/actioncollectionevent.h"
-
+#include "clientsdialog.h"
 
 #include "userconfig/userconfigcontext.h"
 #include "userconfig/userconfigcontroller.h"
@@ -42,6 +42,7 @@
 #include <QStatusBar>
 #include <QDesktopWidget>
 #include <QToolBar>
+#include <QAction>
 #include <QMessageBox>
 #include "profilemanager.h"
 
@@ -134,21 +135,18 @@ void MainWindow::loadDefaultMainToolbar()
     list.appendCommand("separator");
     list.appendCommand("common_status");
     list.appendCommand("separator");
-    list.appendCommand("main_menu");
+    //list.appendCommand("main_menu");
 
     m_bar->load(list);
+    QIcon arrowDown = SIM::getImageStorage()->icon("1downarrow");
+    QAction* mainMenu = new QAction(arrowDown, QString(), m_bar);
+    connect(mainMenu, SIGNAL(triggered()), this, SLOT(mainMenuRequested()));
+    m_bar->addAction(mainMenu);
 }
 
 void MainWindow::populateMainToolbar()
 {
-    QStringList actions = m_core->propertyHub()->value("mainwindow_toolbar_actions").toStringList();
-    if(actions.isEmpty())
-    {
-        loadDefaultMainToolbar();
-    }
-    else
-    {
-    }
+    loadDefaultMainToolbar();
 }
 
 void MainWindow::init()
@@ -239,6 +237,7 @@ void MainWindow::contactMenuRequested(const QPoint& pos, int contactId)
     raiseContactMenu(m_view->mapToGlobal(pos), contactId);
 }
 
+// TODO refactor
 void MainWindow::raiseContactMenu(const QPoint& pos, int contactId)
 {
     SIM::ContactPtr contact = getContactList()->contact(contactId);
@@ -307,6 +306,41 @@ void MainWindow::sendMessageRequested()
     manager->contactChatRequested(contactId, "generic");
 }
 
+void MainWindow::mainMenuRequested()
+{
+    QMenu menu;
+
+    SIM::ActionCollectionEventDataPtr data = SIM::ActionCollectionEventData::create("main_menu", QString());
+    getEventHub()->triggerEvent("main_menu", data);
+
+    if(data->actions()->actions.length() > 0)
+    {
+        foreach(QAction* action, data->actions()->actions)
+        {
+            menu.addAction(action);
+        }
+    }
+
+    addClientsDialogAction(&menu);
+
+    QAction* separator = new QAction(&menu);
+    separator->setSeparator(true);
+    menu.addAction(separator);
+
+    QAction* quit = new QAction(SIM::getImageStorage()->icon("exit"), tr("Quit"), &menu);
+    connect(quit, SIGNAL(triggered()), this, SLOT(quitApp()));
+    menu.addAction(quit);
+
+    menu.exec(QCursor::pos());
+}
+
+void MainWindow::showClientsDialog()
+{
+    ClientsDialog dlg(this);
+    dlg.exec();
+    refreshStatusWidgets();
+}
+
 void MainWindow::contactInfo()
 {
     QAction* action = qobject_cast<QAction*>(sender());
@@ -329,19 +363,26 @@ void MainWindow::contactInfo()
 }
 
 void MainWindow::createTrayIcon(QStringList actions) //Todo make configurable
- {
-     
-     foreach(QString action, actions)
-        m_trayIconMenu->addAction(getCommandHub()->action(action));
-     
-     m_trayIconMenu->addSeparator();
-     QAction * actionQuit = new QAction(getImageStorage()->icon("SIM"), tr("&Quit"), this);
-     connect(actionQuit, SIGNAL(triggered()), this, SLOT(quitApp()));
-     m_trayIconMenu->addAction(actionQuit);
-    
-     m_systray->setIcon(getImageStorage()->icon("SIM"));
-     m_systray->setContextMenu(m_trayIconMenu);
- }
+{
+
+    foreach(QString action, actions)
+                m_trayIconMenu->addAction(getCommandHub()->action(action));
+
+    m_trayIconMenu->addSeparator();
+    QAction * actionQuit = new QAction(getImageStorage()->icon("SIM"), tr("&Quit"), this);
+    connect(actionQuit, SIGNAL(triggered()), this, SLOT(quitApp()));
+    m_trayIconMenu->addAction(actionQuit);
+
+    m_systray->setIcon(getImageStorage()->icon("SIM"));
+    m_systray->setContextMenu(m_trayIconMenu);
+}
+
+void MainWindow::addClientsDialogAction(QMenu* menu)
+{
+    QAction* action = new QAction(tr("Clients..."), menu);
+    connect(action, SIGNAL(triggered()), this, SLOT(showClientsDialog()));
+    menu->addAction(action);
+}
 
 void MainWindow::quitApp()
 {
@@ -349,29 +390,29 @@ void MainWindow::quitApp()
     QTimer::singleShot(0, m_core, SLOT(cmdQuit())); //And quit core :)
 }
 
- void MainWindow::systrayActivated(QSystemTrayIcon::ActivationReason reason)
- {
-     QMessageBox msgBox;
-     switch (reason) {
-         
-     case QSystemTrayIcon::Trigger: // single click
+void MainWindow::systrayActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    QMessageBox msgBox;
+    switch (reason) {
+
+    case QSystemTrayIcon::Trigger: // single click
         if (isVisible () )
             hide();
         else
             show();
         break;
-     case QSystemTrayIcon::DoubleClick:
+    case QSystemTrayIcon::DoubleClick:
         msgBox.setText("The systray has been double clicked");
         msgBox.exec();
-         break;
-     case QSystemTrayIcon::MiddleClick:
+        break;
+    case QSystemTrayIcon::MiddleClick:
         msgBox.setText("The systray has been middle clicked");
         msgBox.exec();
-         break;
-     default:
-         ;
-     }
-  }
+        break;
+    default:
+        ;
+    }
+}
 
 void MainWindow::loadSettings()
 {

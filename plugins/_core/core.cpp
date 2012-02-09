@@ -218,6 +218,7 @@ void CorePlugin::registerEvents()
     getEventHub()->registerEvent(WidgetCollectionEvent::create("contact_widget_collection"));
     getEventHub()->registerEvent(WidgetCollectionEvent::create("global_configure_widget_collection"));
     getEventHub()->registerEvent(ActionCollectionEvent::create("contact_menu"));
+    getEventHub()->registerEvent(ActionCollectionEvent::create("main_menu"));
 }
 
 void CorePlugin::subscribeToEvents()
