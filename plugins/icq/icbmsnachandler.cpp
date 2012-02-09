@@ -56,7 +56,7 @@ bool IcbmSnacHandler::process(unsigned short subtype, const QByteArray& data, in
         return false;
     }
 
-    return true;
+    return true; //unreachable
 }
 
 void IcbmSnacHandler::disconnect()
