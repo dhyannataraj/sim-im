@@ -24,7 +24,7 @@ struct ActionList
 class ActionCollectionEventData;
 typedef QSharedPointer<ActionCollectionEventData> ActionCollectionEventDataPtr;
 
-class ActionCollectionEventData : public SIM::EventData
+class EXPORT ActionCollectionEventData : public SIM::EventData
 {
 public:
 	virtual ~ActionCollectionEventData();
@@ -42,7 +42,7 @@ private:
 	ActionList m_list;
 };
 
-class ActionCollectionEvent : public SIM::IEvent
+class EXPORT ActionCollectionEvent : public SIM::IEvent
 {
 	Q_OBJECT
 public:

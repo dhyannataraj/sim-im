@@ -741,6 +741,7 @@
     </Filter>
     <Filter Include="Interfaces">
       <UniqueIdentifier>{70536cc5-49b4-47aa-abc2-ecff61a117e0}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
     </Filter>
     <Filter Include="Source Files\generated">
       <UniqueIdentifier>{e37c85e1-0632-435c-aaf4-40a216769324}</UniqueIdentifier>
