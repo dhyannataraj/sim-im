@@ -57,12 +57,23 @@ JabberProtocol::~JabberProtocol()
 
 QWidget* JabberProtocol::createLoginWidget()
 {
-	return new JabberLoginWidget();;
+	return new JabberLoginWidget();
 }
 
 SIM::ClientPtr JabberProtocol::createClientWithLoginWidget(QWidget* widget)
 {
-	return SIM::ClientPtr();
+    JabberLoginWidget* loginwidget = qobject_cast<JabberLoginWidget*>(widget);
+    if(!loginwidget)
+        return SIM::ClientPtr();
+
+    QString name = this->name() + '.' + loginwidget->jid();
+    QString password = loginwidget->password();
+
+    JabberClient* client = new JabberClient(this, name);
+    client->setServer(loginwidget->server());
+    client->setPort(loginwidget->port());
+    client->setID(loginwidget->jid());
+	return SIM::ClientPtr(client);
 }
 
 
@@ -78,7 +89,8 @@ QString JabberProtocol::iconId()
 
 SIM::ClientPtr JabberProtocol::createClient(const QString& name)
 {
-    ClientPtr jabber = ClientPtr(new JabberClient(this, name));
+    JabberClient* client = new JabberClient(this, name);
+    ClientPtr jabber = ClientPtr(client);
     return jabber;
 }
 

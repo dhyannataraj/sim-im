@@ -156,6 +156,8 @@ SIM::IMStatusPtr JabberContact::status() const
 
 QString JabberContact::name() const
 {
+    if(getNick().isEmpty())
+        return getId();
     return getNick();
 }
 

@@ -46,7 +46,7 @@ const unsigned SUBSCRIBE_FROM	= 1;
 const unsigned SUBSCRIBE_TO		= 2;
 const unsigned SUBSCRIBE_BOTH	= (SUBSCRIBE_FROM | SUBSCRIBE_TO);
 
-struct JabberClientData // : public SIM::IMContact
+struct JabberClientData
 {
 public:
     JabberClientData(JabberClient* client);
@@ -240,7 +240,7 @@ struct ClientTimeInfo
     QString             display;
 };
 
-class JABBER_EXPORT JabberClient : public QObject, public SIM::Client // : public SIM::TCPClient, public SAXParser
+class JABBER_EXPORT JabberClient : public QObject, public SIM::Client
 {
     Q_OBJECT
 public:
@@ -356,7 +356,7 @@ public:
 //    };
 
     JabberClient(JabberProtocol*, const QString& name);
-    ~JabberClient();
+    virtual ~JabberClient();
     virtual QString name();
 	virtual QString retrievePasswordLink();
     virtual SIM::IMContactPtr createIMContact();

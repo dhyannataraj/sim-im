@@ -22,7 +22,11 @@
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QLineEdit" name="e_password"/>
+    <widget class="QLineEdit" name="e_password">
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
    </item>
    <item row="1" column="1">
     <widget class="QLineEdit" name="e_jid"/>
@@ -67,6 +71,12 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>e_jid</tabstop>
+  <tabstop>e_password</tabstop>
+  <tabstop>e_server</tabstop>
+  <tabstop>sb_port</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
