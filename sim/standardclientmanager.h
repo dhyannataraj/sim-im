@@ -12,9 +12,10 @@ public:
     virtual ~StandardClientManager();
 
     virtual void addClient(ClientPtr client);
-	virtual ClientPtr deleteClient(const QString& name);
+	virtual void deleteClient(const QString& name);
 	ClientPtr getClientByProfileName(const QString& name);
     virtual ClientPtr client(const QString& name);
+    virtual ClientPtr client(int index);
     virtual QStringList clientList();
     virtual QList<ClientPtr> allClients() const;
 
@@ -29,7 +30,7 @@ protected:
 
 private:
     ClientPtr createClient(const QString& name);
-    typedef QMap<QString, ClientPtr> ClientMap;
+    typedef QList<ClientPtr> ClientMap;
     ClientMap m_clients;
     QStringList m_sortedClientNamesList;
     ConfigPtr m_config;

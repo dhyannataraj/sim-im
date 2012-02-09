@@ -11,7 +11,9 @@ namespace MockObjects
     {
     public:
         MOCK_METHOD1(addClient, void(SIM::ClientPtr client));
+        MOCK_METHOD1(deleteClient,  void(const QString& name));
         MOCK_METHOD1(client, SIM::ClientPtr(const QString& name));
+        MOCK_METHOD1(client, SIM::ClientPtr(int));
         MOCK_METHOD0(clientList, QStringList());
         MOCK_CONST_METHOD0(allClients, QList<SIM::ClientPtr>());
 
