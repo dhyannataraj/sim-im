@@ -16,6 +16,13 @@
     <Filter Include="Source Files\generated">
       <UniqueIdentifier>{100d8670-fde6-48dc-9cc9-371223f7a824}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{95e44527-5862-476a-b29f-7a6167ab2366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated">
+      <UniqueIdentifier>{40ae33b9-cbe0-4d48-9ba8-ea64b10cff62}</UniqueIdentifier>
+      <Extensions>ui*.h</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="history.rc">
@@ -35,6 +42,9 @@
     <ClCompile Include="moc_historyplugin.cpp">
       <Filter>Source Files\generated</Filter>
     </ClCompile>
+    <ClCompile Include="historybrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="historystorage.h">
@@ -43,10 +53,21 @@
     <ClInclude Include="sqlitehistorystorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="historybrowser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_historybrowser.h">
+      <Filter>Header Files\generated</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="historyplugin.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Uic Include="historybrowser.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
   </ItemGroup>
 </Project>
