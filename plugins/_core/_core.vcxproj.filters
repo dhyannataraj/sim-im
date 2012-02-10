@@ -145,6 +145,12 @@
     <ClCompile Include="moc_newprotocol.cpp">
       <Filter>Source Files\generated</Filter>
     </ClCompile>
+    <ClCompile Include="clientsdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_clientsdialog.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core_api.h">
@@ -263,6 +269,9 @@
     </ClInclude>
     <ClInclude Include="userconfig\userconfigcontroller.h">
       <Filter>Header Files\userconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_clientsdialog.h">
+      <Filter>Header Files\generated</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -441,6 +450,9 @@
       <Filter>styles</Filter>
     </CustomBuild>
     <CustomBuild Include="newprotocol.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="clientsdialog.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -648,9 +660,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Uic Include="cfgdlgbase.ui">
-      <Filter>Interfaces</Filter>
-    </Uic>
     <Uic Include="profileselectdialog.ui">
       <Filter>Interfaces</Filter>
     </Uic>
@@ -658,6 +667,12 @@
       <Filter>Interfaces</Filter>
     </Uic>
     <Uic Include="newprotocolbase.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="clientsdialog.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
+    <Uic Include="cfgdlgbase.ui">
       <Filter>Interfaces</Filter>
     </Uic>
   </ItemGroup>
