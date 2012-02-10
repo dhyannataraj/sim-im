@@ -28,6 +28,7 @@ SET(jabber_SRCS
 #        jabberworkinfo.cpp
 #        jidadvsearch.cpp
 #        jidsearch.cpp
+        network/standardjabbersocket.cpp
         ui/jabberloginwidget.cpp
 )
 
@@ -56,6 +57,8 @@ SET(jabber_HDRS
 #        jabberworkinfo.h
 #        jidadvsearch.h
 #        jidsearch.h
+        network/jabbersocket.h
+        network/standardjabbersocket.h
         ui/jabberloginwidget.h
 )
 
@@ -73,6 +76,13 @@ SET(jabber_UICS
 #        jidsearchbase.ui
         ui/jabberloginwidget.ui
 )
+
+set (Boost_USE_STATIC_LIBS ON)
+set (Boost_USE_MULTITHREADED ON)
+
+find_package(Boost)
+
+include_directories(${Boost_INCLUDE_DIRS})
 
 SIM_ADD_PLUGIN(jabber)
 SET_TARGET_PROPERTIES(jabber PROPERTIES DEFINE_SYMBOL JABBER_EXPORTS)
