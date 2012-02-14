@@ -1,4 +1,5 @@
 
+#include <algorithm>
 #include <QDir>
 #include "standardclientmanager.h"
 #include "clientmanager.h"
@@ -20,28 +21,32 @@ StandardClientManager::~StandardClientManager()
 void StandardClientManager::addClient(ClientPtr client)
 {
     log(L_DEBUG, "Adding client: %s", qPrintable(client->name()));
-    m_clients.insert(client->name(), client);
-    m_sortedClientNamesList << client->name();
+    m_clients.append(client);
 }
 
 ClientPtr StandardClientManager::client(const QString& name)
 {
-    ClientMap::iterator it = m_clients.find(name);
+    ClientMap::iterator it = std::find_if(m_clients.begin(), m_clients.end(),
+            [&] (const ClientPtr& client) {return client->name() == name;});
     if(it != m_clients.end())
-        return it.value();
+        return *it;
     return ClientPtr();
+}
+
+ClientPtr StandardClientManager::client(int index)
+{
+    return m_clients.at(index);
 }
 
 QList<ClientPtr> StandardClientManager::allClients() const
 {
-    return m_clients.values();
+    return m_clients;
 }
 
 bool StandardClientManager::load()
 {
     log(L_DEBUG, "ClientManager::load()");
     m_clients.clear();
-    m_sortedClientNamesList.clear();
     if(!load_new())
     {
         if(!load_old())
@@ -224,21 +229,30 @@ ClientPtr StandardClientManager::createClient(const QString& name)
 
 QStringList StandardClientManager::clientList()
 {
-    //m_clients.keys();
-    return m_sortedClientNamesList;
+    QStringList result;
+    foreach(const ClientPtr& client, m_clients)
+    {
+        result.append(client->name());
+    }
+    return result;
 }
 
 ClientPtr StandardClientManager::getClientByProfileName(const QString& name)
 {
-    return m_clients[name];
+    foreach(const ClientPtr& client, m_clients)
+    {
+        if(client->name() == name)
+            return client;
+    }
+    return ClientPtr();
 }
 
-ClientPtr StandardClientManager::deleteClient(const QString& name)
+void StandardClientManager::deleteClient(const QString& name)
 {
-    ClientPtr delClient(getClientByProfileName(name));
-    m_clients.erase(m_clients.find(name));
-    m_sortedClientNamesList.removeOne(QString(name));
-    return delClient;
+    auto it = std::find_if(m_clients.begin(), m_clients.end(),
+            [&] (const ClientPtr& client) {return client->name() == name; } );
+    if(it != m_clients.end())
+        m_clients.erase(it);
 }
 
 ConfigPtr StandardClientManager::config()

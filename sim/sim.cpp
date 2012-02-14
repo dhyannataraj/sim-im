@@ -163,6 +163,7 @@ int main(int argc, char *argv[])
     if (SIM::getPluginManager()->isLoaded())
         res = app.exec();
     
+    SIM::getClientManager()->sync();
     SIM::destroyClientManager();
     SIM::destroyPluginManager();
     
@@ -170,11 +171,11 @@ int main(int argc, char *argv[])
     SIM::destroyCommandHub();
     SIM::destroyAvatarStorage();
     SIM::destroyImageStorage();
+    SIM::destroyProfileManager();
     SIM::destroyOutMessagePipe();
     SIM::destroyMessagePipe();
     destroyLogging();
     SIM::destroyEventHub();
-    SIM::destroyProfileManager();
   
     SIM::destroyProtocolManager(); //Put it to here fixes crash on end bug.
     return res;

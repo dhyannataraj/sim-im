@@ -28,6 +28,7 @@ SET(jabber_SRCS
 #        jabberworkinfo.cpp
 #        jidadvsearch.cpp
 #        jidsearch.cpp
+        ui/jabberloginwidget.cpp
 )
 
 SET(jabber_HDRS
@@ -55,6 +56,7 @@ SET(jabber_HDRS
 #        jabberworkinfo.h
 #        jidadvsearch.h
 #        jidsearch.h
+        ui/jabberloginwidget.h
 )
 
 SET(jabber_UICS
@@ -69,6 +71,7 @@ SET(jabber_UICS
 #        jabberworkinfobase.ui
 #        jidadvsearchbase.ui
 #        jidsearchbase.ui
+        ui/jabberloginwidget.ui
 )
 
 SIM_ADD_PLUGIN(jabber)

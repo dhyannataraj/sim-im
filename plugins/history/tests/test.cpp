@@ -15,12 +15,14 @@
 #include "messaging/messagepipe.h"
 #include "messaging/messageoutpipe.h"
 #include "core.h"
+#include "events/actioncollectionevent.h"
 
 void registerEvents()
 {
     SIM::getEventHub()->registerEvent(SIM::StandardEvent::create("init"));
     SIM::getEventHub()->registerEvent(SIM::StandardEvent::create("init_abort"));
     SIM::getEventHub()->registerEvent(SIM::StandardEvent::create("quit"));
+    SIM::getEventHub()->registerEvent(SIM::ActionCollectionEvent::create("contact_menu"));
     SIM::getEventHub()->registerEvent(SIM::LogEvent::create());
 }
 

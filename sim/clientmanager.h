@@ -16,7 +16,9 @@ namespace SIM
         virtual ~ClientManager() {}
 
         virtual void addClient(ClientPtr client) = 0;
+        virtual void deleteClient(const QString& name) = 0;
         virtual ClientPtr client(const QString& name) = 0;
+        virtual ClientPtr client(int index) = 0;
         virtual QList<ClientPtr> allClients() const = 0;
         virtual QStringList clientList() = 0;
 

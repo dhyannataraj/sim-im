@@ -1407,12 +1407,12 @@ QString MsgView::printMessage(const MessagePtr& message)
     QString options(" direction='0' "); 
     QString result;
     //bool direction=false;
-    result += 
+    result +=
         QString(" <message %1>%2\n").arg(options).arg(info)
 
         //.append("  <source>\n")
         .append(QString("   <contact_id>%1</contact_id>\n").arg(source->parentContactId()))
-        .append(QString("   <from>%1</from>\n").arg(quoteXml(source->name()))) 
+        .append(QString("   <from>%1</from>\n").arg(quoteXml(source->name())))
         .append(QString("   <imcontact_id>%1</imcontact_id>\n").arg(quoteXml(source->id().toString())))
         //.append("  </source>\n")
     /*

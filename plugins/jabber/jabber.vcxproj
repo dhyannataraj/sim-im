@@ -164,6 +164,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="moc_jabberstatuswidget.cpp" />
+    <ClCompile Include="ui\jabberloginwidget.cpp" />
+    <ClCompile Include="ui\moc_jabberloginwidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="jabber.h" />
@@ -201,6 +203,12 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <CustomBuild Include="ui\jabberloginwidget.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="ui_discoinfobase.h" />
     <ClInclude Include="ui_infoproxybase.h" />
     <ClInclude Include="ui_jabberaboutinfobase.h" />
@@ -233,6 +241,7 @@
     <Uic Include="jabberworkinfobase.ui" />
     <Uic Include="jidadvsearchbase.ui" />
     <Uic Include="jidsearchbase.ui" />
+    <Uic Include="ui\jabberloginwidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\sim.vcxproj">

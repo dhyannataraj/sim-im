@@ -13,6 +13,8 @@
 #include "messaging/genericmessage.h"
 #include "tests/mocks/mockmessagepipe.h"
 #include "mocks/mockhistorystorage.h"
+#include "events/actioncollectionevent.h"
+#include "events/eventhub.h"
 
 #include "historyplugin.h"
 
@@ -98,5 +100,14 @@ namespace
         history.setHistoryStorage(storage);
 
         SIM::getOutMessagePipe()->pushMessage(createMessage());
+    }
+
+    TEST_F(TestHistoryPlugin, menuItemCollectionEvent_addsAction)
+    {
+    	HistoryPlugin history;
+    	auto data = SIM::ActionCollectionEventData::create("contact_menu", "12");
+    	SIM::getEventHub()->triggerEvent("contact_menu", data);
+
+    	ASSERT_EQ(1, data->actions()->actions.length());
     }
 }

@@ -28,6 +28,12 @@
     <ClCompile Include="jabberstatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ui\jabberloginwidget.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\moc_jabberloginwidget.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="jabber.h">
@@ -86,6 +92,9 @@
     <CustomBuild Include="jabberstatuswidget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="ui\jabberloginwidget.h">
+      <Filter>Header Files\ui</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Uic Include="discoinfobase.ui">
@@ -121,25 +130,37 @@
     <Uic Include="jabberaddbase.ui">
       <Filter>Interfaces</Filter>
     </Uic>
+    <Uic Include="ui\jabberloginwidget.ui">
+      <Filter>Interfaces</Filter>
+    </Uic>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
       <UniqueIdentifier>{3f95c2d1-71d4-4b8c-8b29-d7240ca3d60b}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Header Files\generated">
       <UniqueIdentifier>{92f63252-ed7e-47e7-ae56-453010e4768d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Interfaces">
       <UniqueIdentifier>{2b1e8342-2960-47ea-9723-5d8e374e3d11}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4b187071-4ff6-414b-a7f7-38e222ca8626}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Source Files\generated">
       <UniqueIdentifier>{7b072ca6-2907-4980-a798-55f0b7d9934b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{72a9333f-c295-4331-8921-495ffea46e03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{07f43dc2-ca19-425a-8db7-35d0fa853b01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{d64bb00f-89c5-4dc8-bb92-d4607136986a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

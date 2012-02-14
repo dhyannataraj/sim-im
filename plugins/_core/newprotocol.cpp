@@ -71,9 +71,14 @@ void NewProtocol::loadProtocolPlugins()
 void NewProtocol::accept()
 {
 	ProtocolPtr protocol = protocolByIndex(m_ui->cb_protocol->currentIndex());
-	getProfileManager()->newProfile(m_profileName);
-	getProfileManager()->selectProfile(m_profileName);
+
 	ProfilePtr profile = getProfileManager()->currentProfile();
+	if(!profile)
+	{
+        getProfileManager()->newProfile(m_profileName);
+        getProfileManager()->selectProfile(m_profileName);
+        profile = getProfileManager()->currentProfile();
+	}
 	profile->enablePlugin(protocol->plugin()->name());
 
 	ClientPtr client = protocol->createClientWithLoginWidget(m_connectionParameters);

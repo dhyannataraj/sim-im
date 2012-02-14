@@ -13,6 +13,7 @@ SET(_core_SRCS
 #        commands.cpp
 #        connectionsettings.cpp
 #        connectwnd.cpp
+        clientsdialog.cpp
         container/containermanager.cpp
         container/icontainermanager.cpp
         container/containercontroller.cpp
@@ -102,6 +103,7 @@ SET(_core_HDRS
 #        commands.h
 #        connectionsettings.h
 #        connectwnd.h
+        clientsdialog.h
         container/containermanager.h
         container/icontainermanager.h
         container/containercontroller.h
@@ -174,6 +176,7 @@ SET(_core_UICS
 #        arcfgbase.ui
 #        autoreplybase.ui
         cfgdlgbase.ui
+        clientsdialog.ui
 #        connectionsettingsbase.ui
 #        connectwndbase.ui
 #        declinedlgbase.ui

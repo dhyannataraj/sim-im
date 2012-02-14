@@ -56,7 +56,7 @@ bool IcbmSnacHandler::process(unsigned short subtype, const QByteArray& data, in
         return false;
     }
 
-    return true;
+    return true; //unreachable
 }
 
 void IcbmSnacHandler::disconnect()
@@ -166,7 +166,8 @@ bool IcbmSnacHandler::handleIncomingMessage(const QByteArray& data)
     parser.readWord(); // tlv count
     TlvList list = TlvList::fromByteArray(parser.readAll());
 
-    time_t timestamp = list.firstTlv(TlvTimestamp).toUint32();
+    time_t timestamp = QDateTime::currentDateTime().toTime_t();
+    // list.firstTlv(TlvTimestamp).toUint32(); // For offline messages
 
     Tlv messageTlv = list.firstTlv(TlvMessage);
     if(messageTlv.isValid())
