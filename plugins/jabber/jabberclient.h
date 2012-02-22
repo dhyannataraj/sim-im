@@ -32,7 +32,9 @@
 #include "contacts/client.h"
 #include "jabber_api.h"
 
-//#include "jabberbuffer.h"
+#include "network/jabbersocket.h"
+#include "protocol/inputstreamdispatcher.h"
+#include "protocol/jabberauthenticationcontroller.h"
 
 using namespace std;
 
@@ -322,6 +324,12 @@ private:
     QString m_name;
     QList<JabberStatusPtr> m_defaultStates;
     JabberStatusPtr m_currentStatus;
+    JabberStatusPtr m_nextStatus;
+
+    JabberSocket* m_socket;
+    InputStreamDispatcher* m_dispatcher;
+
+    JabberAuthenticationController::SharedPointer m_auth;
 };
 
 #endif

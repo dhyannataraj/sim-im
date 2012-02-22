@@ -17,8 +17,17 @@ StandardJabberSocket::~StandardJabberSocket()
 {
 }
 
+void StandardJabberSocket::startStream()
+{
+    QString stream("<stream:stream xmlns='jabber:client' "
+            "xmlns:stream='http://etherx.jabber.org/streams' to='%1' version='1.0'").
+            arg(m_host);
+    send(stream.toUtf8());
+}
+
 void StandardJabberSocket::connectToHost(const QString& host, int port)
 {
+    m_host = host;
     m_socket.connectToHost(host, port);
 }
 
@@ -34,12 +43,12 @@ void StandardJabberSocket::send(const QByteArray& data)
 
 int StandardJabberSocket::dataAvailable()
 {
-    return m_buffer.size();
+    return m_socket.bytesAvailable();
 }
 
 QIODevice* StandardJabberSocket::inputStream()
 {
-    return m_socket;
+    return &m_socket;
 }
 
 void StandardJabberSocket::slot_connected()
@@ -49,10 +58,5 @@ void StandardJabberSocket::slot_connected()
 
 void StandardJabberSocket::readReady()
 {
-    QByteArray data = m_socket.readAll();
-    for(int i = 0; i < data.size(); i++)
-    {
-        m_buffer.push_back(data[i]);
-    }
     emit newData();
 }

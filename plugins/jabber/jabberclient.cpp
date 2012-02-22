@@ -35,17 +35,7 @@
 #include "jabberstatuswidget.h"
 #include "clientmanager.h"
 
-//#include "jabberconfig.h"
-//#include "jabber_ssl.h"
-//#include "jabberadd.h"
-//#include "jabberinfo.h"
-//#include "jabberhomeinfo.h"
-//#include "jabberworkinfo.h"
-//#include "jabberaboutinfo.h"
-//#include "jabberpicture.h"
-//#include "jabbermessage.h"
-//#include "jabberbrowser.h"
-//#include "infoproxy.h"
+#include "network/standardjabbersocket.h"
 
 #include <QTimer>
 #include <QRegExp>
@@ -183,58 +173,23 @@ void JabberClientData::deserializeLine(const QString& key, const QString& value)
 
 JabberClient::JabberClient(JabberProtocol* protocol, const QString& name) : SIM::Client(protocol), m_name(name)
 {
-//    QString jid = clientPersistentData->owner->getId();
-//    //log(L_DEBUG, "JID: %s", jid.toUtf8().data());
+    m_socket = new StandardJabberSocket();
+    m_dispatcher = new InputStreamDispatcher();
+    m_dispatcher->setDevice(m_socket->inputStream());
 
-//    //For old configs, where server part in own jid is missing
-//    if (!jid.isEmpty() && jid.indexOf('@')==-1)
-//    {
-//        jid += '@';
-//        if (getUseVHost())
-//        {
-//            jid += getVHost();
-//        }
-//        else
-//        {
-//            jid += getServer();
-//        }
-//        clientPersistentData->owner->setId(jid);
-//    }
-//    if (clientPersistentData->owner->getResource().isEmpty())
-//    {
-//        QString resource = PACKAGE;
-//        clientPersistentData->owner->setResource(resource.simplified());
-//    }
+    m_auth = JabberAuthenticationController::SharedPointer(new JabberAuthenticationController());
 
-//    TCPClient::changeStatus(this->protocol()->status("offline"));
+    m_dispatcher->addTagHandler(m_auth);
 
-//    QString listRequests = getListRequest();
-//    while (!listRequests.isEmpty()){
-//        QString item = getToken(listRequests, ';', false);
-//        JabberListRequest lr;
-//        lr.bDelete = false;
-//        lr.jid = getToken(item, ',');
-//        lr.grp = getToken(item, ',');
-//        if (!item.isEmpty())
-//            lr.bDelete = true;
-//        m_listRequests.push_back(lr);
-//    }
-//    setListRequest(QString::null);
-
-//    m_bSSL		 = false;
-//    m_curRequest = NULL;
-//    m_msg_id	 = 0;
-//    m_bJoin		 = false;
+    connect(m_socket, SIGNAL(newData()), m_dispatcher, SLOT(newData()));
     clientPersistentData = new JabberClientData(this);
     init();
 }
 
 JabberClient::~JabberClient()
 {
-//    TCPClient::changeStatus(this->protocol()->status("offline"));
-//    //TCPClient::setStatus(STATUS_OFFLINE, false);
-//	//free_data(jabberClientData, &data);
-//    freeData();
+    delete m_dispatcher;
+    delete m_socket;
 }
 
 
@@ -367,7 +322,11 @@ IMStatusPtr JabberClient::currentStatus()
 
 void JabberClient::changeStatus(const IMStatusPtr& status)
 {
-
+    if(m_currentStatus->flag(SIM::IMStatus::flOffline))
+    {
+        m_auth.startAuthentication(clientPersistentData->getServer(),
+                clientPersistentData->getPort());
+    }
 }
 
 IMStatusPtr JabberClient::savedStatus()
@@ -1122,16 +1081,16 @@ QString JabberClient::retrievePasswordLink()
 
 void JabberClient::init()
 {
-//    m_id = QString::null;
-//    m_depth = 0;
-//    m_id_seed = 0xAAAA;
-//    m_bSSL = false;
     addDefaultStates();
     m_currentStatus = getDefaultStatus("offline");
+
 }
 
 void JabberClient::addDefaultStates()
 {
+    JabberStatusPtr online = JabberStatusPtr(new JabberStatus("online", "Online", true, QString(), getImageStorage()->pixmap("Jabber_online"), QString(), QString()));
+    m_defaultStates.append(online);
+
     JabberStatusPtr offline = JabberStatusPtr(new JabberStatus("offline", "Offline", true, QString(), getImageStorage()->pixmap("Jabber_offline"), QString(), QString()));
     offline->setFlag(IMStatus::flOffline, true);
     m_defaultStates.append(offline);

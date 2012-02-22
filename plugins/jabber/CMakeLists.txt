@@ -28,6 +28,9 @@ SET(jabber_SRCS
 #        jabberworkinfo.cpp
 #        jidadvsearch.cpp
 #        jidsearch.cpp
+        protocol/inputstreamdispatcher.cpp
+        protocol/jabberauthenticationcontroller.cpp
+        protocol/taghandler.cpp
         network/standardjabbersocket.cpp
         ui/jabberloginwidget.cpp
 )
@@ -57,6 +60,9 @@ SET(jabber_HDRS
 #        jabberworkinfo.h
 #        jidadvsearch.h
 #        jidsearch.h
+        protocol/inputstreamdispatcher.h
+        protocol/jabberauthenticationcontroller.h
+        protocol/taghandler.h
         network/jabbersocket.h
         network/standardjabbersocket.h
         ui/jabberloginwidget.h
@@ -93,6 +99,8 @@ SET(jabber_test_sources
     tests/testjabberclient.cpp
     tests/testjabberstatus.cpp
     tests/testjabbergroup.cpp
+    tests/testinputstreamdispatcher.cpp
+    tests/testjabberauthenticationcontroller.cpp
     
     ${CMAKE_SOURCE_DIR}/testing/gtest/src/gtest-all.cc        
     ${CMAKE_SOURCE_DIR}/testing/src/gmock-all.cc
@@ -100,5 +108,7 @@ SET(jabber_test_sources
 
 ADD_EXECUTABLE(test_jabber ${jabber_test_sources})
 TARGET_LINK_LIBRARIES(test_jabber simlib ${QT_LIBRARIES} jabber)
+
+ADD_CUSTOM_COMMAND(TARGET test_jabber POST_BUILD COMMAND test_jabber)
 
 ADD_TEST(testJabber test_jabber)
