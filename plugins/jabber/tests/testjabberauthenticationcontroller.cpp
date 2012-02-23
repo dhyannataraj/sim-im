@@ -35,7 +35,7 @@ namespace
 
     TEST_F(TestJabberAuthenticationController, afterConnect_startsStream)
     {
-        EXPECT_CALL(*sock, startStream());
+        EXPECT_CALL(*sock, send(_));
 
         auth.connected();
     }

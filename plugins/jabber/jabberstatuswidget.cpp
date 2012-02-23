@@ -26,7 +26,7 @@ QMenu* JabberStatusWidget::menu() const
     QAction* a;
     QMenu* m = new QMenu();
 
-    a = m->addAction(SIM::getImageStorage()->icon("Jaber_online"), I18N_NOOP("Online"), this, SLOT(online()));
+    a = m->addAction(SIM::getImageStorage()->icon("Jabber_online"), I18N_NOOP("Online"), this, SLOT(online()));
     a->setCheckable(true);
     a->setChecked(status->id() == "online");
 

@@ -178,6 +178,7 @@ JabberClient::JabberClient(JabberProtocol* protocol, const QString& name) : SIM:
     m_dispatcher->setDevice(m_socket->inputStream());
 
     m_auth = JabberAuthenticationController::SharedPointer(new JabberAuthenticationController());
+    m_auth->setSocket(m_socket);
 
     m_dispatcher->addTagHandler(m_auth);
 
@@ -324,7 +325,7 @@ void JabberClient::changeStatus(const IMStatusPtr& status)
 {
     if(m_currentStatus->flag(SIM::IMStatus::flOffline))
     {
-        m_auth.startAuthentication(clientPersistentData->getServer(),
+        m_auth->startAuthentication(clientPersistentData->getServer(),
                 clientPersistentData->getPort());
     }
 }

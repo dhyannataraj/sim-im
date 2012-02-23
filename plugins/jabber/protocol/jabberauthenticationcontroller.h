@@ -27,7 +27,7 @@ public:
 
     virtual QString element() const;
 
-    virtual void startElement(const QString& name, const QXmlAttributes);
+    virtual void startElement(const QString& name, const QXmlAttributes& attr);
     virtual void endElement(const QString& name);
     virtual void characters(const QString& ch);
 public slots:
@@ -35,6 +35,7 @@ public slots:
 
 private:
     JabberSocket* m_socket;
+    QString m_host;
 };
 
 #endif /* JABBERAUTHENTICATIONCONTROLLER_H_ */

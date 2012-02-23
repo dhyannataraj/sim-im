@@ -13,9 +13,10 @@
 #include "taghandler.h"
 #include <QList>
 #include <QXmlContentHandler>
+#include <QXmlErrorHandler>
 #include <QXmlSimpleReader>
 
-class InputStreamDispatcher : public QObject, public QXmlContentHandler
+class InputStreamDispatcher : public QObject, public QXmlContentHandler, public QXmlErrorHandler
 {
     Q_OBJECT
 public:
@@ -31,7 +32,6 @@ public:
     virtual bool endDocument();
     virtual bool endElement(const QString& namespaceURI, const QString& localName, const QString& qName);
     virtual bool endPrefixMapping(const QString& prefix);
-    virtual QString errorString() const;
     virtual bool ignorableWhitespace(const QString& ch);
     virtual bool processingInstruction(const QString& target, const QString& data);
     virtual void setDocumentLocator(QXmlLocator* locator);
@@ -40,7 +40,15 @@ public:
     virtual bool startElement(const QString& namespaceURI, const QString& localName, const QString& qName, const QXmlAttributes& atts);
     virtual bool startPrefixMapping(const QString& prefix, const QString& uri);
 
-private slots:
+    // QXmlErrorHandler interface
+
+    virtual bool error(const QXmlParseException& exception);
+    virtual QString errorString() const;
+    virtual bool fatalError(const QXmlParseException& exception);
+    virtual bool warning(const QXmlParseException& exception );
+
+
+public slots:
     void newData();
 
 private:
@@ -49,6 +57,8 @@ private:
     QIODevice* m_device;
     QXmlSimpleReader m_reader;
     QXmlInputSource* m_source;
+    bool m_parsingStarted;
+	int m_level;
 };
 
 #endif /* INPUTSTREAMDISPATCHER_H_ */

@@ -20,7 +20,7 @@ public:
 
     virtual QString element() const = 0;
 
-    virtual void startElement(const QString& name, const QXmlAttributes) = 0;
+    virtual void startElement(const QString& name, const QXmlAttributes& attrs) = 0;
     virtual void endElement(const QString& name) = 0;
     virtual void characters(const QString& ch) = 0;
 };

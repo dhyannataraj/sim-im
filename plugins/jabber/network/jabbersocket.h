@@ -21,8 +21,6 @@ public:
     virtual void connectToHost(const QString& host, int port) = 0;
     virtual void disconnectFromHost() = 0;
 
-    virtual void startStream() = 0;
-
     virtual void send(const QByteArray& data) = 0;
     virtual int dataAvailable() = 0;
 

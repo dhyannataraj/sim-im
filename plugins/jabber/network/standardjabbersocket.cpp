@@ -6,24 +6,21 @@
  */
 
 #include "standardjabbersocket.h"
+#include "log.h"
+
+using namespace SIM;
+
 
 StandardJabberSocket::StandardJabberSocket()
 {
     connect(&m_socket, SIGNAL(connected()), this, SLOT(slot_connected()));
-    connect(&m_socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+    connect(&m_socket, SIGNAL(readyRead()), this, SLOT(readReady()));
 }
 
 StandardJabberSocket::~StandardJabberSocket()
 {
 }
 
-void StandardJabberSocket::startStream()
-{
-    QString stream("<stream:stream xmlns='jabber:client' "
-            "xmlns:stream='http://etherx.jabber.org/streams' to='%1' version='1.0'").
-            arg(m_host);
-    send(stream.toUtf8());
-}
 
 void StandardJabberSocket::connectToHost(const QString& host, int port)
 {
@@ -58,5 +55,6 @@ void StandardJabberSocket::slot_connected()
 
 void StandardJabberSocket::readReady()
 {
+    log(L_DEBUG, "readyRead");
     emit newData();
 }

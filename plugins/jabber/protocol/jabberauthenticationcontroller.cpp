@@ -25,13 +25,17 @@ void JabberAuthenticationController::setSocket(JabberSocket* socket)
 
 void JabberAuthenticationController::startAuthentication(const QString& host, int port)
 {
+    m_host = host;
     m_socket->connectToHost(host, port);
     connect(m_socket, SIGNAL(connected()), this, SLOT(connected()));
 }
 
 void JabberAuthenticationController::connected()
 {
-    m_socket->startStream();
+    QString stream = QString("<stream:stream xmlns='jabber:client' "
+            "xmlns:stream='http://etherx.jabber.org/streams' to='%1' version='1.0'>").
+            arg(m_host);
+    m_socket->send(stream.toUtf8());
 }
 
 QString JabberAuthenticationController::element() const
@@ -39,7 +43,7 @@ QString JabberAuthenticationController::element() const
     return "stream";
 }
 
-void JabberAuthenticationController::startElement(const QString& name, const QXmlAttributes)
+void JabberAuthenticationController::startElement(const QString& name, const QXmlAttributes& attr)
 {
     log(L_DEBUG, "startElement(%s)", qPrintable(name));
 }
