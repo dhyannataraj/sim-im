@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema
+      Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName
+      Include="Ogg">
+      <Targets>_Ogg</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+  <UsingTask
+    TaskName="Ogg"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <Target
+    Name="_Ogg"
+    BeforeTargets="$(OggBeforeTargets)"
+    AfterTargets="$(OggAfterTargets)"
+    Condition="'@(Ogg)' != ''"
+    DependsOnTargets="$(OggDependsOn);ComputeOggOutput"
+    Outputs="%(Ogg.Outputs)"
+    Inputs="%(Ogg.Identity);%(Ogg.AdditionalDependencies);$(MSBuildProjectFile)">
+    <ItemGroup
+      Condition="'@(SelectedFiles)' != ''">
+      <Ogg
+        Remove="@(Ogg)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <Ogg_tlog
+        Include="%(Ogg.Outputs)"
+        Condition="'%(Ogg.Outputs)' != '' and '%(Ogg.ExcludedFromBuild)' != 'true'">
+        <Source>@(Ogg, '|')</Source>
+      </Ogg_tlog>
+    </ItemGroup>
+    <Message
+      Importance="High"
+      Text="%(Ogg.ExecutionDescription)" />
+    <WriteLinesToFile
+      Condition="'@(Ogg_tlog)' != '' and '%(Ogg_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(Ogg_tlog.Source);@(Ogg_tlog-&gt;'%(Fullpath)')" />
+    <Ogg
+      Condition="'@(Ogg)' != '' and '%(Ogg.ExcludedFromBuild)' != 'true'"
+      CommandLineTemplate="%(Ogg.CommandLineTemplate)"
+      AdditionalOptions="%(Ogg.AdditionalOptions)"
+      Inputs="%(Ogg.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+            $(ComputeLinkInputsTargets);
+            ComputeOggOutput;
+          </ComputeLinkInputsTargets>
+    <ComputeLibInputsTargets>
+            $(ComputeLibInputsTargets);
+            ComputeOggOutput;
+          </ComputeLibInputsTargets>
+  </PropertyGroup>
+  <Target
+    Name="ComputeOggOutput"
+    Condition="'@(Ogg)' != ''">
+    <ItemGroup>
+      <OggDirsToMake
+        Condition="'@(Ogg)' != '' and '%(Ogg.ExcludedFromBuild)' != 'true'"
+        Include="%(Ogg.Outputs)" />
+      <Link
+        Include="%(OggDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <Lib
+        Include="%(OggDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <ImpLib
+        Include="%(OggDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+    </ItemGroup>
+    <MakeDir
+      Directories="@(OggDirsToMake-&gt;'%(RootDir)%(Directory)')" />
+  </Target>
+</Project>
