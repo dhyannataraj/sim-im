@@ -33,6 +33,12 @@ void StandardJabberSocket::disconnectFromHost()
     m_socket.disconnectFromHost();
 }
 
+void StandardJabberSocket::startTls()
+{
+	log(L_DEBUG, "StandardJabberSocket::startTls()");
+	m_socket.startClientEncryption();
+}
+
 void StandardJabberSocket::send(const QByteArray& data)
 {
     m_socket.write(data);
@@ -57,4 +63,9 @@ void StandardJabberSocket::readReady()
 {
     log(L_DEBUG, "readyRead");
     emit newData();
+}
+
+void StandardJabberSocket::encrypted()
+{
+	emit tlsHandshakeDone();
 }

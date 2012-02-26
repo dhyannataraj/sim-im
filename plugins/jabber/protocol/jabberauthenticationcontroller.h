@@ -25,17 +25,33 @@ public:
 
     void setSocket(JabberSocket* socket);
 
-    virtual QString element() const;
+    virtual bool canHandle(const QString& tagName) const;
 
-    virtual void startElement(const QString& name, const QXmlAttributes& attr);
+    virtual void startElement(const QDomElement& root);
     virtual void endElement(const QString& name);
     virtual void characters(const QString& ch);
+
 public slots:
     void connected();
+	void tlsHandshakeDone();
+
+signals:
+	void newStream();
 
 private:
     JabberSocket* m_socket;
     QString m_host;
+	QList<QString> m_features;
+	enum State
+	{
+		Initial,
+		TlsNegotiation,
+		ReadyToAuthenticate,
+		DigestMd5WaitingChallenge,
+		Authenticated,
+		Error
+	};
+	State m_state;
 };
 
 #endif /* JABBERAUTHENTICATIONCONTROLLER_H_ */

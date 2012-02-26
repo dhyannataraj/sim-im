@@ -20,6 +20,8 @@ public:
 
     virtual void connectToHost(const QString& host, int port) = 0;
     virtual void disconnectFromHost() = 0;
+	
+	virtual void startTls() = 0;
 
     virtual void send(const QByteArray& data) = 0;
     virtual int dataAvailable() = 0;
@@ -29,6 +31,7 @@ public:
 signals:
     void connected();
     void newData();
+	void tlsHandshakeDone();
 
 };
 

@@ -18,6 +18,7 @@ namespace MockObjects
     public:
         MOCK_METHOD2(connectToHost, void(const QString& host, int port));
         MOCK_METHOD0(disconnectFromHost, void());
+		MOCK_METHOD0(startTls, void());
 
         MOCK_METHOD0(startStream, void());
 

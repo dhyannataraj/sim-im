@@ -10,6 +10,7 @@
 
 #include <QXmlAttributes>
 #include <QSharedPointer>
+#include <QDomElement>
 
 class TagHandler
 {
@@ -18,9 +19,9 @@ public:
     TagHandler();
     virtual ~TagHandler();
 
-    virtual QString element() const = 0;
+    virtual bool canHandle(const QString& tagName) const = 0;
 
-    virtual void startElement(const QString& name, const QXmlAttributes& attrs) = 0;
+    virtual void startElement(const QDomElement& root) = 0;
     virtual void endElement(const QString& name) = 0;
     virtual void characters(const QString& ch) = 0;
 };

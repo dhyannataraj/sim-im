@@ -12,7 +12,7 @@
 using namespace SIM;
 
 InputStreamDispatcher::InputStreamDispatcher() : m_source(0),
-        m_parsingStarted(false), m_level(0)
+        m_parsingStarted(false), m_level(0), m_hasTag(false)
 {
     m_reader.setContentHandler(this);
     m_reader.setErrorHandler(this);
@@ -49,9 +49,19 @@ void InputStreamDispatcher::newData()
     }
 }
 
+void InputStreamDispatcher::newStream()
+{
+	m_level = 0;
+}
+
 void InputStreamDispatcher::addTagHandler(const TagHandler::SharedPointer& ptr)
 {
     m_handlers.append(ptr);
+}
+
+int InputStreamDispatcher::currentLevel() const
+{
+	return m_level;
 }
 
 bool InputStreamDispatcher::characters(const QString& ch)
@@ -68,14 +78,19 @@ bool InputStreamDispatcher::endElement(const QString& namespaceURI, const QStrin
 {
     //printf("endElement(%s, %s, %s)\n", qPrintable(namespaceURI), qPrintable(localName), qPrintable(qName));
 	m_level--;
-    for(auto it = m_handlers.begin(); it != m_handlers.end(); ++it)
-    {
-        if(m_currentTag.startsWith((*it)->element()))
-        {
-            (*it)->endElement(qName);
-            return true;
-        }
-    }
+	if(m_level == 1)
+	{
+		QString currentTag = m_currentRoot.tagName();
+		for(auto it = m_handlers.begin(); it != m_handlers.end(); ++it)
+		{
+			if((*it)->canHandle(currentTag))
+			{
+				(*it)->startElement(m_currentRoot);
+				return true;
+			}
+		}
+	}
+	m_currentTag = m_currentTag.parentNode().toElement();
     return true;
 }
 
@@ -116,7 +131,7 @@ bool InputStreamDispatcher::startDocument()
 
 bool InputStreamDispatcher::startElement(const QString& namespaceURI, const QString& localName, const QString& qName, const QXmlAttributes& atts)
 {
-    //printf("startElement(%s, %s, %s / %d)\n", qPrintable(namespaceURI), qPrintable(localName), qPrintable(qName), m_level);
+    log(L_DEBUG, "startElement(%s, %s, %s / %d)", qPrintable(namespaceURI), qPrintable(localName), qPrintable(qName), m_level);
 	
 	// m_level tracks current nesting level. The logic is as follows:
 	// 0th level is global
@@ -127,26 +142,40 @@ bool InputStreamDispatcher::startElement(const QString& namespaceURI, const QStr
 	// with child's tag name
 	
 	m_level++;
-    for(auto it = m_handlers.begin(); it != m_handlers.end(); ++it)
-    {
-		if(m_level <= 2)
+	if(m_level == 2)
+	{
+		for(auto it = m_handlers.begin(); it != m_handlers.end(); ++it)
 		{
-			if(qName.startsWith((*it)->element()))
+			if((*it)->canHandle(qName))
 			{
-				m_currentTag = qName;
-				(*it)->startElement(qName, atts);
+				m_currentDocument.clear();
+				m_hasTag = true;
+				m_currentRoot = m_currentDocument.createElement(qName);
+				m_currentTag = m_currentRoot;
+				m_currentDocument.appendChild(m_currentRoot);
 				return true;
 			}
 		}
-		else
+		log(L_WARN, "Unknown level2 tag: %s", qPrintable(qName));
+	}
+	else if(m_level > 2)
+	{
+		if(!m_hasTag)
+			return true;
+
+		QDomElement newChild = m_currentDocument.createElement(qName);
+		m_currentTag.appendChild(newChild);
+		m_currentTag = newChild;
+	}
+	else if(m_level == 1)
+	{
+		// Opening tag
+		if(qName != "stream:stream")
 		{
-			if(m_currentTag.startsWith((*it)->element()))
-			{
-				(*it)->startElement(qName, atts);
-				return true;
-			}
+			emit error(tr("Invalid stream start"));
+			return false;
 		}
-    }
+	}
     return true;
 }
 

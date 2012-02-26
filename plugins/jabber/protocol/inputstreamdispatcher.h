@@ -15,6 +15,8 @@
 #include <QXmlContentHandler>
 #include <QXmlErrorHandler>
 #include <QXmlSimpleReader>
+#include <QDomElement>
+#include <QDomDocument>
 
 class InputStreamDispatcher : public QObject, public QXmlContentHandler, public QXmlErrorHandler
 {
@@ -24,6 +26,7 @@ public:
     virtual ~InputStreamDispatcher();
 
     void addTagHandler(const TagHandler::SharedPointer& ptr);
+	int currentLevel() const;
 
     void setDevice(QIODevice* device);
 
@@ -50,14 +53,21 @@ public:
 
 public slots:
     void newData();
+	void newStream();
+
+signals:
+	void error(const QString& errorMessage);
 
 private:
     QList<TagHandler::SharedPointer> m_handlers;
-    QString m_currentTag;
     QIODevice* m_device;
     QXmlSimpleReader m_reader;
     QXmlInputSource* m_source;
     bool m_parsingStarted;
+	bool m_hasTag;
+	QDomDocument m_currentDocument;
+	QDomElement m_currentRoot;
+	QDomElement m_currentTag;
 	int m_level;
 };
 

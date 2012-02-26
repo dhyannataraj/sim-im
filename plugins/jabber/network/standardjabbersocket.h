@@ -10,7 +10,7 @@
 
 #include "jabbersocket.h"
 #include <boost/circular_buffer.hpp>
-#include <QTcpSocket>
+#include <QSslSocket>
 
 class StandardJabberSocket : public JabberSocket
 {
@@ -22,6 +22,8 @@ public:
     virtual void connectToHost(const QString& host, int port) ;
     virtual void disconnectFromHost();
 
+	virtual void startTls();
+
     virtual void send(const QByteArray& data);
     virtual int dataAvailable();
 
@@ -30,9 +32,10 @@ public:
 private slots:
     void slot_connected();
     void readReady();
+    void encrypted();
 
 private:
-    QTcpSocket m_socket;
+    QSslSocket m_socket;
     QString m_host;
 };
 
