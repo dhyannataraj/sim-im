@@ -114,6 +114,18 @@ namespace
         auth.startElement(doc.childNodes().at(0).toElement());
     }
 
+	static void sendChallengeTag(JabberAuthenticationController& auth, const QString& s)
+	{
+        QDomDocument doc;
+        QDomElement challengeElement = doc.createElementNS("urn:ietf:params:xml:ns:xmpp-sasl", "challenge");
+        doc.appendChild(challengeElement);
+        QByteArray challenge(s.toAscii());
+        QDomText text = doc.createTextNode(QString::fromAscii(challenge.toBase64()));
+        challengeElement.appendChild(text);
+		
+        auth.startElement(challengeElement);
+	}
+
     TEST_F(TestJabberAuthenticationController, digestMd5_serverChallenge)
     {
         QDomDocument doc = startAuth();
@@ -124,12 +136,6 @@ namespace
         auth.setPassword("testpassword");
         auth.setHostname("test.com");
 
-        doc.clear();
-        QDomElement challengeElement = doc.createElementNS("urn:ietf:params:xml:ns:xmpp-sasl", "challenge");
-        doc.appendChild(challengeElement);
-        QByteArray challenge(R"(realm="somerealm",nonce="OA6MG9tEQGm2hh",qop="auth",charset=utf-8,algorithm=md5-sess)");
-        QDomText text = doc.createTextNode(QString::fromAscii(challenge.toBase64()));
-        challengeElement.appendChild(text);
 
         EXPECT_CALL(*sock, send(Truly([&] (const QByteArray& arr)
                         {
@@ -186,9 +192,29 @@ namespace
 
                         })));
 
+		sendChallengeTag(auth, R"(realm="somerealm",nonce="OA6MG9tEQGm2hh",qop="auth",charset=utf-8,algorithm=md5-sess)");
 
-        auth.startElement(challengeElement);
     }
+
+    TEST_F(TestJabberAuthenticationController, digestMd5_secondServerChallenge)
+    {
+        QDomDocument doc = startAuth();
+        EXPECT_CALL(*sock, send(QByteArray("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>")));
+        auth.startElement(doc.childNodes().at(0).toElement());
+
+        auth.setUsername("testusername");
+        auth.setPassword("testpassword");
+        auth.setHostname("test.com");
+
+		{
+			InSequence seq;
+			EXPECT_CALL(*sock, send(_));
+
+			EXPECT_CALL(*sock, send(StartsWith("<response")));
+		}
+		sendChallengeTag(auth, R"(realm="somerealm",nonce="OA6MG9tEQGm2hh",qop="auth",charset=utf-8,algorithm=md5-sess)");
+		sendChallengeTag(auth, R"(rspauth=blahblahblah)");
+	}
 
 }
 

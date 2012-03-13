@@ -54,6 +54,8 @@ private:
 		TlsNegotiation,
 		ReadyToAuthenticate,
 		DigestMd5WaitingChallenge,
+		DigestMd5WaitingSecondChallenge,
+		DigestMd5WaitingSuccess,
 		Authenticated,
 		Error
 	};

@@ -111,6 +111,12 @@ void JabberAuthenticationController::startElement(const QDomElement& root)
         QString challengeString = QString::fromUtf8(QByteArray::fromBase64(root.text().toAscii()));
 		QString response = makeResponseToChallenge(challengeString);
         m_socket->send(response.toAscii());
+		m_state = DigestMd5WaitingSecondChallenge;
+    }
+    else if((m_state == DigestMd5WaitingSecondChallenge) && (root.tagName() == "challenge"))
+    {
+		QString response("<response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'/>");
+        m_socket->send(response.toAscii());
     }
 }
 
