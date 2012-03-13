@@ -21,6 +21,10 @@ public:
     JabberAuthenticationController();
     virtual ~JabberAuthenticationController();
 
+    void setUsername(const QString& username);
+    void setPassword(const QString& password);
+    void setHostname(const QString& hostname);
+
     void startAuthentication(const QString& host, int port);
 
     void setSocket(JabberSocket* socket);
@@ -39,6 +43,8 @@ signals:
 	void newStream();
 
 private:
+	QString makeResponseToChallenge(const QString& challengeString);
+
     JabberSocket* m_socket;
     QString m_host;
 	QList<QString> m_features;
@@ -52,6 +58,10 @@ private:
 		Error
 	};
 	State m_state;
+
+    QString m_username;
+    QString m_hostname;
+    QString m_password;
 };
 
 #endif /* JABBERAUTHENTICATIONCONTROLLER_H_ */

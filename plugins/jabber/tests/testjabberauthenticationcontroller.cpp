@@ -12,6 +12,7 @@
 #include "mocks/mockjabbersocket.h"
 
 #include <QSignalSpy>
+#include <QCryptographicHash>
 
 namespace
 {
@@ -19,42 +20,42 @@ namespace
 
     class TestJabberAuthenticationController : public Test
     {
-    public:
-        virtual void SetUp()
-        {
-            sock = new MockObjects::MockJabberSocket();
-            auth.setSocket(sock);
-        }
+        public:
+            virtual void SetUp()
+            {
+                sock = new MockObjects::MockJabberSocket();
+                auth.setSocket(sock);
+            }
 
-        virtual void TearDown()
-        {
-            delete sock;
-        }
+            virtual void TearDown()
+            {
+                delete sock;
+            }
 
-		void startAuth()
-		{
-			EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
+            QDomDocument startAuth()
+            {
+                EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
 
-			auth.tlsHandshakeDone();
+                auth.tlsHandshakeDone();
 
-			QDomDocument doc;
-			doc.setContent(QByteArray(R"(
-				<stream:features>
-				<starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'>
-				<required/>
-				</starttls>
-				<mechanisms xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
-				<mechanism>DIGEST-MD5</mechanism>
-				<mechanism>PLAIN</mechanism>
-				</mechanisms>
-				</stream:features>
-				)"));
+                QDomDocument doc;
+                doc.setContent(QByteArray(R"(
+                    <stream:features>
+                    <starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'>
+                    <required/>
+                    </starttls>
+                    <mechanisms xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+                    <mechanism>DIGEST-MD5</mechanism>
+                    <mechanism>PLAIN</mechanism>
+                    </mechanisms>
+                    </stream:features>
+                    )"));
 
+                return doc;
+            }
 
-		}
-
-        JabberAuthenticationController auth;
-        MockObjects::MockJabberSocket* sock;
+            JabberAuthenticationController auth;
+            MockObjects::MockJabberSocket* sock;
     };
 
     TEST_F(TestJabberAuthenticationController, afterConnect_startsStream)
@@ -64,69 +65,132 @@ namespace
         auth.connected();
     }
 
-   TEST_F(TestJabberAuthenticationController, afterConnect_ifReceivedStartTlsRequest_sendsStartTls)
-   {
-	   EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
-	   auth.connected();
+    TEST_F(TestJabberAuthenticationController, afterConnect_ifReceivedStartTlsRequest_sendsStartTls)
+    {
+        EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
+        auth.connected();
 
-	   EXPECT_CALL(*sock, send(StartsWith("<starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'/>")));
+        EXPECT_CALL(*sock, send(StartsWith("<starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'/>")));
 
-	   QDomDocument doc;
-	   doc.setContent(QByteArray(R"(
-		   <stream:features>
-			   <starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'>
-				   <required/>
-			   </starttls>
-			   <mechanisms xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
-				   <mechanism>DIGEST-MD5</mechanism>
-				   <mechanism>PLAIN</mechanism>
-			   </mechanisms>
-		   </stream:features>
-	   		   )"));
+        QDomDocument doc;
+        doc.setContent(QByteArray(R"(
+            <stream:features>
+            <starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'>
+            <required/>
+            </starttls>
+            <mechanisms xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+            <mechanism>DIGEST-MD5</mechanism>
+            <mechanism>PLAIN</mechanism>
+            </mechanisms>
+            </stream:features>
+            )"));
 
-	   auth.startElement(doc.childNodes().at(0).toElement());
-   }
+        auth.startElement(doc.childNodes().at(0).toElement());
+    }
 
-   TEST_F(TestJabberAuthenticationController, tlsHandshakeDone_startsNewStream)
-   {
-	   EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
+    TEST_F(TestJabberAuthenticationController, tlsHandshakeDone_startsNewStream)
+    {
+        EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
 
-	   auth.tlsHandshakeDone();
-   }
+        auth.tlsHandshakeDone();
+    }
 
-   TEST_F(TestJabberAuthenticationController, tlsHandshakeDone_emitsNewStreamSignal)
-   {
-	   EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
-	   QSignalSpy spy(&auth, SIGNAL(newStream()));
+    TEST_F(TestJabberAuthenticationController, tlsHandshakeDone_emitsNewStreamSignal)
+    {
+        EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
+        QSignalSpy spy(&auth, SIGNAL(newStream()));
 
-	   auth.tlsHandshakeDone();
+        auth.tlsHandshakeDone();
 
-	   ASSERT_EQ(1, spy.count());
-   }
+        ASSERT_EQ(1, spy.count());
+    }
 
-   TEST_F(TestJabberAuthenticationController, newStream_ifDigestMd5Mechanism_useIt)
-   {
-	   startAuth();
+    TEST_F(TestJabberAuthenticationController, newStream_ifDigestMd5Mechanism_useIt)
+    {
+        QDomDocument doc = startAuth();
 
-	   EXPECT_CALL(*sock, send(QByteArray("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>")));
+        EXPECT_CALL(*sock, send(QByteArray("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>")));
 
-	   auth.startElement(doc.childNodes().at(0).toElement());
-   }
+        auth.startElement(doc.childNodes().at(0).toElement());
+    }
 
-   TEST_F(TestJabberAuthenticationController, digestMd5_serverChallenge)
-   {
-	   startAuth();
-	   EXPECT_CALL(*sock, send(QByteArray("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>")));
-	   auth.startElement(doc.childNodes().at(0).toElement());
+    TEST_F(TestJabberAuthenticationController, digestMd5_serverChallenge)
+    {
+        QDomDocument doc = startAuth();
+        EXPECT_CALL(*sock, send(QByteArray("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>")));
+        auth.startElement(doc.childNodes().at(0).toElement());
+
+        auth.setUsername("testusername");
+        auth.setPassword("testpassword");
+        auth.setHostname("test.com");
+
+        doc.clear();
+        QDomElement challengeElement = doc.createElementNS("urn:ietf:params:xml:ns:xmpp-sasl", "challenge");
+        doc.appendChild(challengeElement);
+        QByteArray challenge(R"(realm="somerealm",nonce="OA6MG9tEQGm2hh",qop="auth",charset=utf-8,algorithm=md5-sess)");
+        QDomText text = doc.createTextNode(QString::fromAscii(challenge.toBase64()));
+        challengeElement.appendChild(text);
+
+        EXPECT_CALL(*sock, send(Truly([&] (const QByteArray& arr)
+                        {
+                            QRegExp responseRx("<response[^>]*>(.*)</response>");
+                            if(!responseRx.exactMatch(QString::fromUtf8(arr)))
+                                return false;
+
+                            QMap<QString, QString> map; QString s = QString::fromUtf8(
+                                QByteArray::fromBase64(responseRx.cap(1).toAscii()));
+
+                            QStringList entries = s.split(',');
+                            QRegExp rx(R":(([\w\-]+)="?([^"-, ]*)"?):");
+                            foreach(const QString& s, entries)
+                            {
+                                if(rx.exactMatch(s))
+                                {
+                                    map[rx.cap(1)] = rx.cap(2);
+                                }
+                            }
+
+                            if(!map.keys().contains("cnonce"))
+                                return false;
+                            if(map["nonce"] != "OA6MG9tEQGm2hh")
+                                return false;
+                            if(map["realm"] != "somerealm")
+                                return false;
+                            if(map["nc"] != "00000001")
+                                return false;
+                            if(map["qop"] != "auth")
+                                return false;
+
+                            QByteArray a1 = QCryptographicHash::hash("testusername:somerealm:testpassword",
+                                    QCryptographicHash::Md5) + ":OA6MG9tEQGm2hh:" + map["cnonce"].toAscii();
+
+                            QByteArray a2 = (QString("AUTHENTICATE:") + map["digest-uri"]).toAscii();
+                         
+                            QCryptographicHash result(QCryptographicHash::Md5);
+                            result.addData(QCryptographicHash::hash(a1, QCryptographicHash::Md5).toHex());
+                            result.addData(map["nonce"].toAscii());
+                            result.addData(":", 1);
+                            result.addData(map["nc"].toAscii());
+                            result.addData(":", 1);
+                            result.addData(map["cnonce"].toAscii());
+                            result.addData(":", 1);
+                            result.addData(map["qop"].toAscii());
+                            result.addData(":", 1);
+                            result.addData(QCryptographicHash::hash(a2, QCryptographicHash::Md5).toHex());
 
 
-	   QDomDocument doc;
-	   QDomElement challenge = doc.createElementNS("urn:ietf:params:xml:ns:xmpp-sasl", "challenge");
-	   doc.appendChild(challenge);
-	   QByteArray challenge(R"(realm="somerealm",nonce="" )");
-	   QDomText text = doc.createTextNode(QString::fromAscii(QByteArray::toBase64()));
+                            if(result.result().toHex() != map["response"])
+                                return false;
 
-   }
+                            return true;
+
+                        })));
+
+
+        auth.startElement(challengeElement);
+    }
 
 }
+
+// vim : set expandtab
 
