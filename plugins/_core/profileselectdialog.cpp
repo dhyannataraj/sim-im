@@ -78,6 +78,7 @@ void ProfileSelectDialog::accept()
 	{
 		m_profile = QString::null;
 	}
+	updatePasswords();
 	QDialog::accept();
 }
 
@@ -85,6 +86,14 @@ bool ProfileSelectDialog::selectedNewProfile()
 {
 	int index = m_ui->cmbProfile->currentIndex();
 	return (index == m_ui->cmbProfile->count() - 1);
+}
+
+void ProfileSelectDialog::updatePasswords()
+{
+    for(const auto& entry : m_clientEntries)
+    {
+        entry.client->setPassword(entry.passwordEdit->text());
+    }
 }
 
 void ProfileSelectDialog::updateProfilesList()
@@ -176,6 +185,7 @@ void ProfileSelectDialog::adjust()
 void ProfileSelectDialog::makeInputs(const ClientPtr& client)
 {
     ClientEntry entry;
+    entry.client = client;
     QHBoxLayout* layout = new QHBoxLayout();
     m_ui->inputsLayout->addLayout(layout);
 
@@ -308,5 +318,7 @@ void ProfileSelectDialog::saveState()
 
 QString ProfileSelectDialog::newProfileName() const
 {
-	return m_ui->e_newName->text();
-}
+    return m_ui->e_newName->text();
+}	
+
+// vim : set expandtab :
