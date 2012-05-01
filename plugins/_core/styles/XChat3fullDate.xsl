@@ -1,7 +1,8 @@
-<?xml version="1.0"?> 
+<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output method="html"/>
-<xsl:template match="/message">
+  <xsl:template match="/">
+    <xsl:for-each select="/messages/message">
 <xsl:choose>
 <xsl:when test="@direction='2'">
 <font>
@@ -17,7 +18,7 @@
 </xsl:when>
 <xsl:otherwise>
 <prepend>
-<span>
+<div>
 <xsl:if test="@unread='1'">
 <xsl:attribute name="style">font-weight:600</xsl:attribute>
 </xsl:if>
@@ -35,13 +36,23 @@
 <xsl:value-of disable-output-escaping="yes" select="from"/>
 </font>
 <xsl:text>&gt; </xsl:text>
-</span>
+</div>
 </prepend>
-<span>
-<xsl:attribute name="style"><xsl:if test="body/@bgcolor">background-color:<xsl:value-of select="body/@bgcolor"/>;</xsl:if><xsl:if test="body/@fgcolor">color:<xsl:value-of select="body/@fgcolor"/>;</xsl:if></xsl:attribute>
+<div>
+<xsl:attribute name="style">
+<xsl:if test="body/@bgcolor">
+background-color:
+<xsl:value-of select="body/@bgcolor"/>;
+</xsl:if>
+<xsl:if test="body/@fgcolor">
+color:
+<xsl:value-of select="body/@fgcolor"/>;
+</xsl:if>
+</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="body"/>
-</span>
+</div>
 </xsl:otherwise>
 </xsl:choose>
+    </xsl:for-each>
 </xsl:template>
 </xsl:stylesheet>

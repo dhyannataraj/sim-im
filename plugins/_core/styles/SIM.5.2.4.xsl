@@ -1,8 +1,8 @@
-<?xml version="1.0"?> 
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:output method="html"/>
-<xsl:template match="/message">
-
+<xsl:template match="/">
+<xsl:for-each select="/messages/message">
 <!--line between messages -->
 <hr/>
 
@@ -69,15 +69,14 @@ _____________________________________________________________________________-->
 <xsl:if test="@unread='1'">
 <xsl:attribute name="style">font-weight:600</xsl:attribute>
 </xsl:if>
-
 <xsl:text> </xsl:text>
 <font>
 <xsl:choose>
-<xsl:when test="@direction='1'">
-<xsl:attribute name="color">#800000</xsl:attribute>
-</xsl:when>
 <xsl:when test="@direction='0'">
 <xsl:attribute name="color">#000080</xsl:attribute>
+</xsl:when>
+<xsl:when test="@direction='1'">
+<xsl:attribute name="color">#800000</xsl:attribute>
 </xsl:when>
 </xsl:choose>
 <xsl:value-of disable-output-escaping="no" select="from"/>
@@ -140,6 +139,7 @@ _____________________________________________________________________________-->
 </xsl:when>
 <!-- message with changed user state :: END
 _____________________________________________________________________________-->
+
 <!-- message body :: BEGIN -->
 <xsl:otherwise>
 <xsl:if test="@direction='0'">
@@ -163,5 +163,6 @@ _____________________________________________________________________________-->
 _____________________________________________________________________________-->
 
 </table>
+	</xsl:for-each>
 </xsl:template>
 </xsl:stylesheet>
