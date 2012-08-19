@@ -106,7 +106,7 @@ bool SsiSnacHandler::parseContactList(const QByteArray& data, bool lastPacket)
 {
     log(L_DEBUG, "SsiSnacHandler::parseContactList");
     ByteArrayParser parser(data);
-    int version = parser.readByte();
+    int version = parser.readByte();//version not used!
     int objects = parser.readWord();
     for(int objnum = 0; objnum < objects; objnum++)
     {

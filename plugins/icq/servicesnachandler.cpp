@@ -13,7 +13,7 @@ ServiceSnacHandler::ServiceSnacHandler(ICQClient* client) : SnacHandler(client, 
 {
 }
 
-bool ServiceSnacHandler::process(unsigned short subtype, const QByteArray& data, int flags, unsigned int requestId)
+bool ServiceSnacHandler::process(unsigned short subtype, const QByteArray& data, int flags, unsigned int requestId)//requestId not used!
 {
     // TODO move to ICQClient
     QByteArray realData = data;
@@ -55,7 +55,7 @@ void ServiceSnacHandler::disconnect()
     m_rateInfoList.clear();
 }
 
-bool ServiceSnacHandler::sendServices(const QByteArray& data)
+bool ServiceSnacHandler::sendServices(const QByteArray& data)//data not used!
 {
     OscarSocket* socket = client()->oscarSocket();
     Q_ASSERT(socket);
@@ -158,7 +158,7 @@ bool ServiceSnacHandler::handleServiceResponse(const QByteArray& data)
     return true;
 }
 
-bool ServiceSnacHandler::handleSelfInfoReply(const QByteArray& data)
+bool ServiceSnacHandler::handleSelfInfoReply(const QByteArray& data)//data not used!
 {
     emit statusTransitionComplete();
     return true;
@@ -286,7 +286,7 @@ RateInfoPtr ServiceSnacHandler::rateInfo(int group) const
     return RateInfoPtr();
 }
 
-bool ServiceSnacHandler::parseServiceStatus(const QByteArray& data)
+bool ServiceSnacHandler::parseServiceStatus(const QByteArray& data)//data not used! //Todo
 {
     // TODO: parse this packet
     return true;

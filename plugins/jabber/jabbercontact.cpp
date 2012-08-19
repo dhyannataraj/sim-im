@@ -176,7 +176,7 @@ SIM::IMContactId JabberContact::id() const
     return SIM::IMContactId();
 }
 
-bool JabberContact::sendMessage(const SIM::MessagePtr& message)
+bool JabberContact::sendMessage(const SIM::MessagePtr& message)//Todo
 {
     return true;
 }
@@ -191,7 +191,7 @@ SIM::MessagePtr JabberContact::dequeueUnreadMessage()
     return SIM::MessagePtr();
 }
 
-void JabberContact::enqueueUnreadMessage(const SIM::MessagePtr& message)
+void JabberContact::enqueueUnreadMessage(const SIM::MessagePtr& message)//Todo
 {
 
 }

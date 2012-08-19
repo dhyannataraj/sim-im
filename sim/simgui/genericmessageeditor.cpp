@@ -136,7 +136,7 @@ void GenericMessageEditor::chooseFont()
     m_edit->setFont(f);
 }
 
-void GenericMessageEditor::setCloseOnSend(bool b)
+void GenericMessageEditor::setCloseOnSend(bool b) //Todo
 {
 
 }
@@ -215,7 +215,7 @@ QToolBar* GenericMessageEditor::createToolBar()
 
     bar->addSeparator();
 
-    QAction* emoticons = bar->addAction(SIM::getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(insertSmile()));
+    QAction* emoticons = bar->addAction(SIM::getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(insertSmile())); //Todo
 
     QAction* translit = bar->addAction(SIM::getImageStorage()->icon("translit"), I18N_NOOP("Send in &translit"), this, SLOT(setTranslit(bool)));
     translit->setCheckable(true);

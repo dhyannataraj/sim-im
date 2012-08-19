@@ -43,7 +43,7 @@ void SQLiteHistoryStorage::addMessage(const SIM::MessagePtr& message)
 }
 
 QList<SIM::MessagePtr> SQLiteHistoryStorage::getMessages(const QString& sourceContactId, const QString& targetContactId,
-        const QDateTime& start, const QDateTime& end)
+        const QDateTime& start, const QDateTime& end)//start, end not used!
 {
 	QList<SIM::MessagePtr> result;
 	QSqlQuery query;

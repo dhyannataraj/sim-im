@@ -91,7 +91,7 @@ private:
     bool m_bResize;
     bool m_bClosed;
     bool m_bBarChanged;
-    unsigned long m_id;
+    int m_id;
     QTreeWidget* m_targetContactList;
     static const int ContactIdRole = Qt::UserRole + 1;
     Ui::UserWnd* m_ui;

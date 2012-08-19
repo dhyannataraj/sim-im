@@ -73,7 +73,7 @@
     </ClCompile>
     <Link>
       <AdditionalOptions>/FORCE:MULTIPLE /ENTRY:mainCRTStartup %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>$(SolutionDir)$(Configuration)\sim.lib;$(SolutionDir)$(Configuration)\gmock.lib;$(SolutionDir)$(Configuration)\gtestd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Configuration)\sim.lib;$(SolutionDir)$(Configuration)\gmock.lib;$(SolutionDir)$(Configuration)\gtest.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>

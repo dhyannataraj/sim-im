@@ -957,7 +957,7 @@ SIM::IMGroupPtr ICQClient::createIMGroup()
     return SIM::IMGroupPtr(new ICQGroup(this));
 }
 
-QWidget* ICQClient::createSetupWidget(const QString& id, QWidget* parent)
+QWidget* ICQClient::createSetupWidget(const QString& id, QWidget* parent)//id, parent not used!
 {
     return new QWidget();
 }

@@ -325,12 +325,12 @@ IMContactPtr JabberClient::createIMContact()
     return IMContactPtr(new JabberContact(this));
 }
 
-void JabberClient::addIMContact(const SIM::IMContactPtr& contact)
+void JabberClient::addIMContact(const SIM::IMContactPtr& contact)//Todo
 {
 
 }
 
-SIM::IMContactPtr JabberClient::getIMContact(const SIM::IMContactId& id)
+SIM::IMContactPtr JabberClient::getIMContact(const SIM::IMContactId& id)//Todo
 {
 	return SIM::IMContactPtr();
 }
@@ -340,17 +340,17 @@ IMGroupPtr JabberClient::createIMGroup()
     return IMGroupPtr(new JabberGroup(this));
 }
 
-QWidget* JabberClient::createSetupWidget(const QString& id, QWidget* parent)
+QWidget* JabberClient::createSetupWidget(const QString& id, QWidget* parent)//Todo, id, parent not used!
 {
     return 0;
 }
 
-void JabberClient::destroySetupWidget()
+void JabberClient::destroySetupWidget()//Todo
 {
 
 }
 
-QStringList JabberClient::availableSetupWidgets() const
+QStringList JabberClient::availableSetupWidgets() const//Todo
 {
     return QStringList();
 }
@@ -365,7 +365,7 @@ IMStatusPtr JabberClient::currentStatus()
     return m_currentStatus;
 }
 
-void JabberClient::changeStatus(const IMStatusPtr& status)
+void JabberClient::changeStatus(const IMStatusPtr& status)//Todo, status not used!
 {
 
 }
@@ -375,12 +375,12 @@ IMStatusPtr JabberClient::savedStatus()
     return IMStatusPtr();
 }
 
-SIM::MessageEditorFactory* JabberClient::messageEditorFactory() const
+SIM::MessageEditorFactory* JabberClient::messageEditorFactory() const//Todo
 {
     return 0;
 }
 
-QWidget* JabberClient::createSearchWidow(QWidget *parent)
+QWidget* JabberClient::createSearchWidow(QWidget *parent)//Todo, parent not used!
 {
     return 0;
 }
