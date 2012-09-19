@@ -51,6 +51,7 @@ void InputStreamDispatcher::newData()
 
 void InputStreamDispatcher::newStream()
 {
+    m_parsingStarted = false;
 	m_level = 0;
 }
 
@@ -66,6 +67,11 @@ int InputStreamDispatcher::currentLevel() const
 
 bool InputStreamDispatcher::characters(const QString& ch)
 {
+	if(ch.trimmed().isEmpty())
+		return true;
+	auto text = m_currentDocument.createTextNode(ch);
+	if(!m_currentTag.isNull())
+		m_currentTag.appendChild(text);
     return true;
 }
 
@@ -131,7 +137,7 @@ bool InputStreamDispatcher::startDocument()
 
 bool InputStreamDispatcher::startElement(const QString& namespaceURI, const QString& localName, const QString& qName, const QXmlAttributes& atts)
 {
-    log(L_DEBUG, "startElement(%s, %s, %s / %d)", qPrintable(namespaceURI), qPrintable(localName), qPrintable(qName), m_level);
+    //log(L_DEBUG, "startElement(%s, %s, %s / %d)", qPrintable(namespaceURI), qPrintable(localName), qPrintable(qName), m_level);
 	
 	// m_level tracks current nesting level. The logic is as follows:
 	// 0th level is global
@@ -174,6 +180,10 @@ bool InputStreamDispatcher::startElement(const QString& namespaceURI, const QStr
 		{
 			emit error(tr("Invalid stream start"));
 			return false;
+		}
+		else
+		{
+			log(L_DEBUG, "Level1 OK");
 		}
 	}
     return true;

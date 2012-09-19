@@ -116,13 +116,10 @@ namespace
 
 	static void sendChallengeTag(JabberAuthenticationController& auth, const QString& s)
 	{
+		QString challenge = QString("<challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>%1</challenge>").arg(QString::fromAscii(s.toAscii().toBase64()));
         QDomDocument doc;
-        QDomElement challengeElement = doc.createElementNS("urn:ietf:params:xml:ns:xmpp-sasl", "challenge");
-        doc.appendChild(challengeElement);
-        QByteArray challenge(s.toAscii());
-        QDomText text = doc.createTextNode(QString::fromAscii(challenge.toBase64()));
-        challengeElement.appendChild(text);
-		
+		doc.setContent(challenge);
+        QDomElement challengeElement = doc.elementsByTagName("challenge").at(0).toElement();
         auth.startElement(challengeElement);
 	}
 
@@ -174,6 +171,7 @@ namespace
                          
                             QCryptographicHash result(QCryptographicHash::Md5);
                             result.addData(QCryptographicHash::hash(a1, QCryptographicHash::Md5).toHex());
+                            result.addData(":", 1);
                             result.addData(map["nonce"].toAscii());
                             result.addData(":", 1);
                             result.addData(map["nc"].toAscii());

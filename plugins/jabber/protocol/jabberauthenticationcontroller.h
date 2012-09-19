@@ -56,6 +56,7 @@ private:
 		DigestMd5WaitingChallenge,
 		DigestMd5WaitingSecondChallenge,
 		DigestMd5WaitingSuccess,
+		RestartingStream,
 		Authenticated,
 		Error
 	};

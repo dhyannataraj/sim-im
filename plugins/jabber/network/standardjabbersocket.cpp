@@ -15,6 +15,7 @@ StandardJabberSocket::StandardJabberSocket()
 {
     connect(&m_socket, SIGNAL(connected()), this, SLOT(slot_connected()));
     connect(&m_socket, SIGNAL(readyRead()), this, SLOT(readReady()));
+    connect(&m_socket, SIGNAL(encrypted()), this, SLOT(encrypted()));
 }
 
 StandardJabberSocket::~StandardJabberSocket()
@@ -61,7 +62,8 @@ void StandardJabberSocket::slot_connected()
 
 void StandardJabberSocket::readReady()
 {
-    log(L_DEBUG, "readyRead");
+    QByteArray data = m_socket.peek(512);
+    log(L_DEBUG, "readyRead: %s", data.data());
     emit newData();
 }
 

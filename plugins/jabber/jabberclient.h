@@ -244,7 +244,9 @@ public:
     JabberStatusPtr getDefaultStatus(const QString& id) const;
 
     void setID(const QString &id);
-    QString getID();
+    QString getID() const;
+    
+    QString getUsername() const;
 
     QString getServer() const;
     void setServer(const QString& server);
