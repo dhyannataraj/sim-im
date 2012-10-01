@@ -109,7 +109,12 @@ void JabberAuthenticationController::startElement(const QDomElement& root)
 		}
 		else if(m_state == RestartingStream)
 		{
-		    log(L_DEBUG, "Features");
+		    QDomElement bind = root.elementsByTagName("bind");
+		    if(!bind.isNull())
+		    {
+		        m_state = ResourceBinding;
+
+		    }
 		}
 	}
 	else if((m_state == TlsNegotiation) && (root.tagName() == "proceed"))

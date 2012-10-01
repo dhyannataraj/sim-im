@@ -171,7 +171,8 @@ void JabberClientData::deserializeLine(const QString& key, const QString& value)
         owner->deserializeLine(key, value);
 }
 
-JabberClient::JabberClient(JabberProtocol* protocol, const QString& name) : SIM::Client(protocol), m_name(name)
+JabberClient::JabberClient(JabberProtocol* protocol, const QString& name) : SIM::Client(protocol), m_name(name),
+        m_resource("Default")
 {
     m_socket = new StandardJabberSocket();
     m_dispatcher = new InputStreamDispatcher();
@@ -220,6 +221,7 @@ bool JabberClient::loadState(SIM::PropertyHubPtr state)
     setUseSSL(hub->value("UseSSL").toBool());
     setUsePlain(hub->value("UsePlain").toBool());
     setUseVHost(hub->value("UseVHost").toBool());
+    setResource(hub->value("Resource").toUInt());
     setPriority(hub->value("Priority").toUInt());
     setListRequest(hub->value("ListRequest").toString());
     setVHost(hub->value("VHost").toString());
@@ -250,6 +252,7 @@ SIM::PropertyHubPtr JabberClient::saveState()
     hub->setValue("UseSSL", getUseSSL());
     hub->setValue("UsePlain", getUsePlain());
     hub->setValue("UseVHost", getUseVHost());
+    hub->setValue("Resource", getResource());
     hub->setValue("Priority", (unsigned int)getPriority());
     hub->setValue("ListRequest", getListRequest());
     hub->setValue("VHost", getVHost());
@@ -454,6 +457,16 @@ bool JabberClient::getRegister() const
 void JabberClient::setRegister(bool b)
 {
     clientPersistentData->setRegister(b);
+}
+
+QString JabberClient::getResource() const
+{
+    return m_resource;
+}
+
+void JabberClient::setResource(const QString& resource)
+{
+    m_resource = resource;
 }
 
 unsigned long JabberClient::getPriority() const

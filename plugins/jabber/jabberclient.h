@@ -140,6 +140,7 @@ public:
     bool m_usePlain;
     bool m_useVHost;
     bool m_register;
+    QString m_resource;
     unsigned long m_priority;
     QString m_listRequest;
     QString m_vHost;
@@ -269,6 +270,9 @@ public:
     bool getRegister() const;
     void setRegister(bool b);
 
+    QString getResource() const;
+    void setResource(const QString& resource);
+
     unsigned long getPriority() const;
     void setPriority(unsigned long p);
 
@@ -324,6 +328,7 @@ protected:
 
 private:
     QString m_name;
+    QString m_resource;
     QList<JabberStatusPtr> m_defaultStates;
     JabberStatusPtr m_currentStatus;
     JabberStatusPtr m_nextStatus;

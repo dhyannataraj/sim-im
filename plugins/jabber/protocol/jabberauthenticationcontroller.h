@@ -58,6 +58,7 @@ private:
 		DigestMd5WaitingSuccess,
 		RestartingStream,
 		Authenticated,
+		ResourceBinding,
 		Error
 	};
 	State m_state;
