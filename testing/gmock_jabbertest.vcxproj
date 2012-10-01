@@ -70,7 +70,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(SolutionDir)$(Configuration)\sim.lib;$(SolutionDir)$(Configuration)\plugins\jabber.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Configuration)\sim.lib;$(SolutionDir)$(Configuration)\plugins\_core.lib;$(SolutionDir)$(Configuration)\plugins\jabber.lib;$(SolutionDir)$(Configuration)\gmock.lib;$(SolutionDir)$(Configuration)\gtest.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -80,7 +80,7 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Manifest>
-      <AdditionalManifestFiles>$(SolutionDir)$(Configuration)\sim.exe.intermediate.manifest;$(SolutionDir)\plugins\jabber\$(Configuration)\jabber.dll.intermediate.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(SolutionDir)$(Configuration)\sim.dll.intermediate.manifest;$(SolutionDir)\plugins\jabber\$(Configuration)\jabber.dll.intermediate.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
     <PostBuildEvent>
       <Command>copy $(TargetDir)plugins\jabber.* $(TargetDir)</Command>

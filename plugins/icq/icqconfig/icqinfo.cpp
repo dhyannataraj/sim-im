@@ -199,7 +199,7 @@ void ICQInfo::fill()
         m_ui->edtAutoReply->hide();
     }
 
-    int current = 0;
+    int current = 0; //current not used!
     QString text;
     if((m_contact != m_client->ownerContact()) && (status->flag(SIM::IMStatus::flInvisible)))
     {

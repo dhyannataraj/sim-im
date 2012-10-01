@@ -25,17 +25,17 @@ QList<SIM::IMContactPtr> ICQGroup::contacts()
     return QList<SIM::IMContactPtr>();
 }
 
-bool ICQGroup::serialize(QDomElement& element)
+bool ICQGroup::serialize(QDomElement& element)//Todo
 {
     return true;
 }
 
-bool ICQGroup::deserialize(QDomElement& element)
+bool ICQGroup::deserialize(QDomElement& element)//Todo
 {
     return true;
 }
 
-bool ICQGroup::deserialize(const QString& data)
+bool ICQGroup::deserialize(const QString& data)//Todo
 {
     return true;
 }

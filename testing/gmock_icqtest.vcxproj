@@ -72,7 +72,7 @@
     </ClCompile>
     <Link>
       <AdditionalOptions>/FORCE:MULTIPLE /ENTRY:mainCRTStartup %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>$(SolutionDir)$(Configuration)\sim.lib;$(SolutionDir)$(Configuration)\_core.lib;$(SolutionDir)$(Configuration)\icq.lib;$(SolutionDir)$(Configuration)\gmock.lib;$(SolutionDir)$(Configuration)\gtestd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Configuration)\sim.lib;$(SolutionDir)$(Configuration)\plugins\_core.lib;$(SolutionDir)$(Configuration)\plugins\icq.lib;$(SolutionDir)$(Configuration)\gmock.lib;$(SolutionDir)$(Configuration)\gtest.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AssemblyDebug>true</AssemblyDebug>

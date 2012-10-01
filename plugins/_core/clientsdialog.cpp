@@ -57,6 +57,6 @@ void ClientsDialog::fillClientsList()
         QIcon icon = SIM::getImageStorage()->icon(client->protocol()->iconId());
         QString name = client->ownerContact()->name();
 
-        QListWidgetItem* item = new QListWidgetItem(icon, name, ui.lw_clients);
+        QListWidgetItem* item = new QListWidgetItem(icon, name, ui.lw_clients); //item not used! Todo?
     }
 }

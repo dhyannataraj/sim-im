@@ -55,8 +55,6 @@ bool IcbmSnacHandler::process(unsigned short subtype, const QByteArray& data, in
         log(L_WARN, "Unhandled icbm snac, subtype: %04x", subtype);
         return false;
     }
-
-    return true; //unreachable
 }
 
 void IcbmSnacHandler::disconnect()

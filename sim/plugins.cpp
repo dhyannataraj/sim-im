@@ -266,7 +266,7 @@ namespace SIM
     bool PluginManagerPrivate::isPluginLoadByDefault(const QString& pluginname)
     {
     	if (getInfo(pluginname))
-			return !(getInfo(pluginname)->enabledByDefault & PLUGIN_NOLOAD_DEFAULT);
+			return !(getInfo(pluginname)->enabledByDefault & PLUGIN_NOLOAD_DEFAULT); //Foo, foo, foo!
 		else
 			return true;
     }

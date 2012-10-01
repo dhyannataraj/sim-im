@@ -763,7 +763,7 @@ SIM::MessagePtr ICQContact::dequeueUnreadMessage()
     return SIM::MessagePtr();
 }
 
-void ICQContact::enqueueUnreadMessage(const SIM::MessagePtr& message)
+void ICQContact::enqueueUnreadMessage(const SIM::MessagePtr& message)//Todo
 {
 
 }

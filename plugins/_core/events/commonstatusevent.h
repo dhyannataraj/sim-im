@@ -17,7 +17,7 @@ namespace SIM
     class CommonStatusEventData : public SIM::EventData
     {
     public:
-        CommonStatusEventData(const QString& statusId) {}
+        CommonStatusEventData(const QString& statusId) {} //statusId not used!
         virtual ~CommonStatusEventData() {}
 
         virtual QString eventId() const { return "common_status"; }

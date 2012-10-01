@@ -371,9 +371,6 @@
     <CustomBuild Include="msgview.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="emoticons_prebuilt\msn.jisp">
-      <Filter>GPL-Icons</Filter>
-    </CustomBuild>
     <CustomBuild Include="GPL-Icons\icondef.xml">
       <Filter>GPL-Icons</Filter>
     </CustomBuild>
@@ -454,6 +451,9 @@
     </CustomBuild>
     <CustomBuild Include="clientsdialog.h">
       <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="emoticons_prebuilt\msn.jisp">
+      <Filter>emoticons_prebuilt</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -764,6 +764,7 @@
     </Filter>
     <Filter Include="emoticons_prebuilt">
       <UniqueIdentifier>{27000346-6223-4788-9c09-c1f55535a146}</UniqueIdentifier>
+      <Extensions>jisp</Extensions>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{c22ebbfc-3164-4a7c-99eb-277c1f83cbda}</UniqueIdentifier>

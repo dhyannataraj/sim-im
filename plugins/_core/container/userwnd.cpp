@@ -42,7 +42,7 @@
 using namespace std;
 using namespace SIM;
 
-UserWnd::UserWnd(unsigned long id, bool bReceived, bool bAdjust)
+UserWnd::UserWnd(unsigned long id, bool bReceived, bool bAdjust) //bReceived, bAdjust not used!
         : m_ui(new Ui::UserWnd)
         , m_id (id)
         , m_bResize (false) 
@@ -201,7 +201,7 @@ void UserWnd::modeChanged()
 
 }
 
-void UserWnd::editHeightChanged(int h)
+void UserWnd::editHeightChanged(int h) //Todo
 {
 //    if (!m_bResize && CorePlugin::instance()->getContainerMode())
 //    {
@@ -294,7 +294,7 @@ void UserWnd::refreshTargetList()
     }
 }
 
-void UserWnd::fillContactList(QTreeWidget* tree)
+void UserWnd::fillContactList(QTreeWidget* tree) //Todo
 {
 //    QList<Group*> groups = getContacts()->allGroups();
 //    QTreeWidgetItem* groupItem = 0;
@@ -322,7 +322,7 @@ void UserWnd::fillContactList(QTreeWidget* tree)
 //    }
 }
 
-void UserWnd::closeEvent(QCloseEvent *e)
+void UserWnd::closeEvent(QCloseEvent *e) //Todo
 {
 //    QSplitter::closeEvent(e);
 //    m_bClosed = true;

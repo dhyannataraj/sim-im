@@ -16,7 +16,7 @@ ICQMessageFactory::~ICQMessageFactory()
 {
 }
 
-SIM::MessagePtr ICQMessageFactory::createMessage(const QString& messageTypeId)
+SIM::MessagePtr ICQMessageFactory::createMessage(const QString& messageTypeId)//messageTypeId not used!
 {
     return SIM::MessagePtr();
 }

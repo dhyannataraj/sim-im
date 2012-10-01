@@ -54,8 +54,8 @@
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(LIB)</LibraryPath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;$(INCLUDE)</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(LIB)</LibraryPath>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\plugins\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\plugins\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <BuildLog>
@@ -95,7 +95,7 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
-      <OutputFile>$(OutDir)plugins/$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -141,7 +141,7 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
-      <OutputFile>$(OutDir)plugins/$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -676,161 +676,161 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)styles\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\additional.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\amibulb.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\apple_ichat.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\gants.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\icq5.1.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\icq5.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\icqlite.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\lovenmoney.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\msn.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\SIM-icons-Crystal-full.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\SIM-icons-Nuvola-full.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\SIM-icons-XP-full.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\sim.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\sim2.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\smiles.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
     </CustomBuild>
     <CustomBuild Include="emoticons_prebuilt\yahoo.jisp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS &amp; ICONS</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying EMOTICONS and ICONS</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy %(RootDir)%(Directory)%(Filename)%(Extension) $(SolutionDir)$(Configuration)\icons
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\icons\%(Filename)%(Extension);%(Outputs)</Outputs>
