@@ -27,9 +27,13 @@
 namespace SIM
 {
 
-GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMContactPtr& to, QWidget* parent) : MessageEditor(parent),
-        m_from(from), m_to(to)
+GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMContactPtr& to, QWidget* parent) : MessageEditor(parent)
+        , m_from(from), m_to(to)
+        , m_bTranslationService(false) //#Todo later from config...
+        , m_editTrans(NULL)
+        , m_editActive(NULL)
 {
+
     m_layout = new QVBoxLayout(this);
     m_layout->setMargin(0);
 
@@ -41,13 +45,36 @@ GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMCon
 
     QFontMetrics fm(m_edit->font());
     m_edit->setMinimumSize(QSize(fm.maxWidth(), fm.height() + 10));
-
+    
     m_bar = createToolBar();
+    m_bar->setParent(this);
     m_layout->addWidget(m_bar);
 
+    if (m_bTranslationService)
+    {
+        QTextEdit * m_editTrans = new QTextEdit(this);
+        QColor color(Qt::GlobalColor::lightGray);
+        m_editTrans->setStyleSheet(getBGStyleSheet(color.name()));
+        m_layout->addWidget(m_editTrans);
+    }
+    m_editActive=&(*m_edit);
+
     m_layout->addWidget(m_edit);
+    this->setLayout(m_layout);
     connect(m_edit, SIGNAL(textChanged()), this, SLOT(textChanged()));
     textChanged();
+    
+    /*QStringList strL_geom = getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core")->value("ContainerGeometry").toString().split(   QChar(','),QString::SkipEmptyParts   );
+    */
+    //this->setGeometry(490,278,1031,736);
+    /*this->setFixedSize(  strL_geom.at(2).trimmed().toInt(),                    //This works, but is bad, because leads to bad resize-behavior. Who likes to help!?
+                        strL_geom.at(3).trimmed().toInt()  );*/
+    /*this->setFixedSize(  strL_geom.at(2).trimmed().toInt(), 
+                        strL_geom.at(3).trimmed().toInt()  );*/
+    /*this->move(         strL_geom.at(0).trimmed().toInt(),
+                        strL_geom.at(1).trimmed().toInt()  );
+    */
+    //this->updateGeometry();
 }
 
 GenericMessageEditor::~GenericMessageEditor()
@@ -219,6 +246,44 @@ QToolBar* GenericMessageEditor::createToolBar()
 
     QAction* translit = bar->addAction(SIM::getImageStorage()->icon("translit"), I18N_NOOP("Send in &translit"), this, SLOT(setTranslit(bool)));
     translit->setCheckable(true);
+
+    if (m_bTranslationService) 
+    {
+        bar->addSeparator();
+
+        QAction* incommingTranslation = bar->addAction(getImageStorage()->icon("translate"), I18N_NOOP("OTRT-Incomming:"), this, SLOT(setTranslateOutgoing(bool))); //Todo create Icon
+        incommingTranslation->setCheckable(true);
+
+        m_cmbLanguageIncomming = new QComboBox(m_edit);  //Todo: Implement language selection for the language it should automatically translated...
+        //fillLangs(); //Todo Fill cmbBox with languages
+        m_cmbLanguageIncomming->setToolTip(i18n("Select translation language for incomming messages"));
+        bar->addWidget(m_cmbLanguageIncomming);
+
+
+
+        bar->addSeparator();
+
+        QAction* outgoingTranslation = bar->addAction(getImageStorage()->icon("translator"), I18N_NOOP("OTRT-Outgoing:"), this, SLOT(setTranslateIncomming(bool))); //Todo create Icon
+        outgoingTranslation->setCheckable(true);
+
+        m_cmbLanguageOutgoing = new QComboBox(m_edit);  //Todo: Implement language selection for the language it should automatically translated...
+        //fillLangs(); //Todo Fill cmbBox with languages
+        m_cmbLanguageOutgoing->setToolTip(i18n("Select translation language for outgoing messages"));
+        bar->addWidget(m_cmbLanguageOutgoing);
+
+        //Translations - How to do:
+        //register for an api-key: https://code.google.com/apis/console/
+
+        //Get the translated string:
+        //GET https://www.googleapis.com/language/translate/v2?q=%3Ch1%3EDas%20ist%20ein%20Text.%3C%2Fh1%3E&target=en&format=html&pp=1&key={YOUR_API_KEY}
+        
+        //Doc for implementation and testing: https://code.google.com/apis/explorer/#_s=translate&_v=v2&_m=translations.list&q=%3Ch1%3EDas%20ist%20ein%20Text.%3C/h1%3E&target=en&cid=blub&format=html
+    }
+    else 
+    {
+        //trEdit->setVisible(false); //How to do it best?
+    }
+
 
     bar->addSeparator();
 

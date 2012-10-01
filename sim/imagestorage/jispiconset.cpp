@@ -28,7 +28,7 @@ bool JispIconSet::parse(const QByteArray& arr)
     QDomDocument doc;
     doc.setContent(arr);
     QDomElement icondef = doc.firstChildElement("icondef");
-    QDomElement meta = doc.firstChildElement("meta");
+    QDomElement meta = icondef.firstChildElement("meta");
     m_name = meta.firstChildElement("name").text();
     QDomElement icon = icondef.firstChildElement("icon");
     while(!icon.isNull()) {
@@ -37,7 +37,7 @@ bool JispIconSet::parse(const QByteArray& arr)
         QString pictfile = object.text();
 
         if(name.isEmpty())
-            name = pictfile;
+            name = pictfile.toLower().left(pictfile.length()-4); //snip extension: -4 => .png
 
         //printf("JispIconSet::parse(%s)\n", qPrintable(name));
 

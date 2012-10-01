@@ -214,7 +214,7 @@ QString MsgEdit::messageHtml() const
     return m_edit->toHtml();
 }
 
-QToolBar* MsgEdit::createToolBar()
+QToolBar* MsgEdit::createToolBar() //==>ATTENTION: use genericmessageeditor.cpp !!!!!!!!!!!!!!!!!!!!!!!!!
 {
     QToolBar* bar = new QToolBar(this); //FIXME Memleak!
     bar->setFloatable(true);
