@@ -23,6 +23,7 @@
 #include "contacts/client.h"
 #include "imagestorage/imagestorage.h"
 #include "messaging/genericmessage.h"
+#include "profilemanager.h"
 
 namespace SIM
 {
@@ -64,11 +65,12 @@ GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMCon
     connect(m_edit, SIGNAL(textChanged()), this, SLOT(textChanged()));
     textChanged();
     
-    PropertyHubPtr p=getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core");
+    PropertyHubPtr p = getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core");
 
     log(L_DEBUG, p->value("ContainerGeometry").typeName());
     if (p->value("ContainerGeometry").typeName()==QString("QString")) //Fallback to old config
-    { //convert from old config
+    {
+        //convert from old config
         QStringList strL_geom = p->value("ContainerGeometry").toString().split(   QChar(','),QString::SkipEmptyParts   );
         //this->setGeometry(490,278,1031,736); //does not work
         this->setFixedSize(  strL_geom.at(2).trimmed().toInt(),                    //This works, but is bad, because leads to bad resize-behavior. This is only first time when converting size values.

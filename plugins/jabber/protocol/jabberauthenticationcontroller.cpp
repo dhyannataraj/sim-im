@@ -109,7 +109,7 @@ void JabberAuthenticationController::startElement(const QDomElement& root)
 		}
 		else if(m_state == RestartingStream)
 		{
-		    QDomElement bind = root.elementsByTagName("bind");
+		    QDomElement bind = root.firstChildElement("bind");
 		    if(!bind.isNull())
 		    {
 		        m_state = ResourceBinding;

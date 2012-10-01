@@ -221,7 +221,7 @@ bool JabberClient::loadState(SIM::PropertyHubPtr state)
     setUseSSL(hub->value("UseSSL").toBool());
     setUsePlain(hub->value("UsePlain").toBool());
     setUseVHost(hub->value("UseVHost").toBool());
-    setResource(hub->value("Resource").toUInt());
+    setResource(hub->value("Resource").toString());
     setPriority(hub->value("Priority").toUInt());
     setListRequest(hub->value("ListRequest").toString());
     setVHost(hub->value("VHost").toString());
