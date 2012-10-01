@@ -121,22 +121,20 @@ QModelIndex UserViewModel::index(int row, int column, const QModelIndex& parent)
             return m_offlineItemsParent;
         else return QModelIndex();
     }
-    else
-    {
-        if(parent.parent().isValid())
-            return QModelIndex();
 
-        int parentId = -1;
-        if(parent.row() == OnlineRow)
-            parentId = IdOnlineParent;
-        else if(parent.row() == OfflineRow)
-            parentId = IdOfflineParent;
-        if(parentId < 0)
-            return QModelIndex();
+    if(parent.parent().isValid())
+        return QModelIndex();
 
-        return createIndex(row, column, (quint32)parentId);
-    }
-    return QModelIndex(); //Fixme Unreachable code
+    int parentId = -1;
+    if(parent.row() == OnlineRow)
+        parentId = IdOnlineParent;
+    else if(parent.row() == OfflineRow)
+        parentId = IdOfflineParent;
+    if(parentId < 0)
+        return QModelIndex();
+
+    return createIndex(row, column, (quint32)parentId);
+  
 }
 
 QModelIndex UserViewModel::parent(const QModelIndex& index) const

@@ -104,9 +104,35 @@ void WeatherPlugin::timeout()
     m_bForecast = false;
     if ( now >= QDateTime::fromTime_t(value("ForecastTime").toUInt()).addSecs(CHECK2_INTERVAL) )
         m_bForecast = true;
-    QString url = "http://xoap.weather.com/weather/local/";
+    //QString url = "http://xoap.weather.com/weather/local/";
+    QString url = "http://xml.weather.com/weather/local/";
+    //QString url = "http://wxdata.weather.com/wxdata/mobile/mobagg/";
+    //QString url = "http://wxdata.weather.com/wxdata/df/";
+    //QString url = "http://wxdata.weather.com/wxdata/mobile/mobagg/";
     url += value("ID").toString();
     url += "?cc=*&link=xoap&prod=xoap&par=1004517364&key=a29796f587f206b2&unit=";
+    //url += "?unit="; //Quickfix Noragen
+    //url += ":1.js?locale=en_US&key=e88cf1e8-a740-102c-bafd-001321203584&unit=";
+    //url +=".xml?key=47ff9b4c-91d5-11e0-b754-001c23d537c5&day=0,1,2,3,4,5,6,7,8,9&units=";
+    //url +=".xml?locale=en_US&key=47ff9b4c-91d5-11e0-b754-001c23d537c5&units=";
+        //API:
+        //attentions parameter "dayf" is in wxdata.weater.com different (days)
+        
+        //day-forcast:
+        //http://wxdata.weather.com/wxdata/df/GMXX0265.xml?key=47ff9b4c-91d5-11e0-b754-001c23d537c5&day=0,1,2,3,4,5,6,7,8,9&units=m
+        
+        //observation
+        //http://wxdata.weather.com/wxdata/obs_hirad/GMXX0265.xml?key=47ff9b4c-91d5-11e0-b754-001c23d537c5&units=m
+        
+        //sunrise/sunset
+        //http://wxdata.weather.com/wxdata/ss/GMXX0265.xml?key=47ff9b4c-91d5-11e0-b754-001c23d537c5&days=10
+        
+        //alerts
+        //http://wxdata.weather.com/wxdata/svr/GMXX0265.xml?key=47ff9b4c-91d5-11e0-b754-001c23d537c5&details=true
+        
+        
+        //all aggregation: 
+        //http://wxdata.weather.com/wxdata/mobile/mobagg/GMXX0265.xml?locale=en_US&key=47ff9b4c-91d5-11e0-b754-001c23d537c5&day=0,1,2,3,4,5,6,7,8,9&units=m
     url += value("Units").toBool() ? "s" : "m";
     if (m_bForecast && value("Forecast").toUInt()){
         url += "&dayf=";
@@ -355,6 +381,7 @@ i18n("weather", "Mostly Cloudy")
 i18n("weather", "Partly Cloudy")
 i18n("weather", "Wind")
 i18n("weather", "Windy")
+i18n("weather", "Cloudy and Windy")
 i18n("weather", "Drizzle")
 i18n("weather", "Heavy Drizzle")
 i18n("weather", "Freezing Drizzle")
@@ -533,20 +560,20 @@ QString WeatherPlugin::getTipText()
         "<img height=\"" + QString::number( WIATHER_ICON_SIZE ) +
             "\" width=\"" + QString::number( WIATHER_ICON_SIZE ) + "\" " +
             "src=\"sim:icons/weather%i\"></p><br>%c<br>\n"+
-		i18n("weather","Temperature")+": <b>%t</b> ("+i18n("weather","feels like")+": <b>%f</b>)<br>\n"+
-		i18n("weather","Humidity")+": <b>%h</b><br>\n"+
-		i18n("weather","Chance of Precipitation")+": <b>%pp%</b><br>\n"+
-		i18n("weather","Pressure")+": <b>%p</b> (%q)<br>\n"+
-		i18n("weather","Wind")+": <b>%b</b> <b>%w %g</b><br>\n"+
-		i18n("weather","Visibility")+": <b>%v</b><br>\n"+
-		i18n("weather","Dew Point")+": <b>%d</b><br>\n"+
-		i18n("weather","Sunrise")+": %r<br>\n"+
-		i18n("weather","Sunset")+": %s<br>\n"+
-		i18n("weather","UV-Intensity is <b>%ut</b> with value <b>%ui</b> (of 11)")+"<br>\n"
-		"<b>"+i18n("weather","Moonphase")+": </b>%mp<br>\n"
+        i18n("weather","Temperature")+": <b>%t</b> ("+i18n("weather","feels like")+": <b>%f</b>)<br>\n"+
+        i18n("weather","Humidity")+": <b>%h</b><br>\n"+
+        i18n("weather","Chance of Precipitation")+": <b>%pp%</b><br>\n"+
+        i18n("weather","Pressure")+": <b>%p</b> (%q)<br>\n"+
+        i18n("weather","Wind")+": <b>%b</b> <b>%w %g</b><br>\n"+
+        i18n("weather","Visibility")+": <b>%v</b><br>\n"+
+        i18n("weather","Dew Point")+": <b>%d</b><br>\n"+
+        i18n("weather","Sunrise")+": %r<br>\n"+
+        i18n("weather","Sunset")+": %s<br>\n"+
+        i18n("weather","UV-Intensity is <b>%ut</b> with value <b>%ui</b> (of 11)")+"<br>\n"
+        "<b>"+i18n("weather","Moonphase")+": </b>%mp<br>\n"
         "<img src=\"sim:icons/moon%mi\"><br>\n"
-		"<br>\n"+
-		i18n("weather","Updated")+": %u<br>\n";
+        "<br>\n"+
+        i18n("weather","Updated")+": %u<br>\n";
     return str;
 }
 
@@ -701,20 +728,20 @@ bool WeatherPlugin::parse(QDomDocument document)
 
 void WeatherPlugin::setPropertyHub(SIM::PropertyHubPtr hub)
 {
-	m_propertyHub = hub;
+    m_propertyHub = hub;
 }
 
 SIM::PropertyHubPtr WeatherPlugin::propertyHub()
 {
-	return m_propertyHub;
+    return m_propertyHub;
 }
 
 QVariant WeatherPlugin::value(const QString& key)
 {
-	return m_propertyHub->value(key);
+    return m_propertyHub->value(key);
 }
 
 void WeatherPlugin::setValue(const QString& key, const QVariant& v)
 {
-	m_propertyHub->setValue(key, v);
+    m_propertyHub->setValue(key, v);
 }

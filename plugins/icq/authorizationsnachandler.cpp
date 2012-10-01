@@ -228,7 +228,7 @@ bool AuthorizationSnacHandler::handleLoginAndCloseChannels(int channel, const QB
     return false;
 }
 
-bool AuthorizationSnacHandler::handleNewConnection(const QByteArray& data)
+bool AuthorizationSnacHandler::handleNewConnection(const QByteArray& data)//data not used!
 {
     if(m_authCookie.size()) {
         ByteArrayBuilder builder;

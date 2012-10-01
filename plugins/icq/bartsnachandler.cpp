@@ -200,7 +200,7 @@ void BartSnacHandler::socketConnected()
     sendLoginCookie(m_loginCookie);
 }
 
-void BartSnacHandler::handleLoginAndCloseChannels(int channel, const QByteArray& data)
+void BartSnacHandler::handleLoginAndCloseChannels(int channel, const QByteArray& data)//Todo ?
 {
 }
 

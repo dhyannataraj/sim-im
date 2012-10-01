@@ -21,17 +21,17 @@ QList<SIM::IMContactPtr> JabberGroup::contacts()
     return QList<SIM::IMContactPtr>();
 }
 
-bool JabberGroup::serialize(QDomElement& element)
+bool JabberGroup::serialize(QDomElement& element)//Todo, element not used!
 {
     return true;
 }
 
-bool JabberGroup::deserialize(QDomElement& element)
+bool JabberGroup::deserialize(QDomElement& element)//Todo, element not used!
 {
     return true;
 }
 
-bool JabberGroup::deserialize(const QString& data)
+bool JabberGroup::deserialize(const QString& data)//Todo, data not used!
 {
     return true;
 }

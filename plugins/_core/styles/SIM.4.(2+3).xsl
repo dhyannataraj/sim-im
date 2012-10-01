@@ -1,7 +1,9 @@
-<?xml version="1.0"?> 
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:output method="html"/>
-<xsl:template match="/message"><p>
+ <xsl:template match="/">
+    <xsl:for-each select="/messages/message">
+<p>
 <xsl:choose>
 <xsl:when test="@direction='2'">
 <font>
@@ -25,11 +27,11 @@
 <xsl:text> </xsl:text>
 <font>
 <xsl:choose>
-<xsl:when test="@direction='1'">
-<xsl:attribute name="color">#800000</xsl:attribute>
-</xsl:when>
 <xsl:when test="@direction='0'">
 <xsl:attribute name="color">#000080</xsl:attribute>
+</xsl:when>
+<xsl:when test="@direction='1'">
+<xsl:attribute name="color">#800000</xsl:attribute>
 </xsl:when>
 </xsl:choose>
 <a>
@@ -47,11 +49,19 @@
 </xsl:otherwise>
 </xsl:choose>
 </p><p>
-<xsl:attribute name="style"><xsl:if test="body/@bgcolor">background-color:<xsl:value-of select="body/@bgcolor"/>;</xsl:if><xsl:if test="body/@fgcolor">color:<xsl:value-of select="body/@fgcolor"/>;</xsl:if></xsl:attribute>
+<xsl:attribute name="style">
+<xsl:if test="body/@bgcolor">background-color:
+<xsl:value-of select="body/@bgcolor"/>;
+</xsl:if>
+<xsl:if test="body/@fgcolor">color:
+<xsl:value-of select="body/@fgcolor"/>;
+</xsl:if>
+</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="body"/>
 </p>
 <p>
 <xsl:text>&#xA0;</xsl:text>
 </p>
+	</xsl:for-each>
 </xsl:template>
 </xsl:stylesheet>

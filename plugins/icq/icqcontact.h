@@ -203,16 +203,16 @@ public:
     QString getZip() const { return m_zip; }
     void setZip(const QString& zip) { m_zip = zip; }
 
-    unsigned long getCountry() const { return m_country; }
+    int getCountry() const { return m_country; }
     void setCountry(unsigned long country) { m_country =  country; }
 
     unsigned long getTimeZone() const { return m_timezone; }
     void setTimeZone(unsigned long timezone) { m_timezone = timezone; }
 
-    unsigned long getAge() const { return m_age; }
-    void setAge(unsigned long age) { m_age = age; }
+    int getAge() const { return m_age; }
+    void setAge(int age) { m_age = age; }
 
-    unsigned long getGender() const { return m_gender; }
+    int getGender() const { return m_gender; }
     void setGender(unsigned long gender) { m_gender = gender; }
 
     QString getHomepage() const { return m_homepage; }
@@ -221,14 +221,14 @@ public:
     QDate getBirthday() const { return m_birthday; }
     void setBirthday(const QDate& date) { m_birthday = date; }
 
-    unsigned long getPrimaryLanguage() const { return m_primaryLanguage; }
-    void setPrimaryLanguage(unsigned long language) { m_primaryLanguage = language; }
+    int getPrimaryLanguage() const { return m_primaryLanguage; }
+    void setPrimaryLanguage(int language) { m_primaryLanguage = language; }
 
-    unsigned long getSecondaryLanguage() const { return m_secondaryLanguage; }
-    void setSecondaryLanguage(unsigned long language) { m_secondaryLanguage = language; }
+    int getSecondaryLanguage() const { return m_secondaryLanguage; }
+    void setSecondaryLanguage(int language) { m_secondaryLanguage = language; }
 
-    unsigned long getTertiaryLanguage() const { return m_tertiaryLanguage; }
-    void setTertiaryLanguage(unsigned long language) { m_tertiaryLanguage = language; }
+    int getTertiaryLanguage() const { return m_tertiaryLanguage; }
+    void setTertiaryLanguage(int language) { m_tertiaryLanguage = language; }
 
     QString getEMails() const { return m_emails; }
     void setEMails(const QString& emails) { m_emails = emails; }
@@ -251,8 +251,8 @@ public:
     QString getWorkZip() const { return m_workzip; }
     void setWorkZip(const QString& workzip) { m_workzip = workzip; }
 
-    unsigned long getWorkCountry() const { return m_workcountry; }
-    void setWorkCountry(unsigned long workcountry) { m_workcountry = workcountry; }
+    int getWorkCountry() const { return m_workcountry; }
+    void setWorkCountry(int workcountry) { m_workcountry = workcountry; }
 
     QString getWorkName() const { return m_workname; }
     void setWorkName(const QString& workname) { m_workname = workname; }
@@ -263,8 +263,8 @@ public:
     QString getWorkPosition() const { return m_workposition; }
     void setWorkPosition(const QString& workposition) { m_workposition = workposition; }
 
-    unsigned long getOccupation() const { return m_occupation; }
-    void setOccupation(unsigned long occupation) { m_occupation = occupation; }
+    int getOccupation() const { return m_occupation; }
+    void setOccupation(int occupation) { m_occupation = occupation; }
 
     QString getWorkHomepage() const { return m_workhomepage; }
     void setWorkHomepage(const QString& homepage) { m_workhomepage = homepage; }
@@ -437,15 +437,15 @@ private:
     QString m_address;
     QString m_privateCellular;
     QString m_zip;
-    unsigned long m_country;
+    int m_country;
     unsigned long m_timezone;
-    unsigned long m_age;
-    unsigned long m_gender;
+    int m_age;
+    int m_gender;
     QString m_homepage;
     QDate m_birthday;
-    unsigned long m_primaryLanguage;
-    unsigned long m_secondaryLanguage;
-    unsigned long m_tertiaryLanguage;
+    int m_primaryLanguage;
+    int m_secondaryLanguage;
+    int m_tertiaryLanguage;
     QString m_emails;
     QString m_workcity;
     QString m_workstate;
@@ -453,11 +453,11 @@ private:
     QString m_workfax;
     QString m_workaddress;
     QString m_workzip;
-    unsigned long m_workcountry;
+    int m_workcountry;
     QString m_workname;
     QString m_workdepartment;
     QString m_workposition;
-    unsigned long m_occupation;
+    int m_occupation;
     QString m_workhomepage;
     QString m_about;
 

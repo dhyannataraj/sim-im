@@ -56,7 +56,7 @@ using namespace SIM;
 
 const unsigned ACCEL_MESSAGE = 0x1000;
 
-Container::Container(unsigned id)
+Container::Container(unsigned id) //id unused
     : QMainWindow()
     , m_bNoRead     (false)
     , m_bInit       (false)
@@ -286,7 +286,7 @@ void Container::addUserWnd(IUserWnd *wnd)
 //    }
 }
 
-void Container::raiseUserWnd(int id)
+void Container::raiseUserWnd(int id) //id unused, Todo!
 {
     this->activateWindow();
     this->raise();
@@ -400,7 +400,7 @@ void Container::contactSelected(int contactId)
 //    }
 }
 
-void Container::setMessageType(unsigned type)
+void Container::setMessageType(unsigned type) //Todo!
 {
 //    CommandDef *def;
 //    def = CorePlugin::instance()->messageTypes.find(type);
@@ -449,7 +449,7 @@ void Container::toolbarChanged(QToolBar*)
     //copyData(CorePlugin::instance()->data.ContainerBar, data.barState, 7);
 }
 
-void Container::statusChanged(int width)
+void Container::statusChanged(int width) //Todo
 {
 //    if (m_tabBar->isVisible() && !m_bStatusSize){
 //        setStatusSize(width);
@@ -457,7 +457,7 @@ void Container::statusChanged(int width)
 //    }
 }
 
-void Container::statusChanged(UserWnd *wnd)
+void Container::statusChanged(UserWnd *wnd) //Todo
 {
 //    if (wnd == m_tabBar->currentWnd())
 //        m_status->showMessage(wnd->status());
@@ -763,7 +763,7 @@ bool Container::event(QEvent *e)
     return QMainWindow::event(e);
 }
 
-void Container::contactChanged(const SIM::ContactPtr& contact)
+void Container::contactChanged(const SIM::ContactPtr& contact) //Todo
 {
 //    UserWnd *userWnd = NULL;
 //    if (m_tabBar){
@@ -803,7 +803,7 @@ UserTabBar::UserTabBar(QWidget *parent) : QTabBar(parent)
     //setShape(QTabBar::TriangularSouth);
 }
 
-UserWnd *UserTabBar::wnd(unsigned id)
+UserWnd *UserTabBar::wnd(unsigned id) //Todo
 {
 //    UserWnd *res = NULL;
 //    for (int t = 0; t < count(); t++)
@@ -819,7 +819,7 @@ UserWnd *UserTabBar::wnd(unsigned id)
     return 0;
 }
 
-int UserTabBar::tab(unsigned contactid)
+int UserTabBar::tab(unsigned contactid) //Todo
 {
 //    UserWnd *res = NULL;
 //    for (int t = 0; t < count(); t++)
@@ -835,7 +835,7 @@ int UserTabBar::tab(unsigned contactid)
     return 0;
 }
 
-void UserTabBar::raiseTab(unsigned id)
+void UserTabBar::raiseTab(unsigned id) //Todo
 {
 //    for (int t = 0; t < count(); t++)
 //    {
@@ -874,7 +874,7 @@ void UserTabBar::slotRepaint()
     repaint();
 }
 
-void UserTabBar::removeTab(unsigned id)
+void UserTabBar::removeTab(unsigned id) //Todo
 {
 //    layoutTabs();
 //    for (int t = 0; t < count(); t++)

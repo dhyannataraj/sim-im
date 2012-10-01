@@ -24,7 +24,7 @@ MetaInfoSnacHandler::~MetaInfoSnacHandler()
 {
 }
 
-bool MetaInfoSnacHandler::process(unsigned short subtype, const QByteArray& data, int flags, unsigned int requestId)
+bool MetaInfoSnacHandler::process(unsigned short subtype, const QByteArray& data, int flags, unsigned int requestId)//flags, requestId not used!
 {
     switch(subtype)
     {
@@ -300,8 +300,6 @@ bool MetaInfoSnacHandler::processMetaInfoData(const QByteArray& arr)
     default:
         return false;
     }
-
-    return false;
 }
 
 bool MetaInfoSnacHandler::parseBasicUserInfo(ByteArrayParser& parser, const ICQContactPtr& contact)
@@ -423,7 +421,7 @@ bool MetaInfoSnacHandler::parsePastUserInfo(ByteArrayParser& parser, const ICQCo
     if(successByte != 0x0a)
         return false;
 
-    int affiliationCount = parser.readByte();
+    int affiliationCount = parser.readByte();//affiliationCount not used!
     for(int i = 0; i < 3; i++)
     {
         int affiliationCode = parser.readWord();
@@ -431,7 +429,7 @@ bool MetaInfoSnacHandler::parsePastUserInfo(ByteArrayParser& parser, const ICQCo
         contact->setAffiliation(i, affiliationCode, affiliationText);
     }
 
-    int backgroundsCount = parser.readByte();
+    int backgroundsCount = parser.readByte();//backgroundsCount not used!
     for(int i = 0; i < 3; i++)
     {
         int backgroundCode = parser.readWord();
@@ -444,7 +442,7 @@ bool MetaInfoSnacHandler::parsePastUserInfo(ByteArrayParser& parser, const ICQCo
     return true;
 }
 
-void MetaInfoSnacHandler::addMetaInfoRequest(int sqnum, const ICQContactPtr& contact)
+void MetaInfoSnacHandler::addMetaInfoRequest(int sqnum, const ICQContactPtr& contact)//sqnum not used!
 {
     MetaInfoRequestDescriptor desc = {m_sqnum, QDateTime::currentDateTime(), contact};
     m_requests.append(desc);

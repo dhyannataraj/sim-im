@@ -55,7 +55,7 @@ UiCommandList SimToolbar::save()
     return UiCommandList();
 }
 
-void SimToolbar::contextMenuEvent(QContextMenuEvent* event)
+void SimToolbar::contextMenuEvent(QContextMenuEvent* event) //event not used and reserved word, change!
 {
    return;
 }

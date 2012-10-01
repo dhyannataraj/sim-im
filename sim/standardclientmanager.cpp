@@ -1,4 +1,5 @@
 
+#include <algorithm>
 #include <QDir>
 #include "standardclientmanager.h"
 #include "clientmanager.h"

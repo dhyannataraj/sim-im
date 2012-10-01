@@ -72,7 +72,7 @@ bool SimFileEngine::mkdir( const QString & /*dirName*/, bool /*createParentDirec
     return false;
 }
 
-bool SimFileEngine::open( QIODevice::OpenMode mode ) {
+bool SimFileEngine::open( QIODevice::OpenMode mode ) { //mode not used!
 //    if( mode & QIODevice::WriteOnly )
 //        return false;
 

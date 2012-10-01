@@ -38,7 +38,7 @@ using namespace SIM;
 
 #ifndef USE_KDE
 
-static FilePreview *createPreview(QWidget *parent)
+static FilePreview *createPreview(QWidget *parent)//this function is not longer used!
 {
     return new PictPreview(parent);
 }

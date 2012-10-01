@@ -43,7 +43,7 @@ using namespace SIM;
 
 const unsigned NO_TYPE = (unsigned)(-1);
 
-MsgTextEdit::MsgTextEdit(MsgEdit *edit, QWidget *parent)
+MsgTextEdit::MsgTextEdit(MsgEdit *edit, QWidget *parent) //parent not used!
         //: TextEdit(parent)
 {
     m_edit = edit;
@@ -56,7 +56,7 @@ MsgTextEdit::MsgTextEdit(MsgEdit *edit, QWidget *parent)
 #endif
 }
 
-void MsgTextEdit::contextMenuEvent(QContextMenuEvent* event)
+void MsgTextEdit::contextMenuEvent(QContextMenuEvent* event) //event not used and reserved word, change!
 {
 //    if (m_bInClick)
 //        return;
@@ -98,7 +98,7 @@ void MsgTextEdit::contextMenuEvent(QContextMenuEvent* event)
 //    return msg;
 //}
 
-void MsgTextEdit::contentsDropEvent(QDropEvent *e)
+void MsgTextEdit::contentsDropEvent(QDropEvent *e)//e not used!
 {
 //    Message *msg = createMessage(e);
 //    if (msg){
@@ -111,7 +111,7 @@ void MsgTextEdit::contentsDropEvent(QDropEvent *e)
     //TextEdit::contentsDropEvent(e); //FIXME
 }
 
-void MsgTextEdit::contentsDragEnterEvent(QDragEnterEvent *e)
+void MsgTextEdit::contentsDragEnterEvent(QDragEnterEvent *e)//e not used!
 {
 //    Message *msg = createMessage(e);
 //    if (msg){
@@ -122,7 +122,7 @@ void MsgTextEdit::contentsDragEnterEvent(QDragEnterEvent *e)
     //TextEdit::contentsDragEnterEvent(e);  //FIXME
 }
 
-void MsgTextEdit::contentsDragMoveEvent(QDragMoveEvent *e)
+void MsgTextEdit::contentsDragMoveEvent(QDragMoveEvent *e)//e not used!
 {
 //    Message *msg = createMessage(e);
 //    if (msg){
@@ -214,7 +214,7 @@ QString MsgEdit::messageHtml() const
     return m_edit->toHtml();
 }
 
-QToolBar* MsgEdit::createToolBar()
+QToolBar* MsgEdit::createToolBar() //==>ATTENTION: use genericmessageeditor.cpp !!!!!!!!!!!!!!!!!!!!!!!!!
 {
     QToolBar* bar = new QToolBar(this); //FIXME Memleak!
     bar->setFloatable(true);
@@ -242,6 +242,7 @@ QToolBar* MsgEdit::createToolBar()
 
     bar->addSeparator();
 
+    //Todo: Implement emoticons
     QAction* emoticons = bar->addAction(getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(insertSmile()));
     
     QAction* translit = bar->addAction(getImageStorage()->icon("translit"), I18N_NOOP("Send in &translit"), this, SLOT(setTranslit(bool)));
@@ -390,7 +391,7 @@ void MsgEdit::chooseFont()
     m_edit->setFont(f);
 }
 
-void MsgEdit::setCloseOnSend(bool b)
+void MsgEdit::setCloseOnSend(bool b)//Todo
 {
     
 }

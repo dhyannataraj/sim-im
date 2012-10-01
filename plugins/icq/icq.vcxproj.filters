@@ -527,18 +527,21 @@
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{74b01002-9e07-4d97-9ceb-48a10166d19d}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Source Files\generated">
       <UniqueIdentifier>{76280db1-8c4c-40e7-97a9-ce9572dc663c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{828b39b5-8694-47db-a2e5-da9cae249694}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Header Files\generated">
       <UniqueIdentifier>{9d4cbabd-8988-4595-a018-22fad2f25d0c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Interfaces">
       <UniqueIdentifier>{ac95ff80-8726-4678-96a0-945bfe5b7df8}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{026ae41c-658f-47c7-8c8e-1b96801f85c3}</UniqueIdentifier>

@@ -180,7 +180,7 @@ namespace SIM
         foreach (const QString& clname, clients)
         {
             IMGroupPtr imgr = clientGroup(clname);
-            Client* client = imgr->client();
+            Client* client = imgr->client(); //client not used
             clientsHub->addPropertyHub(imgr->saveState());
         }
         coreHub->addPropertyHub(clientsHub);

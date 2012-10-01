@@ -29,8 +29,6 @@ bool LocationSnacHandler::process(unsigned short subtype, const QByteArray& data
         log(L_WARN, "Unhandled location snac, subtype: %04x", subtype);
         return false;
     }
-
-    return true;
 }
 
 void LocationSnacHandler::disconnect()

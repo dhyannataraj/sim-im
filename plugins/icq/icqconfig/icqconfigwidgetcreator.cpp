@@ -47,7 +47,7 @@ void IcqConfigWidgetCreator::contactConfigRequested(SIM::WidgetHierarchy* hierar
     emit fullInfoRequest(icqcontact->getScreen());
 }
 
-void IcqConfigWidgetCreator::globalConfigRequested(SIM::WidgetHierarchy* hierarchy, const QString& context)
+void IcqConfigWidgetCreator::globalConfigRequested(SIM::WidgetHierarchy* hierarchy, const QString& context)//context not used!
 {
     ICQContactPtr icqcontact = m_client->ownerIcqContact();
     if(!icqcontact)

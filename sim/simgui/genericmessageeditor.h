@@ -14,6 +14,7 @@
 #include <QToolButton>
 #include <QVBoxLayout>
 #include <QToolBar>
+#include <QComboBox>
 
 #include "contacts/imcontact.h"
 #include "simapi.h"
@@ -59,8 +60,12 @@ private:
     QTextEdit *m_edit;
     QTextEdit *m_editTrans;
     QTextEdit *m_editActive;
+    bool m_bTranslationService;
 
     QVBoxLayout *m_layout;
+
+    QComboBox * m_cmbLanguageIncomming;
+    QComboBox * m_cmbLanguageOutgoing;
 
     QAction* m_sendAction;
     QAction* m_sendMultiple;

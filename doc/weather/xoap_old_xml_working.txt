@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This document is intended only for use by authorized licensees of The  -->
+<!-- Weather Channel. Unauthorized use is prohibited.  Copyright 1995-2012, -->
+<!-- The Weather Channel Interactive, Inc.  All Rights Reserved.            -->
+<weather ver="2.0">
+  <head>
+    <locale>en_US</locale>
+    <form>MEDIUM</form>
+    <ut>C</ut>
+    <ud>km</ud>
+    <us>km/h</us>
+    <up>mb</up>
+    <ur>mm</ur>
+  </head>
+  <loc id="ITXX0252">
+    <dnam>Olbia, Italy</dnam>
+    <tm>12:33 AM</tm>
+    <lat>40.92</lat>
+    <lon>9.49</lon>
+    <sunr>7:15 AM</sunr>
+    <suns>5:57 PM</suns>
+    <zone>1</zone>
+  </loc>
+  <cc>
+    <lsup>2/17/12 12:20 AM Local Time</lsup>
+    <obst>Olbia/Costa Smer, ITALY</obst>
+    <tmp>5</tmp>
+    <flik>3</flik>
+    <t>Partly Cloudy</t>
+    <icon>29</icon>
+    <bar>
+      <r>1021.0</r>
+      <d>steady</d>
+    </bar>
+    <wind>
+      <s>8</s>
+      <gust>N/A</gust>
+      <d>210</d>
+      <t>SSW</t>
+    </wind>
+    <hmid>87</hmid>
+    <vis>10.0</vis>
+    <uv>
+      <i>0</i>
+      <t>Low</t>
+    </uv>
+    <dewp>3</dewp>
+    <moon>
+      <icon>24</icon>
+      <t>Waning Crescent</t>
+    </moon>
+  </cc>
+  <dayf>
+    <lsup>2/16/12 8:09 PM Local Time</lsup>
+    <day d="0" t="Thursday" dt="Feb 16">
+      <hi>N/A</hi>
+      <low>5</low>
+      <sunr>7:16 AM</sunr>
+      <suns>5:57 PM</suns>
+      <part p="d">
+        <icon>44</icon>
+        <t>N/A</t>
+        <wind>
+          <s>N/A</s>
+          <gust>N/A</gust>
+          <d>N/A</d>
+          <t>N/A</t>
+        </wind>
+        <bt>N/A</bt>
+        <ppcp>0</ppcp>
+        <hmid>N/A</hmid>
+      </part>
+      <part p="n">
+        <icon>31</icon>
+        <t>Clear</t>
+        <wind>
+          <s>6</s>
+          <gust>N/A</gust>
+          <d>198</d>
+          <t>SSW</t>
+        </wind>
+        <bt>Clear</bt>
+        <ppcp>0</ppcp>
+        <hmid>76</hmid>
+      </part>
+    </day>
+    <day d="1" t="Friday" dt="Feb 17">
+      <hi>14</hi>
+      <low>4</low>
+      <sunr>7:15 AM</sunr>
+      <suns>5:58 PM</suns>
+      <part p="d">
+        <icon>32</icon>
+        <t>Sunny</t>
+        <wind>
+          <s>5</s>
+          <gust>N/A</gust>
+          <d>183</d>
+          <t>S</t>
+        </wind>
+        <bt>Sunny</bt>
+        <ppcp>0</ppcp>
+        <hmid>66</hmid>
+      </part>
+      <part p="n">
+        <icon>33</icon>
+        <t>Mostly Clear</t>
+        <wind>
+          <s>6</s>
+          <gust>N/A</gust>
+          <d>202</d>
+          <t>SSW</t>
+        </wind>
+        <bt>M Clear</bt>
+        <ppcp>0</ppcp>
+        <hmid>85</hmid>
+      </part>
+    </day>
+    <day d="2" t="Saturday" dt="Feb 18">
+      <hi>14</hi>
+      <low>4</low>
+      <sunr>7:13 AM</sunr>
+      <suns>5:59 PM</suns>
+      <part p="d">
+        <icon>34</icon>
+        <t>Mostly Sunny</t>
+        <wind>
+          <s>6</s>
+          <gust>N/A</gust>
+          <d>184</d>
+          <t>S</t>
+        </wind>
+        <bt>M Sunny</bt>
+        <ppcp>10</ppcp>
+        <hmid>70</hmid>
+      </part>
+      <part p="n">
+        <icon>29</icon>
+        <t>Partly Cloudy</t>
+        <wind>
+          <s>3</s>
+          <gust>N/A</gust>
+          <d>205</d>
+          <t>SSW</t>
+        </wind>
+        <bt>P Cloudy</bt>
+        <ppcp>10</ppcp>
+        <hmid>83</hmid>
+      </part>
+    </day>
+    <day d="3" t="Sunday" dt="Feb 19">
+      <hi>14</hi>
+      <low>5</low>
+      <sunr>7:12 AM</sunr>
+      <suns>6:01 PM</suns>
+      <part p="d">
+        <icon>30</icon>
+        <t>Partly Cloudy</t>
+        <wind>
+          <s>6</s>
+          <gust>N/A</gust>
+          <d>212</d>
+          <t>SSW</t>
+        </wind>
+        <bt>P Cloudy</bt>
+        <ppcp>20</ppcp>
+        <hmid>74</hmid>
+      </part>
+      <part p="n">
+        <icon>29</icon>
+        <t>Partly Cloudy</t>
+        <wind>
+          <s>6</s>
+          <gust>N/A</gust>
+          <d>222</d>
+          <t>SW</t>
+        </wind>
+        <bt>P Cloudy</bt>
+        <ppcp>20</ppcp>
+        <hmid>83</hmid>
+      </part>
+    </day>
+    <day d="4" t="Monday" dt="Feb 20">
+      <hi>12</hi>
+      <low>5</low>
+      <sunr>7:11 AM</sunr>
+      <suns>6:02 PM</suns>
+      <part p="d">
+        <icon>39</icon>
+        <t>Scattered Showers</t>
+        <wind>
+          <s>10</s>
+          <gust>N/A</gust>
+          <d>180</d>
+          <t>S</t>
+        </wind>
+        <bt>Sct Showers</bt>
+        <ppcp>30</ppcp>
+        <hmid>75</hmid>
+      </part>
+      <part p="n">
+        <icon>11</icon>
+        <t>Showers</t>
+        <wind>
+          <s>16</s>
+          <gust>N/A</gust>
+          <d>40</d>
+          <t>NE</t>
+        </wind>
+        <bt>Showers</bt>
+        <ppcp>60</ppcp>
+        <hmid>77</hmid>
+      </part>
+    </day>
+    <day d="5" t="Tuesday" dt="Feb 21">
+      <hi>11</hi>
+      <low>6</low>
+      <sunr>7:09 AM</sunr>
+      <suns>6:03 PM</suns>
+      <part p="d">
+        <icon>11</icon>
+        <t>Showers</t>
+        <wind>
+          <s>24</s>
+          <gust>N/A</gust>
+          <d>79</d>
+          <t>E</t>
+        </wind>
+        <bt>Showers</bt>
+        <ppcp>60</ppcp>
+        <hmid>76</hmid>
+      </part>
+      <part p="n">
+        <icon>45</icon>
+        <t>Scattered Showers</t>
+        <wind>
+          <s>8</s>
+          <gust>N/A</gust>
+          <d>175</d>
+          <t>S</t>
+        </wind>
+        <bt>Sct Showers</bt>
+        <ppcp>60</ppcp>
+        <hmid>72</hmid>
+      </part>
+    </day>
+    <day d="6" t="Wednesday" dt="Feb 22">
+      <hi>12</hi>
+      <low>6</low>
+      <sunr>7:08 AM</sunr>
+      <suns>6:04 PM</suns>
+      <part p="d">
+        <icon>32</icon>
+        <t>Sunny</t>
+        <wind>
+          <s>10</s>
+          <gust>N/A</gust>
+          <d>229</d>
+          <t>SW</t>
+        </wind>
+        <bt>Sunny</bt>
+        <ppcp>0</ppcp>
+        <hmid>70</hmid>
+      </part>
+      <part p="n">
+        <icon>45</icon>
+        <t>Scattered Showers</t>
+        <wind>
+          <s>8</s>
+          <gust>N/A</gust>
+          <d>246</d>
+          <t>WSW</t>
+        </wind>
+        <bt>Sct Showers</bt>
+        <ppcp>30</ppcp>
+        <hmid>82</hmid>
+      </part>
+    </day>
+    <day d="7" t="Thursday" dt="Feb 23">
+      <hi>12</hi>
+      <low>7</low>
+      <sunr>7:06 AM</sunr>
+      <suns>6:05 PM</suns>
+      <part p="d">
+        <icon>11</icon>
+        <t>Showers</t>
+        <wind>
+          <s>21</s>
+          <gust>N/A</gust>
+          <d>215</d>
+          <t>SW</t>
+        </wind>
+        <bt>Showers</bt>
+        <ppcp>60</ppcp>
+        <hmid>76</hmid>
+      </part>
+      <part p="n">
+        <icon>31</icon>
+        <t>Clear</t>
+        <wind>
+          <s>6</s>
+          <gust>N/A</gust>
+          <d>241</d>
+          <t>WSW</t>
+        </wind>
+        <bt>Clear</bt>
+        <ppcp>0</ppcp>
+        <hmid>82</hmid>
+      </part>
+    </day>
+  </dayf>
+</weather>
+

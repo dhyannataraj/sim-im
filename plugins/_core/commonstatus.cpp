@@ -126,7 +126,7 @@ CommonStatus::CommonStatusDescription CommonStatus::currentCommonStatus() const
     return CommonStatusDescription();
 }
 
-int CommonStatus::indexOfCommonStatus(const QString& id)
+int CommonStatus::indexOfCommonStatus(const QString& id)//id not used!
 {
     int i = 0;
     foreach(const CommonStatusDescription& desc, m_statuses)
@@ -138,7 +138,7 @@ int CommonStatus::indexOfCommonStatus(const QString& id)
     return -1;
 }
 
-CommonStatus::CommonStatusDescription CommonStatus::commonStatusByIndex(int index) const
+CommonStatus::CommonStatusDescription CommonStatus::commonStatusByIndex(int index) const//index not used!
 {
     foreach(const CommonStatusDescription& desc, m_statuses)
     {

@@ -52,7 +52,7 @@ public:
 private:
 };
 
-UserConfigContextPtr UserConfigContext::create(GlobalContext context)
+UserConfigContextPtr UserConfigContext::create(GlobalContext context) //context not used!
 {
     return UserConfigContextPtr(new GlobalContextProvider());
 }
