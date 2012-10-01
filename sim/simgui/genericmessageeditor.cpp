@@ -53,7 +53,7 @@ GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMCon
     if (m_bTranslationService)
     {
         QTextEdit * m_editTrans = new QTextEdit(this);
-        QColor color(Qt::GlobalColor::lightGray);
+        QColor color(Qt::lightGray);
         m_editTrans->setStyleSheet(getBGStyleSheet(color.name()));
         m_layout->addWidget(m_editTrans);
     }
@@ -64,21 +64,25 @@ GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMCon
     connect(m_edit, SIGNAL(textChanged()), this, SLOT(textChanged()));
     textChanged();
     
-    /*QStringList strL_geom = getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core")->value("ContainerGeometry").toString().split(   QChar(','),QString::SkipEmptyParts   );
-    */
-    //this->setGeometry(490,278,1031,736);
-    /*this->setFixedSize(  strL_geom.at(2).trimmed().toInt(),                    //This works, but is bad, because leads to bad resize-behavior. Who likes to help!?
-                        strL_geom.at(3).trimmed().toInt()  );*/
-    /*this->setFixedSize(  strL_geom.at(2).trimmed().toInt(), 
-                        strL_geom.at(3).trimmed().toInt()  );*/
-    /*this->move(         strL_geom.at(0).trimmed().toInt(),
-                        strL_geom.at(1).trimmed().toInt()  );
-    */
-    //this->updateGeometry();
+    PropertyHubPtr p=getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core");
+
+    log(L_DEBUG, p->value("ContainerGeometry").typeName());
+    if (p->value("ContainerGeometry").typeName()==QString("QString")) //Fallback to old config
+    { //convert from old config
+        QStringList strL_geom = p->value("ContainerGeometry").toString().split(   QChar(','),QString::SkipEmptyParts   );
+        //this->setGeometry(490,278,1031,736); //does not work
+        this->setFixedSize(  strL_geom.at(2).trimmed().toInt(),                    //This works, but is bad, because leads to bad resize-behavior. This is only first time when converting size values.
+                             strL_geom.at(3).trimmed().toInt()  );
+    }
+    else
+    {
+        this->restoreGeometry(p->value("ContainerGeometry").toByteArray());
+    }
 }
 
 GenericMessageEditor::~GenericMessageEditor()
 {
+    getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core")->setValue("ContainerGeometry", this->saveGeometry());
 }
 
 QString GenericMessageEditor::messageTypeId() const
