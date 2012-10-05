@@ -13,6 +13,7 @@
 #include <QMenu>
 #include <QToolButton>
 #include <QVBoxLayout>
+#include <QGridLayout>
 #include <QToolBar>
 #include <QComboBox>
 
@@ -43,14 +44,16 @@ private slots:
     void setItalic(bool b);
     void setUnderline(bool b);
     void insertSmile();
+	void closeSmilies();
     void setTranslit(bool on);
     void setTranslateIncomming(bool on);
     void setTranslateOutgoing(bool on);
     void setCloseOnSend(bool b);
     void send();
-
+	
     void textChanged();
-
+	bool eventFilter(QObject *obj, QEvent *e);
+	
 private:
     QToolBar* createToolBar();
     QString m_bgColorName;
