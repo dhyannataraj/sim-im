@@ -13,11 +13,13 @@
 #include <QColorDialog>
 #include <QFontDialog>
 #include <QToolBar>
+#include <QPushButton>
 #include <algorithm>
 
 #include "core.h"
 #include "simapi.h"
 #include "log.h"
+#include "profilemanager.h"
 #include "contacts/contact.h"
 #include "contacts/imcontact.h"
 #include "contacts/client.h"
@@ -25,8 +27,13 @@
 #include "messaging/genericmessage.h"
 #include "profilemanager.h"
 
+
+using namespace std;
+using namespace SIM;
+
 namespace SIM
 {
+QWidget* w;
 
 GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMContactPtr& to, QWidget* parent) : MessageEditor(parent)
         , m_from(from), m_to(to)
@@ -79,11 +86,13 @@ GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMCon
     {
         this->restoreGeometry(p->value("ContainerGeometry").toByteArray());
     }
+	
 }
 
 GenericMessageEditor::~GenericMessageEditor()
 {
     getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core")->setValue("ContainerGeometry", this->saveGeometry());
+	closeSmilies();
 }
 
 QString GenericMessageEditor::messageTypeId() const
@@ -141,8 +150,43 @@ void GenericMessageEditor::setUnderline(bool b)
 
 void GenericMessageEditor::insertSmile() //Todo
 {
+	w=new QWidget();
+	w->resize(400,32);
+	w->move(QCursor::pos()-QPoint(15,15));
+	w->setWindowFlags(Qt::FramelessWindowHint);
+	QGridLayout * g= new QGridLayout();
+	w->setLayout(g);
+	//foreach (Icon ic)
+	//	g->addWidget(ic) + action 
+	w->installEventFilter(this);
+	w->setFocusPolicy(Qt::ClickFocus);
 
+	/*QPushButton * btnClose = new QPushButton ( getImageStorage()->icon("fileclose"), "", w);
+	connect(btnClose, SIGNAL(clicked()), this, SLOT(closeSmilies()));
+	g->addWidget(btnClose);*/
+	w->show();
+	w->setFocus();
+	
 }
+
+bool GenericMessageEditor::eventFilter(QObject *obj, QEvent *e)
+{
+    if (e->type() == QEvent::FocusOut ||
+        e->type() == QEvent::KeyPress ||
+        e->type() == QEvent::MouseButtonPress )
+    {
+        this->closeSmilies();
+    }
+    return MessageEditor::eventFilter(obj, e);
+}
+
+
+
+void GenericMessageEditor::closeSmilies() //Todo
+{
+	w->close();
+}
+
 
 void GenericMessageEditor::setTranslit(bool on) //Todo
 {
@@ -183,7 +227,7 @@ void GenericMessageEditor::send()
 
     GenericMessage* message = new GenericMessage(m_from, m_to, text);
     message->setTimestamp(QDateTime::currentDateTime());
-    emit messageSendRequest(SIM::MessagePtr(message));
+    emit messageSendRequest(MessagePtr(message));
 }
 
 void GenericMessageEditor::textChanged()
@@ -231,25 +275,25 @@ QToolBar* GenericMessageEditor::createToolBar()
     //fixme: the following should be made generic, f.e. for toolbar changes in icon-positioning...
 
     bar->addSeparator();
-    bar->addAction(SIM::getImageStorage()->icon("bgcolor"), I18N_NOOP("Back&ground color"), this, SLOT(chooseBackgroundColor()));
-    bar->addAction(SIM::getImageStorage()->icon("fgcolor"), I18N_NOOP("Fo&reground color"), this, SLOT(chooseForegroundColor()));
+    bar->addAction(getImageStorage()->icon("bgcolor"), I18N_NOOP("Back&ground color"), this, SLOT(chooseBackgroundColor()));
+    bar->addAction(getImageStorage()->icon("fgcolor"), I18N_NOOP("Fo&reground color"), this, SLOT(chooseForegroundColor()));
 
-    QAction* bold = bar->addAction(SIM::getImageStorage()->icon("text_bold"), I18N_NOOP("&Bold"), this, SLOT(setBold(bool)));
+    QAction* bold = bar->addAction(getImageStorage()->icon("text_bold"), I18N_NOOP("&Bold"), this, SLOT(setBold(bool)));
     bold->setCheckable(true);
 
-    QAction* italic = bar->addAction(SIM::getImageStorage()->icon("text_italic"), I18N_NOOP("&Italic"), this, SLOT(setItalic(bool)));
+    QAction* italic = bar->addAction(getImageStorage()->icon("text_italic"), I18N_NOOP("&Italic"), this, SLOT(setItalic(bool)));
     italic->setCheckable(true);
 
-    QAction* underline = bar->addAction(SIM::getImageStorage()->icon("text_under"), I18N_NOOP("&Underline"), this, SLOT(setUnderline(bool)));
+    QAction* underline = bar->addAction(getImageStorage()->icon("text_under"), I18N_NOOP("&Underline"), this, SLOT(setUnderline(bool)));
     underline->setCheckable(true);
 
-    bar->addAction(SIM::getImageStorage()->icon("text"), I18N_NOOP("Select f&ont"), this, SLOT(chooseFont()));
+    bar->addAction(getImageStorage()->icon("text"), I18N_NOOP("Select f&ont"), this, SLOT(chooseFont()));
 
     bar->addSeparator();
 
-    QAction* emoticons = bar->addAction(SIM::getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(insertSmile())); //Todo
+    QAction* emoticons = bar->addAction(getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(insertSmile())); //Todo
 
-    QAction* translit = bar->addAction(SIM::getImageStorage()->icon("translit"), I18N_NOOP("Send in &translit"), this, SLOT(setTranslit(bool)));
+    QAction* translit = bar->addAction(getImageStorage()->icon("translit"), I18N_NOOP("Send in &translit"), this, SLOT(setTranslit(bool)));
     translit->setCheckable(true);
 
     if (m_bTranslationService) 
@@ -292,7 +336,7 @@ QToolBar* GenericMessageEditor::createToolBar()
 
     bar->addSeparator();
 
-    QAction* closeAfterSend = bar->addAction(SIM::getImageStorage()->icon("fileclose"), I18N_NOOP("C&lose after send"), this, SLOT(setCloseOnSend(bool)));
+    QAction* closeAfterSend = bar->addAction(getImageStorage()->icon("fileclose"), I18N_NOOP("C&lose after send"), this, SLOT(setCloseOnSend(bool)));
     closeAfterSend->setCheckable(true);
     bar->addSeparator();
     //m_sendAction = bar->addAction(getImageStorage()->icon("mail_generic"), I18N_NOOP("&Send"), this, SLOT(send()));
@@ -301,7 +345,7 @@ QToolBar* GenericMessageEditor::createToolBar()
     m_cmdSend = new QToolButton(m_edit);
     connect(m_cmdSend, SIGNAL(clicked()), this, SLOT(send()));
 
-    m_cmdSend->setIcon(SIM::getImageStorage()->icon("mail_generic"));
+    m_cmdSend->setIcon(getImageStorage()->icon("mail_generic"));
     m_cmdSend->setText(i18n("&Send"));
     m_cmdSend->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_cmdSend->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -309,7 +353,7 @@ QToolBar* GenericMessageEditor::createToolBar()
 
     bar->addSeparator();
 
-    m_sendMultiple = bar->addAction(SIM::getImageStorage()->icon("1rightarrow"), I18N_NOOP("Send to &multiple"), this, SLOT(sendMultiple(bool)));
+    m_sendMultiple = bar->addAction(getImageStorage()->icon("1rightarrow"), I18N_NOOP("Send to &multiple"), this, SLOT(sendMultiple(bool)));
     m_sendMultiple->setCheckable(true);
 
     return bar;
