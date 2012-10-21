@@ -63,6 +63,7 @@ private:
     QTextEdit *m_edit;
     QTextEdit *m_editTrans;
     QTextEdit *m_editActive;
+    QWidget* w;
     bool m_bTranslationService;
 
     QVBoxLayout *m_layout;

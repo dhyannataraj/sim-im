@@ -22,6 +22,9 @@ public:
 
     virtual bool addIconSet(IconSet* set) = 0;
     virtual bool removeIconset(const QString& id) = 0;
+    virtual QList<IconSet *> getIconSets()=0;
+    virtual QString textSmiles()=0;
+    virtual QString parseAllSmiles(const QString& input)=0;
 };
 
 EXPORT ImageStorage* getImageStorage();

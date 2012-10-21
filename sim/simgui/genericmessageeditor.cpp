@@ -32,10 +32,11 @@ using namespace SIM;
 
 namespace SIM
 {
-QWidget* w;
+
 
 GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMContactPtr& to, QWidget* parent) : MessageEditor(parent)
-        , m_from(from), m_to(to)
+        , m_from(from)
+        , m_to(to)
         , m_bTranslationService(false) //#Todo later from config...
         , m_editTrans(NULL)
         , m_editActive(NULL)
@@ -155,11 +156,17 @@ void GenericMessageEditor::insertSmile() //Todo
 	w->setWindowFlags(Qt::FramelessWindowHint);
 	QGridLayout * g= new QGridLayout();
 	w->setLayout(g);
-	//foreach (Icon ic)
-	//	g->addWidget(ic) + action 
+    //log(L_DEBUG, getImageStorage()->parseAllSmiles(QString(":)")));
+
+    foreach (IconSet * ic , getImageStorage()->getIconSets())
+    {
+        log(L_DEBUG, ic->textSmiles().join(" "));
+        //w->addAction(ic->textSmiles());
+    }
+    //	g->addWidget(ic) + action 
 	w->installEventFilter(this);
 	w->setFocusPolicy(Qt::ClickFocus);
-
+    //JispIconSet  textSmiles();
 	/*QPushButton * btnClose = new QPushButton ( getImageStorage()->icon("fileclose"), "", w);
 	connect(btnClose, SIGNAL(clicked()), this, SLOT(closeSmilies()));
 	g->addWidget(btnClose);*/

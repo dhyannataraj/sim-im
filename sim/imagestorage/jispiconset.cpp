@@ -44,8 +44,10 @@ bool JispIconSet::parse(const QByteArray& arr)
         m_images.insert(name, pictfile);
 
         QDomNodeList texts = icon.elementsByTagName("text");
+        if (!m_smileKeys.contains(texts.at(0).toElement().text()))
+            m_smileKeys << texts.at(0).toElement().text();
         for(int i = 0; i < texts.count(); i++) {
-            QString text = texts.at(i).toElement().text();
+            QString text = texts.at(i).toElement().text().trimmed();
             m_smiles.insert(text, name);
         }
         icon = icon.nextSiblingElement("icon");
@@ -67,6 +69,21 @@ bool JispIconSet::hasIcon(const QString& iconId)
 {
     //printf("JispIconSet::hasIcon(%s)\n", qPrintable(iconId));
     return m_images.contains(iconId);
+}
+
+bool JispIconSet::hasSmile(const QString& txtSmile)
+{
+    //printf("JispIconSet::hasIcon(%s)\n", qPrintable(iconId));
+    return m_smiles.contains(txtSmile);
+}
+
+QStringList JispIconSet::textSmiles()
+{
+    //log(L_DEBUG, QStringList(m_smiles.keys()).join(""));
+    //log(L_DEBUG, m_smileKeys.join(" "));
+    //return m_smiles.keys();
+    return m_smileKeys;
+
 }
 
 QIcon JispIconSet::icon(const QString& iconId)
