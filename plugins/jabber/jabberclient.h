@@ -32,7 +32,9 @@
 #include "contacts/client.h"
 #include "jabber_api.h"
 
-//#include "jabberbuffer.h"
+#include "network/jabbersocket.h"
+#include "protocol/inputstreamdispatcher.h"
+#include "protocol/jabberauthenticationcontroller.h"
 
 using namespace std;
 
@@ -138,6 +140,7 @@ public:
     bool m_usePlain;
     bool m_useVHost;
     bool m_register;
+    QString m_resource;
     unsigned long m_priority;
     QString m_listRequest;
     QString m_vHost;
@@ -156,44 +159,6 @@ public:
     bool m_infoUpdated;
 };
 
-//struct JabberAgentsInfo
-//{
-//    SIM::Data		VHost;
-//    SIM::Data		ID;
-//    SIM::Data		Name;
-//    SIM::Data		Search;
-//    SIM::Data		Register;
-//    JabberClient	*Client;
-//};
-
-//struct JabberAgentInfo
-//{
-//    SIM::Data		ReqID;
-//    SIM::Data		VHost;
-//    SIM::Data		ID;
-//    SIM::Data		Field;
-//    SIM::Data		Type;
-//    SIM::Data		Label;
-//    SIM::Data		Value;
-//    SIM::Data		Desc;
-//    SIM::Data		Options;
-//    SIM::Data		OptionLabels;
-//    SIM::Data		nOptions;
-//    SIM::Data		bRequired;
-//};
-
-//struct JabberSearchData
-//{
-//    SIM::Data		ID;
-//    SIM::Data		JID;
-//    SIM::Data		First;
-//    SIM::Data		Last;
-//    SIM::Data		Nick;
-//    SIM::Data		EMail;
-//    SIM::Data		Status;
-//    SIM::Data		Fields;
-//    SIM::Data		nFields;
-//};
 
 struct JabberListRequest
 {
@@ -244,116 +209,6 @@ class JABBER_EXPORT JabberClient : public QObject, public SIM::Client
 {
     Q_OBJECT
 public:
-//    class ServerRequest
-//    {
-//    public:
-//        ServerRequest(JabberClient *client, const char *type, const QString &from, const QString &to, const QString &id=QString());
-//        virtual ~ServerRequest();
-//        void	send();
-//        void	start_element(const QString &name);
-//        void	end_element(bool bNewLevel = false);
-//        void	add_attribute(const QString &name, const char *value);
-//        void	add_attribute(const QString &name, const QString &value);
-//        void	add_condition(const QString &cond, bool bXData);
-//        void	add_text(const QString &text);
-//        void	text_tag(const QString &name, const QString &value);
-//        static const char *_GET;
-//        static const char *_SET;
-//        static const char *_RESULT;
-//    protected:
-//        virtual void element_start(const QString& el, const QXmlAttributes& attrs);
-//        virtual void element_end(const QString& el);
-//        virtual void char_data(const QString& str);
-//        QString  		m_element;
-//        QStack<QString>	m_els;
-//        QString		    m_id;
-//        JabberClient	*m_client;
-//        friend class JabberClient;
-//    };
-
-//    class IqRequest : public ServerRequest
-//    {
-//    public:
-//        IqRequest(JabberClient *client);
-//        ~IqRequest();
-//    public:
-//        virtual void element_start(const QString& el, const QXmlAttributes& attrs);
-//        virtual void element_end(const QString& el);
-//        virtual void char_data(const QString& str);
-//        QString		*m_data;
-//        QString		m_url;
-//        QString		m_descr;
-//        QString		m_query;
-//        QString		m_from;
-//        QString		m_id;
-//        QString		m_type;
-//        QString		m_file_name;
-//        unsigned	m_file_size;
-//    };
-
-//    class PresenceRequest : public ServerRequest
-//    {
-//    public:
-//        PresenceRequest(JabberClient *client);
-//        ~PresenceRequest();
-//    protected:
-//        virtual void element_start(const QString& el, const QXmlAttributes& attrs);
-//        virtual void element_end(const QString& el);
-//        virtual void char_data(const QString& str);
-//        QString m_from;
-//        QString m_data;
-//        QString m_type;
-//        QString m_status;
-//        QString m_show;
-//        QString m_stamp1;
-//        QString m_stamp2;
-//    };
-
-//    class MessageRequest : public ServerRequest
-//    {
-//    public:
-//        MessageRequest(JabberClient *client);
-//        ~MessageRequest();
-//    protected:
-//        virtual void element_start(const QString& el, const QXmlAttributes& attrs);
-//        virtual void element_end(const QString& el);
-//        virtual void char_data(const QString& str);
-//        QString m_from;
-//        QString *m_data;
-//        QString m_body;
-//        QString m_richText;
-//        QString m_subj;
-//        QString m_error;
-//        QString m_contacts;
-//        QString m_target;
-//        QString m_desc;
-//		QString m_enc;
-//        vector<QString> m_targets;
-//        vector<QString> m_descs;
-
-//        bool   m_bBody;
-//        bool   m_bRosters;
-//        bool   m_bError;
-//        QString m_id;
-//        bool   m_bCompose;
-//        bool   m_bEvent;
-//        bool   m_bRichText;
-//		bool   m_bEnc;
-//        unsigned m_errorCode;
-//    };
-
-//    class StreamErrorRequest : public ServerRequest
-//    {
-//    public:
-//        StreamErrorRequest(JabberClient *client);
-//        ~StreamErrorRequest();
-//    protected:
-//        virtual void element_start(const QString& el, const QXmlAttributes& attrs);
-//        virtual void element_end(const QString& el);
-//        virtual void char_data(const QString& str);
-//        QString *m_data;
-//        QString m_descr;
-//    };
 
     JabberClient(JabberProtocol*, const QString& name);
     virtual ~JabberClient();
@@ -390,7 +245,9 @@ public:
     JabberStatusPtr getDefaultStatus(const QString& id) const;
 
     void setID(const QString &id);
-    QString getID();
+    QString getID() const;
+    
+    QString getUsername() const;
 
     QString getServer() const;
     void setServer(const QString& server);
@@ -412,6 +269,9 @@ public:
 
     bool getRegister() const;
     void setRegister(bool b);
+
+    QString getResource() const;
+    void setResource(const QString& resource);
 
     unsigned long getPriority() const;
     void setPriority(unsigned long p);
@@ -458,185 +318,28 @@ public:
     bool getInfoUpdated() const;
     void setInfoUpdated(bool b);
 
-//    QString         buildId(JabberUserData *data);
-//    JabberUserData *findContact(const QString &jid, const QString &name, bool bCreate, SIM::Contact *&contact, QString &resource, bool bJoin=true);
-//    bool            add_contact(const char *id, unsigned grp);
-//    QString         get_agents(const QString &jid);
-//    QString         get_agent_info(const QString &jid, const QString &node, const QString &type);
-//    void            auth_request(const QString &jid, unsigned type, const QString &text, bool bCreate);
-//    QString         search(const QString &jid, const QString &node, const QString &condition);
-//    QString         process(const QString &jid, const QString &node, const QString &condition, const QString &type);
-
-//    static QString	get_attr(const char *name, const char **attrs);
-//    virtual void setupContact(SIM::Contact*, void *data);
-//    virtual void updateInfo(SIM::Contact *contact, void *data);
-
     JabberClientData* clientPersistentData;
 
-//    JabberListRequest *findRequest(const QString &jid, bool bRemove);
-
-//    QString VHost();
-//    bool isAgent(const QString &jid);
-//    virtual bool send(SIM::Message*, void*);
-//    void    listRequest(JabberUserData *data, const QString &name, const QString &grp, bool bDelete);
-//    void	sendFileRequest(SIM::FileMessage *msg, unsigned short port, JabberUserData *data, const QString &url, unsigned size);
-//    void	sendFileAccept(SIM::FileMessage *msg, JabberUserData *data);
-
-//    list<SIM::Message*> m_ackMsg;
-//    list<SIM::Message*> m_waitMsg;
-
-//    QString photoFile(JabberUserData*);
-//    QString logoFile(JabberUserData*);
-//    list<ServerRequest*>	m_requests;
-
-//    QString discoItems(const QString &jid, const QString &node);
-//    QString discoInfo(const QString &jid, const QString &node);
-//    QString browse(const QString &jid);
-//    QString versionInfo(const QString &jid, const QString &node = QString::null);
-//    QString timeInfo(const QString &jid, const QString &node);
-//    QString lastInfo(const QString &jid, const QString &node);
-//    QString statInfo(const QString &jid, const QString &node);
-//    void addLang(ServerRequest *req);
-//    void info_request(JabberUserData *user_data, bool bVCard);
-//    virtual void setClientInfo(SIM::IMContact *data);
-//    void changePassword(const QString &pass);
-
-//    // reimplement socket() to get correct Buffer
-//    virtual JabberClientSocket *socket() { return static_cast<JabberClientSocket*>(TCPClient::socket()); }
-//    virtual JabberClientSocket *createClientSocket() { return new JabberClientSocket(this, createSocket()); }
-
-//    virtual void changeStatus(const SIM::IMStatusPtr& status);
-    
-//    JabberUserData* toJabberUserData(SIM::IMContact *); // More safely type conversion from generic SIM::clientData into JabberUserData
-//protected slots:
-//    void	ping();
-//    void	auth_failed();
-//    void	auth_ok();
 protected:
-//    virtual bool processEvent(SIM::Event *e);
-//    SIM::Socket *createSocket();
-
-//    virtual QString contactName(void *clientData);
-//    virtual void setStatus(unsigned status);
-//    void setStatus(unsigned status, const QString &ar);
-//    virtual void disconnected();
-//    virtual void connect_ready();
-//    virtual void packet_ready();
-//    virtual void setInvisible(bool bState);
-//    virtual bool isMyData(SIM::IMContact*&, SIM::Contact*&);
-//    virtual bool createData(SIM::IMContact*&, SIM::Contact*);
-//    virtual bool compareData(void*, void*);
-//    virtual bool canSend(unsigned, void*);
-//    virtual void contactInfo(void *data, unsigned long &curStatus, unsigned &style, QString &statusIcon, QSet<QString> *icons = NULL);
-//    virtual QString resources(void *data);
-//    virtual QString contactTip(void *data);
-//    virtual QWidget *searchWindow(QWidget *parent);
-//    virtual SIM::CommandDef *infoWindows(SIM::Contact *contact, void *data);
-//    virtual QWidget *infoWindow(QWidget *parent, SIM::Contact *contact, void *data, unsigned id);
-//    virtual SIM::CommandDef *configWindows();
-//    virtual QWidget *configWindow(QWidget *parent, unsigned id);
 
     void init();
     void addDefaultStates();
-//    void sendPacket();
-//    void startHandshake();
-//    void connected();
-//    void handshake(const QString &id);
-//    void rosters_request();
-//    void setOffline(JabberUserData *data);
 
-//    static	QString encodeXML(const QString &str);
-//    static	QString encodeXMLattr(const QString &str);
-//    QString		m_id;
-//    unsigned	m_depth;
-
-//    QString		get_unique_id();
-//    unsigned	m_id_seed;
-//    unsigned	m_msg_id;
-
-//    bool		m_bHTTP;
-
-//    void element_start(const QString& el, const QXmlAttributes& attrs);
-//    void element_end(const QString& el);
-//    void char_data(const QString& str);
-
-//    list<JabberListRequest>	m_listRequests;
-//    ServerRequest			*m_curRequest;
-
-//    class JabberAuthMessage;
-//    vector<JabberAuthMessage*>	tempAuthMessages;
-
-//    QString get_icon(JabberUserData *data, unsigned status, bool invisible);
-
-//    void		processList();
-
-//    void		auth_plain();
-//    void		auth_digest();
-//    void		auth_register();
-//    bool		m_bSSL;
-//    bool		m_bJoin;
-
-//    friend class ServerRequest;
-//    friend class RostersRequest;
-//    friend class PresenceRequest;
-//    friend class JabberBrowser;
+private slots:
+    void authenticationDone();
 
 private:
     QString m_name;
+    QString m_resource;
     QList<JabberStatusPtr> m_defaultStates;
     JabberStatusPtr m_currentStatus;
+    JabberStatusPtr m_nextStatus;
+
+    JabberSocket* m_socket;
+    InputStreamDispatcher* m_dispatcher;
+
+    JabberAuthenticationController::SharedPointer m_auth;
 };
-
-//class JabberFileTransfer : public SIM::FileTransfer, public SIM::ClientSocketNotify, public SIM::ServerSocketNotify
-//{
-//public:
-//    JabberFileTransfer(SIM::FileMessage *msg, JabberUserData *data, JabberClient *client);
-//    ~JabberFileTransfer();
-//    void listen();
-//    void connect();
-//protected:
-//    JabberClient	*m_client;
-//    JabberUserData	*m_data;
-//    enum State
-//    {
-//        None,
-//        Listen,
-//        ListenWait,
-//        Header,
-//        Send,
-//        Wait,
-//        Connect,
-//        ReadHeader,
-//        Receive
-//    };
-//    State m_state;
-//    virtual bool    error_state(const QString &err, unsigned code = 0);
-//    virtual void    packet_ready();
-//    virtual void    connect_ready();
-//    virtual void    write_ready();
-//    virtual void    startReceive(unsigned pos);
-//    virtual void    bind_ready(unsigned short port);
-//    virtual bool    error(const QString &err);
-//    virtual bool    accept(SIM::Socket *s, unsigned long ip);
-//    bool get_line(const QByteArray &str);
-//    void send_line(const QString &str);
-//    void send_line(const QByteArray &str);
-//    void send_line(const char *str);
-//    unsigned m_startPos;
-//    unsigned m_endPos;
-//    unsigned m_answer;
-//    QString             m_url;
-//    JabberClientSocket *m_socket;
-//};
-
-//class JabberSearch;
-
-//struct agentRegisterInfo
-//{
-//    QString		id;
-//    unsigned		err_code;
-//    QString		error;
-//};
 
 #endif
 

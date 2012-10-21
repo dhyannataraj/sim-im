@@ -19,6 +19,8 @@ public:
 signals:
 
 public slots:
+    void online();
+    void offline();
 
 protected:
     virtual void paintEvent(QPaintEvent* event);
@@ -28,6 +30,8 @@ protected:
     void drawStatus();
 
 private:
+    void updateTooltip();
+
     JabberClient* m_client;
 
 };

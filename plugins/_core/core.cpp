@@ -3156,7 +3156,8 @@ bool CorePlugin::init()
     foreach(const QString& clname, clients)
     {
         ClientPtr client = getClientManager()->client(clname);
-        client->changeStatus(client->savedStatus());
+        if(client->savedStatus())
+            client->changeStatus(client->savedStatus());
     }
 
     getContactList()->load();

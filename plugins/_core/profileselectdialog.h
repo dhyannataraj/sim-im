@@ -60,12 +60,14 @@ protected:
     void clearInputs();
     void updateProfilesList();
     bool selectedNewProfile();
+	void updatePasswords();
 
 private:
     QString m_profile;
 
     struct ClientEntry
     {
+        SIM::ClientPtr client;
         QLabel* picture;
         QLabel* text;
         QLineEdit* passwordEdit;
