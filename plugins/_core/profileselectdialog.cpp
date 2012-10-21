@@ -90,7 +90,7 @@ bool ProfileSelectDialog::selectedNewProfile()
 
 void ProfileSelectDialog::updatePasswords()
 {
-    for(const auto& entry : m_clientEntries)
+    foreach(const auto& entry , m_clientEntries)
     {
         entry.client->setPassword(entry.passwordEdit->text());
     }
