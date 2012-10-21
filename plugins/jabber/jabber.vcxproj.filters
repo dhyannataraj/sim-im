@@ -34,6 +34,45 @@
     <ClCompile Include="ui\moc_jabberloginwidget.cpp">
       <Filter>Source Files\generated</Filter>
     </ClCompile>
+    <ClCompile Include="protocol\inputstreamdispatcher.cpp">
+      <Filter>Source Files\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\iqcontroller.cpp">
+      <Filter>Source Files\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\iqrequest.cpp">
+      <Filter>Source Files\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\jabberauthenticationcontroller.cpp">
+      <Filter>Source Files\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\taghandler.cpp">
+      <Filter>Source Files\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="network\standardjabbersocket.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="network\moc_jabbersocket.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="network\moc_standardjabbersocket.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\moc_inputstreamdispatcher.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\moc_iqcontroller.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\moc_iqrequest.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\moc_jabberauthenticationcontroller.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\moc_taghandler.cpp">
+      <Filter>Source Files\generated</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="jabber.h">
@@ -81,6 +120,9 @@
     <ClInclude Include="ui_jidadvsearchbase.h">
       <Filter>Header Files\generated</Filter>
     </ClInclude>
+    <ClInclude Include="protocol\stanzas\xmlstanza.h">
+      <Filter>Header Files\protocol\stanzas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="jabberclient.h">
@@ -94,6 +136,27 @@
     </CustomBuild>
     <CustomBuild Include="ui\jabberloginwidget.h">
       <Filter>Header Files\ui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="network\jabbersocket.h">
+      <Filter>Header Files\network</Filter>
+    </CustomBuild>
+    <CustomBuild Include="network\standardjabbersocket.h">
+      <Filter>Header Files\network</Filter>
+    </CustomBuild>
+    <CustomBuild Include="protocol\jabberauthenticationcontroller.h">
+      <Filter>Header Files\protocol</Filter>
+    </CustomBuild>
+    <CustomBuild Include="protocol\iqrequest.h">
+      <Filter>Header Files\protocol</Filter>
+    </CustomBuild>
+    <CustomBuild Include="protocol\iqcontroller.h">
+      <Filter>Header Files\protocol</Filter>
+    </CustomBuild>
+    <CustomBuild Include="protocol\taghandler.h">
+      <Filter>Header Files\protocol</Filter>
+    </CustomBuild>
+    <CustomBuild Include="protocol\inputstreamdispatcher.h">
+      <Filter>Header Files\protocol</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +224,21 @@
     </Filter>
     <Filter Include="Header Files\ui">
       <UniqueIdentifier>{d64bb00f-89c5-4dc8-bb92-d4607136986a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\network">
+      <UniqueIdentifier>{f21b4c48-4516-46d6-a275-d1c2c3baab9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\protocol">
+      <UniqueIdentifier>{4ad40418-8d83-426a-833c-91b0c6ab016e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\network">
+      <UniqueIdentifier>{d9800ef6-90da-4b70-a090-21fba6abe58a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\protocol">
+      <UniqueIdentifier>{46640b1e-7fd9-423e-8921-d8002606f9b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\protocol\stanzas">
+      <UniqueIdentifier>{fe76db41-2577-48ce-ac40-76c8bb2889ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

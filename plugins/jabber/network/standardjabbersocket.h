@@ -9,7 +9,6 @@
 #define STANDARDJABBERSOCKET_H_
 
 #include "jabbersocket.h"
-#include <boost/circular_buffer.hpp>
 #include <QSslSocket>
 
 class StandardJabberSocket : public JabberSocket

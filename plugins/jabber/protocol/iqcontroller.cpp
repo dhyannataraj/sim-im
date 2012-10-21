@@ -42,7 +42,7 @@ void IqController::sendRequest(const IqRequestPtr& request)
 
 	request->setId(m_currentId++);
 
-	m_requests.append( {request->id(), 0, request} );
+	//m_requests.append( {request->id(), 0, request} );
 
 }
 

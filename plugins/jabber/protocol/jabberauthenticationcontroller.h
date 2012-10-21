@@ -8,7 +8,7 @@
 #ifndef JABBERAUTHENTICATIONCONTROLLER_H_
 #define JABBERAUTHENTICATIONCONTROLLER_H_
 
-#include "network/jabbersocket.h"
+#include "../network/jabbersocket.h"
 #include "taghandler.h"
 #include <QSharedPointer>
 

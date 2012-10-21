@@ -192,7 +192,7 @@ QString JabberAuthenticationController::makeResponseToChallenge(const QString& c
 {
 	QMap<QString, QString> map;
 	QStringList entries = challengeString.split(',');
-	QRegExp rx(R":((\w+)="?([^"-, ]*)"?):");
+	QRegExp rx("((\w+)=\"?([^\"-, ]*)\"?)");
 	foreach(const QString& s, entries)
 	{
 		if(rx.exactMatch(s))
@@ -227,7 +227,8 @@ QString JabberAuthenticationController::makeResponseToChallenge(const QString& c
 	result.addData(QCryptographicHash::hash(a2, QCryptographicHash::Md5).toHex());
 
 
-	QString responseString = QString(R"(username="%1",realm="%2",nonce="%3",cnonce="%4",nc=%5,qop=%6,digest-uri="%7",response=%8,charset=utf-8)").arg(m_username).arg(map["realm"]).arg(map["nonce"]).arg(QString::fromAscii(cnonce)).
+	QString responseString = QString("(username=\"%1\",realm=\"%2\",nonce=\"%3\",cnonce=\"%4\",nc=%5,qop=%6,digest-uri=\"%7\",response=%8,charset=utf-8)")
+        .arg(m_username).arg(map["realm"]).arg(map["nonce"]).arg(QString::fromAscii(cnonce)).
 		arg(nc).arg(map["qop"]).arg("xmpp/" + m_hostname).arg(QString::fromAscii(result.result().toHex()));
 
 	printf("Response: %s\n", qPrintable(responseString));

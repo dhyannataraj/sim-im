@@ -9,7 +9,7 @@
 #include <QList>
 #include "taghandler.h"
 #include "iqrequest.h"
-#include "network/jabbersocket.h"
+#include "../network/jabbersocket.h"
 
 class IqController : public QObject, public TagHandler
 {
