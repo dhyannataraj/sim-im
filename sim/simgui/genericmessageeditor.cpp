@@ -67,7 +67,6 @@ GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMCon
     
     PropertyHubPtr p = getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core");
 
-    log(L_DEBUG, p->value("ContainerGeometry").typeName());
     if (p->value("ContainerGeometry").typeName()==QString("QString")) //Fallback to old config
     {
         //convert from old config

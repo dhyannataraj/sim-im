@@ -325,6 +325,8 @@ protected:
     void init();
     void addDefaultStates();
 
+private slots:
+    void authenticationDone();
 
 private:
     QString m_name;

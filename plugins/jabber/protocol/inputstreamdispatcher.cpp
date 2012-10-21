@@ -157,6 +157,8 @@ bool InputStreamDispatcher::startElement(const QString& namespaceURI, const QStr
 				m_currentDocument.clear();
 				m_hasTag = true;
 				m_currentRoot = m_currentDocument.createElement(qName);
+				for(int i = 0; i < atts.count(); i++)
+                    m_currentRoot.setAttribute(atts.localName(i), atts.value(i));
 				m_currentTag = m_currentRoot;
 				m_currentDocument.appendChild(m_currentRoot);
 				return true;
@@ -170,6 +172,8 @@ bool InputStreamDispatcher::startElement(const QString& namespaceURI, const QStr
 			return true;
 
 		QDomElement newChild = m_currentDocument.createElement(qName);
+		for(int i = 0; i < atts.count(); i++)
+		    newChild.setAttribute(atts.localName(i), atts.value(i));
 		m_currentTag.appendChild(newChild);
 		m_currentTag = newChild;
 	}

@@ -29,6 +29,8 @@ SET(jabber_SRCS
 #        jidadvsearch.cpp
 #        jidsearch.cpp
         protocol/inputstreamdispatcher.cpp
+        protocol/iqcontroller.cpp
+        protocol/iqrequest.cpp
         protocol/jabberauthenticationcontroller.cpp
         protocol/taghandler.cpp
         network/standardjabbersocket.cpp
@@ -61,6 +63,8 @@ SET(jabber_HDRS
 #        jidadvsearch.h
 #        jidsearch.h
         protocol/inputstreamdispatcher.h
+        protocol/iqcontroller.h
+        protocol/iqrequest.h
         protocol/jabberauthenticationcontroller.h
         protocol/taghandler.h
         network/jabbersocket.h

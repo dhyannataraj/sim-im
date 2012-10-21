@@ -35,6 +35,11 @@ void JabberAuthenticationController::setHostname(const QString& hostname)
     m_hostname = hostname;
 }
 
+void JabberAuthenticationController::setResource(const QString& resource)
+{
+    m_resource = resource;
+}
+
 void JabberAuthenticationController::setSocket(JabberSocket* socket)
 {
     m_socket = socket;
@@ -78,6 +83,8 @@ bool JabberAuthenticationController::canHandle(const QString& tagName) const
 		return true;
 	if(tagName == "success")
 	    return true;
+	if(tagName == "iq")
+	    return true;
 	return false;
 }
 
@@ -113,7 +120,11 @@ void JabberAuthenticationController::startElement(const QDomElement& root)
 		    if(!bind.isNull())
 		    {
 		        m_state = ResourceBinding;
-
+		        m_socket->send(QString("<iq id=\"bind1\" type=\"set\">"
+		                "<bind xmlns=\"urn:ietf:params:xml:ns:xmpp-bind\">"
+		                "<resource>%1</resource>"
+		                "</bind>"
+		                "</iq>").arg(m_resource).toUtf8());
 		    }
 		}
 	}
@@ -144,6 +155,26 @@ void JabberAuthenticationController::startElement(const QDomElement& root)
                 arg(m_host);
         m_socket->send(stream.toUtf8());
         emit newStream();
+    }
+    else if((m_state == ResourceBinding) && (root.tagName() == "iq"))
+    {
+        auto type = root.attribute("type");
+        log(L_DEBUG, "[%s]", qPrintable(type));
+        if(type != "result")
+        {
+            log(L_WARN, "Resource binding: error");
+            return;
+        }
+        auto el = root.firstChildElement("bind").firstChildElement("jid");
+        if(el.isNull() || (el.text().isEmpty()))
+        {
+            log(L_WARN, "Resource binding: error: no jid");
+            return;
+        }
+
+        m_fullJid = el.text();
+        log(L_DEBUG, "Authentication completed, JID: %s", qPrintable(m_fullJid));
+        emit authenticationCompleted();
     }
 }
 

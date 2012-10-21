@@ -180,8 +180,10 @@ JabberClient::JabberClient(JabberProtocol* protocol, const QString& name) : SIM:
 
     m_auth = JabberAuthenticationController::SharedPointer(new JabberAuthenticationController());
     m_auth->setSocket(m_socket);
+    m_auth->setResource(m_resource);
 
     connect(m_auth.data(), SIGNAL(newStream()), m_dispatcher, SLOT(newStream()));
+    connect(m_auth.data(), SIGNAL(authenticationDone()), this, SLOT(authenticationDone()));
 
     m_dispatcher->addTagHandler(m_auth);
 
@@ -1119,6 +1121,11 @@ void JabberClient::addDefaultStates()
     JabberStatusPtr offline = JabberStatusPtr(new JabberStatus("offline", "Offline", true, QString(), getImageStorage()->pixmap("Jabber_offline"), QString(), QString()));
     offline->setFlag(IMStatus::flOffline, true);
     m_defaultStates.append(offline);
+}
+
+void JabberClient::authenticationDone()
+{
+
 }
 
 //void JabberClient::sendPacket()

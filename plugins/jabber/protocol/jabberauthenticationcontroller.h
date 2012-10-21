@@ -24,6 +24,8 @@ public:
     void setUsername(const QString& username);
     void setPassword(const QString& password);
     void setHostname(const QString& hostname);
+    void setResource(const QString& resource);
+    QString fullJid() const { return m_fullJid; }
 
     void startAuthentication(const QString& host, int port);
 
@@ -41,6 +43,7 @@ public slots:
 
 signals:
 	void newStream();
+	void authenticationCompleted();
 
 private:
 	QString makeResponseToChallenge(const QString& challengeString);
@@ -66,6 +69,8 @@ private:
     QString m_username;
     QString m_hostname;
     QString m_password;
+    QString m_resource;
+    QString m_fullJid;
 };
 
 #endif /* JABBERAUTHENTICATIONCONTROLLER_H_ */
