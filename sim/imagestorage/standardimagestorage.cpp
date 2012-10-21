@@ -67,6 +67,7 @@ namespace SIM
             else
             {
                 addIconSet(set);
+
             }
         }
     }
@@ -143,4 +144,13 @@ namespace SIM
         return false;
     }
 
+    QStringList StandardImageStorage::uniqueKeys()
+    {
+        QStringList uniKeys;
+        foreach (IconSet * ic, getIconSets())
+            for (int i=0;i<ic->textSmiles().count();++i)
+                if (!uniKeys.contains(ic->textSmiles().at(i)))
+                    uniKeys << ic->textSmiles().at(i);
+        return uniKeys;                   
+    }
 }

@@ -160,11 +160,12 @@ void GenericMessageEditor::insertSmile() //Todo
 	w->setLayout(g);
     //log(L_DEBUG, getImageStorage()->parseAllSmiles(QString(":)")));
 
-    foreach (IconSet * ic , getImageStorage()->getIconSets())
-    {
-        log(L_DEBUG, ic->textSmiles().join(" "));
+
+
+    
+    log(L_DEBUG, getImageStorage()->uniqueKeys().join(" "));
         //w->addAction(ic->textSmiles());
-    }
+    
     //	g->addWidget(ic) + action 
 	w->installEventFilter(this);
 	w->setFocusPolicy(Qt::ClickFocus);

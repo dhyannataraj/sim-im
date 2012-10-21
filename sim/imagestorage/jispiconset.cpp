@@ -44,15 +44,31 @@ bool JispIconSet::parse(const QByteArray& arr)
         m_images.insert(name, pictfile);
 
         QDomNodeList texts = icon.elementsByTagName("text");
-        if (!m_smileKeys.contains(texts.at(0).toElement().text()))
-            m_smileKeys << texts.at(0).toElement().text();
-        for(int i = 0; i < texts.count(); i++) {
-            QString text = texts.at(i).toElement().text().trimmed();
-            m_smiles.insert(text, name);
-        }
         icon = icon.nextSiblingElement("icon");
+
+        
+
+        QString txtSmile= texts.at(0).toElement().text().trimmed();
+        if (txtSmile.isEmpty())
+            continue;
+    
+        if (!isTextIconAdded(txtSmile))
+            m_smileKeys << txtSmile;
+
+        for(int i = 0; i < texts.count(); i++) {
+            m_smiles.insert(texts.at(i).toElement().text().trimmed(), name);
+        }
+        
     }
     return true;
+}
+
+bool JispIconSet::isTextIconAdded(const QString& iconId)
+{
+    for (int i=0;i<textSmiles().count();++i)
+        if (textSmiles().at(i)==iconId)
+            return true;
+    return false;
 }
 
 QString JispIconSet::id() const

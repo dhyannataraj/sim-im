@@ -24,6 +24,7 @@ public:
     virtual QString parseSmiles(const QString& input);
     virtual QString parseAllSmiles(const QString& input){return input;};
     virtual QStringList textSmiles();
+    virtual bool isTextIconAdded(const QString& iconId);
 private:
     bool parse(const QByteArray& arr);
 
