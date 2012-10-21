@@ -41,6 +41,7 @@ GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMCon
         , m_bTranslationService(false) //#Todo later from config...
         , m_editTrans(NULL)
         , m_editActive(NULL)
+        , w(NULL)
 {
 
     m_layout = new QVBoxLayout(this);
@@ -191,7 +192,8 @@ bool GenericMessageEditor::eventFilter(QObject *obj, QEvent *e)
 
 void GenericMessageEditor::closeSmilies() //Todo
 {
-	w->close();
+    if (w)
+	    w->close();
 }
 
 
