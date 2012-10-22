@@ -29,12 +29,14 @@ public:
 
     virtual QString id() const;
     virtual bool hasIcon(const QString& iconId);
+    virtual bool hasSmile(const QString& txtSmile){return false;};
     virtual QIcon icon(const QString& iconId);
     virtual QImage image(const QString& iconId);
     virtual QPixmap pixmap(const QString& iconId);
     virtual QString parseSmiles(const QString& input) {return input;};
     virtual QStringList textSmiles(){return QStringList();};
     virtual QString parseAllSmiles(const QString& input){return input;};
+    virtual QString getSmileName(const QString& iconId) {return QString();}
 protected:
     virtual bool saveImage(const QString& path, const QImage& image);
     virtual QImage loadImage(const QString& path);

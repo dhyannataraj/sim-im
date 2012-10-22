@@ -21,6 +21,7 @@ namespace SIM
         bool removeIconset(const QString& id);
         QStringList uniqueKeys();
         QString textSmiles(){return QString();};
+        QString getSmileName(const QString& iconId);
     private:
         QList<IconSet*> m_sets;
     };

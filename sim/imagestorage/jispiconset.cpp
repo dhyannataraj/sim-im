@@ -51,7 +51,7 @@ bool JispIconSet::parse(const QByteArray& arr)
         QString txtSmile= texts.at(0).toElement().text().trimmed();
         if (txtSmile.isEmpty())
             continue;
-    
+
         if (!isTextIconAdded(txtSmile))
             m_smileKeys << txtSmile;
 
@@ -145,6 +145,11 @@ QString JispIconSet::parseSmiles(const QString& input)
         }
     }
     return result;
+}
+
+QString JispIconSet::getSmileName(const QString& iconId)
+{
+    return m_smiles[iconId];
 }
 
 } // namespace SIM

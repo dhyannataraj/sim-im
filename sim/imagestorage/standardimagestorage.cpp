@@ -153,4 +153,26 @@ namespace SIM
                     uniKeys << ic->textSmiles().at(i);
         return uniKeys;                   
     }
+
+    QString StandardImageStorage::getSmileName(const QString& iconId)
+    {
+        QString res;
+        foreach (IconSet * ic, getIconSets())
+            if (ic->hasSmile(iconId))
+            {
+                int i=ic->getSmileName(iconId).toInt();
+                QString str= ic->getSmileName(iconId);
+                if (i!=0)
+                {
+                    return i18n(iconId);
+                }
+                else
+                {
+                    if (ic->getSmileName(iconId).length()<2)
+                        return i18n(iconId);
+                    return i18n(str = str.left(1).toUpper()+str.mid(1));
+                }
+            }
+        return QString(); //should not happen.
+    }
 }

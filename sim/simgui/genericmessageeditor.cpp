@@ -159,7 +159,8 @@ void GenericMessageEditor::insertSmile() //Todo
 	QGridLayout * g= new QGridLayout();
 	w->setLayout(g);
     //log(L_DEBUG, getImageStorage()->parseAllSmiles(QString(":)")));
-
+    foreach (QString key, getImageStorage()->uniqueKeys())
+         log(L_DEBUG, getImageStorage()->getSmileName( key ));
 
 
     
