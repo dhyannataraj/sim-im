@@ -18,6 +18,7 @@ namespace SIM
         bool addIconSet(IconSet* set);
         QList<IconSet *> getIconSets();
         QString parseAllSmiles(const QString& input);
+        QString parseAllSmilesByName(const QString& name);
         bool removeIconset(const QString& id);
         QStringList uniqueSmileKeys();
         QString textSmiles(){return QString();};

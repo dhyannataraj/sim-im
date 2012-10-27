@@ -22,7 +22,8 @@ public:
     virtual QImage image(const QString& iconId);
     virtual QPixmap pixmap(const QString& iconId);
     virtual QString parseSmiles(const QString& input);
-    virtual QString parseAllSmiles(const QString& input){return input;};
+    virtual QString parseAllSmiles(const QString& input){return parseSmiles(input);};
+    virtual QString parseAllSmilesByName(const QString& name);
     virtual QStringList textSmiles();
     virtual bool isTextIconAdded(const QString& iconId);
     virtual QString getSmileName(const QString& iconId);

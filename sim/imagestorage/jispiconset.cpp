@@ -147,6 +147,22 @@ QString JispIconSet::parseSmiles(const QString& input)
     return result;
 }
 
+QString JispIconSet::parseAllSmilesByName(const QString& name)
+{
+    QString result = name.toLower();
+    log(L_DEBUG, name);
+    for(QMap<QString, QString>::iterator it = m_images.begin(); it != m_images.end(); ++it)
+    {
+        
+        if(result.contains(it.key().toLower()))
+        {
+            result.replace(it.key(), QString("<img src=\"sim:icons/%1\" />").arg(it.value()));
+            log(L_DEBUG, result);
+        }
+    }
+    return result;
+}
+
 QString JispIconSet::getSmileName(const QString& iconId)
 {
     return m_smiles[iconId];

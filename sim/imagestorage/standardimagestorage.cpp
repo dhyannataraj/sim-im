@@ -133,6 +133,15 @@ namespace SIM
         return res;
     }
 
+    QString StandardImageStorage::parseAllSmilesByName(const QString& name)
+    {
+        QString res=name;
+        for(QList<IconSet*>::iterator it = m_sets.begin(); it != m_sets.end(); ++it) {
+            res = (*it)->parseAllSmilesByName(res);
+        }
+        return res;
+    }
+
     bool StandardImageStorage::removeIconset(const QString& id)
     {
         for(QList<IconSet*>::iterator it = m_sets.begin(); it != m_sets.end(); ++it) {

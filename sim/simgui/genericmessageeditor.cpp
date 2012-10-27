@@ -165,14 +165,14 @@ void GenericMessageEditor::showSmiles() //Todo
     int div=8;
     foreach (QString key, getImageStorage()->uniqueSmileKeys())
     {
-         log(L_DEBUG, getImageStorage()->getSmileName( key ));
-         QToolButton * tmp=new QToolButton(w);
-         tmp->setIcon(getImageStorage()->icon(getImageStorage()->getSmileName(key)));
-         tmp->setToolTip(getImageStorage()->getSmileNamePretty(key));
-         connect(tmp, SIGNAL(clicked()), m_signalMapper, SLOT(map()));
-         m_signalMapper->setMapping(tmp, tmp->toolTip());
-         g->addWidget( tmp, i/div, i%div );
-         ++i;
+        log(L_DEBUG, getImageStorage()->getSmileName( key ));
+        QToolButton * tmp=new QToolButton(w);
+        tmp->setIcon(getImageStorage()->icon(getImageStorage()->getSmileName(key)));
+        tmp->setToolTip(getImageStorage()->getSmileNamePretty(key));
+        connect(tmp, SIGNAL(clicked()), m_signalMapper, SLOT(map()));
+        m_signalMapper->setMapping(tmp, tmp->toolTip());
+        g->addWidget( tmp, i/div, i%div );
+        ++i;
     }
     connect(m_signalMapper, SIGNAL(mapped(const QString &)),
              this, SLOT(insertSmile(const QString &)));
@@ -189,7 +189,9 @@ void GenericMessageEditor::insertSmile(const QString & smile) //Todo
 {
     log(L_DEBUG, smile);
     QTextCursor cursor(m_edit->document());
-    cursor.insertImage(getImageStorage()->parseAllSmiles(smile)); //insert at QTextCursor
+    QString parsed=getImageStorage()->parseAllSmilesByName(smile);
+    log(L_DEBUG, parsed);
+    cursor.insertImage(parsed); //insert at QTextCursor
     this->closeSmilies();
 }
 
