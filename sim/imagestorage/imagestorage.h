@@ -25,8 +25,9 @@ public:
     virtual QList<IconSet *> getIconSets()=0;
     virtual QString textSmiles()=0;
     virtual QString parseAllSmiles(const QString& input)=0;
-    virtual QStringList uniqueKeys()=0;
+    virtual QStringList uniqueSmileKeys()=0;
     virtual QString getSmileName(const QString& iconId)=0;
+    virtual QString getSmileNamePretty(const QString& iconId, bool localized=false)=0;
 };
 
 EXPORT ImageStorage* getImageStorage();

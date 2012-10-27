@@ -23,6 +23,7 @@ public:
     virtual QString parseSmiles(const QString& input) = 0;
     virtual QString parseAllSmiles(const QString& input)=0;
     virtual QString getSmileName(const QString& iconId)=0;
+    virtual QString getSmileNamePretty(const QString& iconId, bool localized=false)=0;
 };
 
 } // namespace SIM

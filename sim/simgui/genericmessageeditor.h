@@ -16,6 +16,7 @@
 #include <QGridLayout>
 #include <QToolBar>
 #include <QComboBox>
+#include <QSignalMapper>
 
 #include "contacts/imcontact.h"
 #include "simapi.h"
@@ -43,7 +44,8 @@ private slots:
     void setBold(bool b);
     void setItalic(bool b);
     void setUnderline(bool b);
-    void insertSmile();
+    void showSmiles();
+    void insertSmile(const QString & smile);
 	void closeSmilies();
     void setTranslit(bool on);
     void setTranslateIncomming(bool on);
@@ -78,7 +80,7 @@ private:
 
     IMContactPtr m_from;
     IMContactPtr m_to;
-
+    QSignalMapper * m_signalMapper;
 };
 }
 

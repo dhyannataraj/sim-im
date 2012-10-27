@@ -37,6 +37,7 @@ public:
     virtual QStringList textSmiles(){return QStringList();};
     virtual QString parseAllSmiles(const QString& input){return input;};
     virtual QString getSmileName(const QString& iconId) {return QString();}
+    virtual QString getSmileNamePretty(const QString& iconId, bool localized=false){return QString();};
 protected:
     virtual bool saveImage(const QString& path, const QImage& image);
     virtual QImage loadImage(const QString& path);

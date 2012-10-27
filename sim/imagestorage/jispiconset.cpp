@@ -152,4 +152,28 @@ QString JispIconSet::getSmileName(const QString& iconId)
     return m_smiles[iconId];
 }
 
+QString JispIconSet::getSmileNamePretty(const QString& iconId, bool localized)
+{
+    int i=getSmileName(iconId).toInt();
+    QString str= getSmileName(iconId);
+    if (i!=0)
+    {
+        if (localized)
+            return i18n(iconId);
+        return iconId;
+    }
+    else
+    {
+        if (getSmileName(iconId).length()<2)
+        {
+            if (localized)
+                return i18n(iconId);
+            return iconId;
+        }
+        if (localized)
+            return i18n(str = str.left(1).toUpper()+str.mid(1));
+        return str = str.left(1).toUpper()+str.mid(1);
+    }
+}
+
 } // namespace SIM

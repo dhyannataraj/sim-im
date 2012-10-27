@@ -93,7 +93,7 @@ namespace SIM
     {
         //log(L_DEBUG, "pixmap request: %s", qPrintable(id));
         foreach(IconSet* set, m_sets) {
-            if(set->hasIcon(id)) {
+            if(set->hasIcon(id) || set->hasSmile(id)) {
                 QPixmap p = set->pixmap(id);
                 if(!p.isNull())
                     return p;
@@ -144,7 +144,7 @@ namespace SIM
         return false;
     }
 
-    QStringList StandardImageStorage::uniqueKeys()
+    QStringList StandardImageStorage::uniqueSmileKeys()
     {
         QStringList uniKeys;
         foreach (IconSet * ic, getIconSets())
@@ -160,19 +160,37 @@ namespace SIM
         foreach (IconSet * ic, getIconSets())
             if (ic->hasSmile(iconId))
             {
-                int i=ic->getSmileName(iconId).toInt();
-                QString str= ic->getSmileName(iconId);
-                if (i!=0)
+                //int i=ic->getSmileName(iconId).toInt();
+                return ic->getSmileName(iconId);
+                //QString str= ic->getSmileName(iconId);
+                /*if (i!=0)
                 {
-                    return i18n(iconId);
+                    if (localized)
+                        return i18n(iconId);
+                    return iconId;
                 }
                 else
                 {
                     if (ic->getSmileName(iconId).length()<2)
-                        return i18n(iconId);
-                    return i18n(str = str.left(1).toUpper()+str.mid(1));
-                }
+                        if (localized)
+                            return i18n(iconId);
+                        return iconId;
+                    if (localized)
+                        return i18n(str = str.left(1).toUpper()+str.mid(1));
+                    return str = str.left(1).toUpper()+str.mid(1);
+                }*/
             }
         return QString(); //should not happen.
     }
+
+    QString StandardImageStorage::getSmileNamePretty(const QString& iconId, bool localized)
+    {
+        QString res;
+        foreach (IconSet * ic, getIconSets())
+            if (ic->hasSmile(iconId))
+                return ic->getSmileNamePretty(iconId, localized);
+        return QString(); //should not happen.
+    }
+
+
 }

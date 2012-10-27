@@ -42,6 +42,7 @@ GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMCon
         , m_editTrans(NULL)
         , m_editActive(NULL)
         , w(NULL)
+        , m_signalMapper(NULL)
 {
 
     m_layout = new QVBoxLayout(this);
@@ -150,33 +151,52 @@ void GenericMessageEditor::setUnderline(bool b)
     m_edit->setFontUnderline(b);
 }
 
-void GenericMessageEditor::insertSmile() //Todo
+void GenericMessageEditor::showSmiles() //Todo
 {
-	w=new QWidget();
+	w=new QFrame();
 	w->resize(400,32);
 	w->move(QCursor::pos()-QPoint(15,15));
 	w->setWindowFlags(Qt::FramelessWindowHint);
 	QGridLayout * g= new QGridLayout();
+ 
 	w->setLayout(g);
-    //log(L_DEBUG, getImageStorage()->parseAllSmiles(QString(":)")));
-    foreach (QString key, getImageStorage()->uniqueKeys())
+    m_signalMapper = new QSignalMapper(this);
+    int i=0;
+    int div=8;
+    foreach (QString key, getImageStorage()->uniqueSmileKeys())
+    {
          log(L_DEBUG, getImageStorage()->getSmileName( key ));
-
-
+         QToolButton * tmp=new QToolButton(w);
+         tmp->setIcon(getImageStorage()->icon(getImageStorage()->getSmileName(key)));
+         tmp->setToolTip(getImageStorage()->getSmileNamePretty(key));
+         connect(tmp, SIGNAL(clicked()), m_signalMapper, SLOT(map()));
+         m_signalMapper->setMapping(tmp, tmp->toolTip());
+         g->addWidget( tmp, i/div, i%div );
+         ++i;
+    }
+    connect(m_signalMapper, SIGNAL(mapped(const QString &)),
+             this, SLOT(insertSmile(const QString &)));
     
-    log(L_DEBUG, getImageStorage()->uniqueKeys().join(" "));
-        //w->addAction(ic->textSmiles());
-    
-    //	g->addWidget(ic) + action 
+    log(L_DEBUG, getImageStorage()->uniqueSmileKeys().join(" "));
 	w->installEventFilter(this);
 	w->setFocusPolicy(Qt::ClickFocus);
-    //JispIconSet  textSmiles();
-	/*QPushButton * btnClose = new QPushButton ( getImageStorage()->icon("fileclose"), "", w);
-	connect(btnClose, SIGNAL(clicked()), this, SLOT(closeSmilies()));
-	g->addWidget(btnClose);*/
 	w->show();
 	w->setFocus();
 	
+}
+
+void GenericMessageEditor::insertSmile(const QString & smile) //Todo
+{
+    log(L_DEBUG, smile);
+    QTextCursor cursor(m_edit->document());
+    cursor.insertImage(getImageStorage()->parseAllSmiles(smile)); //insert at QTextCursor
+    this->closeSmilies();
+}
+
+void GenericMessageEditor::closeSmilies()
+{
+    if (w)
+	    w->close();
 }
 
 bool GenericMessageEditor::eventFilter(QObject *obj, QEvent *e)
@@ -189,15 +209,6 @@ bool GenericMessageEditor::eventFilter(QObject *obj, QEvent *e)
     }
     return MessageEditor::eventFilter(obj, e);
 }
-
-
-
-void GenericMessageEditor::closeSmilies() //Todo
-{
-    if (w)
-	    w->close();
-}
-
 
 void GenericMessageEditor::setTranslit(bool on) //Todo
 {
@@ -302,7 +313,7 @@ QToolBar* GenericMessageEditor::createToolBar()
 
     bar->addSeparator();
 
-    QAction* emoticons = bar->addAction(getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(insertSmile())); //Todo
+    QAction* emoticons = bar->addAction(getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(showSmiles())); //Todo
 
     QAction* translit = bar->addAction(getImageStorage()->icon("translit"), I18N_NOOP("Send in &translit"), this, SLOT(setTranslit(bool)));
     translit->setCheckable(true);

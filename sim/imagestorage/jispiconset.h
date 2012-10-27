@@ -26,6 +26,7 @@ public:
     virtual QStringList textSmiles();
     virtual bool isTextIconAdded(const QString& iconId);
     virtual QString getSmileName(const QString& iconId);
+    virtual QString getSmileNamePretty(const QString& iconId, bool localized=false);
 private:
     bool parse(const QByteArray& arr);
 
