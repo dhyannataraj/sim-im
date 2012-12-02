@@ -17,6 +17,13 @@
 // for Q_CC_foo - macros
 #include <qglobal.h>
 
+#ifdef WIN32
+    #define BP __asm int 3;
+#else
+    #define BP asm("int $3");
+#endif
+
+
 #ifdef Q_CC_MSVC
 	// "conditional expression is constant" (W4)
 	# pragma warning(disable: 4127)

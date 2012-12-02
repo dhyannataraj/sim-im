@@ -315,7 +315,8 @@ QToolBar* GenericMessageEditor::createToolBar()
 
     bar->addSeparator();
 
-    QAction* emoticons = bar->addAction(getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(showSmiles())); //Todo
+    //QAction* emoticons = 
+    bar->addAction(getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(showSmiles())); //Todo
 
     QAction* translit = bar->addAction(getImageStorage()->icon("translit"), I18N_NOOP("Send in &translit"), this, SLOT(setTranslit(bool)));
     translit->setCheckable(true);
