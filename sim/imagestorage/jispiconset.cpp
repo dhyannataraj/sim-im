@@ -37,28 +37,26 @@ bool JispIconSet::parse(const QByteArray& arr)
         QString pictfile = object.text();
 
         if(name.isEmpty())
-            name = pictfile.toLower().left(pictfile.length()-4); //snip extension: -4 => .png
-
-        //printf("JispIconSet::parse(%s)\n", qPrintable(name));
-
-        m_images.insert(name, pictfile);
+            name = pictfile.toLower().section('.', 0, -2); // Remove trailing extension
 
         QDomNodeList texts = icon.elementsByTagName("text");
-        icon = icon.nextSiblingElement("icon");
-
-        
-
-        QString txtSmile= texts.at(0).toElement().text().trimmed();
-        if (txtSmile.isEmpty())
-            continue;
-
-        if (!isTextIconAdded(txtSmile))
-            m_smileKeys << txtSmile;
-
-        for(int i = 0; i < texts.count(); i++) {
-            m_smiles.insert(texts.at(i).toElement().text().trimmed(), name);
+        QString txtSmile = texts.at(0).toElement().text().trimmed();
+        if(txtSmile.isEmpty())
+        {
+            m_images.insert(name, pictfile);
         }
-        
+        else
+        {
+            name = name.prepend(m_id);
+            m_images.insert(name, pictfile);
+            if(!isTextIconAdded(txtSmile))
+                m_smileKeys << txtSmile;
+
+            for(int i = 0; i < texts.count(); i++) {
+                m_smiles.insert(texts.at(i).toElement().text().trimmed(), name);
+            }
+        }
+        icon = icon.nextSiblingElement("icon");
     }
     return true;
 }
