@@ -22,7 +22,7 @@ public:
     virtual QStringList textSmiles()=0;
     virtual QString parseSmiles(const QString& input) = 0;
     virtual QString parseAllSmiles(const QString& input)=0;
-    virtual QString parseAllSmilesByName(const QString& name)=0;
+    virtual void parseAllSmilesByName(const QString& name, QIcon &ricon)=0;
     virtual QString getSmileName(const QString& iconId)=0;
     virtual QString getSmileNamePretty(const QString& iconId, bool localized=false)=0;
 };

@@ -56,7 +56,8 @@ namespace SIM
         foreach(const QString& s, QStringList() <<
                 "icons/SIM-icons-Crystal-full.jisp" <<
                 "icons/smiles.jisp" <<
-                "icons/icqlite.jisp" << "icons/additional.jisp" <<
+                "icons/icqlite.jisp" << 
+                "icons/additional.jisp" <<
                 "icons/sim.jisp") {
             JispIconSet* set = new JispIconSet();
             if(!set->load(SIM::PathManager::appFile(s)))
@@ -133,13 +134,13 @@ namespace SIM
         return res;
     }
 
-    QString StandardImageStorage::parseAllSmilesByName(const QString& name)
+    void StandardImageStorage::parseAllSmilesByName(const QString& name, QIcon &ricon)
     {
-        QString res=name;
+        QIcon foundicon;
         for(QList<IconSet*>::iterator it = m_sets.begin(); it != m_sets.end(); ++it) {
-            res = (*it)->parseAllSmilesByName(res);
+            (*it)->parseAllSmilesByName(name, ricon);
+            if (!foundicon.isNull()) break;
         }
-        return res;
     }
 
     bool StandardImageStorage::removeIconset(const QString& id)
