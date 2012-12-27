@@ -14,6 +14,7 @@
 #include <QFontDialog>
 #include <QToolBar>
 #include <QPushButton>
+#include <QUrl>
 #include <algorithm>
 
 #include "core.h"

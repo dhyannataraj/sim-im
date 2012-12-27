@@ -19,7 +19,7 @@ namespace StubObjects
 		virtual QList<SIM::IconSet*> getIconSets() { return QList<SIM::IconSet*>(); }
 		virtual QString textSmiles() { return QString(); }
 		virtual QString parseAllSmiles(const QString& input) { return QString(); }
-		virtual QString parseAllSmilesByName(const QString& name) { return QString(); }
+		virtual void parseAllSmilesByName(const QString& name, QIcon& icon) {}
 		virtual QStringList uniqueSmileKeys() { return QStringList(); }
 		virtual QString getSmileName(const QString& iconId) { return QString(); }
 		virtual QString getSmileNamePretty(const QString& iconId, bool localized = false) { return QString(); }

@@ -23,7 +23,7 @@ namespace MockObjects
 		MOCK_METHOD0(getIconSets, QList<SIM::IconSet*>());
 		MOCK_METHOD0(textSmiles, QString());
 		MOCK_METHOD1(parseAllSmiles, QString(const QString& input));
-		MOCK_METHOD1(parseAllSmilesByName, QString(const QString& name));
+		MOCK_METHOD2(parseAllSmilesByName, void(const QString& name, QIcon& icon));
 		MOCK_METHOD0(uniqueSmileKeys, QStringList());
 		MOCK_METHOD1(getSmileName, QString(const QString& iconId));
 		MOCK_METHOD2(getSmileNamePretty, QString(const QString& iconId, bool localized));
