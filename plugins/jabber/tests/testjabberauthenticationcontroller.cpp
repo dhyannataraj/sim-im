@@ -152,10 +152,11 @@ namespace
                                     map[rx.cap(1)] = rx.cap(2);
                                 }
                             }
+							QString nonce = "OA6MG9tEQGm2hh";
 
                             if(!map.keys().contains("cnonce"))
                                 return false;
-                            if(map["nonce"] != "OA6MG9tEQGm2hh")
+                            if(map["nonce"] != nonce)
                                 return false;
                             if(map["realm"] != "somerealm")
                                 return false;
@@ -165,7 +166,7 @@ namespace
                                 return false;
 
                             QByteArray a1 = QCryptographicHash::hash("testusername:somerealm:testpassword",
-                                    QCryptographicHash::Md5) + ":OA6MG9tEQGm2hh:" + map["cnonce"].toAscii();
+                                    QCryptographicHash::Md5) + ":" + nonce.toAscii() + ":" + map["cnonce"].toAscii();
 
                             QByteArray a2 = (QString("AUTHENTICATE:") + map["digest-uri"]).toAscii();
                          
@@ -181,7 +182,6 @@ namespace
                             result.addData(map["qop"].toAscii());
                             result.addData(":", 1);
                             result.addData(QCryptographicHash::hash(a2, QCryptographicHash::Md5).toHex());
-
 
                             if(result.result().toHex() != map["response"])
                                 return false;

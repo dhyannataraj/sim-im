@@ -26,6 +26,14 @@ namespace MockObjects
         MOCK_METHOD1(image, QImage(const QString& iconId));
         MOCK_METHOD1(pixmap, QPixmap(const QString& iconId));
 
+		MOCK_METHOD1(hasSmile, bool(const QString& txtSmile));
+		MOCK_METHOD0(textSmiles, QStringList());
+		MOCK_METHOD1(parseSmiles, QString(const QString& input));
+		MOCK_METHOD1(parseAllSmiles, QString(const QString& input));
+		MOCK_METHOD1(parseAllSmilesByName, QString(const QString& name));
+		MOCK_METHOD1(getSmileName, QString(const QString& iconId));
+		MOCK_METHOD2(getSmileNamePretty, QString(const QString& iconId, bool localized));
+
     };
 }
 

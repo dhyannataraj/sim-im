@@ -135,7 +135,7 @@ void JabberAuthenticationController::startElement(const QDomElement& root)
     else if((m_state == DigestMd5WaitingChallenge) && (root.tagName() == "challenge"))
     {
         QString challengeString = QString::fromUtf8(QByteArray::fromBase64(root.text().toAscii()));
-		printf("Challenge: %s\n", qPrintable(challengeString));
+		//printf("Challenge: %s\n", qPrintable(challengeString));
 		QString response = makeResponseToChallenge(challengeString);
         m_socket->send(response.toAscii());
 		m_state = DigestMd5WaitingSecondChallenge;
@@ -192,10 +192,10 @@ QString JabberAuthenticationController::makeResponseToChallenge(const QString& c
 {
 	QMap<QString, QString> map;
 	QStringList entries = challengeString.split(',');
-	QRegExp rx("((\w+)=\"?([^\"-, ]*)\"?)");
+	QRegExp rx(R"((\w+)=\"?([^\", ]*)\"?)");
 	foreach(const QString& s, entries)
 	{
-		if(rx.exactMatch(s))
+		if(rx.indexIn(s) >= 0)
 		{
 			map[rx.cap(1)] = rx.cap(2);
 			log(L_DEBUG, "%s=%s", qPrintable(rx.cap(1)), qPrintable(rx.cap(2)));
@@ -231,7 +231,7 @@ QString JabberAuthenticationController::makeResponseToChallenge(const QString& c
         .arg(m_username).arg(map["realm"]).arg(map["nonce"]).arg(QString::fromAscii(cnonce)).
 		arg(nc).arg(map["qop"]).arg("xmpp/" + m_hostname).arg(QString::fromAscii(result.result().toHex()));
 
-	printf("Response: %s\n", qPrintable(responseString));
+	//printf("Response: %s\n", qPrintable(responseString));
 	QString response = QString("<response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>%1</response>").
 		arg(QString::fromAscii(responseString.toUtf8().toBase64()));
 

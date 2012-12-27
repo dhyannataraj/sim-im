@@ -1,5 +1,6 @@
 #include "jispiconset.h"
 #include "log.h"
+#include "misc.h"
 
 #include <QtXml>
 
