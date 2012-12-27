@@ -164,9 +164,11 @@ namespace
                                 return false;
                             if(map["qop"] != "auth")
                                 return false;
+                            if(map["authzid"] != "testusername@test.com")
+                                return false;
 
                             QByteArray a1 = QCryptographicHash::hash("testusername:somerealm:testpassword",
-                                    QCryptographicHash::Md5) + ":" + nonce.toAscii() + ":" + map["cnonce"].toAscii();
+                                    QCryptographicHash::Md5) + ":" + nonce.toAscii() + ":" + map["cnonce"].toAscii() + ":" + map["authzid"].toAscii();
 
                             QByteArray a2 = (QString("AUTHENTICATE:") + map["digest-uri"]).toAscii();
                          

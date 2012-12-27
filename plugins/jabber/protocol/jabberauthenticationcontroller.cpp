@@ -206,12 +206,15 @@ QString JabberAuthenticationController::makeResponseToChallenge(const QString& c
 	QByteArray cnonce = QByteArray::number(qrand());
 	QString nc = "00000001";
 
+	QString authzid = m_username + "@" + m_hostname;
+
 	QByteArray a1 = QCryptographicHash::hash(m_username.toUtf8() + ":" + map["realm"].toUtf8() + ":" + m_password.toUtf8(),
-			QCryptographicHash::Md5) + QString(":" + map["nonce"].toUtf8() + ":" + cnonce).toUtf8();
+			QCryptographicHash::Md5) + QString(":" + map["nonce"].toUtf8() + ":" + cnonce + ":" + authzid).toUtf8();
 
 	QByteArray a2 = (QString("AUTHENTICATE:") + QString("xmpp/%1").arg(m_hostname)).toAscii();
 
-	log(L_DEBUG, "a1: %s; a2: %s", a1.data(), a2.data());
+	//log(L_DEBUG, "username: %s; password: %s", qPrintable(m_username), qPrintable(m_password));
+	log(L_DEBUG, "a1: %s; a2: %s", a1.toHex().data(), a2.toHex().data());
 
 	QCryptographicHash result(QCryptographicHash::Md5);
 	result.addData(QCryptographicHash::hash(a1, QCryptographicHash::Md5).toHex());
@@ -227,11 +230,11 @@ QString JabberAuthenticationController::makeResponseToChallenge(const QString& c
 	result.addData(QCryptographicHash::hash(a2, QCryptographicHash::Md5).toHex());
 
 
-	QString responseString = QString("(username=\"%1\",realm=\"%2\",nonce=\"%3\",cnonce=\"%4\",nc=%5,qop=%6,digest-uri=\"%7\",response=%8,charset=utf-8)")
+	QString responseString = QString("username=\"%1\",realm=\"%2\",nonce=\"%3\",cnonce=\"%4\",nc=%5,qop=%6,digest-uri=\"%7\",response=%8,charset=utf-8,authzid=\"%9\"")
         .arg(m_username).arg(map["realm"]).arg(map["nonce"]).arg(QString::fromAscii(cnonce)).
-		arg(nc).arg(map["qop"]).arg("xmpp/" + m_hostname).arg(QString::fromAscii(result.result().toHex()));
+		arg(nc).arg(map["qop"]).arg("xmpp/" + m_hostname).arg(QString::fromAscii(result.result().toHex())).arg(authzid);
 
-	//printf("Response: %s\n", qPrintable(responseString));
+	log(L_DEBUG, "Response: %s\n", qPrintable(responseString));
 	QString response = QString("<response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>%1</response>").
 		arg(QString::fromAscii(responseString.toUtf8().toBase64()));
 
