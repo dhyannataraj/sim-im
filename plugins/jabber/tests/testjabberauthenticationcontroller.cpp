@@ -6,6 +6,7 @@
  */
 
 #include "../protocol/jabberauthenticationcontroller.h"
+#include "../protocol/xmlelement.h"
 
 #include "gtest/gtest.h"
 
@@ -13,6 +14,8 @@
 
 #include <QSignalSpy>
 #include <QCryptographicHash>
+#include <QRegExp>
+#include <QStringList>
 
 namespace
 {
@@ -32,26 +35,23 @@ namespace
                 delete sock;
             }
 
-            QDomDocument startAuth()
+            XmlElement::Ptr startAuth()
             {
                 EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
 
                 auth.tlsHandshakeDone();
 
-                QDomDocument doc;
-                doc.setContent(QByteArray(R"(
-                    <stream:features>
-                    <starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'>
-                    <required/>
-                    </starttls>
-                    <mechanisms xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
-                    <mechanism>DIGEST-MD5</mechanism>
-                    <mechanism>PLAIN</mechanism>
-                    </mechanisms>
-                    </stream:features>
-                    )"));
+                auto root = XmlElement::create("stream:features");
+                    auto starttls = XmlElement::create("starttls", root);
+                        auto required = XmlElement::create("required", starttls);
+                
+                    auto mechanisms = XmlElement::create("mechanisms", root);
+                        auto mechanism_md5 = XmlElement::create("mechanism");
+                        mechanism_md5->appendText("DIGEST-MD5");
+                        auto mechanism_plain = XmlElement::create("mechanism");
+                        mechanism_plain->appendText("PLAIN");
 
-                return doc;
+                return root;
             }
 
             JabberAuthenticationController auth;
@@ -72,20 +72,17 @@ namespace
 
         EXPECT_CALL(*sock, send(StartsWith("<starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'/>")));
 
-        QDomDocument doc;
-        doc.setContent(QByteArray(R"(
-            <stream:features>
-            <starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'>
-            <required/>
-            </starttls>
-            <mechanisms xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
-            <mechanism>DIGEST-MD5</mechanism>
-            <mechanism>PLAIN</mechanism>
-            </mechanisms>
-            </stream:features>
-            )"));
+        auto root = XmlElement::create("stream:features");
+            auto starttls = XmlElement::create("starttls", root);
+                auto required = XmlElement::create("required", starttls);
+        
+            auto mechanisms = XmlElement::create("mechanisms", root);
+                auto mechanism_md5 = XmlElement::create("mechanism");
+                mechanism_md5->appendText("DIGEST-MD5");
+                auto mechanism_plain = XmlElement::create("mechanism");
+                mechanism_plain->appendText("PLAIN");
 
-        auth.startElement(doc.childNodes().at(0).toElement());
+        auth.incomingStanza(root);
     }
 
     TEST_F(TestJabberAuthenticationController, tlsHandshakeDone_startsNewStream)
@@ -107,27 +104,25 @@ namespace
 
     TEST_F(TestJabberAuthenticationController, newStream_ifDigestMd5Mechanism_useIt)
     {
-        QDomDocument doc = startAuth();
+        auto doc = startAuth();
 
         EXPECT_CALL(*sock, send(QByteArray("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>")));
 
-        auth.startElement(doc.childNodes().at(0).toElement());
+        auth.incomingStanza(doc);
     }
 
 	static void sendChallengeTag(JabberAuthenticationController& auth, const QString& s)
 	{
-		QString challenge = QString("<challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>%1</challenge>").arg(QString::fromAscii(s.toAscii().toBase64()));
-        QDomDocument doc;
-		doc.setContent(challenge);
-        QDomElement challengeElement = doc.elementsByTagName("challenge").at(0).toElement();
-        auth.startElement(challengeElement);
+        auto root = XmlElement::create("challenge");
+        root->appendText(QString::fromAscii(s.toAscii().toBase64()));
+        auth.incomingStanza(root);
 	}
 
     TEST_F(TestJabberAuthenticationController, digestMd5_serverChallenge)
     {
-        QDomDocument doc = startAuth();
+        auto doc = startAuth();
         EXPECT_CALL(*sock, send(QByteArray("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>")));
-        auth.startElement(doc.childNodes().at(0).toElement());
+        auth.incomingStanza(doc);
 
         auth.setUsername("testusername");
         auth.setPassword("testpassword");
@@ -198,9 +193,9 @@ namespace
 
     TEST_F(TestJabberAuthenticationController, digestMd5_secondServerChallenge)
     {
-        QDomDocument doc = startAuth();
+        auto doc = startAuth();
         EXPECT_CALL(*sock, send(QByteArray("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>")));
-        auth.startElement(doc.childNodes().at(0).toElement());
+        auth.incomingStanza(doc);
 
         auth.setUsername("testusername");
         auth.setPassword("testpassword");

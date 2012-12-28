@@ -15,8 +15,7 @@
 #include <QXmlContentHandler>
 #include <QXmlErrorHandler>
 #include <QXmlSimpleReader>
-#include <QDomElement>
-#include <QDomDocument>
+#include "xmlelement.h"
 
 class InputStreamDispatcher : public QObject, public QXmlContentHandler, public QXmlErrorHandler
 {
@@ -65,9 +64,8 @@ private:
     QXmlInputSource* m_source;
     bool m_parsingStarted;
 	bool m_hasTag;
-	QDomDocument m_currentDocument;
-	QDomElement m_currentRoot;
-	QDomElement m_currentTag;
+    XmlElement::Ptr m_currentRoot;
+    XmlElement::Ptr m_currentTag;
 	int m_level;
 };
 

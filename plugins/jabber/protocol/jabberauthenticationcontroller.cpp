@@ -9,6 +9,7 @@
 #include "log.h"
 
 #include <QCryptographicHash>
+#include <QStringList>
 
 using namespace SIM;
 
@@ -18,6 +19,100 @@ JabberAuthenticationController::JabberAuthenticationController() : m_state(Initi
 
 JabberAuthenticationController::~JabberAuthenticationController()
 {
+}
+
+void JabberAuthenticationController::streamOpened()
+{
+}
+
+void JabberAuthenticationController::incomingStanza(const XmlElement::Ptr& element)
+{
+    if(element->name() == "stream:features")
+    {
+        if(m_state == Initial)
+        {
+            bool tlsRequired = false;
+            auto starttls = element->firstChild("starttls");
+            if(starttls)
+            {
+                tlsRequired = true;
+            }
+
+            if(tlsRequired)
+            {
+                m_socket->send("<starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'/>");
+                m_state = TlsNegotiation;
+            }
+            // TODO: auth without TLS
+        }
+        else if(m_state == ReadyToAuthenticate)
+        {
+            // TODO: implement various,mechanism
+            m_socket->send(QByteArray("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>"));
+            m_state = DigestMd5WaitingChallenge;
+        }
+        else if(m_state == RestartingStream)
+        {
+            auto bind = element->firstChild("bind");
+            if(bind)
+            {
+                m_state = ResourceBinding;
+                m_socket->send(QString("<iq id=\"bind1\" type=\"set\">"
+                            "<bind xmlns=\"urn:ietf:params:xml:ns:xmpp-bind\">"
+                            "<resource>%1</resource>"
+                            "</bind>"
+                            "</iq>").arg(m_resource).toUtf8());
+            }
+        }
+    }
+    else if((m_state == TlsNegotiation) && (element->name() == "proceed"))
+    {
+        m_socket->startTls();
+    }
+    else if((m_state == DigestMd5WaitingChallenge) && (element->name() == "challenge"))
+    {
+        QString challengeString = QString::fromUtf8(QByteArray::fromBase64(element->text().toAscii()));
+        //printf("Challenge: %s\n", qPrintable(challengeString));
+        QString response = makeResponseToChallenge(challengeString);
+        m_socket->send(response.toAscii());
+        m_state = DigestMd5WaitingSecondChallenge;
+    }
+    else if((m_state == DigestMd5WaitingSecondChallenge) && (element->name() == "challenge"))
+    {
+        QString response("<response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'/>");
+        m_socket->send(response.toAscii());
+        m_state = DigestMd5WaitingSuccess;
+    }
+    else if((m_state == DigestMd5WaitingSuccess) && (element->name() == "success"))
+    {
+        log(L_DEBUG, "Successful authentication");
+        m_state = RestartingStream;
+        QString stream = QString("<stream:stream xmlns='jabber:client' "
+                "xmlns:stream='http://etherx.jabber.org/streams' to='%1' version='1.0'>").
+            arg(m_host);
+        m_socket->send(stream.toUtf8());
+        emit newStream();
+    }
+    else if((m_state == ResourceBinding) && (element->name() == "iq"))
+    {
+        auto type = element->attribute("type");
+        log(L_DEBUG, "[%s]", qPrintable(type));
+        if(type != "result")
+        {
+            log(L_WARN, "Resource binding: error");
+            return;
+        }
+        auto el = element->firstChild("bind")->firstChild("jid");
+        if(!el || (el->text().isEmpty()))
+        {
+            log(L_WARN, "Resource binding: error: no jid");
+            return;
+        }
+
+        m_fullJid = el->text();
+        log(L_DEBUG, "Authentication completed, JID: %s", qPrintable(m_fullJid));
+        emit authenticationCompleted();
+    }
 }
 
 void JabberAuthenticationController::setUsername(const QString& username)
@@ -71,121 +166,6 @@ void JabberAuthenticationController::tlsHandshakeDone()
 	m_state = ReadyToAuthenticate;
 
 	emit newStream();
-}
-
-bool JabberAuthenticationController::canHandle(const QString& tagName) const
-{
-	if(tagName == "stream:features")
-		return true;
-	if((m_state == TlsNegotiation) && (tagName == "proceed"))
-		return true;
-	if(tagName == "challenge")
-		return true;
-	if(tagName == "success")
-	    return true;
-	if(tagName == "iq")
-	    return true;
-	return false;
-}
-
-void JabberAuthenticationController::startElement(const QDomElement& root)
-{
-	if(root.tagName() == "stream:features")
-	{
-		if(m_state == Initial)
-		{
-			bool tlsRequired = false;
-			QDomElement starttls = root.elementsByTagName("starttls").at(0).toElement();
-			if(!starttls.isNull())
-			{
-				tlsRequired = true;
-			}
-
-			if(tlsRequired)
-			{
-				m_socket->send("<starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'/>");
-				m_state = TlsNegotiation;
-			}
-			// TODO: auth without TLS
-		}
-		else if(m_state == ReadyToAuthenticate)
-		{
-			// TODO: implement various,mechanism
-			m_socket->send(QByteArray("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>"));
-            m_state = DigestMd5WaitingChallenge;
-		}
-		else if(m_state == RestartingStream)
-		{
-		    QDomElement bind = root.firstChildElement("bind");
-		    if(!bind.isNull())
-		    {
-		        m_state = ResourceBinding;
-		        m_socket->send(QString("<iq id=\"bind1\" type=\"set\">"
-		                "<bind xmlns=\"urn:ietf:params:xml:ns:xmpp-bind\">"
-		                "<resource>%1</resource>"
-		                "</bind>"
-		                "</iq>").arg(m_resource).toUtf8());
-		    }
-		}
-	}
-	else if((m_state == TlsNegotiation) && (root.tagName() == "proceed"))
-	{
-		m_socket->startTls();
-	}
-    else if((m_state == DigestMd5WaitingChallenge) && (root.tagName() == "challenge"))
-    {
-        QString challengeString = QString::fromUtf8(QByteArray::fromBase64(root.text().toAscii()));
-		//printf("Challenge: %s\n", qPrintable(challengeString));
-		QString response = makeResponseToChallenge(challengeString);
-        m_socket->send(response.toAscii());
-		m_state = DigestMd5WaitingSecondChallenge;
-    }
-    else if((m_state == DigestMd5WaitingSecondChallenge) && (root.tagName() == "challenge"))
-    {
-		QString response("<response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'/>");
-        m_socket->send(response.toAscii());
-        m_state = DigestMd5WaitingSuccess;
-    }
-    else if((m_state == DigestMd5WaitingSuccess) && (root.tagName() == "success"))
-    {
-        log(L_DEBUG, "Successful authentication");
-        m_state = RestartingStream;
-        QString stream = QString("<stream:stream xmlns='jabber:client' "
-                "xmlns:stream='http://etherx.jabber.org/streams' to='%1' version='1.0'>").
-                arg(m_host);
-        m_socket->send(stream.toUtf8());
-        emit newStream();
-    }
-    else if((m_state == ResourceBinding) && (root.tagName() == "iq"))
-    {
-        auto type = root.attribute("type");
-        log(L_DEBUG, "[%s]", qPrintable(type));
-        if(type != "result")
-        {
-            log(L_WARN, "Resource binding: error");
-            return;
-        }
-        auto el = root.firstChildElement("bind").firstChildElement("jid");
-        if(el.isNull() || (el.text().isEmpty()))
-        {
-            log(L_WARN, "Resource binding: error: no jid");
-            return;
-        }
-
-        m_fullJid = el.text();
-        log(L_DEBUG, "Authentication completed, JID: %s", qPrintable(m_fullJid));
-        emit authenticationCompleted();
-    }
-}
-
-void JabberAuthenticationController::endElement(const QString& name)
-{
-    log(L_DEBUG, "endElement(%s)", qPrintable(name));
-}
-
-void JabberAuthenticationController::characters(const QString& ch)
-{
-
 }
 
 QString JabberAuthenticationController::makeResponseToChallenge(const QString& challengeString)

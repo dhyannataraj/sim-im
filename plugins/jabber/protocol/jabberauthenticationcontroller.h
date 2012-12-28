@@ -21,6 +21,9 @@ public:
     JabberAuthenticationController();
     virtual ~JabberAuthenticationController();
 
+    virtual void streamOpened();
+    virtual void incomingStanza(const XmlElement::Ptr& element);
+
     void setUsername(const QString& username);
     void setPassword(const QString& password);
     void setHostname(const QString& hostname);
@@ -30,12 +33,6 @@ public:
     void startAuthentication(const QString& host, int port);
 
     void setSocket(JabberSocket* socket);
-
-    virtual bool canHandle(const QString& tagName) const;
-
-    virtual void startElement(const QDomElement& root);
-    virtual void endElement(const QString& name);
-    virtual void characters(const QString& ch);
 
 public slots:
     void connected();
