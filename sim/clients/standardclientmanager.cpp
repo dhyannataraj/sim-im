@@ -148,14 +148,16 @@ bool StandardClientManager::load_old()
                 continue;
             }
             getProfileManager()->currentProfile()->enablePlugin(pluginName);
-            ProtocolPtr protocol;
-            ProtocolIterator it;
-            while ((protocol = ++it) != NULL)
+
+            for(int i = 0; i < getProtocolManager()->protocolCount(); i++)
+            {
+                ProtocolPtr protocol = getProtocolManager()->protocol(i);
                 if (protocol->name() == clientName)
                 {
                     cfg.clear();
                     client = protocol->createClient(0);
                 }
+            }
         }
         else {
             if(!l.isEmpty()) {
