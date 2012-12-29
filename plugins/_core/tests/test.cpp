@@ -13,7 +13,6 @@
 #include "messaging/messageoutpipe.h"
 
 #include "contacts/contactlist.h"
-#include "contacts.h"
 #include "tests/stubs/stubimagestorage.h"
 #include "tests/mocks/mockimagestorage.h"
 

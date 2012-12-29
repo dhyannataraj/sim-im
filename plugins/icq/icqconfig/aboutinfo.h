@@ -18,8 +18,6 @@
 #ifndef _ABOUTINFO_H
 #define _ABOUTINFO_H
 
-#include "contacts.h"
-
 #include "ui_aboutinfobase.h"
 #include "../icqcontact.h"
 

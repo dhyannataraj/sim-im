@@ -18,9 +18,9 @@
 #ifndef _JABBER_H
 #define _JABBER_H
 
-#include "contacts.h"
 #include "contacts/client.h"
 #include "contacts/imstatus.h"
+#include "contacts/protocol.h"
 #include "jabberstatus.h"
 
 #include <QByteArray>

@@ -20,7 +20,6 @@
 
 #include <vector>
 #include <QWizard>
-#include "contacts.h"
 #include "plugins.h"
 #include "contacts/protocol.h"
 #include "contacts/client.h"

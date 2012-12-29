@@ -3,7 +3,6 @@
 #include <vector>
 #include <algorithm>
 #include "contact.h"
-#include "contacts.h"
 #include "group.h"
 #include "client.h"
 #include "log.h"

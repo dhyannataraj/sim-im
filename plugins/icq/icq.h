@@ -18,7 +18,6 @@
 #ifndef _ICQ_H
 #define _ICQ_H
 
-#include "contacts.h"
 #include "contacts/client.h"
 #include "contacts/imstatus.h"
 #include "icqstatus.h"

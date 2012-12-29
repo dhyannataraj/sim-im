@@ -7,7 +7,6 @@
 #include "events/standardevent.h"
 #include "events/logevent.h"
 #include "contacts/contactlist.h"
-#include "contacts.h"
 #include "tests/stubs/stubimagestorage.h"
 
 void registerEvents()
