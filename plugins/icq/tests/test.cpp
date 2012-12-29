@@ -13,6 +13,7 @@
 #include "messaging/messagepipe.h"
 #include "messaging/messageoutpipe.h"
 #include "core.h"
+#include "services.h"
 
 void registerEvents()
 {
@@ -37,7 +38,7 @@ int main(int argc, char** argv)
     SIM::createMessagePipe();
     SIM::createOutMessagePipe();
     //SIM::createContactList();
-    CorePlugin* core = new CorePlugin();
+    CorePlugin* core = new CorePlugin(SIM::makeMockServices());
     int ret = RUN_ALL_TESTS();
     delete core;
 #ifdef WIN32

@@ -23,10 +23,10 @@ namespace SIM
         g_clientManager = manager;
     }
 
-    void createClientManager()
+    void createClientManager(const ProtocolManager::Ptr& protocolManager)
     {
         if(!g_clientManager)
-            g_clientManager = new StandardClientManager();
+            g_clientManager = new StandardClientManager(protocolManager);
     }
 
     void destroyClientManager()

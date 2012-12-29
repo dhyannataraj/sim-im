@@ -12,77 +12,76 @@ SET(sim_LIB_SRCS
     	buffer.cpp
 		builtinlogger.cpp
 		cfg.cpp
+		clients/client.cpp
 		clients/clientmanager.cpp
         clients/standardclientmanager.cpp
-		clients/client.cpp
         commands/commandhub.cpp
-        commands/uicommandlist.cpp
-        commands/uicommandcontextprovider.cpp
         commands/menuaction.cpp
         commands/simtoolbar.cpp
+        commands/uicommandcontextprovider.cpp
+        commands/uicommandlist.cpp
+		contacts/contact.cpp
+        contacts/contactlist.cpp
+		contacts/group.cpp
+        contacts/imcontact.cpp
+        contacts/imcontactid.cpp
+        contacts/imgroup.cpp
+		contacts/imstatus.cpp
+		contacts/packettype.cpp
+		contacts/protocol.cpp
+		contacts/protocolmanager.cpp
+        contacts/standardcontactlist.cpp
+		contacts/userdata.cpp
 		country.cpp
 		events/actioncollectionevent.cpp
+        events/contactevent.cpp
         events/eventdata.cpp
         events/eventhub.cpp
-        events/nulleventdata.cpp
-        events/contactevent.cpp
-        events/standardevent.cpp
         events/ievent.cpp
         events/logevent.cpp
         events/menuitemcollectionevent.cpp
+        events/nulleventdata.cpp
+        events/standardevent.cpp
         events/widgetcollectionevent.cpp
-        imagestorage/imagestorage.cpp
-        imagestorage/standardimagestorage.cpp
-        imagestorage/iconset.cpp
-        imagestorage/jispiconset.cpp
         imagestorage/avatarstorage.cpp
+        imagestorage/iconset.cpp
+        imagestorage/imagestorage.cpp
+        imagestorage/jispiconset.cpp
         imagestorage/standardavatarstorage.cpp
+        imagestorage/standardimagestorage.cpp
 		log.cpp
-        messaging/message.cpp
         messaging/genericmessage.cpp
-        messaging/messagepipe.cpp
-        messaging/standardmessagepipe.cpp
-        messaging/messageprocessor.cpp
+        messaging/message.cpp
         messaging/messageoutpipe.cpp
+        messaging/messagepipe.cpp
+        messaging/messageprocessor.cpp
         messaging/standardmessageoutpipe.cpp
+        messaging/standardmessagepipe.cpp
 		misc.cpp
+        network/asyncsocket.cpp
+        network/tcpasyncsocket.cpp
 		paths.cpp
 		plugins.cpp
 		profile/profile.cpp
 		profile/profilemanager.cpp
 		profile/standardprofilemanager.cpp
 		propertyhub.cpp
-		simfs.cpp
-		translit.cpp
-        xsl.cpp
 		qzip/ioapi.c
 		qzip/qzip.cpp
 		qzip/unzip.c
-		contacts/userdata.cpp
-		contacts/packettype.cpp
-		contacts/contact.cpp
-        contacts/contactlist.cpp
-        contacts/standardcontactlist.cpp
-		contacts/group.cpp
-		contacts/protocol.cpp
-		contacts/protocolmanager.cpp
-		contacts/imstatus.cpp
-        contacts/imcontact.cpp
-        contacts/imcontactid.cpp
-        contacts/imgroup.cpp
-
-        network/asyncsocket.cpp
-        network/tcpasyncsocket.cpp
-
+        services.cpp
+		simfs.cpp
         simgui/ballonmsg.cpp
+        simgui/genericmessageeditor.cpp
 		simgui/linklabel.cpp
+        simgui/messageeditor.cpp
 		simgui/preview.cpp
 		simgui/qchildwidget.cpp
 		simgui/qcolorbutton.cpp
 		simgui/qkeybutton.cpp
         simgui/statuswidget.cpp
-        simgui/messageeditor.cpp
-        simgui/genericmessageeditor.cpp
+		translit.cpp
+        xsl.cpp
 
         ../sqlite/sqlite3.c
 	)
@@ -93,80 +92,79 @@ SET(sim_LIB_HDRS
     	buffer.h
 		builtinlogger.h
 		cfg.h
+		clients/client.h
 		clients/clientmanager.h
         clients/standardclientmanager.h
-		clients/client.h
         commands/commandhub.h
-        commands/uicommandlist.h
-        commands/uicommandcontextprovider.h
         commands/menuaction.h
         commands/simtoolbar.h
+        commands/uicommandcontextprovider.h
+        commands/uicommandlist.h
+		contacts/contact.h
+        contacts/contactlist.h
+		contacts/group.h
+        contacts/imcontact.h
+        contacts/imcontactid.h
+        contacts/imgroup.h
+		contacts/imstatus.h
+		contacts/packettype.h
+		contacts/protocol.h
+		contacts/protocolmanager.h
+        contacts/standardcontactlist.h
+		contacts/userdata.h
 		country.h
 		events/actioncollectionevent.h
+        events/contactevent.h
         events/eventdata.h
         events/eventhub.h
-        events/nulleventdata.h
-        events/contactevent.h
-        events/standardevent.h
         events/ievent.h
         events/logevent.h
         events/menuitemcollectionevent.h
+        events/nulleventdata.h
+        events/standardevent.h
         events/widgetcollectionevent.h
-        imagestorage/imagestorage.h
-        imagestorage/standardimagestorage.h
-        imagestorage/iconset.h
-        imagestorage/jispiconset.h
         imagestorage/avatarstorage.h
+        imagestorage/iconset.h
+        imagestorage/imagestorage.h
+        imagestorage/jispiconset.h
         imagestorage/standardavatarstorage.h
+        imagestorage/standardimagestorage.h
 		log.h
-        messaging/message.h
         messaging/genericmessage.h
-        messaging/messagepipe.h
-        messaging/standardmessagepipe.h
-        messaging/messageprocessor.h
+        messaging/message.h
         messaging/messageoutpipe.h
+        messaging/messagepipe.h
+        messaging/messageprocessor.h
         messaging/standardmessageoutpipe.h
+        messaging/standardmessagepipe.h
 		misc.h
+        network/asyncsocket.h
+        network/tcpasyncsocket.h
 		paths.h
 		plugins.h
 		profile/profile.h
 		profile/profilemanager.h
 		profile/standardprofilemanager.h
 		propertyhub.h
-		simapi.h
-		simfs.h
-		singleton.h
-		translit.h
-        xsl.h
 		qzip/ioapi.h
 		qzip/qzip.h
 		qzip/unzip.h
-		contacts/userdata.h
-		contacts/packettype.h
-		contacts/contact.h
-        contacts/contactlist.h
-        contacts/standardcontactlist.h
-		contacts/group.h
-		contacts/protocol.h
-		contacts/protocolmanager.h
-		contacts/imstatus.h
-        contacts/imcontact.h
-        contacts/imcontactid.h
-        contacts/imgroup.h
-
-        network/asyncsocket.h
-        network/tcpasyncsocket.h
-
+        services.h
+		simapi.h
+		simfs.h
 		simgui/ballonmsg.h
+        simgui/genericmessageeditor.h
 		simgui/linklabel.h
+        simgui/messageeditorfactory.h
+        simgui/messageeditor.h
 		simgui/preview.h
 		simgui/qchildwidget.h
 		simgui/qcolorbutton.h
 		simgui/qkeybutton.h
         simgui/statuswidget.h
-        simgui/messageeditorfactory.h
-        simgui/messageeditor.h
-        simgui/genericmessageeditor.h
+		singleton.h
+		translit.h
+        xsl.h
 
         ../sqlite/sqlite3.h
     )

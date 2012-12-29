@@ -53,12 +53,13 @@ using namespace SIM;
 static const char* MessageTypeIdProperty = "message_type_id";
 static const char* ContactIdProperty = "contact_id";
 
-MainWindow::MainWindow(CorePlugin* core)
+MainWindow::MainWindow(const SIM::Services::Ptr& services, CorePlugin* core)
     : QMainWindow(NULL, Qt::Window)
     , m_core(core)
     , m_noresize(false)
     , m_systray(new QSystemTrayIcon(this))
     , m_trayIconMenu(new QMenu(this))
+    , m_services(services)
 {
     log(L_DEBUG, "MainWindow::MainWindow()");
     setAttribute(Qt::WA_AlwaysShowToolTips);
@@ -336,7 +337,7 @@ void MainWindow::mainMenuRequested()
 
 void MainWindow::showClientsDialog()
 {
-    ClientsDialog dlg(this);
+    ClientsDialog dlg(m_services->protocolManager(), this);
     dlg.exec();
     refreshStatusWidgets();
 }

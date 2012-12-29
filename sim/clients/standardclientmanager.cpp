@@ -9,7 +9,8 @@
 
 namespace SIM {
 
-StandardClientManager::StandardClientManager()
+StandardClientManager::StandardClientManager(const ProtocolManager::Ptr& protocolManager) :
+    m_protocolManager(protocolManager)
 {
 }
 
@@ -90,9 +91,9 @@ bool StandardClientManager::load_new()
         ClientPtr newClient;
         getProfileManager()->currentProfile()->enablePlugin(pluginName);
 
-        for(int i = 0; i < getProtocolManager()->protocolCount(); i++)
+        for(int i = 0; i < m_protocolManager->protocolCount(); i++)
         {
-            ProtocolPtr protocol = getProtocolManager()->protocol(i);
+            ProtocolPtr protocol = m_protocolManager->protocol(i);
             if (protocol->name() == protocolName)
             {
                 newClient = protocol->createClient(clientName);
@@ -149,9 +150,9 @@ bool StandardClientManager::load_old()
             }
             getProfileManager()->currentProfile()->enablePlugin(pluginName);
 
-            for(int i = 0; i < getProtocolManager()->protocolCount(); i++)
+            for(int i = 0; i < m_protocolManager->protocolCount(); i++)
             {
-                ProtocolPtr protocol = getProtocolManager()->protocol(i);
+                ProtocolPtr protocol = m_protocolManager->protocol(i);
                 if (protocol->name() == clientName)
                 {
                     cfg.clear();
@@ -222,7 +223,7 @@ ClientPtr StandardClientManager::createClient(const QString& name)
         return ClientPtr();
     }
     getProfileManager()->currentProfile()->enablePlugin(pluginname);
-    ProtocolPtr protocol = getProtocolManager()->protocol(protocolname);
+    ProtocolPtr protocol = m_protocolManager->protocol(protocolname);
     if(protocol)
         return protocol->createClient(name);
     log(L_DEBUG, "Protocol %s not found", qPrintable(protocolname));

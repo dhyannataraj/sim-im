@@ -52,26 +52,6 @@ namespace SIM
         }
         return ProtocolPtr();
     }
-
-    EXPORT ProtocolManager* getProtocolManager()
-    {
-        return gs_protocolManager;
-    }
-
-    void EXPORT createProtocolManager()
-    {
-        if(!gs_protocolManager)
-            gs_protocolManager = new ProtocolManager();
-    }
-
-    void EXPORT destroyProtocolManager()
-    {
-        if(gs_protocolManager)
-        {
-            delete gs_protocolManager;
-            gs_protocolManager = 0;
-        }
-    }
 }
 
 // vim: set expandtab:

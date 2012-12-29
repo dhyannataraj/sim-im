@@ -152,17 +152,14 @@ int main(int argc, char *argv[])
     SIM::createAvatarStorage();
     SIM::createCommandHub();
     SIM::createContactList();
-    SIM::createProtocolManager();
     SIM::createPluginManager(argc, argv);
-    SIM::createClientManager();
+    SIM::createClientManager(app.services()->protocolManager());
 
+    if(!app.initializePlugins())
+        return -1;
 
-    if(!getPluginManager()->initialize())
-        return 1;
-    app.setQuitOnLastWindowClosed(true);
-    if (SIM::getPluginManager()->isLoaded())
-        res = app.exec();
-    
+    res = app.exec();
+
     SIM::getClientManager()->sync();
     SIM::destroyClientManager();
     SIM::destroyPluginManager();
@@ -177,7 +174,6 @@ int main(int argc, char *argv[])
     destroyLogging();
     SIM::destroyEventHub();
   
-    SIM::destroyProtocolManager(); //Put it to here fixes crash on end bug.
     return res;
 }
 

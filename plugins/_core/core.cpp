@@ -79,13 +79,12 @@ using namespace SIM;
 
 Plugin *createCorePlugin(unsigned /*base*/, bool, Buffer * /*config*/)
 {
-    Plugin *plugin = new CorePlugin();
-    return plugin;
+    return nullptr;
 }
 
-Plugin *createCorePluginObject()
+Plugin *createCorePluginObject(const SIM::Services::Ptr& services)
 {
-    Plugin *plugin = new CorePlugin();
+    Plugin *plugin = new CorePlugin(services);
     return plugin;
 }
 
@@ -179,8 +178,9 @@ CorePlugin* getCorePlugin()
 //	{ 0, NULL }
 //};
 
-CorePlugin::CorePlugin() : QObject()
-    , Plugin            ()
+CorePlugin::CorePlugin(const SIM::Services::Ptr& services) : QObject()
+    , Plugin            (),
+    m_services(services)
 //    , historyXSL        (NULL)
 //    , m_bInit           (false)
 //    , m_cfg             (NULL)
@@ -1077,7 +1077,7 @@ CorePlugin::~CorePlugin()
 
 void CorePlugin::eventInit()
 {
-    m_main = new MainWindow(this);
+    m_main = new MainWindow(m_services, this);
     log(L_DEBUG, "CorePlugin::eventInit");
     if(!init()) {
         getEventHub()->triggerEvent("init_abort");
@@ -3099,7 +3099,7 @@ void CorePlugin::eventInit()
 
 void CorePlugin::createNewProfile(const QString& name)
 {
-	NewProtocol dlg(name, NULL);
+	NewProtocol dlg(m_services->protocolManager(), name, NULL);
 	dlg.exec();
 }
 

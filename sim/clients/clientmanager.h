@@ -7,6 +7,7 @@
 #include "simapi.h"
 #include "clients/client.h"
 #include "cfg.h"
+#include "contacts/protocolmanager.h"
 
 namespace SIM
 {
@@ -30,7 +31,7 @@ namespace SIM
 
     EXPORT ClientManager* getClientManager();
     void EXPORT setClientManager(ClientManager* manager);
-    void EXPORT createClientManager();
+    void EXPORT createClientManager(const ProtocolManager::Ptr& protocolManager);
     void EXPORT destroyClientManager();
 }
 

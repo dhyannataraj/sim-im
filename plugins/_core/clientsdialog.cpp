@@ -7,8 +7,9 @@
 #include "newprotocol.h"
 #include "log.h"
 
-ClientsDialog::ClientsDialog(QWidget *parent)
-    : QDialog(parent)
+ClientsDialog::ClientsDialog(const SIM::ProtocolManager::Ptr& protocolManager, QWidget *parent)
+    : QDialog(parent),
+    m_protocolManager(protocolManager)
 {
 	ui.setupUi(this);
 	fillClientsList();
@@ -21,7 +22,7 @@ ClientsDialog::~ClientsDialog()
 
 void ClientsDialog::addClient()
 {
-    NewProtocol dlg("", this);
+    NewProtocol dlg(m_protocolManager, "", this);
     dlg.exec();
     fillClientsList();
 }

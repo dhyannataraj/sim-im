@@ -35,11 +35,12 @@
 using namespace std;
 using namespace SIM;
 
-NewProtocol::NewProtocol(const QString& profileName, QWidget *parent) :
+NewProtocol::NewProtocol(const SIM::ProtocolManager::Ptr& protocolManager, const QString& profileName, QWidget *parent) :
 		QDialog(parent),
 		m_connectionParameters(NULL),
 		m_profileName(profileName),
-		m_ui(new Ui::NewProtocol)
+		m_ui(new Ui::NewProtocol),
+        m_protocolManager(protocolManager)
 {
 	m_ui->setupUi(this);
 
@@ -98,10 +99,10 @@ void NewProtocol::currentProtocolChanged(int index)
 
 void NewProtocol::fillProtocolsCombobox()
 {
-	int totalProtocolCount = getProtocolManager()->protocolCount();
+	int totalProtocolCount = m_protocolManager->protocolCount();
 	for(int i = 0; i < totalProtocolCount; i++)
 	{
-		ProtocolPtr protocol = getProtocolManager()->protocol(i);
+		ProtocolPtr protocol = m_protocolManager->protocol(i);
 		QIcon icon = SIM::getImageStorage()->icon(protocol->iconId());
 		QString protocolName = protocol->name();
 		m_ui->cb_protocol->addItem(icon, protocolName);
@@ -119,7 +120,7 @@ void NewProtocol::destroyProtocolParametersWidget()
 
 SIM::ProtocolPtr NewProtocol::protocolByIndex(int index)
 {
-	return getProtocolManager()->protocol(index);
+	return m_protocolManager->protocol(index);
 }
 
 void NewProtocol::setProtocolParametersWidget(QWidget* widget)

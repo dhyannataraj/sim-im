@@ -22,6 +22,7 @@
 #include <QString>
 #include <QWidget>
 #include "simapi.h"
+#include "services.h"
 
 class QLibrary;
 class QWidget;
@@ -58,7 +59,7 @@ namespace SIM
         PluginManager(int argc, char **argv);
         ~PluginManager();
 
-        bool initialize();
+        bool initialize(const Services::Ptr& services);
         bool isLoaded();
         PluginPtr plugin(const QString& pluginname);
         QStringList enumPlugins();
@@ -77,13 +78,14 @@ namespace SIM
 
     private:
         class PluginManagerPrivate *p;
+        Services::Ptr m_services;
 
         COPY_RESTRICTED(PluginManager)
     };
 
     /* Plugin prototype */
     typedef Plugin* createPlugin(unsigned base, bool bStart, Buffer *cfg);
-    typedef Plugin* (*createPluginObject)();
+    typedef Plugin* (*createPluginObject)(const Services::Ptr& services);
 
 	const unsigned PLUGIN_KDE_COMPILE    = 0x0001;
 #ifdef USE_KDE

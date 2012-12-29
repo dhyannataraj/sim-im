@@ -28,7 +28,7 @@ namespace
 
 	TEST_F(TestCorePlugin, constructor_registersWidgetCollectionEventForContact)
 	{
-        CorePlugin plugin;
+        CorePlugin plugin(SIM::makeMockServices());
 
         SIM::IEventPtr event = SIM::getEventHub()->getEvent("contact_widget_collection");
 

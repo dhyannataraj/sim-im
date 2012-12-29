@@ -154,7 +154,7 @@ namespace SIM
 			PluginManagerPrivate(int argc, char **argv);
 			~PluginManagerPrivate();
 
-			bool initialize();
+			bool initialize(const Services::Ptr& services);
 			QStringList enumPluginPaths();
 			QStringList enumPluginNames();
 			PluginPtr plugin(const QString& pluginname);
@@ -216,6 +216,7 @@ namespace SIM
 			bool m_bPluginsInBuildDir;  // plugins in build dir -> full path in pluginInfo.filePath
 
 			std::auto_ptr<BuiltinLogger> builtinLogger;
+            Services::Ptr m_services;
 
 			friend class PluginManager;
 	};
@@ -435,8 +436,9 @@ namespace SIM
 		return true;
 	}
 
-	bool PluginManagerPrivate::initialize()
+	bool PluginManagerPrivate::initialize(const Services::Ptr& services)
 	{
+        m_services = services;
 		m_base = 0;
 		m_bLoaded = false;
 		m_bInInit = true;
@@ -593,7 +595,7 @@ namespace SIM
 	{
 		log(L_DEBUG, "[1]Load plugin %s", qPrintable(info.name));
 
-		PluginPtr plugin = PluginPtr(info.info->createObject());
+		PluginPtr plugin = PluginPtr(info.info->createObject(m_services));
 		if( plugin == NULL )
 			return PluginPtr();
 		info.plugin = plugin.toWeakRef();
@@ -743,9 +745,9 @@ namespace SIM
 		p = new PluginManagerPrivate(argc, argv);
 	}
 
-	bool PluginManager::initialize()
+	bool PluginManager::initialize(const Services::Ptr& services)
 	{
-		return p->initialize();
+		return p->initialize(services);
 	}
 
 	void deleteResolver();

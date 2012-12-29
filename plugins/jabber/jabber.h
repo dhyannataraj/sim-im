@@ -22,6 +22,8 @@
 #include "contacts/imstatus.h"
 #include "contacts/protocol.h"
 #include "jabberstatus.h"
+#include "plugins.h"
+#include "services.h"
 
 #include <QByteArray>
 
@@ -84,13 +86,14 @@ private:
 class JabberPlugin : public SIM::Plugin
 {
 public:
-    JabberPlugin();
+    JabberPlugin(const SIM::Services::Ptr& services);
     virtual ~JabberPlugin();
 
     static JabberPlugin *plugin;
 
 protected:
     SIM::ProtocolPtr m_protocol;
+    SIM::Services::Ptr m_services;
 };
 
 #endif

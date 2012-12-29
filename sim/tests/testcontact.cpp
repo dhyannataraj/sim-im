@@ -12,6 +12,7 @@
 #include "mocks/mockimstatus.h"
 #include "clients/clientmanager.h"
 #include "messaging/genericmessage.h"
+#include "services.h"
 
 namespace
 {
@@ -47,6 +48,14 @@ namespace
             c.setGroupId(42);
             c.setFlag(Contact::flIgnore, true);
             c.setLastActive(112);
+        }
+
+        Services::Ptr services;
+        
+        virtual void SetUp()
+        {
+            services = makeMockServices();
+            SIM::createClientManager(services->protocolManager());
         }
     };
 
@@ -100,7 +109,6 @@ namespace
         fillContactData(contact);
         QDomDocument doc;
         QDomElement el = doc.createElement("contact");
-        SIM::createClientManager();
 
         contact.serialize(el);
         Contact deserializedContact(1);
@@ -137,10 +145,8 @@ namespace
     {
         PropertyHubPtr testHub;
         Contact contact(1);
-        SIM::createClientManager();
 
         EXPECT_FALSE(contact.loadState(testHub));
-        SIM::destroyClientManager();
     }
 
     TEST_F(TestContact, loadState_IncorrectPropertyHub_NoUserData)
@@ -148,10 +154,8 @@ namespace
         PropertyHubPtr testHub = PropertyHub::create("groups");
         testHub->addPropertyHub(PropertyHub::create("clients"));
         Contact contact(1);
-        SIM::createClientManager();
 
         EXPECT_FALSE(contact.loadState(testHub));
-        SIM::destroyClientManager();
     }
 
     TEST_F(TestContact, loadState_IncorrectPropertyHub_NoClients)
@@ -159,10 +163,8 @@ namespace
         PropertyHubPtr testHub = PropertyHub::create("groups");
         testHub->addPropertyHub(PropertyHub::create("userdata"));
         Contact contact(1);
-        SIM::createClientManager();
 
         EXPECT_FALSE(contact.loadState(testHub));
-        SIM::destroyClientManager();
     }
 }
 

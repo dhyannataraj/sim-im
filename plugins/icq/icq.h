@@ -21,6 +21,8 @@
 #include "clients/client.h"
 #include "contacts/imstatus.h"
 #include "icqstatus.h"
+#include "plugins.h"
+#include "services.h"
 
 //class CorePlugin;
 
@@ -71,7 +73,7 @@ private:
 class ICQPlugin : public SIM::Plugin
 {
 public:
-    ICQPlugin();
+    ICQPlugin(const SIM::Services::Ptr& services);
     virtual ~ICQPlugin();
 
     unsigned OscarPacket;
@@ -85,6 +87,9 @@ public:
 
     void registerMessages();
     void unregisterMessages();
+   
+private:
+    SIM::Services::Ptr m_services;
 };
 
 #endif

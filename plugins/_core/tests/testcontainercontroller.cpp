@@ -13,6 +13,7 @@
 #include "tests/mocks/mockimcontact.h"
 
 #include "contacts/contactlist.h"
+#include "services.h"
 
 #include "core.h"
 #include "test.h"
@@ -57,7 +58,7 @@ namespace
             auto imagestorage = new testing::NiceMock<MockObjects::MockImageStorage>();
             SIM::setImageStorage(imagestorage);
             ON_CALL(*imagestorage, icon(_)).WillByDefault(Return(QIcon()));
-            core = new CorePlugin();
+            core = new CorePlugin(SIM::makeMockServices());
 
             oldpipe = SIM::getOutMessagePipe();
             pipe = new MockObjects::MockMessagePipe();

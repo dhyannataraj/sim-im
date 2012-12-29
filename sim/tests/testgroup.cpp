@@ -8,6 +8,7 @@
 #include "stubs/stubimgroup.h"
 #include "stubs/stubclient.h"
 #include "clients/clientmanager.h"
+#include "services.h"
 
 namespace
 {
@@ -24,6 +25,14 @@ namespace
         IMGroupPtr createStubIMGroup(const ClientPtr& client)
         {
             return IMGroupPtr(new StubObjects::StubIMGroup(client.data()));
+        }
+
+        Services::Ptr services;
+        
+        virtual void SetUp()
+        {
+            services = makeMockServices();
+            SIM::createClientManager(services->protocolManager());
         }
     };
 
@@ -66,12 +75,10 @@ namespace
         Group gr(1);
         gr.setName("Foo");
 
-        SIM::createClientManager();
         gr.addClientGroup(imGroup);
         PropertyHubPtr groupState = gr.saveState();
         Group deserializedGroup(1);
         deserializedGroup.loadState(groupState);
-        SIM::destroyClientManager();
 
         ASSERT_TRUE(deserializedGroup.name() == "Foo");
     }
@@ -80,10 +87,8 @@ namespace
     {
         PropertyHubPtr testHub;
         Group gr(1);
-        SIM::createClientManager();
 
         ASSERT_FALSE(gr.loadState(testHub));
-        SIM::destroyClientManager();
     }
 
     TEST_F(TestGroup, loadState_IncorrectPropertyHub_NoUserData)
@@ -91,10 +96,8 @@ namespace
         PropertyHubPtr testHub = PropertyHub::create("groups");
         testHub->addPropertyHub(PropertyHub::create("clients"));
         Group gr(1);
-        SIM::createClientManager();
 
         ASSERT_FALSE(gr.loadState(testHub));
-        SIM::destroyClientManager();
     }
 
     TEST_F(TestGroup, loadState_IncorrectPropertyHub_NoClients)
@@ -102,10 +105,8 @@ namespace
         PropertyHubPtr testHub = PropertyHub::create("groups");
         testHub->addPropertyHub(PropertyHub::create("userdata"));
         Group gr(1);
-        SIM::createClientManager();
 
         ASSERT_FALSE(gr.loadState(testHub));
-        SIM::destroyClientManager();
     }
 
 }

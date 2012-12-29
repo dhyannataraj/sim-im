@@ -12,6 +12,8 @@ namespace SIM
     class EXPORT ProtocolManager
     {
     public:
+        typedef QSharedPointer<ProtocolManager> Ptr;
+
         ProtocolManager();
         virtual ~ProtocolManager();
 
@@ -24,10 +26,6 @@ namespace SIM
     private:
         QList<ProtocolPtr> m_protocols;
     };
-
-    EXPORT ProtocolManager* getProtocolManager();
-    void EXPORT createProtocolManager();
-    void EXPORT destroyProtocolManager();
 }
 
 #endif

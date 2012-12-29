@@ -21,24 +21,19 @@
 #include <vector>
 #include <QWizard>
 #include "plugins.h"
-#include "contacts/protocol.h"
 #include "clients/client.h"
+#include "services.h"
 
 #include "ui_newprotocolbase.h"
 
 class ConnectWnd;
 class CorePlugin;
 
-namespace SIM
-{
-	class Protocol;
-}
-
 class NewProtocol : public QDialog
 {
     Q_OBJECT
 public:
-    NewProtocol(const QString& profileName, QWidget *parent);
+    NewProtocol(const SIM::ProtocolManager::Ptr& protocolManager, const QString& profileName, QWidget *parent);
     ~NewProtocol();
 
 protected slots:
@@ -57,6 +52,7 @@ private:
 	QList<SIM::PluginPtr> m_protocolPlugins;
 	QString m_profileName;
 	Ui::NewProtocol* m_ui;
+    SIM::ProtocolManager::Ptr m_protocolManager;
 };
 
 #endif

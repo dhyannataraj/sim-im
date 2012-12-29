@@ -7,6 +7,7 @@
 #include "clients/clientmanager.h"
 #include "contacts/contactlist.h"
 #include "events/eventhub.h"
+#include "services.h"
 
 namespace
 {
@@ -17,8 +18,9 @@ namespace
     protected:
         void SetUp()
         {
+            auto s = makeMockServices();
             SIM::createEventHub();
-            SIM::createClientManager();
+            SIM::createClientManager(s->protocolManager());
             SIM::createContactList();
         }
 

@@ -12,8 +12,9 @@
 #include "historybrowser.h"
 #include <QAction>
 #include "log.h"
+#include "services.h"
 
-SIM::Plugin* createHistoryPlugin()
+SIM::Plugin* createHistoryPlugin(const SIM::Services::Ptr& services)
 {
     HistoryPlugin* plugin = new HistoryPlugin();
     plugin->setHistoryStorage(HistoryStoragePtr(new SQLiteHistoryStorage()));
