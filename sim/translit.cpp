@@ -21,8 +21,8 @@
 namespace SIM
 {
 #include "translit.h"
-#include "cjk_variants.h"
-#include "johab_hangul.h"
+#include "extra/cjk_variants.h"
+#include "extra/johab_hangul.h"
 
 EXPORT QString toTranslit(const QString &str)
 {
