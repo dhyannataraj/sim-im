@@ -52,7 +52,7 @@ email                : vovan@shutoff.ru
 #include "contacts/imcontact.h"
 #include "events/eventhub.h"
 #include "events/widgetcollectionevent.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "clients/clientmanager.h"
 #include "contacts/contactlist.h"
 #include "commands/commandhub.h"

@@ -20,13 +20,12 @@
 #include "core.h"
 #include "simapi.h"
 #include "log.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "contacts/contact.h"
 #include "contacts/imcontact.h"
 #include "clients/client.h"
 #include "imagestorage/imagestorage.h"
 #include "messaging/genericmessage.h"
-#include "profilemanager.h"
 
 
 using namespace std;

@@ -18,7 +18,7 @@
 #include "newprotocol.h"
 
 
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "newprotocol.h"
 #include "core.h"
 #include "clients/client.h"

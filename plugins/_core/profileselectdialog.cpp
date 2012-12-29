@@ -21,7 +21,7 @@ email                : vovan@shutoff.ru
 #include "core.h"
 #include "imagestorage/imagestorage.h"
 #include "log.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "simgui/ballonmsg.h"
 #include "simgui/linklabel.h"
 #include "profileselectdialog.h"

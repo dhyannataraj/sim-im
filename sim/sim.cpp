@@ -19,7 +19,7 @@
 #include "simapi.h"
 #include "log.h"
 #include "misc.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "clients/clientmanager.h"
 #include "simfs.h"
 #include "paths.h"

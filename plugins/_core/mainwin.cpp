@@ -44,7 +44,7 @@
 #include <QToolBar>
 #include <QAction>
 #include <QMessageBox>
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 
 #include "log.h"
 

@@ -1,6 +1,7 @@
+
 #include "containermanager.h"
 #include "core.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "log.h"
 #include "userwnd.h"
 #include "messaging/messagepipe.h"

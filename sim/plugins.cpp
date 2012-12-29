@@ -33,7 +33,7 @@
 
 #include "misc.h"
 #include "builtinlogger.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "events/eventhub.h"
 #include "events/ievent.h"
 #include "log.h"

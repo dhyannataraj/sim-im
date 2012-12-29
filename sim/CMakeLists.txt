@@ -48,9 +48,9 @@ SET(sim_LIB_SRCS
 		misc.cpp
 		paths.cpp
 		plugins.cpp
-		profile.cpp
-		profilemanager.cpp
-		standardprofilemanager.cpp
+		profile/profile.cpp
+		profile/profilemanager.cpp
+		profile/standardprofilemanager.cpp
 		propertyhub.cpp
 		simfs.cpp
 		translit.cpp
@@ -129,9 +129,9 @@ SET(sim_LIB_HDRS
 		misc.h
 		paths.h
 		plugins.h
-		profile.h
-		profilemanager.h
-		standardprofilemanager.h
+		profile/profile.h
+		profile/profilemanager.h
+		profile/standardprofilemanager.h
 		propertyhub.h
 		simapi.h
 		simfs.h

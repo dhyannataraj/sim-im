@@ -1,12 +1,6 @@
-/*
- * standardavatarstorage.cpp
- *
- *  Created on: Jul 2, 2011
- *      Author: todin
- */
 
 #include "standardavatarstorage.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "log.h"
 
 #include "imagestorage.h"

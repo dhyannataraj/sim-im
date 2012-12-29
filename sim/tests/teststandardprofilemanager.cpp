@@ -5,7 +5,7 @@
  *      Author: todin
  */
 
-#include "standardprofilemanager.h"
+#include "profile/standardprofilemanager.h"
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 

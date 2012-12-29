@@ -2,7 +2,7 @@
 #include <QDir>
 #include <QDomElement>
 #include "clientmanager.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "contacts/protocolmanager.h"
 #include "standardclientmanager.h"
 #include "log.h"

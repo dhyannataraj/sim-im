@@ -3,7 +3,7 @@
 #include <QDir>
 #include "standardclientmanager.h"
 #include "clientmanager.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "contacts/protocolmanager.h"
 #include "buffer.h"
 

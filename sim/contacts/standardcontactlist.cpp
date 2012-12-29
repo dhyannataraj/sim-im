@@ -1,7 +1,7 @@
 #include <QDir>
 #include <QStringList>
 #include "standardcontactlist.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "clients/client.h"
 #include "clients/clientmanager.h"
 #include "log.h"

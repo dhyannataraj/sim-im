@@ -8,7 +8,7 @@
 #ifndef MOCKPROFILEMANAGER_H_
 #define MOCKPROFILEMANAGER_H_
 
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 
 namespace MockObjects
 {

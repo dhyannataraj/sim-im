@@ -5,7 +5,7 @@
 #include "events/eventhub.h"
 #include "imagestorage/imagestorage.h"
 #include "imagestorage/avatarstorage.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "commands/commandhub.h"
 #include "events/standardevent.h"
 #include "events/logevent.h"
