@@ -40,15 +40,13 @@ namespace
                 EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
 
                 auth.tlsHandshakeDone();
+                auth.streamOpened();
 
                 auto root = XmlElement::create("stream:features");
-                    auto starttls = XmlElement::create("starttls", root);
-                        auto required = XmlElement::create("required", starttls);
-                
                     auto mechanisms = XmlElement::create("mechanisms", root);
-                        auto mechanism_md5 = XmlElement::create("mechanism");
+                        auto mechanism_md5 = XmlElement::create("mechanism", mechanisms);
                         mechanism_md5->appendText("DIGEST-MD5");
-                        auto mechanism_plain = XmlElement::create("mechanism");
+                        auto mechanism_plain = XmlElement::create("mechanism", mechanisms);
                         mechanism_plain->appendText("PLAIN");
 
                 return root;
@@ -69,6 +67,7 @@ namespace
     {
         EXPECT_CALL(*sock, send(StartsWith("<stream:stream")));
         auth.connected();
+        auth.streamOpened();
 
         EXPECT_CALL(*sock, send(StartsWith("<starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'/>")));
 
