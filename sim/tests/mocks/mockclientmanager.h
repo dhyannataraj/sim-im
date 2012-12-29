@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 
 namespace MockObjects
 {

@@ -5,12 +5,12 @@
 #include <QDomElement>
 
 #include "contacts/contact.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "stubs/stubimcontact.h"
 #include "stubs/stubclient.h"
 #include "mocks/mockimcontact.h"
 #include "mocks/mockimstatus.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "messaging/genericmessage.h"
 
 namespace

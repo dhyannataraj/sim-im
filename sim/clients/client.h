@@ -4,7 +4,7 @@
 
 #include <QSharedPointer>
 #include "cfg.h"
-#include "imstatus.h"
+#include "contacts/imstatus.h"
 #include "contacts/imgroup.h"
 #include "log.h"
 #include "simapi.h"

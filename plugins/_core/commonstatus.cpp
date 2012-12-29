@@ -26,8 +26,8 @@
 #include "core.h"
 #include "events/eventhub.h"
 
-#include "contacts/client.h"
-#include "clientmanager.h"
+#include "clients/client.h"
+#include "clients/clientmanager.h"
 #include "commands/commandhub.h"
 #include "contacts/protocol.h"
 #include "events/commonstatusevent.h"

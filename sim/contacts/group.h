@@ -8,7 +8,6 @@
 
 #include "simapi.h"
 #include "userdata.h"
-#include "clientuserdata.h"
 #include "propertyhub.h"
 #include "misc.h"
 #include "contacts/imgroup.h"

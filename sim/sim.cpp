@@ -20,7 +20,7 @@
 #include "log.h"
 #include "misc.h"
 #include "profilemanager.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "simfs.h"
 #include "paths.h"
 #include "contacts/protocolmanager.h"

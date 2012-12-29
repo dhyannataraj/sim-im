@@ -3,7 +3,7 @@
 
 #include <QSharedPointer>
 #include "contacts/imcontact.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "jabberstatus.h"
 #include "jabber_api.h"
 

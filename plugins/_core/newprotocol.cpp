@@ -21,11 +21,11 @@
 #include "profilemanager.h"
 #include "newprotocol.h"
 #include "core.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "contacts/protocolmanager.h"
 #include "log.h"
 #include "imagestorage/imagestorage.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 
 #include <QPixmap>
 #include <QPushButton>

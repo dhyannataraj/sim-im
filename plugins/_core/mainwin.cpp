@@ -26,7 +26,7 @@
 #include "commands/commandhub.h"
 #include "commands/uicommandlist.h"
 #include "imagestorage/imagestorage.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "container/userwnd.h"
 #include "events/actioncollectionevent.h"
 #include "clientsdialog.h"

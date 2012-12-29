@@ -29,7 +29,7 @@
 #include <QByteArray>
 #include <QDateTime>
 
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "buffer.h"
 #include "log.h"
 #include "contacts/contact.h"

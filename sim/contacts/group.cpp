@@ -3,10 +3,10 @@
 
 #include "group.h"
 
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "contacts/contactlist.h"
 #include "contact.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 
 namespace SIM
 {

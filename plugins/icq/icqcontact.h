@@ -6,7 +6,7 @@
 
 #include "contacts/contact.h"
 #include "contacts/imcontact.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "icqstatus.h"
 #include "icq_defines.h"
 

@@ -12,8 +12,9 @@ SET(sim_LIB_SRCS
     	buffer.cpp
 		builtinlogger.cpp
 		cfg.cpp
-		clientmanager.cpp
-        standardclientmanager.cpp
+		clients/clientmanager.cpp
+        clients/standardclientmanager.cpp
+		clients/client.cpp
         commands/commandhub.cpp
         commands/uicommandlist.cpp
         commands/uicommandcontextprovider.cpp
@@ -65,7 +66,6 @@ SET(sim_LIB_SRCS
 		contacts/group.cpp
 		contacts/protocol.cpp
 		contacts/protocolmanager.cpp
-		contacts/client.cpp
 		contacts/imstatus.cpp
         contacts/imcontact.cpp
         contacts/imcontactid.cpp
@@ -93,8 +93,9 @@ SET(sim_LIB_HDRS
     	buffer.h
 		builtinlogger.h
 		cfg.h
-		clientmanager.h
-        standardclientmanager.h
+		clients/clientmanager.h
+        clients/standardclientmanager.h
+		clients/client.h
         commands/commandhub.h
         commands/uicommandlist.h
         commands/uicommandcontextprovider.h
@@ -148,7 +149,6 @@ SET(sim_LIB_HDRS
 		contacts/group.h
 		contacts/protocol.h
 		contacts/protocolmanager.h
-		contacts/client.h
 		contacts/imstatus.h
         contacts/imcontact.h
         contacts/imcontactid.h

@@ -2,7 +2,7 @@
 
 #include "contacts/contact.h"
 #include "contacts/contactlist.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "log.h"
 #include "xsl.h"
 

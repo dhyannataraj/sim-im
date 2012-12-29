@@ -5,7 +5,7 @@
 #include <QString>
 #include <QMap>
 #include "simapi.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "cfg.h"
 
 namespace SIM

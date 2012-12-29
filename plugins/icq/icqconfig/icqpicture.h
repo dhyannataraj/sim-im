@@ -19,7 +19,7 @@
 #define _ICQPICTURE_H
 
 
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "../icqcontact.h"
 
 #include "ui_icqpicturebase.h"

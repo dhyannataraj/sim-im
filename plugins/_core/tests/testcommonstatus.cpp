@@ -4,9 +4,9 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "tests/stubs/stubclient.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "contacts/protocol.h"
 #include "tests/mocks/mockclientmanager.h"
 #include "commonstatus.h"

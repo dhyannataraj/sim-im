@@ -5,7 +5,6 @@
 #include <QSharedPointer>
 #include "userdata.h"
 #include "propertyhub.h"
-#include "clientuserdata.h"
 #include "misc.h"
 #include "imcontact.h"
 

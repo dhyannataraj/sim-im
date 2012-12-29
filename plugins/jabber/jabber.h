@@ -18,7 +18,7 @@
 #ifndef _JABBER_H
 #define _JABBER_H
 
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "contacts/imstatus.h"
 #include "contacts/protocol.h"
 #include "jabberstatus.h"

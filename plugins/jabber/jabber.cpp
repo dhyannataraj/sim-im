@@ -19,7 +19,7 @@
 #include "jabber.h"
 #include "misc.h"
 #include "contacts/protocolmanager.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "ui/jabberloginwidget.h"
 
 #include <QByteArray>

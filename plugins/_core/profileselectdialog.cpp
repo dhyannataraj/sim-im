@@ -15,9 +15,9 @@ email                : vovan@shutoff.ru
 *                                                                         *
 ***************************************************************************/
 
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "contacts/protocolmanager.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "core.h"
 #include "imagestorage/imagestorage.h"
 #include "log.h"

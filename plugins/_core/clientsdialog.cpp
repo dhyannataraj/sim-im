@@ -1,7 +1,7 @@
 #include "clientsdialog.h"
 
-#include "clientmanager.h"
-#include "contacts/client.h"
+#include "clients/clientmanager.h"
+#include "clients/client.h"
 #include "imagestorage/imagestorage.h"
 #include "contacts/protocol.h"
 #include "newprotocol.h"

@@ -2,8 +2,8 @@
 #include <QStringList>
 #include "standardcontactlist.h"
 #include "profilemanager.h"
-#include "contacts/client.h"
-#include "clientmanager.h"
+#include "clients/client.h"
+#include "clients/clientmanager.h"
 #include "log.h"
 #include "events/eventhub.h"
 #include "events/standardevent.h"

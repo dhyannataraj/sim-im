@@ -22,7 +22,7 @@
 #include <QWizard>
 #include "plugins.h"
 #include "contacts/protocol.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 
 #include "ui_newprotocolbase.h"
 

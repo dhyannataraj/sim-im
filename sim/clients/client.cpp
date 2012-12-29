@@ -2,7 +2,7 @@
 #include <vector>
 #include <list>
 #include "client.h"
-#include "group.h"
+#include "contacts/group.h"
 #include "misc.h"
 #include "log.h"
 #include "contacts/contact.h"

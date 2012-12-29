@@ -23,7 +23,7 @@
 #include "profilemanager.h"
 #include "contacts/contact.h"
 #include "contacts/imcontact.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "imagestorage/imagestorage.h"
 #include "messaging/genericmessage.h"
 #include "profilemanager.h"

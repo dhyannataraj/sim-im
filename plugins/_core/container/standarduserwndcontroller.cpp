@@ -2,9 +2,9 @@
 #include "userwnd.h"
 #include "icontainer.h"
 #include "log.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "simgui/messageeditor.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "contacts/contact.h"
 #include "contacts/contactlist.h"
 

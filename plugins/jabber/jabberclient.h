@@ -29,7 +29,7 @@
 #include "log.h"
 #include "jabbercontact.h"
 #include "jabbergroup.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "jabber_api.h"
 
 #include "network/jabbersocket.h"

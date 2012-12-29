@@ -1,6 +1,6 @@
+
 #include "sqlitehistorystorage.h"
 #include "profilemanager.h"
-//#include "sqlite3.h"
 #include "log.h"
 #include "contacts/imcontact.h"
 #include <QDir>
@@ -8,7 +8,7 @@
 #include <QSqlError>
 #include "messaging/message.h"
 #include "messaging/genericmessage.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 
 
 SQLiteHistoryStorage::SQLiteHistoryStorage() : m_db(QSqlDatabase::addDatabase("QSQLITE"))

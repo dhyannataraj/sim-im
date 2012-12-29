@@ -3,8 +3,8 @@
 #include <gmock/gmock.h>
 #include "stubs/stubclient.h"
 
-#include "contacts/client.h"
-#include "clientmanager.h"
+#include "clients/client.h"
+#include "clients/clientmanager.h"
 #include "contacts/contactlist.h"
 #include "events/eventhub.h"
 

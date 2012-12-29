@@ -18,7 +18,7 @@
 #include "icq.h"
 #include "core.h"
 #include "log.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "imagestorage/imagestorage.h"
 #include "contacts/protocolmanager.h"
 #include "icqclient.h"

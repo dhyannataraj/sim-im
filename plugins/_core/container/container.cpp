@@ -26,7 +26,7 @@
 #include "imagestorage/imagestorage.h"
 #include "imagestorage/avatarstorage.h"
 #include "contacts/contact.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "contacts/contactlist.h"
 
 #include <QSplitter>

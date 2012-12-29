@@ -33,7 +33,7 @@
 #include "jabberclient.h"
 #include "jabber.h"
 #include "jabberstatuswidget.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 
 #include "network/standardjabbersocket.h"
 

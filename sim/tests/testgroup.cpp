@@ -7,7 +7,7 @@
 #include "contacts/group.h"
 #include "stubs/stubimgroup.h"
 #include "stubs/stubclient.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 
 namespace
 {

@@ -18,7 +18,7 @@
 #ifndef _STATUS_H
 #define _STATUS_H
 
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "core.h"
 
 #include <QObject>

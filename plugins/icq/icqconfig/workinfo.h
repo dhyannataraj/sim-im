@@ -19,7 +19,7 @@
 #define _WORKINFO_H
 
 #include "ui_workinfobase.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "../icqcontact.h"
 
 class ICQClient;
