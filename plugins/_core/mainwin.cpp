@@ -191,7 +191,7 @@ void MainWindow::refreshStatusWidgets()
 {
     qDeleteAll(m_statusWidgets);
     m_statusWidgets.clear();
-    QList<ClientPtr> clients = getClientManager()->allClients();
+    QList<ClientPtr> clients = m_services->clientManager()->allClients();
     foreach(const ClientPtr& client, clients)
     {
         QWidget* statusWidget = client->createStatusWidget();
@@ -337,7 +337,7 @@ void MainWindow::mainMenuRequested()
 
 void MainWindow::showClientsDialog()
 {
-    ClientsDialog dlg(m_services->protocolManager(), this);
+    ClientsDialog dlg(m_services, this);
     dlg.exec();
     refreshStatusWidgets();
 }

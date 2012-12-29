@@ -6,6 +6,7 @@
 #include "events/eventhub.h"
 
 #include "test.h"
+#include "tests/simlib-testing.h"
 
 namespace
 {

@@ -151,17 +151,14 @@ int main(int argc, char *argv[])
     SIM::createImageStorage();
     SIM::createAvatarStorage();
     SIM::createCommandHub();
-    SIM::createContactList();
+    SIM::createContactList(app.services()->clientManager());
     SIM::createPluginManager(argc, argv);
-    SIM::createClientManager(app.services()->protocolManager());
 
     if(!app.initializePlugins())
         return -1;
 
     res = app.exec();
 
-    SIM::getClientManager()->sync();
-    SIM::destroyClientManager();
     SIM::destroyPluginManager();
     
     SIM::destroyContactList();

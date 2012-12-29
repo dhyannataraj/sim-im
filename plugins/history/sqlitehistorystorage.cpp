@@ -11,7 +11,8 @@
 #include "clients/clientmanager.h"
 
 
-SQLiteHistoryStorage::SQLiteHistoryStorage() : m_db(QSqlDatabase::addDatabase("QSQLITE"))
+SQLiteHistoryStorage::SQLiteHistoryStorage(const SIM::ClientManager::Ptr& clientManager) : m_db(QSqlDatabase::addDatabase("QSQLITE")),
+    m_clientManager(clientManager)
 {
     init();
 }
@@ -65,8 +66,8 @@ QList<SIM::MessagePtr> SQLiteHistoryStorage::getMessages(const QString& sourceCo
 		QString messageText = query.value(3).toString();
 		QDateTime timestamp = QDateTime::fromTime_t(query.value(4).toUInt());
 
-		SIM::IMContactPtr source = SIM::getClientManager()->client(clientId)->getIMContact(sourceId);
-		SIM::IMContactPtr target = SIM::getClientManager()->client(clientId)->getIMContact(targetId);
+		SIM::IMContactPtr source = m_clientManager->client(clientId)->getIMContact(sourceId);
+		SIM::IMContactPtr target = m_clientManager->client(clientId)->getIMContact(targetId);
 
 		auto message = new SIM::GenericMessage(source, target, messageText);
 		message->setTimestamp(timestamp);

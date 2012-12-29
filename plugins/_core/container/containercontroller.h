@@ -7,12 +7,13 @@
 #include "core_api.h"
 #include "icontainer.h"
 #include "icontainercontroller.h"
+#include "services.h"
 
 class CORE_EXPORT ContainerController : public QObject, public IContainerController
 {
     Q_OBJECT
 public:
-    explicit ContainerController(int id);
+    explicit ContainerController(const SIM::Services::Ptr& services, int id);
     virtual ~ContainerController();
 
     virtual int id() const;
@@ -37,6 +38,7 @@ private:
     QList<UserWndControllerPtr> m_controllers;
     IContainerPtr m_view;
     int m_id;
+    SIM::Services::Ptr m_services;
 };
 
 #endif // CONTAINERCONTROLLER_H

@@ -9,7 +9,7 @@ class ClientsDialog : public QDialog
 {
     Q_OBJECT
 public:
-    ClientsDialog(const SIM::ProtocolManager::Ptr& protocolManager, QWidget *parent = 0);
+    ClientsDialog(const SIM::Services::Ptr& services, QWidget *parent = 0);
     ~ClientsDialog();
 
 public slots:
@@ -21,7 +21,7 @@ public slots:
 private:
     void fillClientsList();
     Ui::ClientsDialog ui;
-    SIM::ProtocolManager::Ptr m_protocolManager;
+    SIM::Services::Ptr m_services;
 };
 
 #endif // CLIENTSDIALOG_H

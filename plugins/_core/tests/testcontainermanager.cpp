@@ -14,6 +14,7 @@
 #include "mocks/mockcontainercontroller.h"
 #include "mocks/mockuserwndcontroller.h"
 #include "mocks/mockuserwnd.h"
+#include "tests/simlib-testing.h"
 
 namespace
 {
@@ -27,7 +28,7 @@ namespace
     class SutContainerManager : public ContainerManager
     {
     public:
-        SutContainerManager() : ContainerManager(0), containerControllersCreated(0) {}
+        SutContainerManager(const SIM::Services::Ptr& services) : ContainerManager(services, 0), containerControllersCreated(0) {}
     protected:
         virtual ContainerControllerPtr makeContainerController()
         {
@@ -52,9 +53,11 @@ namespace
     class TestControllerManager : public ::testing::Test
     {
     public:
+        SIM::Services::Ptr services;
         virtual void SetUp()
         {
-            manager = new SutContainerManager();
+            services = SIM::makeMockServices();
+            manager = new SutContainerManager(services);
             mockUserwndController = MockObjects::NiceMockUserWndControllerPtr(new NiceMock<MockObjects::MockUserWndController>());
         }
 

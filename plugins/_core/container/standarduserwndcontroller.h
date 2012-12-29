@@ -4,6 +4,7 @@
 #include <QObject>
 #include "userwndcontroller.h"
 #include "contacts/imcontact.h"
+#include "services.h"
 
 class IUserWnd;
 class IContainer;
@@ -11,7 +12,7 @@ class StandardUserWndController : public QObject, public UserWndController
 {
     Q_OBJECT
 public:
-    StandardUserWndController(int contactId);
+    StandardUserWndController(const SIM::Services::Ptr& services, int contactId);
     virtual ~StandardUserWndController();
 
     virtual int id() const;
@@ -45,6 +46,7 @@ private:
     IUserWnd* m_userWnd;
     IContainer* m_container;
     int m_id;
+    SIM::Services::Ptr m_services;
 };
 
 #endif // STANDARDUSERWNDCONTROLLER_H

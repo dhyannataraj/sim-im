@@ -11,6 +11,7 @@
 #include "mocks/mockoscarsocket.h"
 #include "signalspy.h"
 #include "qt-gtest.h"
+#include "tests/simlib-testing.h"
 
 namespace
 {
@@ -35,10 +36,12 @@ namespace
     class TestSsiSnacHandler : public ::testing::Test
     {
     protected:
+        SIM::Services::Ptr services;
         virtual void SetUp()
         {
+            services = SIM::makeMockServices();
             //SIM::createEventHub();
-            SIM::createContactList();
+            SIM::createContactList(services->clientManager());
 
             socket = new NiceMock<MockObjects::MockOscarSocket>();
             client = new ICQClient(0, "ICQ.123456", false);

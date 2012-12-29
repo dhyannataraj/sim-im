@@ -11,7 +11,8 @@
 
 namespace SIM {
 
-StandardContactList::StandardContactList()
+StandardContactList::StandardContactList(const ClientManager::Ptr& clientManager) : 
+    m_clientManager(clientManager)
 {
     getEventHub()->registerEvent(SIM::StandardEvent::create("contacts_loaded"));
     getEventHub()->registerEvent(SIM::StandardEvent::create("contact_list_updated"));
@@ -246,7 +247,7 @@ bool StandardContactList::load_groups()
     foreach(QString groupID , groupList)
     {
         GroupPtr gr = createGroup(groupID.toInt());
-        if (!gr->loadState(groupsHub->propertyHub(groupID)))
+        if (!gr->loadState(m_clientManager, groupsHub->propertyHub(groupID)))
             return false;
         addGroup(gr);
     }
@@ -264,7 +265,7 @@ bool StandardContactList::load_contacts()
     foreach(QString contactID , contactsList)
     {
         ContactPtr c = createContact(contactID.toInt());
-        if (!c->loadState(contactsHub->propertyHub(contactID)))
+        if (!c->loadState(m_clientManager, contactsHub->propertyHub(contactID)))
             return false;
         addContact(c);
     }
@@ -333,7 +334,7 @@ bool StandardContactList::load_old_dispatch(ParserState& state)
         {
             if(state.dataname.indexOf('.') >= 0)
             {
-                ClientPtr client = getClientManager()->client(state.dataname);
+                ClientPtr client = m_clientManager->client(state.dataname);
                 if(!client)
                     return false;
                 IMContactPtr imcontact = client->createIMContact();
@@ -367,7 +368,7 @@ bool StandardContactList::load_old_dispatch(ParserState& state)
         {
             if(state.dataname.indexOf('.') >= 0)
             {
-                ClientPtr client = getClientManager()->client(state.dataname);
+                ClientPtr client = m_clientManager->client(state.dataname);
                 if(!client)
                     return false;
                 IMGroupPtr imgroup = client->createIMGroup();

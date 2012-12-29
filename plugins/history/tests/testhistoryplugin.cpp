@@ -17,6 +17,8 @@
 #include "events/eventhub.h"
 
 #include "historyplugin.h"
+#include "services.h"
+#include "tests/simlib-testing.h"
 
 namespace 
 {
@@ -25,8 +27,10 @@ namespace
     class TestHistoryPlugin : public ::testing::Test
     {
     public:
+        SIM::Services::Ptr services;
         virtual void SetUp()
         {
+            services = SIM::makeMockServices();
             SIM::createMessagePipe();
             SIM::createOutMessagePipe();
         }
@@ -58,33 +62,33 @@ namespace
     {
         createMockPipes();
         EXPECT_CALL(*inPipe, addMessageProcessor(_));
-        HistoryPlugin history;
+        HistoryPlugin history(services);
     }
 
     TEST_F(TestHistoryPlugin, constructor_installs_itself_to_message_out_pipe)
     {
         createMockPipes();
         EXPECT_CALL(*outPipe, addMessageProcessor(_));
-        HistoryPlugin history;
+        HistoryPlugin history(services);
     }
 
     TEST_F(TestHistoryPlugin, destructor_removes_itself_from_message_in_pipe)
     {
         createMockPipes();
         EXPECT_CALL(*inPipe, removeMessageProcessor(QString("history")));
-        HistoryPlugin history;
+        HistoryPlugin history(services);
     }
 
     TEST_F(TestHistoryPlugin, destructor_removes_itself_from_message_out_pipe)
     {
         createMockPipes();
         EXPECT_CALL(*outPipe, removeMessageProcessor(QString("history")));
-        HistoryPlugin history;
+        HistoryPlugin history(services);
     }
 
     TEST_F(TestHistoryPlugin, stores_incoming_messages)
     {
-        HistoryPlugin history;
+        HistoryPlugin history(services);
         MockObjects::MockHistoryStoragePtr storage = MockObjects::MockHistoryStoragePtr(new MockObjects::MockHistoryStorage());
         EXPECT_CALL(*storage.data(), addMessage(_));
         history.setHistoryStorage(storage);
@@ -94,7 +98,7 @@ namespace
 
     TEST_F(TestHistoryPlugin, stores_outcoming_messages)
     {
-        HistoryPlugin history;
+        HistoryPlugin history(services);
         MockObjects::MockHistoryStoragePtr storage = MockObjects::MockHistoryStoragePtr(new MockObjects::MockHistoryStorage());
         EXPECT_CALL(*storage.data(), addMessage(_));
         history.setHistoryStorage(storage);
@@ -104,7 +108,7 @@ namespace
 
     TEST_F(TestHistoryPlugin, menuItemCollectionEvent_addsAction)
     {
-    	HistoryPlugin history;
+    	HistoryPlugin history(services);
     	auto data = SIM::ActionCollectionEventData::create("contact_menu", "12");
     	SIM::getEventHub()->triggerEvent("contact_menu", data);
 

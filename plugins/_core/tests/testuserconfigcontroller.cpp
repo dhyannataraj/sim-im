@@ -20,6 +20,7 @@
 #include "core.h"
 #include "test.h"
 #include "services.h"
+#include "tests/simlib-testing.h"
 
 #include <QLabel>
 

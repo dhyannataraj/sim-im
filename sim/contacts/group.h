@@ -11,6 +11,7 @@
 #include "propertyhub.h"
 #include "misc.h"
 #include "contacts/imgroup.h"
+#include "clients/clientmanager.h"
 
 namespace SIM
 {
@@ -40,10 +41,10 @@ namespace SIM
         void setFlag(Flag fl, bool value);
 
         bool serialize(QDomElement& el);
-        bool deserialize(QDomElement& el);
+        bool deserialize(const ClientManager::Ptr& clientManager, QDomElement& el);
         bool deserialize(const QString& data);
 
-        bool loadState(PropertyHubPtr state);
+        bool loadState(const ClientManager::Ptr& clientManager, PropertyHubPtr state);
         PropertyHubPtr saveState();
     private:
         bool serializeMainInfo(QDomElement& element);

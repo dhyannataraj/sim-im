@@ -6,6 +6,7 @@
 
 #include "contacts/contact.h"
 #include "clients/client.h"
+#include "clients/standardclientmanager.h"
 #include "stubs/stubimcontact.h"
 #include "stubs/stubclient.h"
 #include "mocks/mockimcontact.h"
@@ -13,6 +14,7 @@
 #include "clients/clientmanager.h"
 #include "messaging/genericmessage.h"
 #include "services.h"
+#include "simlib-testing.h"
 
 namespace
 {
@@ -25,6 +27,7 @@ namespace
     class TestContact : public ::testing::Test
     {
     protected:
+        ClientManager::Ptr clientManager;
 
         ClientPtr createStubClient(const QString& id)
         {
@@ -55,7 +58,7 @@ namespace
         virtual void SetUp()
         {
             services = makeMockServices();
-            SIM::createClientManager(services->protocolManager());
+            clientManager = ClientManager::Ptr(new StandardClientManager(services->protocolManager()));
         }
     };
 
@@ -112,9 +115,8 @@ namespace
 
         contact.serialize(el);
         Contact deserializedContact(1);
-        deserializedContact.deserialize(el);
+        deserializedContact.deserialize(clientManager, el);
 
-        SIM::destroyClientManager();
         EXPECT_TRUE(deserializedContact.name() == "Foo");
         EXPECT_TRUE(deserializedContact.notes() == "Bar");
         EXPECT_TRUE(deserializedContact.groupId() == 42);
@@ -146,7 +148,7 @@ namespace
         PropertyHubPtr testHub;
         Contact contact(1);
 
-        EXPECT_FALSE(contact.loadState(testHub));
+        EXPECT_FALSE(contact.loadState(clientManager, testHub));
     }
 
     TEST_F(TestContact, loadState_IncorrectPropertyHub_NoUserData)
@@ -155,7 +157,7 @@ namespace
         testHub->addPropertyHub(PropertyHub::create("clients"));
         Contact contact(1);
 
-        EXPECT_FALSE(contact.loadState(testHub));
+        EXPECT_FALSE(contact.loadState(clientManager, testHub));
     }
 
     TEST_F(TestContact, loadState_IncorrectPropertyHub_NoClients)
@@ -164,7 +166,7 @@ namespace
         testHub->addPropertyHub(PropertyHub::create("userdata"));
         Contact contact(1);
 
-        EXPECT_FALSE(contact.loadState(testHub));
+        EXPECT_FALSE(contact.loadState(clientManager, testHub));
     }
 }
 

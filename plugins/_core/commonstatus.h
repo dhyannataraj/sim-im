@@ -30,7 +30,7 @@ class CORE_EXPORT CommonStatus : public QObject
 {
     Q_OBJECT
 public:
-    CommonStatus(SIM::ClientManager* manager);
+    CommonStatus(const SIM::ClientManager::Ptr& manager);
     virtual ~CommonStatus();
 
     void rebuildStatusList();
@@ -64,7 +64,7 @@ private slots:
 
 private:
     QList<CommonStatusDescription> m_statuses;
-    SIM::ClientManager* m_clientManager;
+    SIM::ClientManager::Ptr m_clientManager;
     QString m_currentStatusId;
 };
 

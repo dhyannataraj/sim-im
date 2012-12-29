@@ -5,6 +5,7 @@
 #include <memory>
 #include <QSharedPointer>
 #include "contacts/protocolmanager.h"
+#include "clients/clientmanager.h"
 #include "misc.h"
 
 namespace SIM {
@@ -20,12 +21,13 @@ namespace SIM {
         void setProtocolManager(const ProtocolManager::Ptr& pm);
         ProtocolManager::Ptr protocolManager() const;
 
+        void setClientManager(const ClientManager::Ptr& cm);
+        ClientManager::Ptr clientManager() const;
+
     private:
         struct Impl;
         std::unique_ptr<Impl> m_impl;        
     };
-
-    Services::Ptr EXPORT makeMockServices();
 }
 
 #endif

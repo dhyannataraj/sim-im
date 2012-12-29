@@ -15,6 +15,8 @@
 #include "messaging/messageoutpipe.h"
 #include "core.h"
 #include "events/actioncollectionevent.h"
+#include "services.h"
+#include "tests/simlib-testing.h"
 
 void registerEvents()
 {
@@ -37,12 +39,10 @@ int main(int argc, char** argv)
     SIM::createProfileManager("");
     SIM::createAvatarStorage();
     SIM::createCommandHub();
-    SIM::createContactList();
     int ret = RUN_ALL_TESTS();
 #ifdef WIN32
     getchar();
 #endif
-    SIM::destroyContactList();
     SIM::destroyCommandHub();
     SIM::destroyAvatarStorage();
     SIM::destroyProfileManager();

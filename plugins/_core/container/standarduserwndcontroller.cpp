@@ -11,7 +11,8 @@
 using SIM::log;
 using SIM::L_DEBUG;
 
-StandardUserWndController::StandardUserWndController(int contactId) : m_id(contactId)
+StandardUserWndController::StandardUserWndController(const SIM::Services::Ptr& services, int contactId) : m_id(contactId),
+    m_services(services)
 {
     m_userWnd = createUserWnd(contactId);
 }
@@ -69,7 +70,7 @@ int StandardUserWndController::messagesCount() const
 void StandardUserWndController::setMessageType(const QString& type)
 {
     QString selectedClientId = m_userWnd->selectedClientId();
-    SIM::ClientPtr client = SIM::getClientManager()->client(selectedClientId);
+    SIM::ClientPtr client = m_services->clientManager()->client(selectedClientId);
     if(!client)
     {
         // We just remove message editor if it is there in that case
@@ -104,7 +105,7 @@ SIM::IMContactPtr StandardUserWndController::targetContact() const
 SIM::IMContactPtr StandardUserWndController::sourceContact() const
 {
     QString selectedClientId = m_userWnd->selectedClientId();
-    SIM::ClientPtr client = SIM::getClientManager()->client(selectedClientId);
+    SIM::ClientPtr client = m_services->clientManager()->client(selectedClientId);
     if(!client)
         return SIM::IMContactPtr();
 

@@ -41,8 +41,9 @@ email                : vovan@shutoff.ru
 
 using namespace SIM;
 
-ProfileSelectDialog::ProfileSelectDialog() 
+ProfileSelectDialog::ProfileSelectDialog(const SIM::ClientManager::Ptr& clientManager) 
 	: QDialog(NULL)
+    , m_clientManager(clientManager)
 	, m_ui ( new Ui::ProfileSelectDialog )
 {
     m_ui->setupUi(this);
@@ -155,8 +156,8 @@ void ProfileSelectDialog::profileChanged(int index)
         clearInputs();
         m_profile = m_ui->cmbProfile->currentText();
         getProfileManager()->selectProfile(m_ui->cmbProfile->currentText());
-        getClientManager()->load();
-        QStringList clients = getClientManager()->clientList();
+        m_clientManager->load();
+        QStringList clients = m_clientManager->clientList();
 
         for (int i=0;i<clients.count();++i)
             log(L_DEBUG, "printing client %s", qPrintable(clients.at(i)));
@@ -166,7 +167,7 @@ void ProfileSelectDialog::profileChanged(int index)
         foreach(const QString& clientName, clients)
         {
             log(L_DEBUG, "building profileselect dialog for client: %s", qPrintable(clientName));
-            ClientPtr client = getClientManager()->client(clientName);
+            ClientPtr client = m_clientManager->client(clientName);
             if (client->protocol()->flag(Protocol::flNoAuth))
                 continue;
             makeInputs(client);

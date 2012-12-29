@@ -1,5 +1,6 @@
 
 #include "services.h"
+#include "tests/mocks/mockclientmanager.h"
 
 namespace SIM {
 
@@ -9,6 +10,7 @@ namespace SIM {
         Impl() {}
 
         ProtocolManager::Ptr protocolManager;
+        ClientManager::Ptr clientManager;
     };
 
     Services::Services() : m_impl(new Services::Impl())
@@ -29,11 +31,14 @@ namespace SIM {
         return m_impl->protocolManager;
     }
 
-    Services::Ptr EXPORT makeMockServices()
+    void Services::setClientManager(const ClientManager::Ptr& cm)
     {
-        auto s = Services::Ptr(new Services());
-        s->setProtocolManager(ProtocolManager::Ptr(new ProtocolManager()));
-        return s;
+        m_impl->clientManager = cm;
+    }
+
+    ClientManager::Ptr Services::clientManager() const
+    {
+        return m_impl->clientManager;
     }
 
 }

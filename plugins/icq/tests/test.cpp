@@ -14,6 +14,7 @@
 #include "messaging/messageoutpipe.h"
 #include "core.h"
 #include "services.h"
+#include "tests/simlib-testing.h"
 
 void registerEvents()
 {

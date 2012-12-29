@@ -15,6 +15,7 @@
 #include "contacts/contactlist.h"
 #include "contacts/contact.h"
 #include "log.h"
+#include "tests/simlib-testing.h"
 
 namespace
 {
@@ -31,6 +32,7 @@ namespace
     class TestBuddySnacHandler : public ::testing::Test
     {
     public:
+        SIM::Services::Ptr services;
         static void SetUpTestCase()
         {
             ContactAvatarHash = QByteArray(0x11, 16);
@@ -38,7 +40,8 @@ namespace
 
         virtual void SetUp()
         {
-            SIM::createContactList();
+            services = SIM::makeMockServices();
+            SIM::createContactList(services->clientManager());
             socket = new NiceMock<MockObjects::MockOscarSocket>();
             ON_CALL(*socket, isConnected()).WillByDefault(Return(true));
             client = new ICQClient(0, "ICQ.123456", false);

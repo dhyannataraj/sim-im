@@ -12,8 +12,9 @@ using SIM::log;
 using SIM::L_DEBUG;
 using SIM::L_ERROR;
 
-ContainerManager::ContainerManager(CorePlugin* parent) :
+ContainerManager::ContainerManager(const SIM::Services::Ptr& services, CorePlugin* parent) :
     m_containerControllerId(0),
+    m_services(services),
     m_core(parent)
 {
     m_sendProcessor = new SendMessageProcessor(this);
@@ -31,7 +32,7 @@ ContainerManager::~ContainerManager()
 
 ContainerControllerPtr ContainerManager::makeContainerController()
 {
-    ContainerController* controller = new ContainerController(m_containerControllerId++);
+    ContainerController* controller = new ContainerController(m_services, m_containerControllerId++);
     connect(controller, SIGNAL(closed(int)), this, SLOT(containerClosed(int)));
     return ContainerControllerPtr(controller);
 }

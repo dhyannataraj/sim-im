@@ -5,6 +5,7 @@
 #include "misc.h"
 #include "messaging/message.h"
 #include "plugins.h"
+#include "clients/standardclientmanager.h"
 
 using namespace SIM;
 
@@ -32,7 +33,9 @@ bool SimApp::initializePlugins()
 
 void SimApp::initializeServices()
 {
-    m_services->setProtocolManager(ProtocolManager::Ptr(new ProtocolManager()));
+    auto protocolManager = ProtocolManager::Ptr(new ProtocolManager());
+    m_services->setProtocolManager(protocolManager);
+    m_services->setClientManager(ClientManager::Ptr(new StandardClientManager(protocolManager)));
 }
 
 void SimApp::commitData(QSessionManager&)

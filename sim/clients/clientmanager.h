@@ -3,6 +3,7 @@
 #define SIM_CLIENTMANAGER_H
 
 #include <QString>
+#include <QSharedPointer>
 #include <QMap>
 #include "simapi.h"
 #include "clients/client.h"
@@ -14,6 +15,8 @@ namespace SIM
     class EXPORT ClientManager
     {
     public:
+        typedef QSharedPointer<ClientManager> Ptr;
+
         virtual ~ClientManager() {}
 
         virtual void addClient(ClientPtr client) = 0;
@@ -28,11 +31,6 @@ namespace SIM
 
         virtual ConfigPtr config() = 0;
     };
-
-    EXPORT ClientManager* getClientManager();
-    void EXPORT setClientManager(ClientManager* manager);
-    void EXPORT createClientManager(const ProtocolManager::Ptr& protocolManager);
-    void EXPORT destroyClientManager();
 }
 
 #endif

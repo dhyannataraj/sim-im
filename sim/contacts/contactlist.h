@@ -7,6 +7,7 @@
 #include "simapi.h"
 #include "contact.h"
 #include "group.h"
+#include "clients/clientmanager.h"
 
 namespace SIM {
 
@@ -42,7 +43,7 @@ public:
     virtual ConfigPtr config() = 0;
 };
 
-EXPORT void createContactList();
+EXPORT void createContactList(const ClientManager::Ptr& cm);
 EXPORT void destroyContactList();
 EXPORT void setContactList(ContactList* cl);
 EXPORT ContactList *getContactList();

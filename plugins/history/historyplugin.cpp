@@ -16,8 +16,8 @@
 
 SIM::Plugin* createHistoryPlugin(const SIM::Services::Ptr& services)
 {
-    HistoryPlugin* plugin = new HistoryPlugin();
-    plugin->setHistoryStorage(HistoryStoragePtr(new SQLiteHistoryStorage()));
+    HistoryPlugin* plugin = new HistoryPlugin(services);
+    plugin->setHistoryStorage(HistoryStoragePtr(new SQLiteHistoryStorage(services->clientManager())));
     return plugin;
 }
 
@@ -35,7 +35,8 @@ EXPORT_PROC SIM::PluginInfo* GetPluginInfo()
     return &info;
 }
 
-HistoryPlugin::HistoryPlugin() : SIM::Plugin()
+HistoryPlugin::HistoryPlugin(const SIM::Services::Ptr& services) : SIM::Plugin(),
+    m_services(services)
 {
     SIM::getMessagePipe()->addMessageProcessor(this);
     SIM::getOutMessagePipe()->addMessageProcessor(this);

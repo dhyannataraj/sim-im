@@ -14,6 +14,7 @@
 #include "tests/mocks/mockcontactlist.h"
 #include "tests/mocks/mockimcontact.h"
 #include "tests/mocks/mockimstatus.h"
+#include "tests/mocks/mockclientmanager.h"
 
 namespace
 {
@@ -29,7 +30,8 @@ namespace
     protected:
         virtual void SetUp()
         {
-            SIM::createContactList();
+            auto clientmanager = MockObjects::MockClientManager::Ptr(new NiceMock<MockObjects::MockClientManager>());
+            SIM::createContactList(clientmanager);
             contactList = SIM::getContactList();
         }
 

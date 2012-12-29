@@ -46,8 +46,6 @@ SET(history_test_sources
 ADD_EXECUTABLE(test_history ${history_test_sources} ${testmocs})
 TARGET_LINK_LIBRARIES(test_history simlib ${QT_LIBRARIES} history _core)
 
-IF(NOT DISABLE_AUTOTEST)
-	ADD_CUSTOM_COMMAND(TARGET test_history POST_BUILD COMMAND test_history)
-ENDIF(NOT DISABLE_AUTOTEST)
+ADD_CUSTOM_COMMAND(TARGET test_history POST_BUILD COMMAND test_history)
 
 ADD_TEST(testHistory test_history)

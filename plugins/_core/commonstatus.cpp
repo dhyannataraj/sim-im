@@ -34,7 +34,7 @@
 
 using namespace SIM;
 
-CommonStatus::CommonStatus(SIM::ClientManager* manager) : QObject(), m_clientManager(manager)
+CommonStatus::CommonStatus(const SIM::ClientManager::Ptr& manager) : QObject(), m_clientManager(manager)
 {
     rebuildStatusList();
 

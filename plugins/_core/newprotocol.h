@@ -33,7 +33,7 @@ class NewProtocol : public QDialog
 {
     Q_OBJECT
 public:
-    NewProtocol(const SIM::ProtocolManager::Ptr& protocolManager, const QString& profileName, QWidget *parent);
+    NewProtocol(const SIM::Services::Ptr& services, const QString& profileName, QWidget *parent);
     ~NewProtocol();
 
 protected slots:
@@ -52,7 +52,7 @@ private:
 	QList<SIM::PluginPtr> m_protocolPlugins;
 	QString m_profileName;
 	Ui::NewProtocol* m_ui;
-    SIM::ProtocolManager::Ptr m_protocolManager;
+    SIM::Services::Ptr m_services;
 };
 
 #endif

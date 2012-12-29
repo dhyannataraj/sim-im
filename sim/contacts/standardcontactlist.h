@@ -2,13 +2,14 @@
 #define STANDARDCONTACTLIST_H
 
 #include "contactlist.h"
+#include "clients/clientmanager.h"
 
 namespace SIM {
 
 class StandardContactList : public ContactList
 {
 public:
-    StandardContactList();
+    StandardContactList(const ClientManager::Ptr& clientManager);
 
     virtual void clear();
     virtual bool load();
@@ -63,6 +64,7 @@ protected:
     bool load_old_dispatch(ParserState& state);
     void resetState(ParserState& state);
     bool deserializeLines(const UserDataPtr& ud, const QString& dataname, const QString& data);
+
 private:
     UserDataPtr m_userData;
     ContactPtr m_owner;
@@ -70,6 +72,7 @@ private:
     QMap<int, GroupPtr> m_groups;
     ConfigPtr m_config;
     QString m_loadedProfile;
+    ClientManager::Ptr m_clientManager;
 };
 
 } // namespace SIM

@@ -204,8 +204,8 @@ CorePlugin::CorePlugin(const SIM::Services::Ptr& services) : QObject()
 {
     g_plugin = this;
 //	setValue("StatusTime", QDateTime::currentDateTime().toTime_t());
-    m_containerManager = new ContainerManager(this);
-    m_commonStatus = new CommonStatus(getClientManager());
+    m_containerManager = new ContainerManager(m_services, this);
+    m_commonStatus = new CommonStatus(m_services->clientManager());
 
     registerEvents();
     subscribeToEvents();
@@ -3099,7 +3099,7 @@ void CorePlugin::eventInit()
 
 void CorePlugin::createNewProfile(const QString& name)
 {
-	NewProtocol dlg(m_services->protocolManager(), name, NULL);
+	NewProtocol dlg(m_services, name, NULL);
 	dlg.exec();
 }
 
@@ -3126,7 +3126,7 @@ bool CorePlugin::init()
     if(!noshow)
     {
     	log(L_DEBUG, "!noshow");
-        ProfileSelectDialog dlg;
+        ProfileSelectDialog dlg(m_services->clientManager());
         dlg.setModal(true);
         if(dlg.exec() != QDialog::Accepted)
             return false;
@@ -3141,7 +3141,7 @@ bool CorePlugin::init()
     else
     {
         getProfileManager()->selectProfile(profile);
-        getClientManager()->load();
+        m_services->clientManager()->load();
     }
 
     log(L_DEBUG, "Profile selected: %s", qPrintable(profile));
@@ -3152,10 +3152,10 @@ bool CorePlugin::init()
 
     getEventHub()->triggerEvent("load_config");
 
-    QStringList clients = getClientManager()->clientList();
+    QStringList clients = m_services->clientManager()->clientList();
     foreach(const QString& clname, clients)
     {
-        ClientPtr client = getClientManager()->client(clname);
+        ClientPtr client = m_services->clientManager()->client(clname);
         if(client->savedStatus())
             client->changeStatus(client->savedStatus());
     }

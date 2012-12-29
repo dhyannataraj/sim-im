@@ -20,18 +20,16 @@ namespace
     public:
         virtual void SetUp()
         {
-            clientmanager = new MockObjects::MockClientManager();
-            SIM::setClientManager(clientmanager);
+            clientmanager = MockObjects::MockClientManager::Ptr(new MockObjects::MockClientManager());
             commonStatus = new CommonStatus(clientmanager);
         }
 
         virtual void TearDown()
         {
-            SIM::destroyClientManager();
         }
 
         CommonStatus* commonStatus;
-        MockObjects::MockClientManager* clientmanager;
+        MockObjects::MockClientManager::Ptr clientmanager;
     };
 
     TEST_F(TestCommonStatus, hasStatus_online)

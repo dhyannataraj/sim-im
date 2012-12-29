@@ -195,7 +195,7 @@ namespace SIM
         return true;
     }
 
-    bool Contact::deserialize(const QDomElement& element)
+    bool Contact::deserialize(const ClientManager::Ptr& clientManager, const QDomElement& element)
     {
         userdata()->deserialize(element);
         QDomElement main = element.elementsByTagName("main").at(0).toElement();
@@ -206,7 +206,7 @@ namespace SIM
         QDomNodeList cldatalist = element.elementsByTagName("clientdata");
         for(int j = 0; j < cldatalist.size(); j++) {
             QDomElement clientElement = cldatalist.at(j).toElement();
-            ClientPtr client = getClientManager()->client(clientElement.attribute("clientname"));
+            ClientPtr client = clientManager->client(clientElement.attribute("clientname"));
             if(!client)
                 continue;
             IMContactPtr imc = clientContact(client->name());
@@ -272,7 +272,7 @@ namespace SIM
         return contactHub;
     }
 
-    bool Contact::loadState(PropertyHubPtr state)
+    bool Contact::loadState(const ClientManager::Ptr& clientManager, PropertyHubPtr state)
     {
         if (state.isNull())
             return false;
@@ -299,7 +299,7 @@ namespace SIM
         foreach (const QString& clientName, clientsList)
         {
             PropertyHubPtr curClientHub = clientsHub->propertyHub(clientName);
-            ClientPtr client = getClientManager()->client(clientName);
+            ClientPtr client = clientManager->client(clientName);
             if (!client)
                 continue;
             IMContactPtr imc = clientContact(client->name());

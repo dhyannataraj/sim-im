@@ -25,6 +25,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
+#include "clients/clientmanager.h"
 
 class QLabel;
 class QLineEdit;
@@ -34,7 +35,7 @@ class ProfileSelectDialog : public QDialog
 {
     Q_OBJECT
 public:
-    ProfileSelectDialog();
+    ProfileSelectDialog(const SIM::ClientManager::Ptr& clientManager);
     ~ProfileSelectDialog();
 	QString profile() { return m_profile; }
 
@@ -78,6 +79,7 @@ private:
     QList<QFrame*> m_lines;
     QString m_newProfileName;
     QList<SIM::PluginPtr> m_protocolPlugins;
+    SIM::ClientManager::Ptr m_clientManager;
 
     Ui::ProfileSelectDialog* m_ui;
 };
