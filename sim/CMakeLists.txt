@@ -9,7 +9,7 @@ ENDIF(NOT WIN32)
 ######################
 
 SET(sim_LIB_SRCS
-		buffer.cpp
+    	buffer.cpp
 		builtinlogger.cpp
 		cfg.cpp
 		clientmanager.cpp
@@ -30,7 +30,6 @@ SET(sim_LIB_SRCS
         events/logevent.cpp
         events/menuitemcollectionevent.cpp
         events/widgetcollectionevent.cpp
-		exec.cpp
         imagestorage/imagestorage.cpp
         imagestorage/standardimagestorage.cpp
         imagestorage/iconset.cpp
@@ -91,7 +90,7 @@ SET(sim_LIB_SRCS
 SET(sim_LIB_MESSAGE_SOURCES  ${sim_LIB_SRCS} PARENT_SCOPE)
 
 SET(sim_LIB_HDRS
-		buffer.h
+    	buffer.h
 		builtinlogger.h
 		cfg.h
 		clientmanager.h
@@ -112,7 +111,6 @@ SET(sim_LIB_HDRS
         events/logevent.h
         events/menuitemcollectionevent.h
         events/widgetcollectionevent.h
-		exec.h
         imagestorage/imagestorage.h
         imagestorage/standardimagestorage.h
         imagestorage/iconset.h

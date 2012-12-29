@@ -31,7 +31,6 @@
 #include <QVector>
 #include <memory>
 
-#include "exec.h"
 #include "misc.h"
 #include "builtinlogger.h"
 #include "profilemanager.h"
@@ -216,7 +215,6 @@ namespace SIM
 			bool m_bAbort;
 			bool m_bPluginsInBuildDir;  // plugins in build dir -> full path in pluginInfo.filePath
 
-			ExecManager	*m_exec;
 			std::auto_ptr<BuiltinLogger> builtinLogger;
 
 			friend class PluginManager;
@@ -477,8 +475,6 @@ namespace SIM
 		// #endif
 		builtinLogger.reset(new BuiltinLogger(logLevel));
 
-		m_exec = new ExecManager;
-
 		app_name = QString::fromLocal8Bit(*argv);
 		for (argv++, argc--; argc > 0; argv++, argc--)
 			args.push_back(QString::fromLocal8Bit(*argv));
@@ -495,7 +491,6 @@ namespace SIM
 	PluginManagerPrivate::~PluginManagerPrivate()
 	{
 		release_all();
-		delete m_exec;
 		setLogEnable(false);
 	}
 
