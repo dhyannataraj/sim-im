@@ -57,6 +57,7 @@ email                : vovan@shutoff.ru
 #include "contacts/contactlist.h"
 #include "commands/commandhub.h"
 #include "commands/menuaction.h"
+#include "plugin/pluginmanager.h"
 
 // _core
 #include "core.h"

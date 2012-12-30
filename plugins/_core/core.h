@@ -29,7 +29,7 @@
 #include <QMenu>
 
 #include "misc.h"
-#include "plugins.h"
+#include "plugin/plugin.h"
 #include "propertyhub.h"
 #include "simapi.h"
 #include "mainwin.h"

@@ -23,6 +23,7 @@
 #include <QWidget>
 #include "simapi.h"
 #include "services.h"
+#include "plugin/plugin.h"
 
 class QLibrary;
 class QWidget;
@@ -31,26 +32,6 @@ class Buffer;
 namespace SIM
 {
     struct PluginInfo;
-
-    class EXPORT Plugin
-    {
-    public:
-        Plugin();
-        virtual ~Plugin();
-        virtual QWidget *createConfigWindow(QWidget* /* *parent */ ) { return NULL; }
-        virtual QByteArray getConfig() { return QByteArray(); }
-
-        void setName(const QString& n);
-        QString name();
-
-        PluginInfo* getInfo();
-
-
-    private:
-        class PluginPrivate* p;
-    };
-
-    typedef QSharedPointer<Plugin> PluginPtr;
 
     class EXPORT PluginManager : public QObject
     {
@@ -84,7 +65,6 @@ namespace SIM
     };
 
     /* Plugin prototype */
-    typedef Plugin* createPlugin(unsigned base, bool bStart, Buffer *cfg);
     typedef Plugin* (*createPluginObject)(const Services::Ptr& services);
 
 	const unsigned PLUGIN_KDE_COMPILE    = 0x0001;
@@ -110,6 +90,7 @@ namespace SIM
     };
 
 	SIM_EXPORT PluginInfo *GetPluginInfo();
+
 
     SIM_EXPORT PluginManager* getPluginManager();
     void EXPORT createPluginManager(int argc, char** argv);

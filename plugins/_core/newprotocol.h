@@ -20,7 +20,7 @@
 
 #include <vector>
 #include <QWizard>
-#include "plugins.h"
+#include "plugin/plugin.h"
 #include "clients/client.h"
 #include "services.h"
 

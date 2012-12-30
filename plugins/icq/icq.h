@@ -21,7 +21,7 @@
 #include "clients/client.h"
 #include "contacts/imstatus.h"
 #include "icqstatus.h"
-#include "plugins.h"
+#include "plugin/plugin.h"
 #include "services.h"
 
 //class CorePlugin;

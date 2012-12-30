@@ -61,7 +61,8 @@ SET(sim_LIB_SRCS
         network/asyncsocket.cpp
         network/tcpasyncsocket.cpp
 		paths.cpp
-		plugins.cpp
+        plugin/plugin.cpp
+		plugin/pluginmanager.cpp
 		profile/profile.cpp
 		profile/profilemanager.cpp
 		profile/standardprofilemanager.cpp
@@ -141,7 +142,8 @@ SET(sim_LIB_HDRS
         network/asyncsocket.h
         network/tcpasyncsocket.h
 		paths.h
-		plugins.h
+        plugin/plugin.h
+		plugin/pluginmanager.h
 		profile/profile.h
 		profile/profilemanager.h
 		profile/standardprofilemanager.h

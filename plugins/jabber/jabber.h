@@ -22,7 +22,7 @@
 #include "contacts/imstatus.h"
 #include "contacts/protocol.h"
 #include "jabberstatus.h"
-#include "plugins.h"
+#include "plugin/plugin.h"
 #include "services.h"
 
 #include <QByteArray>

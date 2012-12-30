@@ -6,6 +6,7 @@
 #include "profile/profilemanager.h"
 #include "contacts/protocolmanager.h"
 #include "buffer.h"
+#include "plugin/pluginmanager.h"
 
 namespace SIM {
 

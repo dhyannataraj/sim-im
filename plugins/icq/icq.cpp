@@ -23,6 +23,7 @@
 #include "contacts/protocolmanager.h"
 #include "icqclient.h"
 #include "icqloginwidget.h"
+#include "plugin/pluginmanager.h"
 
 using namespace SIM;
 

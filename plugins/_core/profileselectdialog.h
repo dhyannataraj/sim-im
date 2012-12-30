@@ -20,7 +20,7 @@
 
 #include "buffer.h"
 #include "clients/client.h"
-#include "plugins.h"
+#include "plugin/plugin.h"
 #include "ui_profileselectdialog.h"
 #include <QLabel>
 #include <QLayout>

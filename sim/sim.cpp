@@ -36,6 +36,7 @@
 #include "messaging/messageoutpipe.h"
 #include "messaging/messagepipe.h"
 #include "imagestorage/avatarstorage.h"
+#include "plugin/pluginmanager.h"
 
 #include <QDir>
 

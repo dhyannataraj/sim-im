@@ -4,7 +4,7 @@
 #include "log.h"
 #include "misc.h"
 #include "messaging/message.h"
-#include "plugins.h"
+#include "plugin/pluginmanager.h"
 #include "clients/standardclientmanager.h"
 
 using namespace SIM;

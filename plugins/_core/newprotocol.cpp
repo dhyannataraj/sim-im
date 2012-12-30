@@ -26,6 +26,7 @@
 #include "log.h"
 #include "imagestorage/imagestorage.h"
 #include "clients/clientmanager.h"
+#include "plugin/pluginmanager.h"
 
 #include <QPixmap>
 #include <QPushButton>

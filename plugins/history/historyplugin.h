@@ -7,7 +7,7 @@
 #ifndef HISTORYPLUGIN_H_
 #define HISTORYPLUGIN_H_
 
-#include "plugins.h"
+#include "plugin/plugin.h"
 #include "messaging/message.h"
 #include "messaging/messageprocessor.h"
 #include "historystorage.h"

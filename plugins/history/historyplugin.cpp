@@ -13,6 +13,7 @@
 #include <QAction>
 #include "log.h"
 #include "services.h"
+#include "plugin/pluginmanager.h"
 
 SIM::Plugin* createHistoryPlugin(const SIM::Services::Ptr& services)
 {

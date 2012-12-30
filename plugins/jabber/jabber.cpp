@@ -18,6 +18,7 @@
 #include "jabberclient.h"
 #include "jabber.h"
 #include "misc.h"
+#include "plugin/pluginmanager.h"
 #include "contacts/protocolmanager.h"
 #include "clients/clientmanager.h"
 #include "ui/jabberloginwidget.h"

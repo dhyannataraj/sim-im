@@ -1,6 +1,7 @@
 
 #include "profile.h"
 #include "log.h"
+#include "plugin/pluginmanager.h"
 
 namespace SIM
 {

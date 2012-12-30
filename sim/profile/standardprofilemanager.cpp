@@ -8,6 +8,7 @@
 #include <QDir>
 #include "standardprofilemanager.h"
 #include "log.h"
+#include "plugin/pluginmanager.h"
 
 namespace SIM
 {
