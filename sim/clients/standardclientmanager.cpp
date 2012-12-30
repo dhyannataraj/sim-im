@@ -10,8 +10,9 @@
 
 namespace SIM {
 
-StandardClientManager::StandardClientManager(const ProtocolManager::Ptr& protocolManager) :
-    m_protocolManager(protocolManager)
+StandardClientManager::StandardClientManager(const ProfileManager::Ptr& profileManager, const ProtocolManager::Ptr& protocolManager) :
+    m_protocolManager(protocolManager),
+    m_profileManager(profileManager)
 {
 }
 
@@ -90,7 +91,7 @@ bool StandardClientManager::load_new()
         }
 
         ClientPtr newClient;
-        getProfileManager()->currentProfile()->enablePlugin(pluginName);
+        m_profileManager->currentProfile()->enablePlugin(pluginName);
 
         for(int i = 0; i < m_protocolManager->protocolCount(); i++)
         {
@@ -111,7 +112,7 @@ bool StandardClientManager::load_new()
 bool StandardClientManager::load_old()
 {
     log(L_DEBUG, "ClientManager::load_old()");
-    QString cfgName = getProfileManager()->profilePath() + QDir::separator() + "clients.conf";
+    QString cfgName = m_profileManager->profilePath() + QDir::separator() + "clients.conf";
     QFile f(cfgName);
     if (!f.open(QIODevice::ReadOnly)){
         log(L_ERROR, "[2]Can't open %s", qPrintable(cfgName));
@@ -149,7 +150,7 @@ bool StandardClientManager::load_old()
                 log(L_WARN, "Plugin %s not found", qPrintable(pluginName));
                 continue;
             }
-            getProfileManager()->currentProfile()->enablePlugin(pluginName);
+            m_profileManager->currentProfile()->enablePlugin(pluginName);
 
             for(int i = 0; i < m_protocolManager->protocolCount(); i++)
             {
@@ -181,7 +182,7 @@ bool StandardClientManager::load_old()
 
 bool StandardClientManager::sync()
 {
-    if(!getProfileManager() || m_clients.isEmpty() )
+    if(!m_profileManager || m_clients.isEmpty() )
         return false;
     log(L_DEBUG, "ClientManager::save(): %d", m_clients.count());
 
@@ -223,7 +224,7 @@ ClientPtr StandardClientManager::createClient(const QString& name)
         log(L_WARN, "Plugin %s not found", qPrintable(pluginname));
         return ClientPtr();
     }
-    getProfileManager()->currentProfile()->enablePlugin(pluginname);
+    m_profileManager->currentProfile()->enablePlugin(pluginname);
     ProtocolPtr protocol = m_protocolManager->protocol(protocolname);
     if(protocol)
         return protocol->createClient(name);
@@ -261,11 +262,11 @@ void StandardClientManager::deleteClient(const QString& name)
 
 ConfigPtr StandardClientManager::config()
 {
-    if (!m_config.isNull() && m_loadedProfile == getProfileManager()->currentProfileName())
+    if (!m_config.isNull() && m_loadedProfile == m_profileManager->currentProfileName())
         return m_config;
 
-    m_loadedProfile = getProfileManager()->currentProfileName();
-    QString cfgName = getProfileManager()->profilePath() + QDir::separator() + "clients.xml";
+    m_loadedProfile = m_profileManager->currentProfileName();
+    QString cfgName = m_profileManager->profilePath() + QDir::separator() + "clients.xml";
     log(L_DEBUG, "Creating config: %s", qPrintable(cfgName));
     m_config = ConfigPtr(new Config(cfgName));
 

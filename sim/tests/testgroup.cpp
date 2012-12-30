@@ -34,7 +34,7 @@ namespace
         virtual void SetUp()
         {
             services = makeMockServices();
-            clientManager = ClientManager::Ptr(new StandardClientManager(services->protocolManager()));
+            clientManager = ClientManager::Ptr(new StandardClientManager(services->profileManager(), services->protocolManager()));
         }
     };
 

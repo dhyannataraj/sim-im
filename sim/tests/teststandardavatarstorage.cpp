@@ -32,7 +32,8 @@ namespace
         int saveImageCalls;
         int loadImageCalls;
 
-        StandardAvatarStorage() : saveImageCalls(0), loadImageCalls(0) {}
+        StandardAvatarStorage(const SIM::ProfileManager::Ptr& profileManager) : SIM::StandardAvatarStorage(profileManager),
+            saveImageCalls(0), loadImageCalls(0) {}
         virtual ~StandardAvatarStorage() {}
 
     protected:
@@ -56,18 +57,16 @@ namespace
     public:
         virtual void SetUp()
         {
-            profileManager = new NiceMock<MockObjects::MockProfileManager>();
+            profileManager = MockObjects::MockProfileManager::NicePtr(new NiceMock<MockObjects::MockProfileManager>());
             imagestorage  = new StubObjects::StubImageStorage();
-            SIM::setProfileManager(profileManager);
             SIM::setImageStorage(imagestorage);
             ON_CALL(*profileManager, profilePath()).WillByDefault(Return(ProfileBasePath));
-            storage = new StandardAvatarStorage();
+            storage = new StandardAvatarStorage(profileManager);
         }
 
         virtual void TearDown()
         {
             delete storage;
-            SIM::setProfileManager(0);
             SIM::destroyImageStorage();
         }
 
@@ -76,7 +75,7 @@ namespace
             return ProfileBasePath + QDir::separator() + "pictures" + QDir::separator();
         }
 
-        NiceMock<MockObjects::MockProfileManager>* profileManager;
+        MockObjects::MockProfileManager::NicePtr profileManager;
         StandardAvatarStorage* storage;
         StubObjects::StubImageStorage *imagestorage;
     };

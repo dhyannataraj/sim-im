@@ -11,6 +11,7 @@ namespace SIM {
 
         ProtocolManager::Ptr protocolManager;
         ClientManager::Ptr clientManager;
+        ProfileManager::Ptr profileManager;
     };
 
     Services::Services() : m_impl(new Services::Impl())
@@ -41,4 +42,13 @@ namespace SIM {
         return m_impl->clientManager;
     }
 
+    void Services::setProfileManager(const ProfileManager::Ptr& pm)
+    {
+        m_impl->profileManager = pm;
+    }
+
+    ProfileManager::Ptr Services::profileManager() const
+    {
+        return m_impl->profileManager;
+    }
 }

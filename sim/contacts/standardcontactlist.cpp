@@ -11,8 +11,9 @@
 
 namespace SIM {
 
-StandardContactList::StandardContactList(const ClientManager::Ptr& clientManager) : 
-    m_clientManager(clientManager)
+StandardContactList::StandardContactList(const ProfileManager::Ptr& profileManager, const ClientManager::Ptr& clientManager) : 
+    m_clientManager(clientManager),
+    m_profileManager(profileManager)
 {
     getEventHub()->registerEvent(SIM::StandardEvent::create("contacts_loaded"));
     getEventHub()->registerEvent(SIM::StandardEvent::create("contact_list_updated"));
@@ -35,10 +36,10 @@ bool StandardContactList::load()
 
 bool StandardContactList::sync()
 {
-    if(getProfileManager()->currentProfile().isNull())
+    if(m_profileManager->currentProfile().isNull())
         return false;
 
-    getProfileManager()->sync();
+    m_profileManager->sync();
 
     config()->rootHub()->addPropertyHub(m_userData->saveState());
 
@@ -274,7 +275,7 @@ bool StandardContactList::load_contacts()
 
 bool StandardContactList::load_old()
 {
-    QString cfgName = getProfileManager()->profilePath() + QDir::separator() + "contacts.conf";
+    QString cfgName = m_profileManager->profilePath() + QDir::separator() + "contacts.conf";
     QFile f(cfgName);
     if (!f.open(QIODevice::ReadOnly)){
         log(L_ERROR, "[2]Can't open %s", qPrintable(cfgName));
@@ -415,11 +416,11 @@ bool StandardContactList::deserializeLines(const UserDataPtr& ud, const QString&
 
 ConfigPtr StandardContactList::config()
 {
-    if (!m_config.isNull() && m_loadedProfile == getProfileManager()->currentProfileName())
+    if (!m_config.isNull() && m_loadedProfile == m_profileManager->currentProfileName())
         return m_config;
 
-    m_loadedProfile = getProfileManager()->currentProfileName();
-    QString cfgName = getProfileManager()->profilePath() + QDir::separator() + "contacts.xml";
+    m_loadedProfile = m_profileManager->currentProfileName();
+    QString cfgName = m_profileManager->profilePath() + QDir::separator() + "contacts.xml";
     m_config = ConfigPtr(new Config(cfgName));
 
     m_config->readFromFile();

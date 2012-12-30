@@ -41,13 +41,14 @@ email                : vovan@shutoff.ru
 
 using namespace SIM;
 
-ProfileSelectDialog::ProfileSelectDialog(const SIM::ClientManager::Ptr& clientManager) 
+ProfileSelectDialog::ProfileSelectDialog(const SIM::ProfileManager::Ptr& profileManager, const SIM::ClientManager::Ptr& clientManager) 
 	: QDialog(NULL)
     , m_clientManager(clientManager)
-	, m_ui ( new Ui::ProfileSelectDialog )
+    , m_profileManager(profileManager)
+	, m_ui(new Ui::ProfileSelectDialog)
 {
     m_ui->setupUi(this);
-    ConfigPtr settings = getProfileManager()->config();
+    ConfigPtr settings = m_profileManager->config();
 
     m_profile = settings->rootHub()->value("Profile").toString();
 
@@ -99,7 +100,7 @@ void ProfileSelectDialog::updatePasswords()
 
 void ProfileSelectDialog::updateProfilesList()
 {
-    QStringList profiles = getProfileManager()->enumProfiles();
+    QStringList profiles = m_profileManager->enumProfiles();
     int profileIndex = 0;
 
     for(int i = 0; i < profiles.size(); i++)
@@ -155,7 +156,7 @@ void ProfileSelectDialog::profileChanged(int index)
         m_ui->btnDelete->setEnabled(true);
         clearInputs();
         m_profile = m_ui->cmbProfile->currentText();
-        getProfileManager()->selectProfile(m_ui->cmbProfile->currentText());
+        m_profileManager->selectProfile(m_ui->cmbProfile->currentText());
         m_clientManager->load();
         QStringList clients = m_clientManager->clientList();
 
@@ -266,7 +267,7 @@ void ProfileSelectDialog::profileDelete()
         return;
     QString curProfile = m_ui->cmbProfile->currentText();
 
-    if (!getProfileManager()->removeProfile(curProfile))
+    if (!m_profileManager->removeProfile(curProfile))
         QMessageBox::information(this, i18n("Delete Profile"), i18n("Unable to delete the profile"), QMessageBox::Ok);
     clearInputs();
     m_ui->btnDelete->setEnabled(false);
@@ -285,11 +286,11 @@ void ProfileSelectDialog::profileRename()
                                      QLineEdit::Normal, name, &ok);
         if(!ok)
             return;
-        if(getProfileManager()->profileExists(name)) {
+        if(m_profileManager->profileExists(name)) {
             QMessageBox::information(this, i18n("Rename Profile"), i18n("There is already another profile with this name.  Please choose another."), QMessageBox::Ok);
             continue;
         }
-        else if(!getProfileManager()->renameProfile(old_name, name)) {
+        else if(!m_profileManager->renameProfile(old_name, name)) {
             QMessageBox::information(this, i18n("Rename Profile"), i18n("Unable to rename the profile.  Please do not use any special characters."), QMessageBox::Ok);
             continue;
         }
@@ -305,12 +306,12 @@ void ProfileSelectDialog::newNameChanged(const QString &text)
         m_ui->buttonOk->setEnabled(false);
         return;
     }
-    m_ui->buttonOk->setEnabled(!getProfileManager()->profileExists(text));
+    m_ui->buttonOk->setEnabled(!m_profileManager->profileExists(text));
 }
 
 void ProfileSelectDialog::saveState()
 {
-    ConfigPtr settings = getProfileManager()->config();
+    ConfigPtr settings = m_profileManager->config();
 
     settings->rootHub()->setValue("Profile", profile());
     settings->rootHub()->setValue("SavePasswd",m_ui->chkSave->isChecked());

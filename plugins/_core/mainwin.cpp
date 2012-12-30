@@ -417,9 +417,9 @@ void MainWindow::systrayActivated(QSystemTrayIcon::ActivationReason reason)
 
 void MainWindow::loadSettings()
 {
-    if (!getProfileManager())
+    if (!m_services->profileManager())
         return;
-    PropertyHubPtr rootHub = getProfileManager()->currentProfile()->config()->rootHub();
+    PropertyHubPtr rootHub = m_services->profileManager()->currentProfile()->config()->rootHub();
 
     if (rootHub->propertyHub("windows").isNull())
         return;
@@ -433,9 +433,9 @@ void MainWindow::loadSettings()
 
 void MainWindow::saveSettings()
 {
-    if (!getProfileManager())
+    if (!m_services->profileManager())
         return;
-    PropertyHubPtr rootHub = getProfileManager()->currentProfile()->config()->rootHub();
+    PropertyHubPtr rootHub = m_services->profileManager()->currentProfile()->config()->rootHub();
     if (rootHub->propertyHub("windows").isNull())
         rootHub->addPropertyHub(PropertyHub::create("windows"));
 

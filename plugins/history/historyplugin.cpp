@@ -18,7 +18,7 @@
 SIM::Plugin* createHistoryPlugin(const SIM::Services::Ptr& services)
 {
     HistoryPlugin* plugin = new HistoryPlugin(services);
-    plugin->setHistoryStorage(HistoryStoragePtr(new SQLiteHistoryStorage(services->clientManager())));
+    plugin->setHistoryStorage(HistoryStoragePtr(new SQLiteHistoryStorage(services->profileManager(), services->clientManager())));
     return plugin;
 }
 

@@ -15,6 +15,9 @@ namespace MockObjects
     class MockProfileManager : public SIM::ProfileManager
     {
     public:
+        typedef QSharedPointer<MockProfileManager> Ptr;
+        typedef QSharedPointer<testing::NiceMock<MockProfileManager> > NicePtr;
+
         virtual ~MockProfileManager() {}
         MOCK_METHOD0(enumProfiles, QStringList());
         MOCK_METHOD1(selectProfile, bool(const QString& name));

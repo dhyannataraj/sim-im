@@ -3107,7 +3107,7 @@ void CorePlugin::createNewProfile(const QString& name)
 bool CorePlugin::init()
 {
     log(L_DEBUG, "CorePlugin::init");
-    ConfigPtr settings = getProfileManager()->config();
+    ConfigPtr settings = m_services->profileManager()->config();
 
     QAction* quitAction = getCommandHub()->action("quit");
     connect(quitAction, SIGNAL(triggered()), this, SLOT(cmdQuit()));
@@ -3127,7 +3127,7 @@ bool CorePlugin::init()
     if(!noshow)
     {
     	log(L_DEBUG, "!noshow");
-        ProfileSelectDialog dlg(m_services->clientManager());
+        ProfileSelectDialog dlg(m_services->profileManager(), m_services->clientManager());
         dlg.setModal(true);
         if(dlg.exec() != QDialog::Accepted)
             return false;
@@ -3141,13 +3141,13 @@ bool CorePlugin::init()
     }
     else
     {
-        getProfileManager()->selectProfile(profile);
+        m_services->profileManager()->selectProfile(profile);
         m_services->clientManager()->load();
     }
 
     log(L_DEBUG, "Profile selected: %s", qPrintable(profile));
 
-    m_propertyHub = getProfileManager()->getPropertyHub("_core");
+    m_propertyHub = m_services->profileManager()->getPropertyHub("_core");
     if(!m_propertyHub)
         return false;
 

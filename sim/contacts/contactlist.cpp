@@ -5,11 +5,11 @@ namespace SIM {
 
 static ContactList* gs_contactList = 0;
 
-EXPORT void createContactList(const ClientManager::Ptr& cm)
+EXPORT void createContactList(const ProfileManager::Ptr& pm, const ClientManager::Ptr& cm)
 {
     if(gs_contactList)
         return;
-    gs_contactList = new StandardContactList(cm);
+    gs_contactList = new StandardContactList(pm, cm);
 }
 
 EXPORT void destroyContactList()

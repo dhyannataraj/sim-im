@@ -29,23 +29,21 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
     ::testing::InitGoogleTest(&argc, argv);
     ::testing::InitGoogleMock(&argc, argv);
+    auto services = SIM::makeMockServices();
     SIM::createEventHub();
     registerEvents();
     StubObjects::StubImageStorage imagestorage;
     SIM::setImageStorage(&imagestorage);
-    SIM::createProfileManager("");
-    SIM::createAvatarStorage();
+    SIM::createAvatarStorage(services->profileManager());
     SIM::createCommandHub();
     SIM::createMessagePipe();
     SIM::createOutMessagePipe();
-    //SIM::createContactList();
     CorePlugin* core = new CorePlugin(SIM::makeMockServices());
     int ret = RUN_ALL_TESTS();
     delete core;
 #ifdef WIN32
     getchar();
 #endif
-    SIM::destroyProfileManager();
     return ret;
 }
 

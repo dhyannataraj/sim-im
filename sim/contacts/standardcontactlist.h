@@ -3,13 +3,14 @@
 
 #include "contactlist.h"
 #include "clients/clientmanager.h"
+#include "profile/profilemanager.h"
 
 namespace SIM {
 
 class StandardContactList : public ContactList
 {
 public:
-    StandardContactList(const ClientManager::Ptr& clientManager);
+    StandardContactList(const ProfileManager::Ptr& profileManager, const ClientManager::Ptr& clientManager);
 
     virtual void clear();
     virtual bool load();
@@ -73,6 +74,7 @@ private:
     ConfigPtr m_config;
     QString m_loadedProfile;
     ClientManager::Ptr m_clientManager;
+    ProfileManager::Ptr m_profileManager;
 };
 
 } // namespace SIM

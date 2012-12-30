@@ -32,12 +32,12 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
     ::testing::InitGoogleTest(&argc, argv);
     ::testing::InitGoogleMock(&argc, argv);
+    auto services = SIM::makeMockServices();
     SIM::createEventHub();
     registerEvents();
     StubObjects::StubImageStorage imagestorage;
     SIM::setImageStorage(&imagestorage);
-    SIM::createProfileManager("");
-    SIM::createAvatarStorage();
+    SIM::createAvatarStorage(services->profileManager());
     SIM::createCommandHub();
     int ret = RUN_ALL_TESTS();
 #ifdef WIN32
@@ -45,7 +45,6 @@ int main(int argc, char** argv)
 #endif
     SIM::destroyCommandHub();
     SIM::destroyAvatarStorage();
-    SIM::destroyProfileManager();
     return ret;
 }
 

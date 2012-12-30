@@ -23,8 +23,8 @@ namespace
         {
             auto s = makeMockServices();
             SIM::createEventHub();
-            clientManager = ClientManager::Ptr(new StandardClientManager(s->protocolManager()));
-            SIM::createContactList(clientManager);
+            clientManager = ClientManager::Ptr(new StandardClientManager(s->profileManager(), s->protocolManager()));
+            SIM::createContactList(s->profileManager(), clientManager);
         }
 
         void TearDown()

@@ -13,10 +13,10 @@ namespace SIM
 
 static AvatarStorage* gs_avatarStorage = 0;
 
-void createAvatarStorage()
+void createAvatarStorage(const ProfileManager::Ptr& profileManager)
 {
     Q_ASSERT(!gs_avatarStorage);
-    gs_avatarStorage = new StandardAvatarStorage();
+    gs_avatarStorage = new StandardAvatarStorage(profileManager);
 }
 
 void destroyAvatarStorage()

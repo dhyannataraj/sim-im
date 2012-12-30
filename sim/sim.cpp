@@ -119,7 +119,6 @@ int main(int argc, char *argv[])
     int res = 1;
 	QCoreApplication::setOrganizationDomain("sim-im.org");
 	QCoreApplication::setApplicationName("Sim-IM");
-	SIM::createProfileManager(SIM::PathManager::configRoot());
     qInstallMsgHandler(simMessageOutput);
 
 #ifdef USE_KDE
@@ -150,9 +149,9 @@ int main(int argc, char *argv[])
     SIM::createMessagePipe();
     SIM::createOutMessagePipe();
     SIM::createImageStorage();
-    SIM::createAvatarStorage();
+    SIM::createAvatarStorage(app.services()->profileManager());
     SIM::createCommandHub();
-    SIM::createContactList(app.services()->clientManager());
+    SIM::createContactList(app.services()->profileManager(), app.services()->clientManager());
     SIM::createPluginManager(argc, argv);
 
     if(!app.initializePlugins())
@@ -166,7 +165,6 @@ int main(int argc, char *argv[])
     SIM::destroyCommandHub();
     SIM::destroyAvatarStorage();
     SIM::destroyImageStorage();
-    SIM::destroyProfileManager();
     SIM::destroyOutMessagePipe();
     SIM::destroyMessagePipe();
     destroyLogging();

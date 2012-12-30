@@ -67,7 +67,7 @@ namespace
             pipe = new MockObjects::MockMessagePipe();
             SIM::setOutMessagePipe(pipe);
 
-            SIM::createContactList(services->clientManager());
+            SIM::createContactList(services->profileManager(), services->clientManager());
 
             controller = new ContainerController(services, ControllerId);
         }

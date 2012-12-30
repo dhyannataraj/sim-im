@@ -41,7 +41,7 @@ namespace
         virtual void SetUp()
         {
             services = SIM::makeMockServices();
-            SIM::createContactList(services->clientManager());
+            SIM::createContactList(services->profileManager(), services->clientManager());
             socket = new NiceMock<MockObjects::MockOscarSocket>();
             ON_CALL(*socket, isConnected()).WillByDefault(Return(true));
             client = new ICQClient(0, "ICQ.123456", false);

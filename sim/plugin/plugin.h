@@ -7,7 +7,6 @@
 #include <QByteArray>
 #include <QString>
 #include <QSharedPointer>
-#include "services.h"
 
 namespace SIM {
 

@@ -74,12 +74,12 @@ void NewProtocol::accept()
 {
 	ProtocolPtr protocol = protocolByIndex(m_ui->cb_protocol->currentIndex());
 
-	ProfilePtr profile = getProfileManager()->currentProfile();
+	ProfilePtr profile = m_services->profileManager()->currentProfile();
 	if(!profile)
 	{
-        getProfileManager()->newProfile(m_profileName);
-        getProfileManager()->selectProfile(m_profileName);
-        profile = getProfileManager()->currentProfile();
+        m_services->profileManager()->newProfile(m_profileName);
+        m_services->profileManager()->selectProfile(m_profileName);
+        profile = m_services->profileManager()->currentProfile();
 	}
 	profile->enablePlugin(protocol->plugin()->name());
 

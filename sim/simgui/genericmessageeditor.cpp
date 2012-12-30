@@ -75,6 +75,7 @@ GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMCon
 	connect(m_edit, SIGNAL(textChanged()), this, SLOT(textChanged()));
 	textChanged();
 	
+    /*
 	PropertyHubPtr p = getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core");
 
 	if (p->value("ContainerGeometry").typeName()==QString("QString")) //Fallback to old config
@@ -89,12 +90,12 @@ GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMCon
 	{
 		this->restoreGeometry(p->value("ContainerGeometry").toByteArray());
 	}
-	
+    */
 }
 
 GenericMessageEditor::~GenericMessageEditor()
 {
-	getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core")->setValue("ContainerGeometry", this->saveGeometry());
+	//getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core")->setValue("ContainerGeometry", this->saveGeometry());
 	closeSmilies();
 }
 

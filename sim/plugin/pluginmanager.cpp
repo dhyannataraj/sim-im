@@ -570,7 +570,7 @@ namespace SIM
 		pluginInfo *info = getInfo(name);
 		if (info == NULL)
 			return false;
-		bool disabled = !getProfileManager()->currentProfile()->enabledPlugins().contains(name);
+		bool disabled = !m_services->profileManager()->currentProfile()->enabledPlugins().contains(name);
 		if (disabled)
 		{
 			if (info->plugin == NULL)
@@ -588,7 +588,7 @@ namespace SIM
 
 	void PluginManagerPrivate::saveState()
 	{
-		if(!getProfileManager()->currentProfile())
+		if(!m_services->profileManager()->currentProfile())
 		{
 			// if current profile name is empty then should not write config for it.
 			log(L_DEBUG, "Refusing writing plugins.conf for empty profile");
@@ -598,7 +598,7 @@ namespace SIM
 		if (m_bAbort)
 			return;
 		//getContactList()->save();
-		getProfileManager()->sync();
+		m_services->profileManager()->sync();
 	}
 
 	const unsigned long NO_PLUGIN = (unsigned long)(-1);
@@ -683,7 +683,7 @@ namespace SIM
 	{
 		getEventHub()->triggerEvent("quit");
 		delete p;
-		getProfileManager()->sync();
+		m_services->profileManager()->sync();
 	}
 
 	bool PluginManager::isLoaded()

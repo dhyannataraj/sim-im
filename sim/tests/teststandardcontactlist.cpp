@@ -16,7 +16,7 @@ namespace
         {
             auto services = SIM::makeMockServices();
             SIM::createEventHub();
-            SIM::createContactList(services->clientManager());
+            SIM::createContactList(services->profileManager(), services->clientManager());
         }
 
         virtual void TearDown()

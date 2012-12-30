@@ -11,7 +11,8 @@
 #include "clients/clientmanager.h"
 
 
-SQLiteHistoryStorage::SQLiteHistoryStorage(const SIM::ClientManager::Ptr& clientManager) : m_db(QSqlDatabase::addDatabase("QSQLITE")),
+SQLiteHistoryStorage::SQLiteHistoryStorage(const SIM::ProfileManager::Ptr& profileManager,
+        const SIM::ClientManager::Ptr& clientManager) : m_db(QSqlDatabase::addDatabase("QSQLITE")),
     m_clientManager(clientManager)
 {
     init();
@@ -78,7 +79,7 @@ QList<SIM::MessagePtr> SQLiteHistoryStorage::getMessages(const QString& sourceCo
 
 void SQLiteHistoryStorage::init()
 {
-    QString profileRoot = SIM::getProfileManager()->profilePath();
+    QString profileRoot = m_profileManager->profilePath();
     m_db.setDatabaseName(profileRoot + QDir::separator() + "history.sqlitedb");
 
     bool ok = m_db.open();

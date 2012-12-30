@@ -6,6 +6,8 @@
 #include "messaging/message.h"
 #include "plugin/pluginmanager.h"
 #include "clients/standardclientmanager.h"
+#include "profile/standardprofilemanager.h"
+#include "paths.h"
 
 using namespace SIM;
 
@@ -35,7 +37,9 @@ void SimApp::initializeServices()
 {
     auto protocolManager = ProtocolManager::Ptr(new ProtocolManager());
     m_services->setProtocolManager(protocolManager);
-    m_services->setClientManager(ClientManager::Ptr(new StandardClientManager(protocolManager)));
+    auto profileManager = ProfileManager::Ptr(new StandardProfileManager(SIM::PathManager::configRoot()));
+    m_services->setClientManager(ClientManager::Ptr(new StandardClientManager(profileManager, protocolManager)));
+    m_services->setProfileManager(profileManager);
 }
 
 void SimApp::commitData(QSessionManager&)

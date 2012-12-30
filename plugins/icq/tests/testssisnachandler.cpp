@@ -41,7 +41,7 @@ namespace
         {
             services = SIM::makeMockServices();
             //SIM::createEventHub();
-            SIM::createContactList(services->clientManager());
+            SIM::createContactList(services->profileManager(), services->clientManager());
 
             socket = new NiceMock<MockObjects::MockOscarSocket>();
             client = new ICQClient(0, "ICQ.123456", false);

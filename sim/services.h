@@ -6,6 +6,7 @@
 #include <QSharedPointer>
 #include "contacts/protocolmanager.h"
 #include "clients/clientmanager.h"
+#include "profile/profilemanager.h"
 #include "misc.h"
 
 namespace SIM {
@@ -23,6 +24,9 @@ namespace SIM {
 
         void setClientManager(const ClientManager::Ptr& cm);
         ClientManager::Ptr clientManager() const;
+
+        void setProfileManager(const ProfileManager::Ptr& pm);
+        ProfileManager::Ptr profileManager() const;
 
     private:
         struct Impl;

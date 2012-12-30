@@ -3,9 +3,9 @@
 #define PROFILEMANAGER_H
 
 #include <QString>
+#include <QSharedPointer>
 
 #include "cfg.h"
-#include "singleton.h"
 #include "profile.h"
 
 namespace SIM
@@ -13,6 +13,7 @@ namespace SIM
     class EXPORT ProfileManager
     {
     public:
+        typedef QSharedPointer<ProfileManager> Ptr;
         virtual ~ProfileManager();
 
         virtual QStringList enumProfiles() = 0;
@@ -39,11 +40,6 @@ namespace SIM
 
         virtual ConfigPtr config() = 0;
     };
-
-    void EXPORT createProfileManager(const QString& rootpath);
-    void EXPORT destroyProfileManager();
-    EXPORT ProfileManager* getProfileManager();
-    void EXPORT setProfileManager(ProfileManager* manager);
 }
 
 #endif
