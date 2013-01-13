@@ -83,7 +83,7 @@ def start():
 				fi=open(i,'w')
 				fi.write(data.replace(mlcomment, h_data.replace('<filename>'	, i[i.rfind(os.sep)+1:] ) ))
 				fi.close()
-		if "about.cpp" in i: #testcase
-			return
+		#if "about.cpp" in i: #testcase
+		#	return
 #start()
 
