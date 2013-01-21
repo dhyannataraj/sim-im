@@ -92,7 +92,7 @@ SET(jabber_UICS
 set (Boost_USE_STATIC_LIBS ON)
 set (Boost_USE_MULTITHREADED ON)
 
-find_package(Boost 1.50 REQUIRED system)
+find_package(Boost 1.49 REQUIRED system)
 
 include_directories(${Boost_INCLUDE_DIRS})
 

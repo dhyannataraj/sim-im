@@ -13,7 +13,7 @@
 
 SQLiteHistoryStorage::SQLiteHistoryStorage(const SIM::ProfileManager::Ptr& profileManager,
         const SIM::ClientManager::Ptr& clientManager) : m_db(QSqlDatabase::addDatabase("QSQLITE")),
-    m_clientManager(clientManager)
+    m_clientManager(clientManager), m_profileManager(profileManager)
 {
     init();
 }
