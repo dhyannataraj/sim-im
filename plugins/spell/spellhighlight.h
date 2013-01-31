@@ -53,9 +53,9 @@ protected:
     MAP_BOOL m_words; // Here we store the wordlist from the context menu
 //    int m_paragraph;
 //    int highlightParagraph( const QString &text, int endStateOfLastPara );
-    virtual void text(const QString &text);
-    virtual void tag_start(const QString &tag, const list<QString> &options);
-    virtual void tag_end(const QString &tag);
+//    virtual void text(const QString &text);
+//    virtual void tag_start(const QString &tag, const list<QString> &options);
+//    virtual void tag_end(const QString &tag);
     virtual bool processEvent(SIM::Event *e);
 
     /*************** These methods were added for backward compatibility and should be removed once ***************/
