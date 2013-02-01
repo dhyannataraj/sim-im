@@ -11,6 +11,8 @@
 #include <QCryptographicHash>
 #include <QStringList>
 
+#include <future>
+
 using namespace SIM;
 
 JabberAuthenticationController::JabberAuthenticationController() : m_state(WaitingStreamStart),

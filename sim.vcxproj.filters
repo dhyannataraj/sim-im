@@ -195,12 +195,6 @@
     <ClCompile Include="sim\simfs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sim\standardclientmanager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\standardprofilemanager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sim\translit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -211,12 +205,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sim\moc_builtinlogger.cpp">
-      <Filter>Source Files\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\moc_exec.cpp">
-      <Filter>Source Files\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\moc_plugins.cpp">
       <Filter>Source Files\generated</Filter>
     </ClCompile>
     <ClCompile Include="sim\messaging\genericmessage.cpp">
@@ -242,9 +230,6 @@
     </ClCompile>
     <ClCompile Include="sim\messaging\moc_message.cpp">
       <Filter>messaging\Source Files\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\contacts\client.cpp">
-      <Filter>contacts\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sim\contacts\contact.cpp">
       <Filter>contacts\Source Files</Filter>
@@ -524,9 +509,6 @@
     <ClInclude Include="sim\paths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sim\profile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sim\qzip\qzip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -537,12 +519,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sim\singleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sim\standardclientmanager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sim\standardprofilemanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sim\translit.h">
@@ -571,9 +547,6 @@
     </ClInclude>
     <ClInclude Include="sim\messaging\standardmessagepipe.h">
       <Filter>messaging\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sim\contacts\client.h">
-      <Filter>contacts\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sim\contacts\contact.h">
       <Filter>contacts\Header Files</Filter>
@@ -702,9 +675,6 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="sim\builtinlogger.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="sim\profilemanager.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="sim\propertyhub.h">
