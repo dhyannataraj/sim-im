@@ -176,7 +176,9 @@
     <ClCompile Include="protocol\moc_iqrequest.cpp" />
     <ClCompile Include="protocol\moc_jabberauthenticationcontroller.cpp" />
     <ClCompile Include="protocol\moc_taghandler.cpp" />
+    <ClCompile Include="protocol\moc_xmlelement.cpp" />
     <ClCompile Include="protocol\taghandler.cpp" />
+    <ClCompile Include="protocol\xmlelement.cpp" />
     <ClCompile Include="ui\jabberloginwidget.cpp" />
     <ClCompile Include="ui\moc_jabberloginwidget.cpp" />
   </ItemGroup>
@@ -284,6 +286,16 @@
     </CustomBuild>
     <ClInclude Include="protocol\stanzas\xmlstanza.h" />
     <CustomBuild Include="protocol\taghandler.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="protocol\xmlelement.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
 </Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h

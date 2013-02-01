@@ -73,6 +73,12 @@
     <ClCompile Include="protocol\moc_taghandler.cpp">
       <Filter>Source Files\generated</Filter>
     </ClCompile>
+    <ClCompile Include="protocol\xmlelement.cpp">
+      <Filter>Source Files\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\moc_xmlelement.cpp">
+      <Filter>Header Files\generated</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="jabber.h">
@@ -156,6 +162,9 @@
       <Filter>Header Files\protocol</Filter>
     </CustomBuild>
     <CustomBuild Include="protocol\inputstreamdispatcher.h">
+      <Filter>Header Files\protocol</Filter>
+    </CustomBuild>
+    <CustomBuild Include="protocol\xmlelement.h">
       <Filter>Header Files\protocol</Filter>
     </CustomBuild>
   </ItemGroup>

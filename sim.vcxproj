@@ -162,13 +162,10 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="sim\clientmanager.cpp" />
-    <ClCompile Include="sim\contacts.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
+    <ClCompile Include="sim\clients\client.cpp" />
+    <ClCompile Include="sim\clients\clientmanager.cpp" />
+    <ClCompile Include="sim\clients\clientuserdata.cpp" />
+    <ClCompile Include="sim\clients\standardclientmanager.cpp" />
     <ClCompile Include="sim\country.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -181,12 +178,11 @@
     <ClCompile Include="sim\events\moc_menuitemcollectionevent.cpp" />
     <ClCompile Include="sim\events\moc_widgetcollectionevent.cpp" />
     <ClCompile Include="sim\events\widgetcollectionevent.cpp" />
-    <ClCompile Include="sim\exec.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
+    <ClCompile Include="sim\plugin\plugin.cpp" />
+    <ClCompile Include="sim\plugin\pluginmanager.cpp" />
+    <ClCompile Include="sim\profile\profile.cpp" />
+    <ClCompile Include="sim\profile\profilemanager.cpp" />
+    <ClCompile Include="sim\profile\standardprofilemanager.cpp" />
     <ClCompile Include="sim\qzip\ioapi.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -205,16 +201,9 @@
     </ClCompile>
     <ClCompile Include="sim\misc.cpp" />
     <ClCompile Include="sim\paths.cpp" />
-    <ClCompile Include="sim\plugins.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="sim\profile.cpp" />
-    <ClCompile Include="sim\profilemanager.cpp" />
     <ClCompile Include="sim\propertyhub.cpp" />
     <ClCompile Include="sim\qzip\qzip.cpp" />
+    <ClCompile Include="sim\services.cpp" />
     <ClCompile Include="sim\sim.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -368,28 +357,12 @@
     </CustomBuild>
     <ClInclude Include="sim\cfg.h" />
     <ClInclude Include="sim\cjk_variants.h" />
-    <CustomBuild Include="sim\clientmanager.h">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Step</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Step</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Outputs)</Outputs>
-    </CustomBuild>
-    <ClInclude Include="sim\contacts.h" />
+    <ClInclude Include="sim\clients\client.h" />
+    <ClInclude Include="sim\clients\clientdatastruct.h" />
+    <ClInclude Include="sim\clients\clientmanager.h" />
+    <ClInclude Include="sim\clients\clientuserdata.h" />
+    <ClInclude Include="sim\clients\standardclientmanager.h" />
     <ClInclude Include="sim\country.h" />
-    <CustomBuild Include="sim\exec.h">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Filename).h ...</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
-    </CustomBuild>
     <CustomBuild Include="sim\events\menuitemcollectionevent.h">
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
@@ -416,22 +389,17 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="sim\messaging\messagetypedescriptor.h" />
+    <ClInclude Include="sim\plugin\plugin.h" />
+    <ClInclude Include="sim\plugin\pluginmanager.h" />
+    <ClInclude Include="sim\profile\profile.h" />
+    <ClInclude Include="sim\profile\profilemanager.h" />
+    <ClInclude Include="sim\profile\standardprofilemanager.h" />
     <ClInclude Include="sim\qzip\ioapi.h" />
     <ClInclude Include="sim\johab_hangul.h" />
     <ClInclude Include="sim\kdeisversion.h" />
     <ClInclude Include="sim\log.h" />
     <ClInclude Include="sim\misc.h" />
     <ClInclude Include="sim\paths.h" />
-    <CustomBuild Include="sim\plugins.h">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Filename).h ...</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
-    </CustomBuild>
     <ClInclude Include="sim\profile.h" />
     <CustomBuild Include="sim\profilemanager.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Ein benutzerdefinierter Buildschritt wird ausgeführt.</Message>
@@ -459,6 +427,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClInclude Include="sim\services.h" />
     <ClInclude Include="sim\simapi.h" />
     <ClInclude Include="sim\simfs.h" />
     <CustomBuild Include="sim\simgui\genericmessageeditor.h">

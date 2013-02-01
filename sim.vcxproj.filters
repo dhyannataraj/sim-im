@@ -127,6 +127,33 @@
     <Filter Include="events\Source Files\generated">
       <UniqueIdentifier>{1f0884b0-55fa-4810-bd34-083e2f10e53b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="plugin">
+      <UniqueIdentifier>{c4e3db9a-35cc-4075-8236-32863a461344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="plugin\Source Files">
+      <UniqueIdentifier>{7582b547-529a-4d27-a421-411b1cb58d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="plugin\Header Files">
+      <UniqueIdentifier>{a7273b54-5e10-48eb-a870-1116ac0bbd2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clients">
+      <UniqueIdentifier>{472eee41-5b70-40d1-b7f3-16fa1c71e8e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clients\Source Files">
+      <UniqueIdentifier>{7d569015-6659-46db-a61c-f4beb4fb4b51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clients\Header Fils">
+      <UniqueIdentifier>{cb8150a8-5e65-424f-ab94-d92a73edc3c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="profile">
+      <UniqueIdentifier>{aea783d0-0aa4-4341-9555-0d604b5e2028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="profile\Source Files">
+      <UniqueIdentifier>{d47a2acd-0b0b-4ac5-b4a1-7dd373f92b56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="profile\Header Files">
+      <UniqueIdentifier>{e74d7e2b-3825-4d79-ad22-32add709857f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sim\aboutdata.cpp">
@@ -141,16 +168,7 @@
     <ClCompile Include="sim\cfg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sim\clientmanager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\contacts.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sim\country.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\exec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sim\qzip\ioapi.c">
@@ -163,15 +181,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sim\paths.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\plugins.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\profile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sim\profilemanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sim\propertyhub.cpp">
@@ -450,6 +459,36 @@
     <ClCompile Include="sim\events\moc_actioncollectionevent.cpp">
       <Filter>events\Source Files\generated</Filter>
     </ClCompile>
+    <ClCompile Include="sim\services.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sim\plugin\plugin.cpp">
+      <Filter>plugin\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sim\plugin\pluginmanager.cpp">
+      <Filter>plugin\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sim\clients\client.cpp">
+      <Filter>clients\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sim\clients\clientmanager.cpp">
+      <Filter>clients\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sim\clients\clientuserdata.cpp">
+      <Filter>clients\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sim\clients\standardclientmanager.cpp">
+      <Filter>clients\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sim\profile\profile.cpp">
+      <Filter>profile\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sim\profile\profilemanager.cpp">
+      <Filter>profile\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sim\profile\standardprofilemanager.cpp">
+      <Filter>profile\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sim\aboutdata.h">
@@ -462,9 +501,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sim\cjk_variants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sim\contacts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sim\country.h">
@@ -620,6 +656,39 @@
     <ClInclude Include="sim\widgethierarchy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sim\services.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sim\plugin\plugin.h">
+      <Filter>plugin\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sim\plugin\pluginmanager.h">
+      <Filter>plugin\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sim\clients\client.h">
+      <Filter>clients\Header Fils</Filter>
+    </ClInclude>
+    <ClInclude Include="sim\clients\clientdatastruct.h">
+      <Filter>clients\Header Fils</Filter>
+    </ClInclude>
+    <ClInclude Include="sim\clients\clientmanager.h">
+      <Filter>clients\Header Fils</Filter>
+    </ClInclude>
+    <ClInclude Include="sim\clients\clientuserdata.h">
+      <Filter>clients\Header Fils</Filter>
+    </ClInclude>
+    <ClInclude Include="sim\clients\standardclientmanager.h">
+      <Filter>clients\Header Fils</Filter>
+    </ClInclude>
+    <ClInclude Include="sim\profile\profile.h">
+      <Filter>profile\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sim\profile\profilemanager.h">
+      <Filter>profile\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sim\profile\standardprofilemanager.h">
+      <Filter>profile\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="sim\icq.ico">
@@ -633,15 +702,6 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="sim\builtinlogger.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="sim\clientmanager.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="sim\exec.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="sim\plugins.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="sim\profilemanager.h">

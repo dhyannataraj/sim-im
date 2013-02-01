@@ -7,12 +7,6 @@
     <ClCompile Include="..\sim\tests\spies\widgetcollectioneventreceiver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\sim\tests\moc_testuicommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\sim\tests\spies\moc_widgetcollectioneventreceiver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\sim\tests\test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -49,66 +43,114 @@
     <ClCompile Include="..\sim\tests\testwidgetcollectionevent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\sim\tests\testcommandhub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sim\tests\testconfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sim\tests\testpropertyhub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sim\tests\testsocketfactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sim\tests\testuserdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sim\tests\moc_testuicommand.cpp">
+      <Filter>generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sim\tests\spies\moc_widgetcollectioneventreceiver.cpp">
+      <Filter>generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sim\tests\testcontactlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\sim\tests\gtest-qt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\sim\tests\matchers\messagematchers.h">
+    <ClInclude Include="..\sim\tests\testwidgetcollectionevent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sim\tests\simlib-testing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sim\tests\matchers\messagematchers.h">
+      <Filter>Header Files\matchers</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\mocks\mockasyncsocket.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\mocks\mockavatarstorage.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\mocks\mockclient.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\mocks\mockcontactlist.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\mocks\mockimagestorage.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\mocks\mockimcontact.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\mocks\mockmessage.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\mocks\mockmessageoutpipe.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\mocks\mockmessagepipe.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\mocks\mockmessageprocessor.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
-    <ClInclude Include="..\sim\tests\mockprotocol.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\sim\tests\mocks\mockclientmanager.h">
+      <Filter>Header Files\mock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sim\tests\mocks\mockimstatus.h">
+      <Filter>Header Files\mock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sim\tests\mocks\mockprofilemanager.h">
+      <Filter>Header Files\mock</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\stubs\stubclient.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\stubs</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\stubs\stubimagestorage.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\stubs</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\stubs\stubimcontact.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\stubs</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\stubs\stubimgroup.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\stubs</Filter>
     </ClInclude>
     <ClInclude Include="..\sim\tests\stubs\stubmessage.h">
+      <Filter>Header Files\stubs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sim\tests\testconfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\sim\tests\teststandardmessageoutpipe.h">
+    <ClInclude Include="..\sim\tests\testcontactlist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\sim\tests\testwidgetcollectionevent.h">
+    <ClInclude Include="..\sim\tests\testeventhub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sim\tests\testpropertyhub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sim\tests\testsocketfactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sim\tests\testuserdata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -117,7 +159,7 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="..\sim\tests\spies\widgetcollectioneventreceiver.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\spies</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +168,21 @@
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{d36f3da6-c3d7-4ef4-a991-f3058e72a71a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="generated">
+      <UniqueIdentifier>{d4d17785-707a-4d23-90d0-956106dd6e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\matchers">
+      <UniqueIdentifier>{7ef6b75c-e1c0-41ad-a38e-8a4315f15a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mock">
+      <UniqueIdentifier>{085db4b8-eb01-4795-87dd-a948443cc222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\spies">
+      <UniqueIdentifier>{183c0965-97ec-4357-b533-1ceeb8228566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\stubs">
+      <UniqueIdentifier>{2ac4edc7-8152-43bd-b1e2-b49fab8a8c8c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
