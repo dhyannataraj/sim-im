@@ -895,7 +895,7 @@ void UserTabBar::changeTab(unsigned id)
     for (int t = 0; t < count(); t++)
     {
         UserWnd *wnd = wndForTab(t);
-        if (wnd && wnd->id() == id)
+        if (wnd && (unsigned)wnd->id() == id)
         {
             setTabText(t,wnd->getName());
             QTimer::singleShot(0, this, SLOT(slotRepaint()));

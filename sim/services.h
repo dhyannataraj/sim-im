@@ -11,7 +11,7 @@
 
 namespace SIM {
 
-    class Services
+    class EXPORT Services
     {
     public:
         typedef QSharedPointer<Services> Ptr;

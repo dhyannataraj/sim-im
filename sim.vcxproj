@@ -164,7 +164,7 @@
     </ClCompile>
     <ClCompile Include="sim\clients\client.cpp" />
     <ClCompile Include="sim\clients\clientmanager.cpp" />
-    <ClCompile Include="sim\clients\clientuserdata.cpp" />
+    <ClCompile Include="sim\clients\moc_clientmanager.cpp" />
     <ClCompile Include="sim\clients\standardclientmanager.cpp" />
     <ClCompile Include="sim\country.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -178,6 +178,7 @@
     <ClCompile Include="sim\events\moc_menuitemcollectionevent.cpp" />
     <ClCompile Include="sim\events\moc_widgetcollectionevent.cpp" />
     <ClCompile Include="sim\events\widgetcollectionevent.cpp" />
+    <ClCompile Include="sim\plugin\moc_pluginmanager.cpp" />
     <ClCompile Include="sim\plugin\plugin.cpp" />
     <ClCompile Include="sim\plugin\pluginmanager.cpp" />
     <ClCompile Include="sim\profile\profile.cpp" />
@@ -354,8 +355,16 @@
     <ClInclude Include="sim\cjk_variants.h" />
     <ClInclude Include="sim\clients\client.h" />
     <ClInclude Include="sim\clients\clientdatastruct.h" />
-    <ClInclude Include="sim\clients\clientmanager.h" />
-    <ClInclude Include="sim\clients\clientuserdata.h" />
+    <CustomBuild Include="sim\clients\clientmanager.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="sim\clients\standardclientmanager.h" />
     <ClInclude Include="sim\country.h" />
     <CustomBuild Include="sim\events\menuitemcollectionevent.h">
@@ -385,7 +394,16 @@
     </CustomBuild>
     <ClInclude Include="sim\messaging\messagetypedescriptor.h" />
     <ClInclude Include="sim\plugin\plugin.h" />
-    <ClInclude Include="sim\plugin\pluginmanager.h" />
+    <CustomBuild Include="sim\plugin\pluginmanager.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h
+</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Filename).h ...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="sim\profile\profile.h" />
     <ClInclude Include="sim\profile\profilemanager.h" />
     <ClInclude Include="sim\profile\standardprofilemanager.h" />
@@ -664,10 +682,10 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="sim\icq.ico" />
+    <ResourceCompile Include="sim\sim.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="sim\sim.rc" />
+    <Image Include="sim\extra\sim.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
