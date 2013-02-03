@@ -143,7 +143,7 @@ namespace SIM
 			bool m_bPluginsInBuildDir;  // plugins in build dir -> full path in pluginInfo.filePath
 
 			std::auto_ptr<BuiltinLogger> builtinLogger;
-            Services::Ptr m_services;
+			Services::Ptr m_services;
 
 			friend class PluginManager;
 	};
@@ -365,7 +365,7 @@ namespace SIM
 
 	bool PluginManagerPrivate::initialize(const Services::Ptr& services)
 	{
-        m_services = services;
+		m_services = services;
 		m_base = 0;
 		m_bLoaded = false;
 		m_bInInit = true;
@@ -683,7 +683,7 @@ namespace SIM
 	{
 		getEventHub()->triggerEvent("quit");
 		p->m_services->profileManager()->sync();
-        delete p;
+		delete p;
 	}
 
 	bool PluginManager::isLoaded()

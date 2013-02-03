@@ -1,9 +1,9 @@
 /***************************************************************************
-                          plugins.h  -  description
-                             -------------------
-    begin                : Sat Oct 28 2006
-    copyright            : (C) 2006 by Christian Ehrlicher
-    email                : ch.ehrlicher@gmx.de
+						  plugins.h  -  description
+							 -------------------
+	begin                : Sat Oct 28 2006
+	copyright            : (C) 2006 by Christian Ehrlicher
+	email                : ch.ehrlicher@gmx.de
  ***************************************************************************/
 
 /***************************************************************************
@@ -31,41 +31,40 @@ class Buffer;
 
 namespace SIM
 {
-    struct PluginInfo;
+	struct PluginInfo;
 
-    class EXPORT PluginManager : public QObject
-    {
-        Q_OBJECT
-    public:
-        PluginManager(int argc, char **argv);
-        ~PluginManager();
+	class EXPORT PluginManager : public QObject
+	{
+		Q_OBJECT
+	public:
+		PluginManager(int argc, char **argv);
+		~PluginManager();
 
-        bool initialize(const Services::Ptr& services);
-        bool isLoaded();
-        PluginPtr plugin(const QString& pluginname);
-        QStringList enumPlugins();
+		bool initialize(const Services::Ptr& services);
+		bool isLoaded();
+		PluginPtr plugin(const QString& pluginname);
+		QStringList enumPlugins();
 
-        QString pluginTitle(const QString& pluginname);
-        QString pluginDescription(const QString& pluginname);
+		QString pluginTitle(const QString& pluginname);
+		QString pluginDescription(const QString& pluginname);
 
-        bool isPluginAlwaysEnabled(const QString& pluginname);
-        bool isPluginProtocol(const QString& pluginname);
-        bool isPluginLoadByDefault(const QString& pluginname);
+		bool isPluginAlwaysEnabled(const QString& pluginname);
+		bool isPluginProtocol(const QString& pluginname);
+		bool isPluginLoadByDefault(const QString& pluginname);
 
-        PluginInfo* getPluginInfo(const QString& pluginname);
+		PluginInfo* getPluginInfo(const QString& pluginname);
 
-    private slots:
-        void eventInitAbort();
+	private slots:
+		void eventInitAbort();
 
-    private:
-        class PluginManagerPrivate *p;
-        Services::Ptr m_services;
+	private:
+		class PluginManagerPrivate *p;
 
-        COPY_RESTRICTED(PluginManager)
-    };
+		COPY_RESTRICTED(PluginManager)
+	};
 
-    /* Plugin prototype */
-    typedef Plugin* (*createPluginObject)(const Services::Ptr& services);
+	/* Plugin prototype */
+	typedef Plugin* (*createPluginObject)(const Services::Ptr& services);
 
 	const unsigned PLUGIN_KDE_COMPILE    = 0x0001;
 #ifdef USE_KDE
@@ -80,21 +79,21 @@ namespace SIM
 	const unsigned PLUGIN_NODISABLE      = 0x0010;
 	const unsigned PLUGIN_RELOAD         = 0x0020;
 
-    struct PluginInfo           // Information in plugin
-    {
-        const char      *title;         // User title
-        const char      *description;   // Description
-        const char      *version;       // Version
-        unsigned        flags;          // plugin flags
-        createPluginObject createObject;
-    };
+	struct PluginInfo           // Information in plugin
+	{
+		const char      *title;         // User title
+		const char      *description;   // Description
+		const char      *version;       // Version
+		unsigned        flags;          // plugin flags
+		createPluginObject createObject;
+	};
 
 	SIM_EXPORT PluginInfo *GetPluginInfo();
 
 
-    SIM_EXPORT PluginManager* getPluginManager();
-    void EXPORT createPluginManager(int argc, char** argv);
-    void EXPORT destroyPluginManager();
+	SIM_EXPORT PluginManager* getPluginManager();
+	void EXPORT createPluginManager(int argc, char** argv);
+	void EXPORT destroyPluginManager();
 
 } // namespace SIM
 
