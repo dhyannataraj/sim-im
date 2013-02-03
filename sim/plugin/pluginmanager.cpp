@@ -682,8 +682,8 @@ namespace SIM
 	PluginManager::~PluginManager()
 	{
 		getEventHub()->triggerEvent("quit");
-		delete p;
-		m_services->profileManager()->sync();
+		p->m_services->profileManager()->sync();
+        delete p;
 	}
 
 	bool PluginManager::isLoaded()
