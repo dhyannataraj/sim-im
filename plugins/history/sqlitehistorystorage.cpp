@@ -1,6 +1,6 @@
+
 #include "sqlitehistorystorage.h"
-#include "profilemanager.h"
-//#include "sqlite3.h"
+#include "profile/profilemanager.h"
 #include "log.h"
 #include "contacts/imcontact.h"
 #include <QDir>
@@ -8,10 +8,12 @@
 #include <QSqlError>
 #include "messaging/message.h"
 #include "messaging/genericmessage.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 
 
-SQLiteHistoryStorage::SQLiteHistoryStorage() : m_db(QSqlDatabase::addDatabase("QSQLITE"))
+SQLiteHistoryStorage::SQLiteHistoryStorage(const SIM::ProfileManager::Ptr& profileManager,
+        const SIM::ClientManager::Ptr& clientManager) : m_db(QSqlDatabase::addDatabase("QSQLITE")),
+    m_clientManager(clientManager), m_profileManager(profileManager)
 {
     init();
 }
@@ -65,8 +67,8 @@ QList<SIM::MessagePtr> SQLiteHistoryStorage::getMessages(const QString& sourceCo
 		QString messageText = query.value(3).toString();
 		QDateTime timestamp = QDateTime::fromTime_t(query.value(4).toUInt());
 
-		SIM::IMContactPtr source = SIM::getClientManager()->client(clientId)->getIMContact(sourceId);
-		SIM::IMContactPtr target = SIM::getClientManager()->client(clientId)->getIMContact(targetId);
+		SIM::IMContactPtr source = m_clientManager->client(clientId)->getIMContact(sourceId);
+		SIM::IMContactPtr target = m_clientManager->client(clientId)->getIMContact(targetId);
 
 		auto message = new SIM::GenericMessage(source, target, messageText);
 		message->setTimestamp(timestamp);
@@ -77,7 +79,7 @@ QList<SIM::MessagePtr> SQLiteHistoryStorage::getMessages(const QString& sourceCo
 
 void SQLiteHistoryStorage::init()
 {
-    QString profileRoot = SIM::getProfileManager()->profilePath();
+    QString profileRoot = m_profileManager->profilePath();
     m_db.setDatabaseName(profileRoot + QDir::separator() + "history.sqlitedb");
 
     bool ok = m_db.open();

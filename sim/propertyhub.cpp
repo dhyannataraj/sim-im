@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include "propertyhub.h"
 #include "log.h"
-#include "profilemanager.h"
-
 
 namespace SIM
 {

@@ -33,6 +33,7 @@ SET(jabber_SRCS
         protocol/iqrequest.cpp
         protocol/jabberauthenticationcontroller.cpp
         protocol/taghandler.cpp
+        protocol/xmlelement.cpp
         network/standardjabbersocket.cpp
         ui/jabberloginwidget.cpp
 )
@@ -67,6 +68,7 @@ SET(jabber_HDRS
         protocol/iqrequest.h
         protocol/jabberauthenticationcontroller.h
         protocol/taghandler.h
+        protocol/xmlelement.h
         network/jabbersocket.h
         network/standardjabbersocket.h
         ui/jabberloginwidget.h
@@ -90,7 +92,7 @@ SET(jabber_UICS
 set (Boost_USE_STATIC_LIBS ON)
 set (Boost_USE_MULTITHREADED ON)
 
-find_package(Boost)
+find_package(Boost 1.49 REQUIRED system)
 
 include_directories(${Boost_INCLUDE_DIRS})
 

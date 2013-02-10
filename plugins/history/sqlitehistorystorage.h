@@ -3,11 +3,14 @@
 
 #include "historystorage.h"
 #include <qsqldatabase.h>
+#include "clients/clientmanager.h"
+#include "profile/profilemanager.h"
 
 class SQLiteHistoryStorage : public HistoryStorage
 {
 public:
-    explicit SQLiteHistoryStorage();
+    explicit SQLiteHistoryStorage(const SIM::ProfileManager::Ptr& profileManager,
+            const SIM::ClientManager::Ptr& clientManager);
     virtual ~SQLiteHistoryStorage();
 
     virtual void addMessage(const SIM::MessagePtr& message);
@@ -19,6 +22,8 @@ private:
     void createTables();
 
     QSqlDatabase m_db;
+    SIM::ClientManager::Ptr m_clientManager;
+    SIM::ProfileManager::Ptr m_profileManager;
 };
 
 #endif // SQLITEHISTORYSTORAGE_H

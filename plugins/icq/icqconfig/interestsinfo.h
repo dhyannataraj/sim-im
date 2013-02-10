@@ -18,7 +18,7 @@
 #ifndef _INTERESTSINFO_H
 #define _INTERESTSINFO_H
 
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "ui_interestsinfobase.h"
 #include "../icqcontact.h"
 

@@ -1,8 +1,9 @@
+
 #ifndef ICQGROUP_H
 #define ICQGROUP_H
 
 #include "contacts/imgroup.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "icq_defines.h"
 
 class ICQClient;
@@ -39,3 +40,4 @@ private:
 typedef QSharedPointer<ICQGroup> ICQGroupPtr;
 
 #endif // ICQGROUP_H
+

@@ -13,6 +13,8 @@
 #include "tests/mocks/mockimcontact.h"
 
 #include "contacts/contactlist.h"
+#include "services.h"
+#include "tests/simlib-testing.h"
 
 #include "core.h"
 #include "test.h"
@@ -28,7 +30,7 @@ namespace
     class ContainerController : public ::ContainerController
     {
     public:
-         ContainerController(int id) : ::ContainerController(id) {}
+         ContainerController(const SIM::Services::Ptr& services, int id) : ::ContainerController(services, id) {}
          virtual ~ContainerController() {}
 
          MockObjects::MockUserWndControllerPtr lastCreatedUserWnd()
@@ -51,21 +53,23 @@ namespace
     {
     public:
         SIM::MessagePipe* oldpipe;
+        SIM::Services::Ptr services;
 
         virtual void SetUp()
         {
+            services = SIM::makeMockServices();
             auto imagestorage = new testing::NiceMock<MockObjects::MockImageStorage>();
             SIM::setImageStorage(imagestorage);
             ON_CALL(*imagestorage, icon(_)).WillByDefault(Return(QIcon()));
-            core = new CorePlugin();
+            core = new CorePlugin(SIM::makeMockServices());
 
             oldpipe = SIM::getOutMessagePipe();
             pipe = new MockObjects::MockMessagePipe();
             SIM::setOutMessagePipe(pipe);
 
-            SIM::createContactList();
+            SIM::createContactList(services->profileManager(), services->clientManager());
 
-            controller = new ContainerController(ControllerId);
+            controller = new ContainerController(services, ControllerId);
         }
 
         virtual void TearDown()

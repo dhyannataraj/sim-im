@@ -19,8 +19,8 @@
 #include "simapi.h"
 #include "log.h"
 #include "misc.h"
-#include "profilemanager.h"
-#include "clientmanager.h"
+#include "profile/profilemanager.h"
+#include "clients/clientmanager.h"
 #include "simfs.h"
 #include "paths.h"
 #include "contacts/protocolmanager.h"
@@ -36,6 +36,7 @@
 #include "messaging/messageoutpipe.h"
 #include "messaging/messagepipe.h"
 #include "imagestorage/avatarstorage.h"
+#include "plugin/pluginmanager.h"
 
 #include <QDir>
 
@@ -118,7 +119,6 @@ int main(int argc, char *argv[])
     int res = 1;
 	QCoreApplication::setOrganizationDomain("sim-im.org");
 	QCoreApplication::setApplicationName("Sim-IM");
-	SIM::createProfileManager(SIM::PathManager::configRoot());
     qInstallMsgHandler(simMessageOutput);
 
 #ifdef USE_KDE
@@ -149,35 +149,27 @@ int main(int argc, char *argv[])
     SIM::createMessagePipe();
     SIM::createOutMessagePipe();
     SIM::createImageStorage();
-    SIM::createAvatarStorage();
+    SIM::createAvatarStorage(app.services()->profileManager());
     SIM::createCommandHub();
-    SIM::createContactList();
-    SIM::createProtocolManager();
+    SIM::createContactList(app.services()->profileManager(), app.services()->clientManager());
     SIM::createPluginManager(argc, argv);
-    SIM::createClientManager();
 
+    if(!app.initializePlugins())
+        return -1;
 
-    if(!getPluginManager()->initialize())
-        return 1;
-    app.setQuitOnLastWindowClosed(true);
-    if (SIM::getPluginManager()->isLoaded())
-        res = app.exec();
-    
-    SIM::getClientManager()->sync();
-    SIM::destroyClientManager();
+    res = app.exec();
+
     SIM::destroyPluginManager();
     
     SIM::destroyContactList();
     SIM::destroyCommandHub();
     SIM::destroyAvatarStorage();
     SIM::destroyImageStorage();
-    SIM::destroyProfileManager();
     SIM::destroyOutMessagePipe();
     SIM::destroyMessagePipe();
     destroyLogging();
     SIM::destroyEventHub();
   
-    SIM::destroyProtocolManager(); //Put it to here fixes crash on end bug.
     return res;
 }
 

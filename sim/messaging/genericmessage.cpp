@@ -1,7 +1,7 @@
 #include <QTextDocument>
 
 #include "genericmessage.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 
 namespace SIM {
 

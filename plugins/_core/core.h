@@ -29,12 +29,13 @@
 #include <QMenu>
 
 #include "misc.h"
-#include "plugins.h"
+#include "plugin/plugin.h"
 #include "propertyhub.h"
 #include "simapi.h"
 #include "mainwin.h"
 #include "core_api.h"
 #include "container/icontainermanager.h"
+#include "services.h"
 
 using namespace std;
 
@@ -137,7 +138,7 @@ class CORE_EXPORT CorePlugin : public QObject, public SIM::Plugin
 {
     Q_OBJECT
 public:
-    CorePlugin();
+    CorePlugin(const SIM::Services::Ptr& services);
     virtual ~CorePlugin();
 //    void setManualStatus(unsigned long status);
 //    unsigned long getManualStatus();
@@ -263,6 +264,7 @@ private:
     SIM::PropertyHubPtr m_propertyHub;
     MainWindow* m_main;
     CommonStatus* m_commonStatus;
+    SIM::Services::Ptr m_services;
 //    bool m_bIgnoreEvents;
     IContainerManager* m_containerManager;
 

@@ -1,4 +1,6 @@
+
 #include "protocol.h"
+#include "plugin/plugin.h"
 
 namespace SIM
 {

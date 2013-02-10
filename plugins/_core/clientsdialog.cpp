@@ -1,14 +1,15 @@
 #include "clientsdialog.h"
 
-#include "clientmanager.h"
-#include "contacts/client.h"
+#include "clients/clientmanager.h"
+#include "clients/client.h"
 #include "imagestorage/imagestorage.h"
 #include "contacts/protocol.h"
 #include "newprotocol.h"
 #include "log.h"
 
-ClientsDialog::ClientsDialog(QWidget *parent)
-    : QDialog(parent)
+ClientsDialog::ClientsDialog(const SIM::Services::Ptr& services, QWidget *parent)
+    : QDialog(parent),
+    m_services(services)
 {
 	ui.setupUi(this);
 	fillClientsList();
@@ -21,7 +22,7 @@ ClientsDialog::~ClientsDialog()
 
 void ClientsDialog::addClient()
 {
-    NewProtocol dlg("", this);
+    NewProtocol dlg(m_services, "", this);
     dlg.exec();
     fillClientsList();
 }
@@ -33,8 +34,8 @@ void ClientsDialog::deleteClient()
     if(selected.size() != 1)
         return;
     int index = ui.lw_clients->row(selected.at(0));
-    SIM::ClientPtr client = SIM::getClientManager()->client(index);
-    SIM::getClientManager()->deleteClient(client->name());
+    SIM::ClientPtr client = m_services->clientManager()->client(index);
+    m_services->clientManager()->deleteClient(client->name());
     fillClientsList();
 }
 
@@ -51,7 +52,7 @@ void ClientsDialog::moveDown()
 void ClientsDialog::fillClientsList()
 {
     ui.lw_clients->clear();
-    auto clients = SIM::getClientManager()->allClients();
+    auto clients = m_services->clientManager()->allClients();
     foreach(const auto& client, clients)
     {
         QIcon icon = SIM::getImageStorage()->icon(client->protocol()->iconId());

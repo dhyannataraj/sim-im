@@ -3,10 +3,10 @@
 
 #include "group.h"
 
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "contacts/contactlist.h"
 #include "contact.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 
 namespace SIM
 {
@@ -88,7 +88,7 @@ namespace SIM
         return true;
     }
 
-    bool Group::deserialize(QDomElement& element)
+    bool Group::deserialize(const ClientManager::Ptr& clientManager, QDomElement& element)
     {
         userdata()->deserialize(element);
         QDomElement main = element.elementsByTagName("main").at(0).toElement();
@@ -99,7 +99,7 @@ namespace SIM
         QDomNodeList cldatalist = element.elementsByTagName("clientdata");
         for(int j = 0; j < cldatalist.size(); j++) {
             QDomElement clientElement = cldatalist.at(j).toElement();
-            ClientPtr client = getClientManager()->client(clientElement.attribute("clientname"));
+            ClientPtr client = clientManager->client(clientElement.attribute("clientname"));
             if(!client)
                 continue;
             IMGroupPtr imgr = clientGroup(client->name());
@@ -131,7 +131,7 @@ namespace SIM
         return true;
     }
 
-    bool Group::loadState(PropertyHubPtr state)
+    bool Group::loadState(const ClientManager::Ptr& clientManager, PropertyHubPtr state)
     {
         if (state.isNull())
             return false;
@@ -154,7 +154,7 @@ namespace SIM
         foreach (const QString& clname, clients)
         {
             PropertyHubPtr clientHub = state->propertyHub(clname);
-            ClientPtr client = getClientManager()->client(clname);
+            ClientPtr client = clientManager->client(clname);
             if (!client)
                 continue;
             IMGroupPtr imgr = clientGroup(client->name());

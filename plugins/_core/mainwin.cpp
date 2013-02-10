@@ -26,7 +26,7 @@
 #include "commands/commandhub.h"
 #include "commands/uicommandlist.h"
 #include "imagestorage/imagestorage.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "container/userwnd.h"
 #include "events/actioncollectionevent.h"
 #include "clientsdialog.h"
@@ -44,7 +44,7 @@
 #include <QToolBar>
 #include <QAction>
 #include <QMessageBox>
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 
 #include "log.h"
 
@@ -53,12 +53,13 @@ using namespace SIM;
 static const char* MessageTypeIdProperty = "message_type_id";
 static const char* ContactIdProperty = "contact_id";
 
-MainWindow::MainWindow(CorePlugin* core)
+MainWindow::MainWindow(const SIM::Services::Ptr& services, CorePlugin* core)
     : QMainWindow(NULL, Qt::Window)
     , m_core(core)
     , m_noresize(false)
     , m_systray(new QSystemTrayIcon(this))
     , m_trayIconMenu(new QMenu(this))
+    , m_services(services)
 {
     log(L_DEBUG, "MainWindow::MainWindow()");
     setAttribute(Qt::WA_AlwaysShowToolTips);
@@ -190,7 +191,7 @@ void MainWindow::refreshStatusWidgets()
 {
     qDeleteAll(m_statusWidgets);
     m_statusWidgets.clear();
-    QList<ClientPtr> clients = getClientManager()->allClients();
+    QList<ClientPtr> clients = m_services->clientManager()->allClients();
     foreach(const ClientPtr& client, clients)
     {
         QWidget* statusWidget = client->createStatusWidget();
@@ -336,7 +337,7 @@ void MainWindow::mainMenuRequested()
 
 void MainWindow::showClientsDialog()
 {
-    ClientsDialog dlg(this);
+    ClientsDialog dlg(m_services, this);
     dlg.exec();
     refreshStatusWidgets();
 }
@@ -416,9 +417,9 @@ void MainWindow::systrayActivated(QSystemTrayIcon::ActivationReason reason)
 
 void MainWindow::loadSettings()
 {
-    if (!getProfileManager())
+    if (!m_services->profileManager())
         return;
-    PropertyHubPtr rootHub = getProfileManager()->currentProfile()->config()->rootHub();
+    PropertyHubPtr rootHub = m_services->profileManager()->currentProfile()->config()->rootHub();
 
     if (rootHub->propertyHub("windows").isNull())
         return;
@@ -432,9 +433,9 @@ void MainWindow::loadSettings()
 
 void MainWindow::saveSettings()
 {
-    if (!getProfileManager())
+    if (!m_services->profileManager())
         return;
-    PropertyHubPtr rootHub = getProfileManager()->currentProfile()->config()->rootHub();
+    PropertyHubPtr rootHub = m_services->profileManager()->currentProfile()->config()->rootHub();
     if (rootHub->propertyHub("windows").isNull())
         rootHub->addPropertyHub(PropertyHub::create("windows"));
 

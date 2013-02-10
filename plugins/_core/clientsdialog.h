@@ -3,12 +3,13 @@
 
 #include <QtGui/QDialog>
 #include "ui_clientsdialog.h"
+#include "services.h"
 
 class ClientsDialog : public QDialog
 {
     Q_OBJECT
 public:
-    ClientsDialog(QWidget *parent = 0);
+    ClientsDialog(const SIM::Services::Ptr& services, QWidget *parent = 0);
     ~ClientsDialog();
 
 public slots:
@@ -20,6 +21,7 @@ public slots:
 private:
     void fillClientsList();
     Ui::ClientsDialog ui;
+    SIM::Services::Ptr m_services;
 };
 
 #endif // CLIENTSDIALOG_H

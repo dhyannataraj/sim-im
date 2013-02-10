@@ -3,10 +3,10 @@
 #include <vector>
 #include <stdio.h>
 #include "clientuserdata.h"
-#include "contacts.h"
+#include "contacts/contact.h"
 #include "client.h"
 #include "clientmanager.h"
-#include "imcontact.h"
+#include "contacts/imcontact.h"
 
 namespace SIM
 {

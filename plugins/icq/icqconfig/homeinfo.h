@@ -18,7 +18,6 @@
 #ifndef _HOMEINFO_H
 #define _HOMEINFO_H
 
-#include "contacts.h"
 #include "../icqcontact.h"
 
 #include "ui_homeinfobase.h"

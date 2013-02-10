@@ -18,14 +18,15 @@
 #include "newprotocol.h"
 
 
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "newprotocol.h"
 #include "core.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "contacts/protocolmanager.h"
 #include "log.h"
 #include "imagestorage/imagestorage.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
+#include "plugin/pluginmanager.h"
 
 #include <QPixmap>
 #include <QPushButton>
@@ -35,11 +36,12 @@
 using namespace std;
 using namespace SIM;
 
-NewProtocol::NewProtocol(const QString& profileName, QWidget *parent) :
+NewProtocol::NewProtocol(const SIM::Services::Ptr& services, const QString& profileName, QWidget *parent) :
 		QDialog(parent),
 		m_connectionParameters(NULL),
 		m_profileName(profileName),
-		m_ui(new Ui::NewProtocol)
+		m_ui(new Ui::NewProtocol),
+        m_services(services)
 {
 	m_ui->setupUi(this);
 
@@ -72,18 +74,18 @@ void NewProtocol::accept()
 {
 	ProtocolPtr protocol = protocolByIndex(m_ui->cb_protocol->currentIndex());
 
-	ProfilePtr profile = getProfileManager()->currentProfile();
+	ProfilePtr profile = m_services->profileManager()->currentProfile();
 	if(!profile)
 	{
-        getProfileManager()->newProfile(m_profileName);
-        getProfileManager()->selectProfile(m_profileName);
-        profile = getProfileManager()->currentProfile();
+        m_services->profileManager()->newProfile(m_profileName);
+        m_services->profileManager()->selectProfile(m_profileName);
+        profile = m_services->profileManager()->currentProfile();
 	}
 	profile->enablePlugin(protocol->plugin()->name());
 
 	ClientPtr client = protocol->createClientWithLoginWidget(m_connectionParameters);
-	getClientManager()->addClient(client);
-	getClientManager()->sync();
+	m_services->clientManager()->addClient(client);
+	m_services->clientManager()->sync();
 
 	QDialog::accept();
 }
@@ -98,10 +100,10 @@ void NewProtocol::currentProtocolChanged(int index)
 
 void NewProtocol::fillProtocolsCombobox()
 {
-	int totalProtocolCount = getProtocolManager()->protocolCount();
+	int totalProtocolCount = m_services->protocolManager()->protocolCount();
 	for(int i = 0; i < totalProtocolCount; i++)
 	{
-		ProtocolPtr protocol = getProtocolManager()->protocol(i);
+		ProtocolPtr protocol = m_services->protocolManager()->protocol(i);
 		QIcon icon = SIM::getImageStorage()->icon(protocol->iconId());
 		QString protocolName = protocol->name();
 		m_ui->cb_protocol->addItem(icon, protocolName);
@@ -119,7 +121,7 @@ void NewProtocol::destroyProtocolParametersWidget()
 
 SIM::ProtocolPtr NewProtocol::protocolByIndex(int index)
 {
-	return getProtocolManager()->protocol(index);
+	return m_services->protocolManager()->protocol(index);
 }
 
 void NewProtocol::setProtocolParametersWidget(QWidget* widget)

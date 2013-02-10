@@ -7,7 +7,6 @@
 #include "events/standardevent.h"
 #include "events/logevent.h"
 #include "contacts/contactlist.h"
-#include "contacts.h"
 #include "tests/stubs/stubimagestorage.h"
 
 void registerEvents()
@@ -27,7 +26,6 @@ int main(int argc, char** argv)
     StubObjects::StubImageStorage imagestorage;
     SIM::setImageStorage(&imagestorage);
     SIM::createCommandHub();
-    SIM::createContactList();
     registerEvents();
     int ret = RUN_ALL_TESTS();
 #ifdef WIN32

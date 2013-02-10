@@ -47,16 +47,17 @@ email                : vovan@shutoff.ru
 #include "simgui/ballonmsg.h"
 #include "contacts/contact.h"
 #include "contacts/group.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "contacts/protocolmanager.h"
 #include "contacts/imcontact.h"
 #include "events/eventhub.h"
 #include "events/widgetcollectionevent.h"
-#include "profilemanager.h"
-#include "clientmanager.h"
+#include "profile/profilemanager.h"
+#include "clients/clientmanager.h"
 #include "contacts/contactlist.h"
 #include "commands/commandhub.h"
 #include "commands/menuaction.h"
+#include "plugin/pluginmanager.h"
 
 // _core
 #include "core.h"
@@ -79,13 +80,12 @@ using namespace SIM;
 
 Plugin *createCorePlugin(unsigned /*base*/, bool, Buffer * /*config*/)
 {
-    Plugin *plugin = new CorePlugin();
-    return plugin;
+    return nullptr;
 }
 
-Plugin *createCorePluginObject()
+Plugin *createCorePluginObject(const SIM::Services::Ptr& services)
 {
-    Plugin *plugin = new CorePlugin();
+    Plugin *plugin = new CorePlugin(services);
     return plugin;
 }
 
@@ -179,8 +179,9 @@ CorePlugin* getCorePlugin()
 //	{ 0, NULL }
 //};
 
-CorePlugin::CorePlugin() : QObject()
-    , Plugin            ()
+CorePlugin::CorePlugin(const SIM::Services::Ptr& services) : QObject()
+    , Plugin            (),
+    m_services(services)
 //    , historyXSL        (NULL)
 //    , m_bInit           (false)
 //    , m_cfg             (NULL)
@@ -204,8 +205,8 @@ CorePlugin::CorePlugin() : QObject()
 {
     g_plugin = this;
 //	setValue("StatusTime", QDateTime::currentDateTime().toTime_t());
-    m_containerManager = new ContainerManager(this);
-    m_commonStatus = new CommonStatus(getClientManager());
+    m_containerManager = new ContainerManager(m_services, this);
+    m_commonStatus = new CommonStatus(m_services->clientManager());
 
     registerEvents();
     subscribeToEvents();
@@ -1077,7 +1078,7 @@ CorePlugin::~CorePlugin()
 
 void CorePlugin::eventInit()
 {
-    m_main = new MainWindow(this);
+    m_main = new MainWindow(m_services, this);
     log(L_DEBUG, "CorePlugin::eventInit");
     if(!init()) {
         getEventHub()->triggerEvent("init_abort");
@@ -3099,14 +3100,14 @@ void CorePlugin::eventInit()
 
 void CorePlugin::createNewProfile(const QString& name)
 {
-	NewProtocol dlg(name, NULL);
+	NewProtocol dlg(m_services, name, NULL);
 	dlg.exec();
 }
 
 bool CorePlugin::init()
 {
     log(L_DEBUG, "CorePlugin::init");
-    ConfigPtr settings = getProfileManager()->config();
+    ConfigPtr settings = m_services->profileManager()->config();
 
     QAction* quitAction = getCommandHub()->action("quit");
     connect(quitAction, SIGNAL(triggered()), this, SLOT(cmdQuit()));
@@ -3126,7 +3127,7 @@ bool CorePlugin::init()
     if(!noshow)
     {
     	log(L_DEBUG, "!noshow");
-        ProfileSelectDialog dlg;
+        ProfileSelectDialog dlg(m_services->profileManager(), m_services->clientManager());
         dlg.setModal(true);
         if(dlg.exec() != QDialog::Accepted)
             return false;
@@ -3140,22 +3141,22 @@ bool CorePlugin::init()
     }
     else
     {
-        getProfileManager()->selectProfile(profile);
-        getClientManager()->load();
+        m_services->profileManager()->selectProfile(profile);
+        m_services->clientManager()->load();
     }
 
     log(L_DEBUG, "Profile selected: %s", qPrintable(profile));
 
-    m_propertyHub = getProfileManager()->getPropertyHub("_core");
+    m_propertyHub = m_services->profileManager()->getPropertyHub("_core");
     if(!m_propertyHub)
         return false;
 
     getEventHub()->triggerEvent("load_config");
 
-    QStringList clients = getClientManager()->clientList();
+    QStringList clients = m_services->clientManager()->clientList();
     foreach(const QString& clname, clients)
     {
-        ClientPtr client = getClientManager()->client(clname);
+        ClientPtr client = m_services->clientManager()->client(clname);
         if(client->savedStatus())
             client->changeStatus(client->savedStatus());
     }

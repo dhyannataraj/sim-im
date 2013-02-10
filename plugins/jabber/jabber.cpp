@@ -18,17 +18,18 @@
 #include "jabberclient.h"
 #include "jabber.h"
 #include "misc.h"
+#include "plugin/pluginmanager.h"
 #include "contacts/protocolmanager.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "ui/jabberloginwidget.h"
 
 #include <QByteArray>
 
 using namespace SIM;
 
-Plugin *createJabberPluginObject()
+Plugin *createJabberPluginObject(const SIM::Services::Ptr& services)
 {
-    Plugin *plugin = new JabberPlugin();
+    Plugin *plugin = new JabberPlugin(services);
     return plugin;
 }
 
@@ -97,16 +98,17 @@ SIM::ClientPtr JabberProtocol::createClient(const QString& name)
 
 JabberPlugin *JabberPlugin::plugin = NULL;
 
-JabberPlugin::JabberPlugin() : Plugin()
+JabberPlugin::JabberPlugin(const SIM::Services::Ptr& services) : Plugin(),
+    m_services(services)
 {
     plugin = this;
     m_protocol = ProtocolPtr(new JabberProtocol(this));
-	getProtocolManager()->addProtocol(m_protocol);
+	m_services->protocolManager()->addProtocol(m_protocol);
 }
 
 JabberPlugin::~JabberPlugin()
 {
-    getProtocolManager()->removeProtocol(m_protocol);
+    m_services->protocolManager()->removeProtocol(m_protocol);
 }
 
 // vim: set expandtab:

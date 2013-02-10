@@ -2,13 +2,15 @@
 #define STANDARDCLIENTMANAGER_H
 
 #include "clientmanager.h"
+#include "contacts/protocolmanager.h"
+#include "profile/profilemanager.h"
 
 namespace SIM {
 
 class StandardClientManager : public ClientManager
 {
 public:
-    StandardClientManager();
+    StandardClientManager(const ProfileManager::Ptr& profileManager, const ProtocolManager::Ptr& protocolManager);
     virtual ~StandardClientManager();
 
     virtual void addClient(ClientPtr client);
@@ -35,6 +37,8 @@ private:
     QStringList m_sortedClientNamesList;
     ConfigPtr m_config;
     QString m_loadedProfile;
+    ProtocolManager::Ptr m_protocolManager;
+    ProfileManager::Ptr m_profileManager;
 };
 
 } // namespace SIM

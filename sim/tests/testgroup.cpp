@@ -7,7 +7,9 @@
 #include "contacts/group.h"
 #include "stubs/stubimgroup.h"
 #include "stubs/stubclient.h"
-#include "clientmanager.h"
+#include "clients/standardclientmanager.h"
+#include "services.h"
+#include "simlib-testing.h"
 
 namespace
 {
@@ -15,6 +17,7 @@ namespace
     class TestGroup : public ::testing::Test
     {
     protected:
+        ClientManager::Ptr clientManager;
 
         ClientPtr createStubClient(const QString& id)
         {
@@ -24,6 +27,14 @@ namespace
         IMGroupPtr createStubIMGroup(const ClientPtr& client)
         {
             return IMGroupPtr(new StubObjects::StubIMGroup(client.data()));
+        }
+
+        Services::Ptr services;
+        
+        virtual void SetUp()
+        {
+            services = makeMockServices();
+            clientManager = ClientManager::Ptr(new StandardClientManager(services->profileManager(), services->protocolManager()));
         }
     };
 
@@ -66,12 +77,10 @@ namespace
         Group gr(1);
         gr.setName("Foo");
 
-        SIM::createClientManager();
         gr.addClientGroup(imGroup);
         PropertyHubPtr groupState = gr.saveState();
         Group deserializedGroup(1);
-        deserializedGroup.loadState(groupState);
-        SIM::destroyClientManager();
+        deserializedGroup.loadState(clientManager, groupState);
 
         ASSERT_TRUE(deserializedGroup.name() == "Foo");
     }
@@ -80,10 +89,8 @@ namespace
     {
         PropertyHubPtr testHub;
         Group gr(1);
-        SIM::createClientManager();
 
-        ASSERT_FALSE(gr.loadState(testHub));
-        SIM::destroyClientManager();
+        ASSERT_FALSE(gr.loadState(clientManager, testHub));
     }
 
     TEST_F(TestGroup, loadState_IncorrectPropertyHub_NoUserData)
@@ -91,10 +98,8 @@ namespace
         PropertyHubPtr testHub = PropertyHub::create("groups");
         testHub->addPropertyHub(PropertyHub::create("clients"));
         Group gr(1);
-        SIM::createClientManager();
 
-        ASSERT_FALSE(gr.loadState(testHub));
-        SIM::destroyClientManager();
+        ASSERT_FALSE(gr.loadState(clientManager, testHub));
     }
 
     TEST_F(TestGroup, loadState_IncorrectPropertyHub_NoClients)
@@ -102,10 +107,8 @@ namespace
         PropertyHubPtr testHub = PropertyHub::create("groups");
         testHub->addPropertyHub(PropertyHub::create("userdata"));
         Group gr(1);
-        SIM::createClientManager();
 
-        ASSERT_FALSE(gr.loadState(testHub));
-        SIM::destroyClientManager();
+        ASSERT_FALSE(gr.loadState(clientManager, testHub));
     }
 
 }

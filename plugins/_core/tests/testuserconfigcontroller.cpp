@@ -19,6 +19,8 @@
 
 #include "core.h"
 #include "test.h"
+#include "services.h"
+#include "tests/simlib-testing.h"
 
 #include <QLabel>
 
@@ -48,7 +50,7 @@ namespace
             auto imagestorage = new testing::NiceMock<MockObjects::MockImageStorage>();
             SIM::setImageStorage(imagestorage);
             ON_CALL(*imagestorage, icon(_)).WillByDefault(Return(QIcon()));
-            core = new CorePlugin();
+            core = new CorePlugin(SIM::makeMockServices());
             userConfigView = MockObjects::MockUserConfigView::createNice();
         }
 

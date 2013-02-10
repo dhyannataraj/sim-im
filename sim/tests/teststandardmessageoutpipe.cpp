@@ -5,7 +5,7 @@
 #include "mocks/mockclientmanager.h"
 #include "mocks/mockmessage.h"
 #include "mocks/mockimcontact.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "messaging/standardmessageoutpipe.h"
 
 namespace

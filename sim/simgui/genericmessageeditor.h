@@ -25,62 +25,62 @@ namespace SIM
 {
 class EXPORT GenericMessageEditor: public SIM::MessageEditor
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    GenericMessageEditor(const IMContactPtr& from, const IMContactPtr& to, QWidget* parent);
-    virtual ~GenericMessageEditor();
+	GenericMessageEditor(const IMContactPtr& from, const IMContactPtr& to, QWidget* parent);
+	virtual ~GenericMessageEditor();
 
-    virtual QString messageTypeId() const;
+	virtual QString messageTypeId() const;
 
 public slots:
-    void cursorPositionChanged();
+	void cursorPositionChanged();
 
 private slots:
-    QColor colorFromDialog(QString oldColorName);
-    void chooseBackgroundColor();
-    void chooseForegroundColor();
-    QString getBGStyleSheet(QString bgColorName);
-    void chooseFont();
-    void setBold(bool b);
-    void setItalic(bool b);
-    void setUnderline(bool b);
-    void showSmiles();
-    void insertSmile(const QString & smile);
+	QColor colorFromDialog(QString oldColorName);
+	void chooseBackgroundColor();
+	void chooseForegroundColor();
+	QString getBGStyleSheet(QString bgColorName);
+	void chooseFont();
+	void setBold(bool b);
+	void setItalic(bool b);
+	void setUnderline(bool b);
+	void showSmiles();
+	void insertSmile(const QString & smile);
 	void closeSmilies();
-    void setTranslit(bool on);
-    void setTranslateIncomming(bool on);
-    void setTranslateOutgoing(bool on);
-    void setCloseOnSend(bool b);
-    void send();
+	void setTranslit(bool on);
+	void setTranslateIncomming(bool on);
+	void setTranslateOutgoing(bool on);
+	void setCloseOnSend(bool b);
+	void send();
 	
-    void textChanged();
+	void textChanged();
 	bool eventFilter(QObject *obj, QEvent *e);
 	
 private:
-    QToolBar* createToolBar();
-    QString m_bgColorName;
-    QString m_txtColorName;
-    QToolBar* m_bar;
+	QToolBar* createToolBar();
+	QString m_bgColorName;
+	QString m_txtColorName;
+	QToolBar* m_bar;
 
-    QTextEdit *m_edit;
-    QTextEdit *m_editTrans;
-    QTextEdit *m_editActive;
-    QWidget* w;
-    bool m_bTranslationService;
+	QTextEdit *m_edit;
+	QTextEdit *m_editTrans;
+	QTextEdit *m_editActive;
+	QWidget* m_popupSmile;
+	bool m_bTranslationService;
 
-    QVBoxLayout *m_layout;
+	QVBoxLayout *m_layout;
 
-    QComboBox * m_cmbLanguageIncomming;
-    QComboBox * m_cmbLanguageOutgoing;
+	QComboBox * m_cmbLanguageIncomming;
+	QComboBox * m_cmbLanguageOutgoing;
 
-    QAction* m_sendAction;
-    QAction* m_sendMultiple;
+	QAction* m_sendAction;
+	QAction* m_sendMultiple;
 
-    QToolButton * m_cmdSend;
+	QToolButton * m_cmdSend;
 
-    IMContactPtr m_from;
-    IMContactPtr m_to;
-    QSignalMapper * m_signalMapper;
+	IMContactPtr m_from;
+	IMContactPtr m_to;
+	QSignalMapper * m_signalMapper;
 };
 }
 

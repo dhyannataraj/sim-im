@@ -24,7 +24,7 @@
 #include "container.h"
 #include "contacts/contact.h"
 #include "contacts/group.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "contacts/contactlist.h"
 #include "imagestorage/imagestorage.h"
 #include "messaging/genericmessage.h"

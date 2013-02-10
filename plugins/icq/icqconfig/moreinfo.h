@@ -19,7 +19,7 @@
 #define _MOREINFO_H
 
 #include "ui_moreinfobase.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "../icqcontact.h"
 
 #include <QDate>

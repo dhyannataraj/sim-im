@@ -9,13 +9,14 @@
 #include "receivemessageprocessor.h"
 #include "icontainercontroller.h"
 #include "core_api.h"
+#include "services.h"
 
 class CorePlugin;
 class CORE_EXPORT ContainerManager : public QObject, public IContainerManager
 {
     Q_OBJECT
 public:
-    explicit ContainerManager(CorePlugin* parent);
+    explicit ContainerManager(const SIM::Services::Ptr& services, CorePlugin* parent);
     virtual ~ContainerManager();
 
     virtual bool init();
@@ -53,6 +54,7 @@ private:
     QList<ContainerControllerPtr> m_containers;
     int m_containerControllerId;
     ContainerMode m_containerMode;
+    SIM::Services::Ptr m_services;
     CorePlugin* m_core;
 };
 

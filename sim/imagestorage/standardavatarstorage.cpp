@@ -1,12 +1,6 @@
-/*
- * standardavatarstorage.cpp
- *
- *  Created on: Jul 2, 2011
- *      Author: todin
- */
 
 #include "standardavatarstorage.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "log.h"
 
 #include "imagestorage.h"
@@ -43,11 +37,14 @@ public:
             return QImage();
         return it.value();
     }
+
+    ProfileManager::Ptr profileManager;
 };
 
-StandardAvatarStorage::StandardAvatarStorage()
+StandardAvatarStorage::StandardAvatarStorage(const ProfileManager::Ptr& profileManager)
 {
     d = new StandardAvatarStoragePimpl();
+    d->profileManager = profileManager;
 }
 
 StandardAvatarStorage::~StandardAvatarStorage()
@@ -145,7 +142,7 @@ QString StandardAvatarStorage::makeUri(const IMContactId& id, const QString& typ
 
 QString StandardAvatarStorage::basePath() const
 {
-    return getProfileManager()->profilePath() + QDir::separator() + "pictures" + QDir::separator();
+    return d->profileManager->profilePath() + QDir::separator() + "pictures" + QDir::separator();
 }
 
 }

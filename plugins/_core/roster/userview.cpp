@@ -21,7 +21,7 @@ email                : vovan@shutoff.ru
 #include "core.h"
 #include "contacts/contact.h"
 #include "contacts/imcontact.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "contacts/group.h"
 #include "userviewmodel.h"
 #include "contacts/contactlist.h"

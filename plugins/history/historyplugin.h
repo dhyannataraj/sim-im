@@ -7,17 +7,18 @@
 #ifndef HISTORYPLUGIN_H_
 #define HISTORYPLUGIN_H_
 
-#include "plugins.h"
+#include "plugin/plugin.h"
 #include "messaging/message.h"
 #include "messaging/messageprocessor.h"
 #include "historystorage.h"
 #include "events/actioncollectionevent.h"
+#include "services.h"
 
 class HistoryPlugin : public QObject, public SIM::Plugin, public SIM::MessageProcessor
 {
 	Q_OBJECT
 public:
-    HistoryPlugin();
+    HistoryPlugin(const SIM::Services::Ptr& services);
     virtual ~HistoryPlugin();
 
     virtual QString id() const;
@@ -32,6 +33,7 @@ protected slots:
 
 private:
     HistoryStoragePtr m_historyStorage;
+    SIM::Services::Ptr m_services;
 };
 
 #endif /* HISTORYPLUGIN_H_ */

@@ -18,23 +18,18 @@
 #include "icq.h"
 #include "core.h"
 #include "log.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "imagestorage/imagestorage.h"
 #include "contacts/protocolmanager.h"
 #include "icqclient.h"
 #include "icqloginwidget.h"
+#include "plugin/pluginmanager.h"
 
 using namespace SIM;
 
-Plugin *createICQPlugin(unsigned base, bool, Buffer*)//base not used
+Plugin *createICQPluginObject(const SIM::Services::Ptr& services)
 {
-    Plugin *plugin = new ICQPlugin();
-    return plugin;
-}
-
-Plugin *createICQPluginObject()
-{
-    return new ICQPlugin();
+    return new ICQPlugin(services);
 }
 
 static PluginInfo info =
@@ -160,13 +155,14 @@ void ICQProtocol::addStatus(ICQStatusPtr status)
 
 ICQPlugin *ICQPlugin::icq_plugin = NULL;
 
-ICQPlugin::ICQPlugin()
-        : Plugin()
+ICQPlugin::ICQPlugin(const SIM::Services::Ptr& services)
+        : Plugin(),
+        m_services(services)
 {
     icq_plugin = this;
 
     m_icq = ProtocolPtr(new ICQProtocol(this));
-	getProtocolManager()->addProtocol(m_icq);
+	m_services->protocolManager()->addProtocol(m_icq);
 //    m_aim = ProtocolPtr(new AIMProtocol(this));
 //    getProtocolManager()->addProtocol(m_aim);
 
@@ -224,8 +220,9 @@ ICQPlugin::ICQPlugin()
 ICQPlugin::~ICQPlugin()
 {
     //unregisterMessages();
-    getProtocolManager()->removeProtocol(m_aim);
-    getProtocolManager()->removeProtocol(m_icq);
+    auto pm = m_services->protocolManager();
+    pm->removeProtocol(m_aim);
+    pm->removeProtocol(m_icq);
 
 //    getContacts()->removePacketType(OscarPacket);
 //    getContacts()->removePacketType(ICQDirectPacket);

@@ -11,6 +11,7 @@
 #include <QImage>
 #include "contacts/imcontactid.h"
 #include "iconset.h"
+#include "profile/profilemanager.h"
 
 #include "misc.h"
 
@@ -26,7 +27,7 @@ public:
     virtual QImage getAvatar(const IMContactId& contactId, const QString& type = "") = 0;
 };
 
-void EXPORT createAvatarStorage();
+void EXPORT createAvatarStorage(const ProfileManager::Ptr& profileManager);
 void EXPORT destroyAvatarStorage();
 EXPORT AvatarStorage* getAvatarStorage();
 void EXPORT setAvatarStorage(AvatarStorage* storage);

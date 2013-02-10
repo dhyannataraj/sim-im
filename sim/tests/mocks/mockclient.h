@@ -3,7 +3,7 @@
 
 #include <gmock/gmock.h>
 #include <QSharedPointer>
-#include "contacts/client.h"
+#include "clients/client.h"
 
 namespace MockObjects
 {

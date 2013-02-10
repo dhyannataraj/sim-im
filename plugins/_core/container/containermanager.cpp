@@ -1,6 +1,7 @@
+
 #include "containermanager.h"
 #include "core.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "log.h"
 #include "userwnd.h"
 #include "messaging/messagepipe.h"
@@ -11,8 +12,9 @@ using SIM::log;
 using SIM::L_DEBUG;
 using SIM::L_ERROR;
 
-ContainerManager::ContainerManager(CorePlugin* parent) :
+ContainerManager::ContainerManager(const SIM::Services::Ptr& services, CorePlugin* parent) :
     m_containerControllerId(0),
+    m_services(services),
     m_core(parent)
 {
     m_sendProcessor = new SendMessageProcessor(this);
@@ -30,14 +32,14 @@ ContainerManager::~ContainerManager()
 
 ContainerControllerPtr ContainerManager::makeContainerController()
 {
-    ContainerController* controller = new ContainerController(m_containerControllerId++);
+    ContainerController* controller = new ContainerController(m_services, m_containerControllerId++);
     connect(controller, SIGNAL(closed(int)), this, SLOT(containerClosed(int)));
     return ContainerControllerPtr(controller);
 }
 
 bool ContainerManager::init()
 {
-    setContainerMode((ContainerMode)SIM::getProfileManager()->getPropertyHub("_core")->value("ContainerMode").toUInt());
+    setContainerMode((ContainerMode)m_services->profileManager()->getPropertyHub("_core")->value("ContainerMode").toUInt());
     return true;
 }
 

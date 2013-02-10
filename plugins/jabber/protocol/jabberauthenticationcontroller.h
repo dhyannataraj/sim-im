@@ -21,6 +21,9 @@ public:
     JabberAuthenticationController();
     virtual ~JabberAuthenticationController();
 
+    virtual void streamOpened();
+    virtual void incomingStanza(const XmlElement::Ptr& element);
+
     void setUsername(const QString& username);
     void setPassword(const QString& password);
     void setHostname(const QString& hostname);
@@ -30,12 +33,6 @@ public:
     void startAuthentication(const QString& host, int port);
 
     void setSocket(JabberSocket* socket);
-
-    virtual bool canHandle(const QString& tagName) const;
-
-    virtual void startElement(const QDomElement& root);
-    virtual void endElement(const QString& name);
-    virtual void characters(const QString& ch);
 
 public slots:
     void connected();
@@ -48,20 +45,28 @@ signals:
 private:
 	QString makeResponseToChallenge(const QString& challengeString);
 
+    void handleFeatures(const QStringList& features);
+    void stateWaitingFeatures(const XmlElement::Ptr& root);
+    void stateTlsNegotiation(const XmlElement::Ptr& root);
+    void stateDigestMd5WaitingChallenge(const XmlElement::Ptr& root);
+    void stateDigestMd5WaitingChallengeValidation(const XmlElement::Ptr& root);
+    void stateWaitingResourceBinding(const XmlElement::Ptr& root);
+
+    void failure();
+
+
     JabberSocket* m_socket;
     QString m_host;
 	QList<QString> m_features;
 	enum State
 	{
-		Initial,
+		WaitingStreamStart,
+		WaitingFeatures,
 		TlsNegotiation,
-		ReadyToAuthenticate,
 		DigestMd5WaitingChallenge,
-		DigestMd5WaitingSecondChallenge,
-		DigestMd5WaitingSuccess,
-		RestartingStream,
+		DigestMd5WaitingChallengeValidation,
+		WaitingResourceBinding,
 		Authenticated,
-		ResourceBinding,
 		Error
 	};
 	State m_state;
@@ -71,6 +76,7 @@ private:
     QString m_password;
     QString m_resource;
     QString m_fullJid;
+    bool m_encrypted;
 };
 
 #endif /* JABBERAUTHENTICATIONCONTROLLER_H_ */

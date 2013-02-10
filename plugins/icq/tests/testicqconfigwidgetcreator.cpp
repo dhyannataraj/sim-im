@@ -18,8 +18,7 @@
 #include "events/eventhub.h"
 #include "events/widgetcollectionevent.h"
 #include "imagestorage/avatarstorage.h"
-
-
+#include "tests/simlib-testing.h"
 
 namespace
 {
@@ -28,11 +27,14 @@ namespace
     class TestIcqConfigWidgetCreator : public Test
     {
     public:
+        SIM::Services::Ptr services;
         virtual ~TestIcqConfigWidgetCreator() {}
 
         virtual void SetUp()
         {
-            SIM::createContactList();
+            DefaultValue<QString>::Set(QString());
+            services = SIM::makeMockServices();
+            SIM::createContactList(services->profileManager(), services->clientManager());
 
             client = new ICQClient(0, "ICQ.123456", false);
             contact = ICQContactPtr(new ICQContact(client));
@@ -41,7 +43,7 @@ namespace
             metacontact = SIM::getContactList()->createContact(ContactId);
             SIM::getContactList()->addContact(metacontact);
             metacontact->addClientContact(contact);
-            SIM::createAvatarStorage();
+            SIM::createAvatarStorage(services->profileManager());
         }
 
         virtual void TearDown()

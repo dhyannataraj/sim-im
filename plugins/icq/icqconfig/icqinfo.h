@@ -19,7 +19,7 @@
 #define _ICQINFO_H
 
 #include "ui_icqinfobase.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "../icqcontact.h"
 
 

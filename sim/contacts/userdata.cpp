@@ -1,8 +1,8 @@
 
 #include <map>
 #include <QTextStream>
-#include "contacts.h"
 #include "userdata.h"
+#include <QStringList>
 
 namespace SIM
 {

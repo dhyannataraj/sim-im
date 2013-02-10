@@ -14,18 +14,18 @@
 #include <QFontDialog>
 #include <QToolBar>
 #include <QPushButton>
+#include <QUrl>
 #include <algorithm>
 
 #include "core.h"
 #include "simapi.h"
 #include "log.h"
-#include "profilemanager.h"
+#include "profile/profilemanager.h"
 #include "contacts/contact.h"
 #include "contacts/imcontact.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "imagestorage/imagestorage.h"
 #include "messaging/genericmessage.h"
-#include "profilemanager.h"
 
 
 using namespace std;
@@ -36,180 +36,182 @@ namespace SIM
 
 
 GenericMessageEditor::GenericMessageEditor(const IMContactPtr& from, const IMContactPtr& to, QWidget* parent) : MessageEditor(parent)
-        , m_from(from)
-        , m_to(to)
-        , m_bTranslationService(false) //#Todo later from config...
-        , m_editTrans(NULL)
-        , m_editActive(NULL)
-        , w(NULL)
-        , m_signalMapper(NULL)
+		, m_from(from)
+		, m_to(to)
+		, m_bTranslationService(false) //#Todo later from config...
+		, m_editTrans(NULL)
+		, m_editActive(NULL)
+		, m_popupSmile(NULL)
+		, m_signalMapper(NULL)
 {
 
-    m_layout = new QVBoxLayout(this);
-    m_layout->setMargin(0);
+	m_layout = new QVBoxLayout(this);
+	m_layout->setMargin(0);
 
-    m_edit = new QTextEdit(this);
-    setFocusProxy(m_edit);
+	m_edit = new QTextEdit(this);
+	setFocusProxy(m_edit);
 
 
-    connect(m_edit, SIGNAL(cursorPositionChanged()), this, SLOT(cursorPositionChanged()));
+	connect(m_edit, SIGNAL(cursorPositionChanged()), this, SLOT(cursorPositionChanged()));
 
-    QFontMetrics fm(m_edit->font());
-    m_edit->setMinimumSize(QSize(fm.maxWidth(), fm.height() + 10));
-    
-    m_bar = createToolBar();
-    m_bar->setParent(this);
-    m_layout->addWidget(m_bar);
-
-    if (m_bTranslationService)
-    {
-        QTextEdit * m_editTrans = new QTextEdit(this);
-        QColor color(Qt::lightGray);
-        m_editTrans->setStyleSheet(getBGStyleSheet(color.name()));
-        m_layout->addWidget(m_editTrans);
-    }
-    m_editActive=&(*m_edit);
-
-    m_layout->addWidget(m_edit);
-    this->setLayout(m_layout);
-    connect(m_edit, SIGNAL(textChanged()), this, SLOT(textChanged()));
-    textChanged();
-    
-    PropertyHubPtr p = getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core");
-
-    if (p->value("ContainerGeometry").typeName()==QString("QString")) //Fallback to old config
-    {
-        //convert from old config
-        QStringList strL_geom = p->value("ContainerGeometry").toString().split(   QChar(','),QString::SkipEmptyParts   );
-        //this->setGeometry(490,278,1031,736); //does not work
-        this->setFixedSize(  strL_geom.at(2).trimmed().toInt(),                    //This works, but is bad, because leads to bad resize-behavior. This is only first time when converting size values.
-                             strL_geom.at(3).trimmed().toInt()  );
-    }
-    else
-    {
-        this->restoreGeometry(p->value("ContainerGeometry").toByteArray());
-    }
+	QFontMetrics fm(m_edit->font());
+	m_edit->setMinimumSize(QSize(fm.maxWidth(), fm.height() + 10));
 	
+	m_bar = createToolBar();
+	m_bar->setParent(this);
+	m_layout->addWidget(m_bar);
+
+	if (m_bTranslationService)
+	{
+		QTextEdit * m_editTrans = new QTextEdit(this);
+		QColor color(Qt::lightGray);
+		m_editTrans->setStyleSheet(getBGStyleSheet(color.name()));
+		m_layout->addWidget(m_editTrans);
+	}
+	m_editActive=&(*m_edit);
+
+	m_layout->addWidget(m_edit);
+	this->setLayout(m_layout);
+	connect(m_edit, SIGNAL(textChanged()), this, SLOT(textChanged()));
+	textChanged();
+	
+	/*
+	PropertyHubPtr p = getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core");
+
+	if (p->value("ContainerGeometry").typeName()==QString("QString")) //Fallback to old config
+	{
+		//convert from old config
+		QStringList strL_geom = p->value("ContainerGeometry").toString().split(   QChar(','),QString::SkipEmptyParts   );
+		//this->setGeometry(490,278,1031,736); //does not work
+		this->setFixedSize(  strL_geom.at(2).trimmed().toInt(),                    //This works, but is bad, because leads to bad resize-behavior. This is only first time when converting size values.
+							 strL_geom.at(3).trimmed().toInt()  );
+	}
+	else
+	{
+		this->restoreGeometry(p->value("ContainerGeometry").toByteArray());
+	}
+	*/
 }
 
 GenericMessageEditor::~GenericMessageEditor()
 {
-    getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core")->setValue("ContainerGeometry", this->saveGeometry());
+	//getProfileManager()->currentProfile()->config()->rootHub()->propertyHub("_core")->setValue("ContainerGeometry", this->saveGeometry());
 	closeSmilies();
 }
 
 QString GenericMessageEditor::messageTypeId() const
 {
-    return "generic";
+	return "generic";
 }
 
 QColor GenericMessageEditor::colorFromDialog(QString oldColorName) //reimplement with small ColorPicker...
 {
-    return QColorDialog::getColor(QColor(oldColorName), m_edit);
+	return QColorDialog::getColor(QColor(oldColorName), m_edit);
 }
 
 void GenericMessageEditor::chooseBackgroundColor()
 {
-    QColor color = colorFromDialog(m_bgColorName);
-    if(!color.isValid())
-        return;
-    m_bgColorName = color.name();
-    log(L_DEBUG, color.name());
-    m_edit->setStyleSheet(getBGStyleSheet(color.name()));
+	QColor color = colorFromDialog(m_bgColorName);
+	if(!color.isValid())
+		return;
+	m_bgColorName = color.name();
+	log(L_DEBUG, color.name());
+	m_edit->setStyleSheet(getBGStyleSheet(color.name()));
 
 }
 
 void GenericMessageEditor::chooseForegroundColor()
 {
-    QColor color = colorFromDialog(m_txtColorName);
-    if(!color.isValid())
-        return;
-    m_txtColorName = color.name();
-    log(L_DEBUG, color.name());
-    m_edit->setTextColor(color);
+	QColor color = colorFromDialog(m_txtColorName);
+	if(!color.isValid())
+		return;
+	m_txtColorName = color.name();
+	log(L_DEBUG, color.name());
+	m_edit->setTextColor(color);
 
-    //hub->setValue("msgedit/textcolor", QVariant(color)); //It should be done when window closes, so you should do this from closeEvent of Container
+	//hub->setValue("msgedit/textcolor", QVariant(color)); //It should be done when window closes, so you should do this from closeEvent of Container
 
 }
 
 QString GenericMessageEditor::getBGStyleSheet(QString bgColorName)
 {
-    return QString("QTextEdit {background-color: %1; border: 1px solid black; border-radius: 5px; margin-top: 7px; margin-bottom: 7px; padding: 0px;}").arg(bgColorName);
+	return QString("QTextEdit {background-color: %1; border: 1px solid black; border-radius: 5px; margin-top: 7px; margin-bottom: 7px; padding: 0px;}").arg(bgColorName);
 }
 void GenericMessageEditor::setBold(bool b)
 {
-    m_edit->setFontWeight(b ? QFont::Bold : QFont::Normal);
+	m_edit->setFontWeight(b ? QFont::Bold : QFont::Normal);
 }
 
 void GenericMessageEditor::setItalic(bool b)
 {
-    m_edit->setFontItalic(b);
+	m_edit->setFontItalic(b);
 }
 
 void GenericMessageEditor::setUnderline(bool b)
 {
-    m_edit->setFontUnderline(b);
+	m_edit->setFontUnderline(b);
 }
 
 void GenericMessageEditor::showSmiles() //Todo
 {
-	w=new QFrame();
-	w->resize(400,32);
-	w->move(QCursor::pos()-QPoint(15,15));
-	w->setWindowFlags(Qt::FramelessWindowHint);
+	m_popupSmile=new QFrame();
+	m_popupSmile->resize(400,32);
+	m_popupSmile->move(QCursor::pos()-QPoint(15,15));
+	m_popupSmile->setWindowFlags(Qt::FramelessWindowHint);
 	QGridLayout * g= new QGridLayout();
  
-	w->setLayout(g);
-    m_signalMapper = new QSignalMapper(this);
-    int i=0;
-    int div=8;
-    foreach (QString key, getImageStorage()->uniqueSmileKeys())
-    {
-        log(L_DEBUG, getImageStorage()->getSmileName( key ));
-        QToolButton * tmp=new QToolButton(w);
-        tmp->setIcon(getImageStorage()->icon(getImageStorage()->getSmileName(key)));
-        tmp->setToolTip(getImageStorage()->getSmileNamePretty(key));
-        connect(tmp, SIGNAL(clicked()), m_signalMapper, SLOT(map()));
-        m_signalMapper->setMapping(tmp, tmp->toolTip());
-        g->addWidget( tmp, i/div, i%div );
-        ++i;
-    }
-    connect(m_signalMapper, SIGNAL(mapped(const QString &)),
-             this, SLOT(insertSmile(const QString &)));
-    
-    log(L_DEBUG, getImageStorage()->uniqueSmileKeys().join(" "));
-	w->installEventFilter(this);
-	w->setFocusPolicy(Qt::ClickFocus);
-	w->show();
-	w->setFocus();
+	m_popupSmile->setLayout(g);
+	m_signalMapper = new QSignalMapper(this);
+	int i=0;
+	int div=8;
+	foreach (QString key, getImageStorage()->uniqueSmileKeys())
+	{
+		log(L_DEBUG, getImageStorage()->getSmileName( key ));
+		QToolButton * tmp=new QToolButton(m_popupSmile);
+		tmp->setIcon(getImageStorage()->icon(getImageStorage()->getSmileName(key)));
+		tmp->setToolTip(getImageStorage()->getSmileNamePretty(key));
+		connect(tmp, SIGNAL(clicked()), m_signalMapper, SLOT(map()));
+		m_signalMapper->setMapping(tmp, tmp->toolTip());
+		g->addWidget( tmp, i/div, i%div );
+		++i;
+	}
+	connect(m_signalMapper, SIGNAL(mapped(const QString &)),
+			 this, SLOT(insertSmile(const QString &)));
+	
+	log(L_DEBUG, getImageStorage()->uniqueSmileKeys().join(" "));
+	m_popupSmile->installEventFilter(this);
+	m_popupSmile->setFocusPolicy(Qt::ClickFocus);
+	m_popupSmile->show();
+	m_popupSmile->setFocus();
 	
 }
 
 void GenericMessageEditor::insertSmile(const QString & smile) //Todo
 {
-    log(L_DEBUG, smile);
-    QTextCursor cursor(m_edit->document());
-    QString parsed=getImageStorage()->parseAllSmilesByName(smile);
-    log(L_DEBUG, parsed);
-    cursor.insertImage(parsed); //insert at QTextCursor
-    this->closeSmilies();
+	log(L_DEBUG, smile);
+	QTextCursor cursor(m_edit->textCursor());
+	QIcon img;
+	getImageStorage()->parseAllSmilesByName(smile, img);
+	m_edit->document()->addResource(QTextDocument::ImageResource, QUrl(smile), QImage(img.pixmap(32,32).toImage()));
+	cursor.insertImage(smile);//insert at QTextCursor
+	this->closeSmilies();
 }
 
 void GenericMessageEditor::closeSmilies()
 {
-    if (w)
-	    w->close();
+	if (m_popupSmile)
+		m_popupSmile->close();
 }
 
 bool GenericMessageEditor::eventFilter(QObject *obj, QEvent *e)
 {
-    if (e->type() == QEvent::FocusOut ||
-        e->type() == QEvent::KeyPress ||
-        e->type() == QEvent::MouseButtonPress )
-    {
-        this->closeSmilies();
-    }
-    return MessageEditor::eventFilter(obj, e);
+	if (e->type() == QEvent::FocusOut ||
+		e->type() == QEvent::KeyPress ||
+		e->type() == QEvent::MouseButtonPress )
+	{
+		this->closeSmilies();
+	}
+	return MessageEditor::eventFilter(obj, e);
 }
 
 void GenericMessageEditor::setTranslit(bool on) //Todo
@@ -229,11 +231,11 @@ void GenericMessageEditor::setTranslateOutgoing(bool on) //Todo
 
 void GenericMessageEditor::chooseFont()
 {
-    bool ok = false;
-    QFont f = QFontDialog::getFont(&ok, m_edit->font(), m_edit);
-    if(!ok)
-        return;
-    m_edit->setFont(f);
+	bool ok = false;
+	QFont f = QFontDialog::getFont(&ok, m_edit->font(), m_edit);
+	if(!ok)
+		return;
+	m_edit->setFont(f);
 }
 
 void GenericMessageEditor::setCloseOnSend(bool b) //Todo
@@ -243,145 +245,145 @@ void GenericMessageEditor::setCloseOnSend(bool b) //Todo
 
 void GenericMessageEditor::send()
 {
-    QString text = m_edit->document()->toPlainText();
-    if(text.isEmpty())
-        return;
+	QString text = m_edit->document()->toPlainText();
+	if(text.isEmpty())
+		return;
 
-    m_edit->clear();
+	m_edit->clear();
 
-    GenericMessage* message = new GenericMessage(m_from, m_to, text);
-    message->setTimestamp(QDateTime::currentDateTime());
-    emit messageSendRequest(MessagePtr(message));
+	GenericMessage* message = new GenericMessage(m_from, m_to, text);
+	message->setTimestamp(QDateTime::currentDateTime());
+	emit messageSendRequest(MessagePtr(message));
 }
 
 void GenericMessageEditor::textChanged()
 {
-    if(m_edit->toPlainText().isEmpty() &&
-            m_cmdSend->isEnabled())
-    {
-        m_cmdSend->setEnabled(false);
-    }
-    else if(!m_edit->toPlainText().isEmpty() &&
-            !m_cmdSend->isEnabled())
-    {
-        m_cmdSend->setEnabled(true);
-    }
+	if(m_edit->toPlainText().isEmpty() &&
+			m_cmdSend->isEnabled())
+	{
+		m_cmdSend->setEnabled(false);
+	}
+	else if(!m_edit->toPlainText().isEmpty() &&
+			!m_cmdSend->isEnabled())
+	{
+		m_cmdSend->setEnabled(true);
+	}
 }
 
 void GenericMessageEditor::cursorPositionChanged()
 {
-    QTextCharFormat currentFormat = m_edit->textCursor().charFormat();
-    foreach(QAction* a, m_bar->actions())
-    {
-        // FIXME shouldn't depend on actions text
-        if (a->text() == I18N_NOOP("&Bold"))
-            a->setChecked(currentFormat.fontWeight() == QFont::Bold);
+	QTextCharFormat currentFormat = m_edit->textCursor().charFormat();
+	foreach(QAction* a, m_bar->actions())
+	{
+		// FIXME shouldn't depend on actions text
+		if (a->text() == I18N_NOOP("&Bold"))
+			a->setChecked(currentFormat.fontWeight() == QFont::Bold);
 
-        if (a->text() == I18N_NOOP("&Italic"))
-            a->setChecked(currentFormat.fontItalic());
+		if (a->text() == I18N_NOOP("&Italic"))
+			a->setChecked(currentFormat.fontItalic());
 
-        if (a->text() == I18N_NOOP("&Underline"))
-            a->setChecked(currentFormat.fontUnderline());
+		if (a->text() == I18N_NOOP("&Underline"))
+			a->setChecked(currentFormat.fontUnderline());
 
-    }
+	}
 }
 
 
 QToolBar* GenericMessageEditor::createToolBar()
 {
-    QToolBar* bar = new QToolBar(this); //FIXME Memleak!
-    bar->setFloatable(true);
-    bar->setMovable(true);
+	QToolBar* bar = new QToolBar(this); //FIXME Memleak!
+	bar->setFloatable(true);
+	bar->setMovable(true);
 
-    bar->setAllowedAreas(Qt::TopToolBarArea & Qt::BottomToolBarArea);
-
-
-    //fixme: the following should be made generic, f.e. for toolbar changes in icon-positioning...
-
-    bar->addSeparator();
-    bar->addAction(getImageStorage()->icon("bgcolor"), I18N_NOOP("Back&ground color"), this, SLOT(chooseBackgroundColor()));
-    bar->addAction(getImageStorage()->icon("fgcolor"), I18N_NOOP("Fo&reground color"), this, SLOT(chooseForegroundColor()));
-
-    QAction* bold = bar->addAction(getImageStorage()->icon("text_bold"), I18N_NOOP("&Bold"), this, SLOT(setBold(bool)));
-    bold->setCheckable(true);
-
-    QAction* italic = bar->addAction(getImageStorage()->icon("text_italic"), I18N_NOOP("&Italic"), this, SLOT(setItalic(bool)));
-    italic->setCheckable(true);
-
-    QAction* underline = bar->addAction(getImageStorage()->icon("text_under"), I18N_NOOP("&Underline"), this, SLOT(setUnderline(bool)));
-    underline->setCheckable(true);
-
-    bar->addAction(getImageStorage()->icon("text"), I18N_NOOP("Select f&ont"), this, SLOT(chooseFont()));
-
-    bar->addSeparator();
-
-    //QAction* emoticons = 
-    bar->addAction(getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(showSmiles())); //Todo
-
-    QAction* translit = bar->addAction(getImageStorage()->icon("translit"), I18N_NOOP("Send in &translit"), this, SLOT(setTranslit(bool)));
-    translit->setCheckable(true);
-
-    if (m_bTranslationService) 
-    {
-        bar->addSeparator();
-
-        QAction* incommingTranslation = bar->addAction(getImageStorage()->icon("translate"), I18N_NOOP("OTRT-Incomming:"), this, SLOT(setTranslateOutgoing(bool))); //Todo create Icon
-        incommingTranslation->setCheckable(true);
-
-        m_cmbLanguageIncomming = new QComboBox(m_edit);  //Todo: Implement language selection for the language it should automatically translated...
-        //fillLangs(); //Todo Fill cmbBox with languages
-        m_cmbLanguageIncomming->setToolTip(i18n("Select translation language for incomming messages"));
-        bar->addWidget(m_cmbLanguageIncomming);
+	bar->setAllowedAreas(Qt::TopToolBarArea & Qt::BottomToolBarArea);
 
 
+	//fixme: the following should be made generic, f.e. for toolbar changes in icon-positioning...
 
-        bar->addSeparator();
+	bar->addSeparator();
+	bar->addAction(getImageStorage()->icon("bgcolor"), I18N_NOOP("Back&ground color"), this, SLOT(chooseBackgroundColor()));
+	bar->addAction(getImageStorage()->icon("fgcolor"), I18N_NOOP("Fo&reground color"), this, SLOT(chooseForegroundColor()));
 
-        QAction* outgoingTranslation = bar->addAction(getImageStorage()->icon("translator"), I18N_NOOP("OTRT-Outgoing:"), this, SLOT(setTranslateIncomming(bool))); //Todo create Icon
-        outgoingTranslation->setCheckable(true);
+	QAction* bold = bar->addAction(getImageStorage()->icon("text_bold"), I18N_NOOP("&Bold"), this, SLOT(setBold(bool)));
+	bold->setCheckable(true);
 
-        m_cmbLanguageOutgoing = new QComboBox(m_edit);  //Todo: Implement language selection for the language it should automatically translated...
-        //fillLangs(); //Todo Fill cmbBox with languages
-        m_cmbLanguageOutgoing->setToolTip(i18n("Select translation language for outgoing messages"));
-        bar->addWidget(m_cmbLanguageOutgoing);
+	QAction* italic = bar->addAction(getImageStorage()->icon("text_italic"), I18N_NOOP("&Italic"), this, SLOT(setItalic(bool)));
+	italic->setCheckable(true);
 
-        //Translations - How to do:
-        //register for an api-key: https://code.google.com/apis/console/
+	QAction* underline = bar->addAction(getImageStorage()->icon("text_under"), I18N_NOOP("&Underline"), this, SLOT(setUnderline(bool)));
+	underline->setCheckable(true);
 
-        //Get the translated string:
-        //GET https://www.googleapis.com/language/translate/v2?q=%3Ch1%3EDas%20ist%20ein%20Text.%3C%2Fh1%3E&target=en&format=html&pp=1&key={YOUR_API_KEY}
-        
-        //Doc for implementation and testing: https://code.google.com/apis/explorer/#_s=translate&_v=v2&_m=translations.list&q=%3Ch1%3EDas%20ist%20ein%20Text.%3C/h1%3E&target=en&cid=blub&format=html
-    }
-    else 
-    {
-        //trEdit->setVisible(false); //How to do it best?
-    }
+	bar->addAction(getImageStorage()->icon("text"), I18N_NOOP("Select f&ont"), this, SLOT(chooseFont()));
+
+	bar->addSeparator();
+
+	//QAction* emoticons = 
+	bar->addAction(getImageStorage()->icon("smile"), I18N_NOOP("I&nsert smile"), this, SLOT(showSmiles())); //Todo
+
+	QAction* translit = bar->addAction(getImageStorage()->icon("translit"), I18N_NOOP("Send in &translit"), this, SLOT(setTranslit(bool)));
+	translit->setCheckable(true);
+
+	if (m_bTranslationService) 
+	{
+		bar->addSeparator();
+
+		QAction* incommingTranslation = bar->addAction(getImageStorage()->icon("translate"), I18N_NOOP("OTRT-Incomming:"), this, SLOT(setTranslateOutgoing(bool))); //Todo create Icon
+		incommingTranslation->setCheckable(true);
+
+		m_cmbLanguageIncomming = new QComboBox(m_edit);  //Todo: Implement language selection for the language it should automatically translated...
+		//fillLangs(); //Todo Fill cmbBox with languages
+		m_cmbLanguageIncomming->setToolTip(i18n("Select translation language for incomming messages"));
+		bar->addWidget(m_cmbLanguageIncomming);
 
 
-    bar->addSeparator();
 
-    QAction* closeAfterSend = bar->addAction(getImageStorage()->icon("fileclose"), I18N_NOOP("C&lose after send"), this, SLOT(setCloseOnSend(bool)));
-    closeAfterSend->setCheckable(true);
-    bar->addSeparator();
-    //m_sendAction = bar->addAction(getImageStorage()->icon("mail_generic"), I18N_NOOP("&Send"), this, SLOT(send()));
+		bar->addSeparator();
+
+		QAction* outgoingTranslation = bar->addAction(getImageStorage()->icon("translator"), I18N_NOOP("OTRT-Outgoing:"), this, SLOT(setTranslateIncomming(bool))); //Todo create Icon
+		outgoingTranslation->setCheckable(true);
+
+		m_cmbLanguageOutgoing = new QComboBox(m_edit);  //Todo: Implement language selection for the language it should automatically translated...
+		//fillLangs(); //Todo Fill cmbBox with languages
+		m_cmbLanguageOutgoing->setToolTip(i18n("Select translation language for outgoing messages"));
+		bar->addWidget(m_cmbLanguageOutgoing);
+
+		//Translations - How to do:
+		//register for an api-key: https://code.google.com/apis/console/
+
+		//Get the translated string:
+		//GET https://www.googleapis.com/language/translate/v2?q=%3Ch1%3EDas%20ist%20ein%20Text.%3C%2Fh1%3E&target=en&format=html&pp=1&key={YOUR_API_KEY}
+		
+		//Doc for implementation and testing: https://code.google.com/apis/explorer/#_s=translate&_v=v2&_m=translations.list&q=%3Ch1%3EDas%20ist%20ein%20Text.%3C/h1%3E&target=en&cid=blub&format=html
+	}
+	else 
+	{
+		//trEdit->setVisible(false); //How to do it best?
+	}
 
 
-    m_cmdSend = new QToolButton(m_edit);
-    connect(m_cmdSend, SIGNAL(clicked()), this, SLOT(send()));
+	bar->addSeparator();
 
-    m_cmdSend->setIcon(getImageStorage()->icon("mail_generic"));
-    m_cmdSend->setText(i18n("&Send"));
-    m_cmdSend->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    m_cmdSend->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    bar->addWidget(m_cmdSend);
+	QAction* closeAfterSend = bar->addAction(getImageStorage()->icon("fileclose"), I18N_NOOP("C&lose after send"), this, SLOT(setCloseOnSend(bool)));
+	closeAfterSend->setCheckable(true);
+	bar->addSeparator();
+	//m_sendAction = bar->addAction(getImageStorage()->icon("mail_generic"), I18N_NOOP("&Send"), this, SLOT(send()));
 
-    bar->addSeparator();
 
-    m_sendMultiple = bar->addAction(getImageStorage()->icon("1rightarrow"), I18N_NOOP("Send to &multiple"), this, SLOT(sendMultiple(bool)));
-    m_sendMultiple->setCheckable(true);
+	m_cmdSend = new QToolButton(m_edit);
+	connect(m_cmdSend, SIGNAL(clicked()), this, SLOT(send()));
 
-    return bar;
+	m_cmdSend->setIcon(getImageStorage()->icon("mail_generic"));
+	m_cmdSend->setText(i18n("&Send"));
+	m_cmdSend->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+	m_cmdSend->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+	bar->addWidget(m_cmdSend);
+
+	bar->addSeparator();
+
+	m_sendMultiple = bar->addAction(getImageStorage()->icon("1rightarrow"), I18N_NOOP("Send to &multiple"), this, SLOT(sendMultiple(bool)));
+	m_sendMultiple->setCheckable(true);
+
+	return bar;
 }
 
 }

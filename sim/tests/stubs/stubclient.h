@@ -1,5 +1,5 @@
 
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "stubimcontact.h"
 #include "stubimgroup.h"
 

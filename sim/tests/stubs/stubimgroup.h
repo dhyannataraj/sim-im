@@ -3,7 +3,7 @@
 
 #include <QSharedPointer>
 #include "contacts/imgroup.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 #include "propertyhub.h"
 
 namespace StubObjects

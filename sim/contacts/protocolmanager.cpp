@@ -52,50 +52,6 @@ namespace SIM
         }
         return ProtocolPtr();
     }
-
-    EXPORT ProtocolManager* getProtocolManager()
-    {
-        return gs_protocolManager;
-    }
-
-    void EXPORT createProtocolManager()
-    {
-        if(!gs_protocolManager)
-            gs_protocolManager = new ProtocolManager();
-    }
-
-    void EXPORT destroyProtocolManager()
-    {
-        if(gs_protocolManager)
-        {
-            delete gs_protocolManager;
-            gs_protocolManager = 0;
-        }
-    }
-
-    ProtocolIterator::ProtocolIterator() : m_index(0)
-    {
-    }
-
-    void ProtocolIterator::reset()
-    {
-        m_index = 0;
-    }
-
-    ProtocolIterator::~ProtocolIterator()
-    {
-    }
-
-    ProtocolPtr ProtocolIterator::operator ++()
-    {
-        if(m_index < getProtocolManager()->protocolCount())
-        {
-            ProtocolPtr proto = getProtocolManager()->protocol(m_index);
-            m_index++;
-            return proto;
-        }
-        return ProtocolPtr();
-    }
 }
 
 // vim: set expandtab:

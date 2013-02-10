@@ -5,13 +5,16 @@
 #include <QDomElement>
 
 #include "contacts/contact.h"
-#include "contacts/client.h"
+#include "clients/client.h"
+#include "clients/standardclientmanager.h"
 #include "stubs/stubimcontact.h"
 #include "stubs/stubclient.h"
 #include "mocks/mockimcontact.h"
 #include "mocks/mockimstatus.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 #include "messaging/genericmessage.h"
+#include "services.h"
+#include "simlib-testing.h"
 
 namespace
 {
@@ -24,6 +27,7 @@ namespace
     class TestContact : public ::testing::Test
     {
     protected:
+        ClientManager::Ptr clientManager;
 
         ClientPtr createStubClient(const QString& id)
         {
@@ -47,6 +51,14 @@ namespace
             c.setGroupId(42);
             c.setFlag(Contact::flIgnore, true);
             c.setLastActive(112);
+        }
+
+        Services::Ptr services;
+        
+        virtual void SetUp()
+        {
+            services = makeMockServices();
+            clientManager = ClientManager::Ptr(new StandardClientManager(services->profileManager(), services->protocolManager()));
         }
     };
 
@@ -100,13 +112,11 @@ namespace
         fillContactData(contact);
         QDomDocument doc;
         QDomElement el = doc.createElement("contact");
-        SIM::createClientManager();
 
         contact.serialize(el);
         Contact deserializedContact(1);
-        deserializedContact.deserialize(el);
+        deserializedContact.deserialize(clientManager, el);
 
-        SIM::destroyClientManager();
         EXPECT_TRUE(deserializedContact.name() == "Foo");
         EXPECT_TRUE(deserializedContact.notes() == "Bar");
         EXPECT_TRUE(deserializedContact.groupId() == 42);
@@ -137,10 +147,8 @@ namespace
     {
         PropertyHubPtr testHub;
         Contact contact(1);
-        SIM::createClientManager();
 
-        EXPECT_FALSE(contact.loadState(testHub));
-        SIM::destroyClientManager();
+        EXPECT_FALSE(contact.loadState(clientManager, testHub));
     }
 
     TEST_F(TestContact, loadState_IncorrectPropertyHub_NoUserData)
@@ -148,10 +156,8 @@ namespace
         PropertyHubPtr testHub = PropertyHub::create("groups");
         testHub->addPropertyHub(PropertyHub::create("clients"));
         Contact contact(1);
-        SIM::createClientManager();
 
-        EXPECT_FALSE(contact.loadState(testHub));
-        SIM::destroyClientManager();
+        EXPECT_FALSE(contact.loadState(clientManager, testHub));
     }
 
     TEST_F(TestContact, loadState_IncorrectPropertyHub_NoClients)
@@ -159,10 +165,8 @@ namespace
         PropertyHubPtr testHub = PropertyHub::create("groups");
         testHub->addPropertyHub(PropertyHub::create("userdata"));
         Contact contact(1);
-        SIM::createClientManager();
 
-        EXPECT_FALSE(contact.loadState(testHub));
-        SIM::destroyClientManager();
+        EXPECT_FALSE(contact.loadState(clientManager, testHub));
     }
 }
 

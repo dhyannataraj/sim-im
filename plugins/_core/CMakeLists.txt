@@ -239,6 +239,7 @@ IF(NOT DISABLE_AUTOTEST)
 ENDIF(NOT DISABLE_AUTOTEST)
 
 ADD_TEST(testCore test_core)
+ADD_CUSTOM_COMMAND(TARGET testCore POST_BUILD COMMAND test_core)
 
 # so we don't need an extra CMakeLists.txt in every subdirectory
 ADD_JISP_ARCHIVE(jisp       sim.jisp        _core_SRCS)

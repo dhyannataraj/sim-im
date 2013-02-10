@@ -5,9 +5,9 @@
 #include <QSharedPointer>
 #include "userdata.h"
 #include "propertyhub.h"
-#include "clientuserdata.h"
 #include "misc.h"
 #include "imcontact.h"
+#include "clients/clientmanager.h"
 
 namespace SIM
 {
@@ -61,11 +61,11 @@ namespace SIM
         UserDataPtr userdata() { return m_userData; }
 
         bool serialize(QDomElement& element);
-        bool deserialize(const QDomElement& element);
+        bool deserialize(const ClientManager::Ptr& clientManager, const QDomElement& element);
         bool deserialize(const QString& data);
 
         PropertyHubPtr saveState();
-        bool loadState(PropertyHubPtr state);
+        bool loadState(const ClientManager::Ptr& clientManager, PropertyHubPtr state);
 
     protected:
         bool serializeMainInfo(QDomElement& element);

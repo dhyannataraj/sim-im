@@ -8,9 +8,8 @@
 #ifndef TAGHANDLER_H_
 #define TAGHANDLER_H_
 
-#include <QXmlAttributes>
 #include <QSharedPointer>
-#include <QDomElement>
+#include "xmlelement.h"
 
 class TagHandler
 {
@@ -18,12 +17,9 @@ public:
     typedef QSharedPointer<TagHandler> SharedPointer;
     TagHandler();
     virtual ~TagHandler();
-
-    virtual bool canHandle(const QString& tagName) const = 0;
-
-    virtual void startElement(const QDomElement& root) = 0;
-    virtual void endElement(const QString& name) = 0;
-    virtual void characters(const QString& ch) = 0;
+    
+    virtual void streamOpened() = 0;
+    virtual void incomingStanza(const XmlElement::Ptr& element) = 0;
 };
 
 #endif /* TAGHANDLER_H_ */

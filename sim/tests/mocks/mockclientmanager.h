@@ -3,13 +3,14 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 
 namespace MockObjects
 {
     class MockClientManager : public SIM::ClientManager
     {
     public:
+        typedef QSharedPointer<MockClientManager> Ptr;
         MOCK_METHOD1(addClient, void(SIM::ClientPtr client));
         MOCK_METHOD1(deleteClient,  void(const QString& name));
         MOCK_METHOD1(client, SIM::ClientPtr(const QString& name));

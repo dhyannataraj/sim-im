@@ -13,12 +13,12 @@
 #include "messaging/messageoutpipe.h"
 
 #include "contacts/contactlist.h"
-#include "contacts.h"
 #include "tests/stubs/stubimagestorage.h"
 #include "tests/mocks/mockimagestorage.h"
 
 #include <QModelIndex>
 #include "test.h"
+#include "tests/simlib-testing.h"
 
 void registerEvents()
 {
@@ -34,8 +34,9 @@ int main(int argc, char** argv)
     ::testing::InitGoogleTest(&argc, argv);
     ::testing::InitGoogleMock(&argc, argv);
     qRegisterMetaType<QModelIndex>("QModelIndex");
+    auto services = SIM::makeMockServices();
     SIM::createEventHub();
-    SIM::createAvatarStorage();
+    SIM::createAvatarStorage(services->profileManager());
     SIM::createMessagePipe();
     SIM::createOutMessagePipe();
     SIM::createCommandHub();

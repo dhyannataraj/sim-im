@@ -20,10 +20,8 @@ namespace MockObjects
     public:
         typedef QSharedPointer<MockTagHandler> SharedPointer;
 		typedef QSharedPointer<testing::NiceMock<MockTagHandler>> NiceSharedPointer;
-        MOCK_CONST_METHOD1(canHandle, bool(const QString& tag));
-        MOCK_METHOD1(startElement, void(const QDomElement& root));
-        MOCK_METHOD1(endElement, void(const QString& name));
-        MOCK_METHOD1(characters, void(const QString& ch));
+        MOCK_METHOD0(streamOpened, void());
+        MOCK_METHOD1(incomingStanza, void(const XmlElement::Ptr& element));
     };
 }
 

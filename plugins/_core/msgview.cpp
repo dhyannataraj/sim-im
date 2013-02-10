@@ -20,7 +20,7 @@
 #include "imagestorage/imagestorage.h"
 #include "xsl.h"
 #include "contacts/contact.h"
-#include "contacts/client.h"
+#include "clients/client.h"
 
 #include "msgview.h"
 #include "core.h"

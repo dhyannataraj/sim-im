@@ -20,13 +20,13 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120_CTP_Nov2012</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>false</CLRSupport>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120_CTP_Nov2012</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -122,19 +122,26 @@
     <ClCompile Include="..\sim\tests\test.cpp" />
     <ClCompile Include="..\sim\tests\testbuffer.cpp" />
     <ClCompile Include="..\sim\tests\testclientmanager.cpp" />
+    <ClCompile Include="..\sim\tests\testcommandhub.cpp" />
+    <ClCompile Include="..\sim\tests\testconfig.cpp" />
     <ClCompile Include="..\sim\tests\testcontact.cpp" />
+    <ClCompile Include="..\sim\tests\testcontactlist.cpp" />
     <ClCompile Include="..\sim\tests\testgroup.cpp" />
     <ClCompile Include="..\sim\tests\testimcontactid.cpp" />
     <ClCompile Include="..\sim\tests\testmessagepipe.cpp" />
+    <ClCompile Include="..\sim\tests\testpropertyhub.cpp" />
+    <ClCompile Include="..\sim\tests\testsocketfactory.cpp" />
     <ClCompile Include="..\sim\tests\teststandardavatarstorage.cpp" />
     <ClCompile Include="..\sim\tests\teststandardcontactlist.cpp" />
     <ClCompile Include="..\sim\tests\teststandardmessageoutpipe.cpp" />
     <ClCompile Include="..\sim\tests\teststandardprofilemanager.cpp" />
     <ClCompile Include="..\sim\tests\moc_testuicommand.cpp" />
+    <ClCompile Include="..\sim\tests\testuserdata.cpp" />
     <ClCompile Include="..\sim\tests\testwidgetcollectionevent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\sim\tests\gtest-qt.h" />
+    <ClInclude Include="..\sim\tests\mocks\mockclientmanager.h" />
     <ClInclude Include="..\sim\tests\mocks\mockimagestorage.h" />
     <CustomBuild Include="..\sim\tests\spies\widgetcollectioneventreceiver.h">
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)moc_%(Filename).cpp;%(Outputs)</Outputs>
@@ -144,7 +151,15 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%qtdir%\bin\moc.exe -o %(RootDir)%(Directory)moc_%(Filename).cpp %(RootDir)%(Directory)%(Filename).h</Command>
     </CustomBuild>
-    <ClInclude Include="..\sim\tests\teststandardmessageoutpipe.h" />
+    <ClInclude Include="..\sim\tests\mocks\mockimstatus.h" />
+    <ClInclude Include="..\sim\tests\mocks\mockprofilemanager.h" />
+    <ClInclude Include="..\sim\tests\simlib-testing.h" />
+    <ClInclude Include="..\sim\tests\testconfig.h" />
+    <ClInclude Include="..\sim\tests\testcontactlist.h" />
+    <ClInclude Include="..\sim\tests\testeventhub.h" />
+    <ClInclude Include="..\sim\tests\testpropertyhub.h" />
+    <ClInclude Include="..\sim\tests\testsocketfactory.h" />
+    <ClInclude Include="..\sim\tests\testuserdata.h" />
     <ClInclude Include="..\sim\tests\testwidgetcollectionevent.h" />
     <CustomBuild Include="..\sim\tests\testuicommand.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename).h ...</Message>
@@ -165,7 +180,6 @@
     <ClInclude Include="..\sim\tests\mocks\mockmessageoutpipe.h" />
     <ClInclude Include="..\sim\tests\mocks\mockmessagepipe.h" />
     <ClInclude Include="..\sim\tests\mocks\mockmessageprocessor.h" />
-    <ClInclude Include="..\sim\tests\mockprotocol.h" />
     <ClInclude Include="..\sim\tests\stubs\stubclient.h" />
     <ClInclude Include="..\sim\tests\stubs\stubimagestorage.h" />
     <ClInclude Include="..\sim\tests\stubs\stubimcontact.h" />

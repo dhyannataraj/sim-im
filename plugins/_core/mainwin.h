@@ -21,6 +21,7 @@
 #include <list>
 #include "simapi.h"
 #include "commands/simtoolbar.h"
+#include "services.h"
 
 #include <QMainWindow>
 #include <QList>
@@ -46,7 +47,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    MainWindow(CorePlugin* core);
+    MainWindow(const SIM::Services::Ptr& services, CorePlugin* core);
     ~MainWindow();
 
     UserView* userview() const;
@@ -97,6 +98,7 @@ private:
     QList<QWidget*> m_statusWidgets;
     CorePlugin* m_core;
     bool m_noresize;
+    SIM::Services::Ptr m_services;
 };
 
 #endif

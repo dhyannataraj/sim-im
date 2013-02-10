@@ -15,13 +15,14 @@
 
 #include "avatarstorage.h"
 #include "misc.h"
+#include "profile/profilemanager.h"
 
 namespace SIM {
 
 class SIM_EXPORT StandardAvatarStorage: public SIM::AvatarStorage
 {
 public:
-    StandardAvatarStorage();
+    StandardAvatarStorage(const ProfileManager::Ptr& profileManager);
     virtual ~StandardAvatarStorage();
 
     virtual void addAvatar(const IMContactId& contactId, const QImage& image, const QString& type = QString());
@@ -36,7 +37,7 @@ public:
     virtual QString parseSmiles(const QString& input) {return input;};
     virtual QStringList textSmiles(){return QStringList();};
     virtual QString parseAllSmiles(const QString& input){return input;};
-    virtual QString parseAllSmilesByName(const QString& name){return QString();};
+    virtual void parseAllSmilesByName(const QString& name, QIcon &icon){};
     virtual QString getSmileName(const QString& iconId) {return QString();}
     virtual QString getSmileNamePretty(const QString& iconId, bool localized=false){return QString();};
 protected:

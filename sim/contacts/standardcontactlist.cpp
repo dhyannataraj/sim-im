@@ -1,9 +1,9 @@
 #include <QDir>
 #include <QStringList>
 #include "standardcontactlist.h"
-#include "profilemanager.h"
-#include "contacts/client.h"
-#include "clientmanager.h"
+#include "profile/profilemanager.h"
+#include "clients/client.h"
+#include "clients/clientmanager.h"
 #include "log.h"
 #include "events/eventhub.h"
 #include "events/standardevent.h"
@@ -11,7 +11,9 @@
 
 namespace SIM {
 
-StandardContactList::StandardContactList()
+StandardContactList::StandardContactList(const ProfileManager::Ptr& profileManager, const ClientManager::Ptr& clientManager) : 
+    m_clientManager(clientManager),
+    m_profileManager(profileManager)
 {
     getEventHub()->registerEvent(SIM::StandardEvent::create("contacts_loaded"));
     getEventHub()->registerEvent(SIM::StandardEvent::create("contact_list_updated"));
@@ -34,10 +36,10 @@ bool StandardContactList::load()
 
 bool StandardContactList::sync()
 {
-    if(getProfileManager()->currentProfile().isNull())
+    if(m_profileManager->currentProfile().isNull())
         return false;
 
-    getProfileManager()->sync();
+    m_profileManager->sync();
 
     config()->rootHub()->addPropertyHub(m_userData->saveState());
 
@@ -246,7 +248,7 @@ bool StandardContactList::load_groups()
     foreach(QString groupID , groupList)
     {
         GroupPtr gr = createGroup(groupID.toInt());
-        if (!gr->loadState(groupsHub->propertyHub(groupID)))
+        if (!gr->loadState(m_clientManager, groupsHub->propertyHub(groupID)))
             return false;
         addGroup(gr);
     }
@@ -264,7 +266,7 @@ bool StandardContactList::load_contacts()
     foreach(QString contactID , contactsList)
     {
         ContactPtr c = createContact(contactID.toInt());
-        if (!c->loadState(contactsHub->propertyHub(contactID)))
+        if (!c->loadState(m_clientManager, contactsHub->propertyHub(contactID)))
             return false;
         addContact(c);
     }
@@ -273,7 +275,7 @@ bool StandardContactList::load_contacts()
 
 bool StandardContactList::load_old()
 {
-    QString cfgName = getProfileManager()->profilePath() + QDir::separator() + "contacts.conf";
+    QString cfgName = m_profileManager->profilePath() + QDir::separator() + "contacts.conf";
     QFile f(cfgName);
     if (!f.open(QIODevice::ReadOnly)){
         log(L_ERROR, "[2]Can't open %s", qPrintable(cfgName));
@@ -333,7 +335,7 @@ bool StandardContactList::load_old_dispatch(ParserState& state)
         {
             if(state.dataname.indexOf('.') >= 0)
             {
-                ClientPtr client = getClientManager()->client(state.dataname);
+                ClientPtr client = m_clientManager->client(state.dataname);
                 if(!client)
                     return false;
                 IMContactPtr imcontact = client->createIMContact();
@@ -367,7 +369,7 @@ bool StandardContactList::load_old_dispatch(ParserState& state)
         {
             if(state.dataname.indexOf('.') >= 0)
             {
-                ClientPtr client = getClientManager()->client(state.dataname);
+                ClientPtr client = m_clientManager->client(state.dataname);
                 if(!client)
                     return false;
                 IMGroupPtr imgroup = client->createIMGroup();
@@ -414,11 +416,11 @@ bool StandardContactList::deserializeLines(const UserDataPtr& ud, const QString&
 
 ConfigPtr StandardContactList::config()
 {
-    if (!m_config.isNull() && m_loadedProfile == getProfileManager()->currentProfileName())
+    if (!m_config.isNull() && m_loadedProfile == m_profileManager->currentProfileName())
         return m_config;
 
-    m_loadedProfile = getProfileManager()->currentProfileName();
-    QString cfgName = getProfileManager()->profilePath() + QDir::separator() + "contacts.xml";
+    m_loadedProfile = m_profileManager->currentProfileName();
+    QString cfgName = m_profileManager->profilePath() + QDir::separator() + "contacts.xml";
     m_config = ConfigPtr(new Config(cfgName));
 
     m_config->readFromFile();

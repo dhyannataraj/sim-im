@@ -5,7 +5,6 @@
 #include <QSharedPointer>
 #include <QBitArray>
 #include "simapi.h"
-#include "plugins.h"
 //#include "event.h"
 #include "cfg.h"
 #include "contacts/imstatus.h"
@@ -14,6 +13,7 @@
 
 namespace SIM
 {
+    class Plugin;
     class Client;
     class EXPORT Protocol
     {

@@ -6,7 +6,7 @@
 #include <QString>
 #include <QStringList>
 #include "cfg.h"
-#include "plugins.h"
+#include "plugin/plugin.h"
 
 namespace SIM
 {

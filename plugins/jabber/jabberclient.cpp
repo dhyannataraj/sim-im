@@ -1,9 +1,9 @@
 /***************************************************************************
-                          jabberclient.cpp  -  description
-                             -------------------
-    begin                : Sun Mar 17 2002
-    copyright            : (C) 2002 by Vladimir Shutoff
-    email                : vovan@shutoff.ru
+						  jabberclient.cpp  -  description
+							 -------------------
+	begin                : Sun Mar 17 2002
+	copyright            : (C) 2002 by Vladimir Shutoff
+	email                : vovan@shutoff.ru
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,7 +33,7 @@
 #include "jabberclient.h"
 #include "jabber.h"
 #include "jabberstatuswidget.h"
-#include "clientmanager.h"
+#include "clients/clientmanager.h"
 
 #include "network/standardjabbersocket.h"
 
@@ -59,233 +59,233 @@ using namespace SIM;
 unsigned PING_TIMEOUT = 50;
 
 JabberClientData::JabberClientData(JabberClient* client) :
-    m_server("jabber.org"),
-    m_port(5222),
-    m_useSSL(false),
-    m_usePlain(false),
-    m_useVHost(false),
-    m_priority(5),
-    m_typing(true),
-    m_richText(true),
-    m_useVersion(true),
-    m_protocolIcons(true),
-    m_minPort(1024),
-    m_maxPort(0xffff),
-    m_autoSubscribe(true),
-    m_autoAccept(true)
+	m_server("jabber.org"),
+	m_port(5222),
+	m_useSSL(false),
+	m_usePlain(false),
+	m_useVHost(false),
+	m_priority(5),
+	m_typing(true),
+	m_richText(true),
+	m_useVersion(true),
+	m_protocolIcons(true),
+	m_minPort(1024),
+	m_maxPort(0xffff),
+	m_autoSubscribe(true),
+	m_autoAccept(true)
 {
-    owner = JabberContactPtr(new JabberContact(client));
+	owner = JabberContactPtr(new JabberContact(client));
 }
 
 QByteArray JabberClientData::serialize()
 {
-    return QByteArray();
+	return QByteArray();
 }
 
 void JabberClientData::deserialize(Buffer* cfg)
 {
-    while(1) {
-        const QString line = QString::fromUtf8(cfg->getLine());
-        if (line.isEmpty())
-            break;
-        QStringList keyval = line.split('=');
-        if(keyval.size() < 2)
-            continue;
-        deserializeLine(keyval.at(0), keyval.at(1));
-    }
+	while(1) {
+		const QString line = QString::fromUtf8(cfg->getLine());
+		if (line.isEmpty())
+			break;
+		QStringList keyval = line.split('=');
+		if(keyval.size() < 2)
+			continue;
+		deserializeLine(keyval.at(0), keyval.at(1));
+	}
 }
 
 void JabberClientData::deserializeLine(const QString& key, const QString& value)
 {
-    QString val = value;
-    if(val.startsWith('\"') && val.endsWith('\"'))
-        val = val.mid(1, val.length() - 2);
-    log(L_DEBUG, "JabberClientData::deserializeLine(%s, %s)", qPrintable(key), qPrintable(value));
-    if(val == "Server") {
-        setServer(key);
-    }
-    if(key == "Password") {
+	QString val = value;
+	if(val.startsWith('\"') && val.endsWith('\"'))
+		val = val.mid(1, val.length() - 2);
+	log(L_DEBUG, "JabberClientData::deserializeLine(%s, %s)", qPrintable(key), qPrintable(value));
+	if(val == "Server") {
+		setServer(key);
+	}
+	if(key == "Password") {
 		owner->client()->setCryptedPassword(val);
-    }
-    else if(val == "Port") {
-        setPort(val.toUInt());
-    }
-    else if(val == "UseSSL") {
-        setUseSSL(val == "true");
-    }
-    else if(val == "UsePlain") {
-        setUsePlain(val == "true");
-    }
-    else if(val == "UseVHost") {
-        setUseVHost(val == "true");
-    }
-    else if(val == "Priority") {
-        setPriority(val.toUInt());
-    }
-    else if(val == "ListRequest") {
-        setListRequest(val);
-    }
-    else if(val == "VHost") {
-        setVHost(val);
-    }
-    else if(val == "Typing") {
-        setTyping(val == "true");
-    }
-    else if(val == "RichText") {
-        setRichText(val == "true");
-    }
-    else if(val == "UseVersion") {
-        setUseVersion(val == "true");
-    }
-    else if(val == "ProtocolIcons") {
-        setProtocolIcons(val == "true");
-    }
-    else if(val == "MinPort") {
-        setMinPort(val.toUInt());
-    }
-    else if(val == "MaxPort") {
-        setMaxPort(val.toUInt());
-    }
-    else if(val == "Photo") {
-        setPhoto(val);
-    }
-    else if(val == "Logo") {
-        setLogo(val);
-    }
-    else if(val == "AutoSubscribe") {
-        setAutoSubscribe(val == "true");
-    }
-    else if(val == "AutoAccept") {
-        setAutoAccept(val == "true");
-    }
-    else if(val == "UseHTTP") {
-        setUseHttp(val == "true");
-    }
-    else if(val == "URL") {
-        setUrl(val);
-    }
-    else if(val == "InfoUpdated") {
-        setInfoUpdated(val == "true");
-    }
-    else
-        owner->deserializeLine(key, value);
+	}
+	else if(val == "Port") {
+		setPort(val.toUInt());
+	}
+	else if(val == "UseSSL") {
+		setUseSSL(val == "true");
+	}
+	else if(val == "UsePlain") {
+		setUsePlain(val == "true");
+	}
+	else if(val == "UseVHost") {
+		setUseVHost(val == "true");
+	}
+	else if(val == "Priority") {
+		setPriority(val.toUInt());
+	}
+	else if(val == "ListRequest") {
+		setListRequest(val);
+	}
+	else if(val == "VHost") {
+		setVHost(val);
+	}
+	else if(val == "Typing") {
+		setTyping(val == "true");
+	}
+	else if(val == "RichText") {
+		setRichText(val == "true");
+	}
+	else if(val == "UseVersion") {
+		setUseVersion(val == "true");
+	}
+	else if(val == "ProtocolIcons") {
+		setProtocolIcons(val == "true");
+	}
+	else if(val == "MinPort") {
+		setMinPort(val.toUInt());
+	}
+	else if(val == "MaxPort") {
+		setMaxPort(val.toUInt());
+	}
+	else if(val == "Photo") {
+		setPhoto(val);
+	}
+	else if(val == "Logo") {
+		setLogo(val);
+	}
+	else if(val == "AutoSubscribe") {
+		setAutoSubscribe(val == "true");
+	}
+	else if(val == "AutoAccept") {
+		setAutoAccept(val == "true");
+	}
+	else if(val == "UseHTTP") {
+		setUseHttp(val == "true");
+	}
+	else if(val == "URL") {
+		setUrl(val);
+	}
+	else if(val == "InfoUpdated") {
+		setInfoUpdated(val == "true");
+	}
+	else
+		owner->deserializeLine(key, value);
 }
 
 JabberClient::JabberClient(JabberProtocol* protocol, const QString& name) : SIM::Client(protocol), m_name(name),
-        m_resource("Default")
+		m_resource("Default")
 {
-    m_socket = new StandardJabberSocket();
-    m_dispatcher = new InputStreamDispatcher();
-    m_dispatcher->setDevice(m_socket->inputStream());
+	m_socket = new StandardJabberSocket();
+	m_dispatcher = new InputStreamDispatcher();
+	m_dispatcher->setDevice(m_socket->inputStream());
 
-    m_auth = JabberAuthenticationController::SharedPointer(new JabberAuthenticationController());
-    m_auth->setSocket(m_socket);
-    m_auth->setResource(m_resource);
+	m_auth = JabberAuthenticationController::SharedPointer(new JabberAuthenticationController());
+	m_auth->setSocket(m_socket);
+	m_auth->setResource(m_resource);
 
-    connect(m_auth.data(), SIGNAL(newStream()), m_dispatcher, SLOT(newStream()));
-    connect(m_auth.data(), SIGNAL(authenticationDone()), this, SLOT(authenticationDone()));
+	connect(m_auth.data(), SIGNAL(newStream()), m_dispatcher, SLOT(newStream()));
+	connect(m_auth.data(), SIGNAL(authenticationDone()), this, SLOT(authenticationDone()));
 
-    m_dispatcher->addTagHandler(m_auth);
+	m_dispatcher->addTagHandler(m_auth);
 
-    connect(m_socket, SIGNAL(newData()), m_dispatcher, SLOT(newData()));
-    clientPersistentData = new JabberClientData(this);
-    init();
+	connect(m_socket, SIGNAL(newData()), m_dispatcher, SLOT(newData()));
+	clientPersistentData = new JabberClientData(this);
+	init();
 }
 
 JabberClient::~JabberClient()
 {
-    delete m_dispatcher;
-    delete m_socket;
+	delete m_dispatcher;
+	delete m_socket;
 }
 
 
 SIM::IMContactPtr JabberClient::ownerContact()
 {
-    return clientPersistentData->owner;
+	return clientPersistentData->owner;
 }
 
 void JabberClient::setOwnerContact(SIM::IMContactPtr contact)
 {
-    JabberContactPtr jabberContact = contact.dynamicCast<JabberContact>();
-    if(jabberContact)
-        clientPersistentData->owner = jabberContact;
+	JabberContactPtr jabberContact = contact.dynamicCast<JabberContact>();
+	if(jabberContact)
+		clientPersistentData->owner = jabberContact;
 }
 
 bool JabberClient::loadState(SIM::PropertyHubPtr state)
 {
-    if (state.isNull())
-        return false;
-    PropertyHubPtr hub = state;
+	if (state.isNull())
+		return false;
+	PropertyHubPtr hub = state;
 
-    setID(hub->value("ID").toString());
-    setServer(hub->value("Server").toString());
-    setPort(hub->value("Port").toUInt());
-    setUseSSL(hub->value("UseSSL").toBool());
-    setUsePlain(hub->value("UsePlain").toBool());
-    setUseVHost(hub->value("UseVHost").toBool());
-    setResource(hub->value("Resource").toString());
-    setPriority(hub->value("Priority").toUInt());
-    setListRequest(hub->value("ListRequest").toString());
-    setVHost(hub->value("VHost").toString());
-    setTyping(hub->value("Typing").toBool());
-    setRichText(hub->value("RichText").toBool());
-    setUseVersion(hub->value("UseVersion").toBool());
-    setProtocolIcons(hub->value("ProtocolIcons").toBool());
-    setMinPort(hub->value("MinPort").toUInt());
-    setMaxPort(hub->value("MaxPort").toUInt());
-    setPhoto(hub->value("Photo").toString());
-    setLogo(hub->value("Logo").toString());
-    setAutoSubscribe(hub->value("AutoSubscribe").toBool());
-    setAutoAccept(hub->value("AutoAccept").toBool());
-    setUseHTTP(hub->value("UseHTTP").toBool());
-    setURL(hub->value("URL").toString());
-    setInfoUpdated(hub->value("InfoUpdated").toBool());
+	setID(hub->value("ID").toString());
+	setServer(hub->value("Server").toString());
+	setPort(hub->value("Port").toUInt());
+	setUseSSL(hub->value("UseSSL").toBool());
+	setUsePlain(hub->value("UsePlain").toBool());
+	setUseVHost(hub->value("UseVHost").toBool());
+	setResource(hub->value("Resource").toString());
+	setPriority(hub->value("Priority").toUInt());
+	setListRequest(hub->value("ListRequest").toString());
+	setVHost(hub->value("VHost").toString());
+	setTyping(hub->value("Typing").toBool());
+	setRichText(hub->value("RichText").toBool());
+	setUseVersion(hub->value("UseVersion").toBool());
+	setProtocolIcons(hub->value("ProtocolIcons").toBool());
+	setMinPort(hub->value("MinPort").toUInt());
+	setMaxPort(hub->value("MaxPort").toUInt());
+	setPhoto(hub->value("Photo").toString());
+	setLogo(hub->value("Logo").toString());
+	setAutoSubscribe(hub->value("AutoSubscribe").toBool());
+	setAutoAccept(hub->value("AutoAccept").toBool());
+	setUseHTTP(hub->value("UseHTTP").toBool());
+	setURL(hub->value("URL").toString());
+	setInfoUpdated(hub->value("InfoUpdated").toBool());
 
-    return Client::loadState(hub->propertyHub("client"));
+	return Client::loadState(hub->propertyHub("client"));
 }
 
 SIM::PropertyHubPtr JabberClient::saveState()
 {
-    PropertyHubPtr hub = SIM::PropertyHub::create(name());
+	PropertyHubPtr hub = SIM::PropertyHub::create(name());
 
-    hub->setValue("ID", getID());
-    hub->setValue("Server", getServer());
-    hub->setValue("Port", getPort());
-    hub->setValue("UseSSL", getUseSSL());
-    hub->setValue("UsePlain", getUsePlain());
-    hub->setValue("UseVHost", getUseVHost());
-    hub->setValue("Resource", getResource());
-    hub->setValue("Priority", (unsigned int)getPriority());
-    hub->setValue("ListRequest", getListRequest());
-    hub->setValue("VHost", getVHost());
-    hub->setValue("Typing", getTyping());
-    hub->setValue("RichText", getRichText());
-    hub->setValue("UseVersion", getUseVersion());
-    hub->setValue("ProtocolIcons", getProtocolIcons());
-    hub->setValue("MinPort", (unsigned int)getMinPort());
-    hub->setValue("MaxPort", (unsigned int)getMaxPort());
-    hub->setValue("Photo", getPhoto());
-    hub->setValue("Logo", getLogo());
-    hub->setValue("AutoSubscribe", getAutoSubscribe());
-    hub->setValue("AutoAccept", getAutoAccept());
-    hub->setValue("UseHTTP", getUseHTTP());
-    hub->setValue("URL", getURL());
-    hub->setValue("InfoUpdated", getInfoUpdated());
+	hub->setValue("ID", getID());
+	hub->setValue("Server", getServer());
+	hub->setValue("Port", getPort());
+	hub->setValue("UseSSL", getUseSSL());
+	hub->setValue("UsePlain", getUsePlain());
+	hub->setValue("UseVHost", getUseVHost());
+	hub->setValue("Resource", getResource());
+	hub->setValue("Priority", (unsigned int)getPriority());
+	hub->setValue("ListRequest", getListRequest());
+	hub->setValue("VHost", getVHost());
+	hub->setValue("Typing", getTyping());
+	hub->setValue("RichText", getRichText());
+	hub->setValue("UseVersion", getUseVersion());
+	hub->setValue("ProtocolIcons", getProtocolIcons());
+	hub->setValue("MinPort", (unsigned int)getMinPort());
+	hub->setValue("MaxPort", (unsigned int)getMaxPort());
+	hub->setValue("Photo", getPhoto());
+	hub->setValue("Logo", getLogo());
+	hub->setValue("AutoSubscribe", getAutoSubscribe());
+	hub->setValue("AutoAccept", getAutoAccept());
+	hub->setValue("UseHTTP", getUseHTTP());
+	hub->setValue("URL", getURL());
+	hub->setValue("InfoUpdated", getInfoUpdated());
 
-    hub->addPropertyHub(Client::saveState());
+	hub->addPropertyHub(Client::saveState());
 
-    return hub;
+	return hub;
 }
 
 bool JabberClient::deserialize(Buffer* cfg)
 {
-    clientPersistentData->deserialize(cfg);
-    return true;
+	clientPersistentData->deserialize(cfg);
+	return true;
 }
 
 IMContactPtr JabberClient::createIMContact()
 {
-    return IMContactPtr(new JabberContact(this));
+	return IMContactPtr(new JabberContact(this));
 }
 
 void JabberClient::addIMContact(const SIM::IMContactPtr& contact)//Todo
@@ -300,12 +300,12 @@ SIM::IMContactPtr JabberClient::getIMContact(const SIM::IMContactId& id)//Todo
 
 IMGroupPtr JabberClient::createIMGroup()
 {
-    return IMGroupPtr(new JabberGroup(this));
+	return IMGroupPtr(new JabberGroup(this));
 }
 
 QWidget* JabberClient::createSetupWidget(const QString& id, QWidget* parent)//Todo, id, parent not used!
 {
-    return 0;
+	return 0;
 }
 
 void JabberClient::destroySetupWidget()//Todo
@@ -315,310 +315,310 @@ void JabberClient::destroySetupWidget()//Todo
 
 QStringList JabberClient::availableSetupWidgets() const//Todo
 {
-    return QStringList();
+	return QStringList();
 }
 
 QWidget* JabberClient::createStatusWidget()
 {
-    return new JabberStatusWidget(this);
+	return new JabberStatusWidget(this);
 }
 
 IMStatusPtr JabberClient::currentStatus()
 {
-    return m_currentStatus;
+	return m_currentStatus;
 }
 
 void JabberClient::changeStatus(const IMStatusPtr& status)//Todo, status not used!
 {
-    if(m_currentStatus->flag(SIM::IMStatus::flOffline))
-    {
-        m_auth->setUsername(getUsername());
-        m_auth->setHostname(getServer());
-        m_auth->setPassword(password());
-        m_auth->startAuthentication(clientPersistentData->getServer(),
-                clientPersistentData->getPort());
-    }
+	if(m_currentStatus->flag(SIM::IMStatus::flOffline))
+	{
+		m_auth->setUsername(getUsername());
+		m_auth->setHostname(getServer());
+		m_auth->setPassword(password());
+		m_auth->startAuthentication(clientPersistentData->getServer(),
+				clientPersistentData->getPort());
+	}
 }
 
 IMStatusPtr JabberClient::savedStatus()
 {
-    return IMStatusPtr();
+	return IMStatusPtr();
 }
 
 SIM::MessageEditorFactory* JabberClient::messageEditorFactory() const//Todo
 {
-    return 0;
+	return 0;
 }
 
 QWidget* JabberClient::createSearchWidow(QWidget *parent)//Todo, parent not used!
 {
-    return 0;
+	return 0;
 }
 
 QList<IMGroupPtr> JabberClient::groups()
 {
-    return QList<IMGroupPtr>();
+	return QList<IMGroupPtr>();
 }
 
 QList<IMContactPtr> JabberClient::contacts()
 {
-    return QList<IMContactPtr>();
+	return QList<IMContactPtr>();
 }
 
 JabberStatusPtr JabberClient::getDefaultStatus(const QString& id) const
 {
-    foreach(const JabberStatusPtr& status, m_defaultStates)
-    {
-        if(status->id() == id)
-            return status->clone().dynamicCast<JabberStatus>();
-    }
-    return JabberStatusPtr();
+	foreach(const JabberStatusPtr& status, m_defaultStates)
+	{
+		if(status->id() == id)
+			return status->clone().dynamicCast<JabberStatus>();
+	}
+	return JabberStatusPtr();
 }
 
 void JabberClient::setID(const QString &id)
 {
-    clientPersistentData->owner->setId(id);
+	clientPersistentData->owner->setId(id);
 }
 
 QString JabberClient::getID() const
 {
-    return clientPersistentData->owner->getId();
+	return clientPersistentData->owner->getId();
 }
-    
+	
 QString JabberClient::getUsername() const
 {
-    QString id = getID(); 
-    return id.section('@', 0, 0);
+	QString id = getID(); 
+	return id.section('@', 0, 0);
 }
 
 QString JabberClient::getServer() const
 {
-    return clientPersistentData->getServer();
+	return clientPersistentData->getServer();
 }
 
 void JabberClient::setServer(const QString& server)
 {
-    clientPersistentData->setServer(server);
+	clientPersistentData->setServer(server);
 }
 
 QString JabberClient::getVHost() const
 {
-    return clientPersistentData->getVHost();
+	return clientPersistentData->getVHost();
 }
 
 void JabberClient::setVHost(const QString& vhost)
 {
-    clientPersistentData->setVHost(vhost);
+	clientPersistentData->setVHost(vhost);
 }
 
 unsigned short JabberClient::getPort() const
 {
-    return clientPersistentData->getPort();
+	return clientPersistentData->getPort();
 }
 
 void JabberClient::setPort(unsigned long port)
 {
-    clientPersistentData->setPort(port);
+	clientPersistentData->setPort(port);
 }
 
 bool JabberClient::getUseSSL() const
 {
-    return clientPersistentData->getUseSSL();
+	return clientPersistentData->getUseSSL();
 }
 
 void JabberClient::setUseSSL(bool b)
 {
-    clientPersistentData->setUseSSL(b);
+	clientPersistentData->setUseSSL(b);
 }
 
 bool JabberClient::getUsePlain() const
 {
-    return clientPersistentData->getUsePlain();
+	return clientPersistentData->getUsePlain();
 }
 
 void JabberClient::setUsePlain(bool b)
 {
-    clientPersistentData->setUsePlain(b);
+	clientPersistentData->setUsePlain(b);
 }
 
 bool JabberClient::getUseVHost() const
 {
-    return clientPersistentData->getUseVHost();
+	return clientPersistentData->getUseVHost();
 }
 
 void JabberClient::setUseVHost(bool b)
 {
-    clientPersistentData->setUseVHost(b);
+	clientPersistentData->setUseVHost(b);
 }
 
 bool JabberClient::getRegister() const
 {
-    return clientPersistentData->getRegister();
+	return clientPersistentData->getRegister();
 }
 
 void JabberClient::setRegister(bool b)
 {
-    clientPersistentData->setRegister(b);
+	clientPersistentData->setRegister(b);
 }
 
 QString JabberClient::getResource() const
 {
-    return m_resource;
+	return m_resource;
 }
 
 void JabberClient::setResource(const QString& resource)
 {
-    m_resource = resource;
+	m_resource = resource;
 }
 
 unsigned long JabberClient::getPriority() const
 {
-    return clientPersistentData->getPriority();
+	return clientPersistentData->getPriority();
 }
 
 void JabberClient::setPriority(unsigned long p)
 {
-    clientPersistentData->setPriority(p);
+	clientPersistentData->setPriority(p);
 }
 
 QString JabberClient::getListRequest() const
 {
-    return clientPersistentData->getListRequest();
+	return clientPersistentData->getListRequest();
 }
 
 void JabberClient::setListRequest(const QString& request)
 {
-    clientPersistentData->setListRequest(request);
+	clientPersistentData->setListRequest(request);
 }
 
 bool JabberClient::getTyping() const
 {
-    return clientPersistentData->isTyping();
+	return clientPersistentData->isTyping();
 }
 
 void JabberClient::setTyping(bool t)
 {
-    clientPersistentData->setTyping(t);
+	clientPersistentData->setTyping(t);
 }
 
 bool JabberClient::getRichText() const
 {
-    return clientPersistentData->isRichText();
+	return clientPersistentData->isRichText();
 }
 
 void JabberClient::setRichText(bool rt)
 {
-    clientPersistentData->setRichText(rt);
+	clientPersistentData->setRichText(rt);
 }
 
 bool JabberClient::getUseVersion()
 {
-    return clientPersistentData->getUseVersion();
+	return clientPersistentData->getUseVersion();
 }
 
 void JabberClient::setUseVersion(bool b)
 {
-    clientPersistentData->setUseVersion(b);
+	clientPersistentData->setUseVersion(b);
 }
 
 bool JabberClient::getProtocolIcons() const
 {
-    return clientPersistentData->getProtocolIcons();
+	return clientPersistentData->getProtocolIcons();
 }
 
 void JabberClient::setProtocolIcons(bool b)
 {
-    clientPersistentData->setProtocolIcons(b);
+	clientPersistentData->setProtocolIcons(b);
 }
 
 unsigned long JabberClient::getMinPort() const
 {
-    return clientPersistentData->getMinPort();
+	return clientPersistentData->getMinPort();
 }
 
 void JabberClient::setMinPort(unsigned long port)
 {
-    clientPersistentData->setMinPort(port);
+	clientPersistentData->setMinPort(port);
 }
 
 unsigned long JabberClient::getMaxPort() const
 {
-    return clientPersistentData->getMaxPort();
+	return clientPersistentData->getMaxPort();
 }
 
 void JabberClient::setMaxPort(unsigned long port)
 {
-    clientPersistentData->setMaxPort(port);
+	clientPersistentData->setMaxPort(port);
 }
 
 QString JabberClient::getPhoto() const
 {
-    return clientPersistentData->getPhoto();
+	return clientPersistentData->getPhoto();
 }
 
 void JabberClient::setPhoto(const QString& photo)
 {
-    clientPersistentData->setPhoto(photo);
+	clientPersistentData->setPhoto(photo);
 }
 
 QString JabberClient::getLogo() const
 {
-    return clientPersistentData->getLogo();
+	return clientPersistentData->getLogo();
 }
 
 void JabberClient::setLogo(const QString& logo)
 {
-    clientPersistentData->setLogo(logo);
+	clientPersistentData->setLogo(logo);
 }
 
 bool JabberClient::getAutoSubscribe() const
 {
-    return clientPersistentData->getAutoSubscribe();
+	return clientPersistentData->getAutoSubscribe();
 }
 
 void JabberClient::setAutoSubscribe(bool b)
 {
-    clientPersistentData->setAutoSubscribe(b);
+	clientPersistentData->setAutoSubscribe(b);
 }
 
 bool JabberClient::getAutoAccept() const
 {
-    return clientPersistentData->getAutoAccept();
+	return clientPersistentData->getAutoAccept();
 }
 
 void JabberClient::setAutoAccept(bool b)
 {
-    clientPersistentData->setAutoAccept(b);
+	clientPersistentData->setAutoAccept(b);
 }
 
 bool JabberClient::getUseHTTP() const
 {
-    return clientPersistentData->getUseHttp();
+	return clientPersistentData->getUseHttp();
 }
 
 void JabberClient::setUseHTTP(bool b)
 {
-    clientPersistentData->setUseHttp(b);
+	clientPersistentData->setUseHttp(b);
 }
 
 QString JabberClient::getURL() const
 {
-    return clientPersistentData->getUrl();
+	return clientPersistentData->getUrl();
 }
 
 void JabberClient::setURL(const QString& url)
 {
-    clientPersistentData->setUrl(url);
+	clientPersistentData->setUrl(url);
 }
 
 bool JabberClient::getInfoUpdated() const
 {
-    return clientPersistentData->getInfoUpdated();
+	return clientPersistentData->getInfoUpdated();
 }
 
 void JabberClient::setInfoUpdated(bool b)
 {
-    clientPersistentData->setInfoUpdated(b);
+	clientPersistentData->setInfoUpdated(b);
 }
 
 //QByteArray JabberClient::getConfig()
@@ -642,13 +642,13 @@ void JabberClient::setInfoUpdated(bool b)
 
 QString JabberClient::name()
 {
-    if(m_name.isEmpty())
-    {
-        QString res = "Jabber.";
-        res += clientPersistentData->owner->getId();
-        return res;
-    }
-    return m_name;
+	if(m_name.isEmpty())
+	{
+		QString res = "Jabber.";
+		res += clientPersistentData->owner->getId();
+		return res;
+	}
+	return m_name;
 }
 
 QString JabberClient::retrievePasswordLink()
@@ -1108,19 +1108,19 @@ QString JabberClient::retrievePasswordLink()
 
 void JabberClient::init()
 {
-    addDefaultStates();
-    m_currentStatus = getDefaultStatus("offline");
+	addDefaultStates();
+	m_currentStatus = getDefaultStatus("offline");
 
 }
 
 void JabberClient::addDefaultStates()
 {
-    JabberStatusPtr online = JabberStatusPtr(new JabberStatus("online", "Online", true, QString(), getImageStorage()->pixmap("Jabber_online"), QString(), QString()));
-    m_defaultStates.append(online);
+	JabberStatusPtr online = JabberStatusPtr(new JabberStatus("online", "Online", true, QString(), getImageStorage()->pixmap("Jabber_online"), QString(), QString()));
+	m_defaultStates.append(online);
 
-    JabberStatusPtr offline = JabberStatusPtr(new JabberStatus("offline", "Offline", true, QString(), getImageStorage()->pixmap("Jabber_offline"), QString(), QString()));
-    offline->setFlag(IMStatus::flOffline, true);
-    m_defaultStates.append(offline);
+	JabberStatusPtr offline = JabberStatusPtr(new JabberStatus("offline", "Offline", true, QString(), getImageStorage()->pixmap("Jabber_offline"), QString(), QString()));
+	offline->setFlag(IMStatus::flOffline, true);
+	m_defaultStates.append(offline);
 }
 
 void JabberClient::authenticationDone()

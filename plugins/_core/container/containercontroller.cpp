@@ -4,7 +4,8 @@
 #include "container.h"
 #include "userwnd.h"
 
-ContainerController::ContainerController(int id) : m_id(id)
+ContainerController::ContainerController(const SIM::Services::Ptr& services, int id) : m_id(id),
+    m_services(services)
 {
     Container* container = new Container(id);
     m_view = IContainerPtr(container);
@@ -67,7 +68,7 @@ void ContainerController::containerClosed()
 
 UserWndControllerPtr ContainerController::createUserWndController(int id)
 {
-    StandardUserWndController* controller = new StandardUserWndController(id);
+    StandardUserWndController* controller = new StandardUserWndController(m_services, id);
     connect(controller, SIGNAL(messageSendRequest(SIM::MessagePtr)), this, SLOT(messageSendRequest(SIM::MessagePtr)));
     return UserWndControllerPtr(controller);
 }

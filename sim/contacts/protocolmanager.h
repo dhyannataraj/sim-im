@@ -5,12 +5,15 @@
 #include "protocol.h"
 #include "simapi.h"
 #include <list>
+#include <QSharedPointer>
 
 namespace SIM
 {
     class EXPORT ProtocolManager
     {
     public:
+        typedef QSharedPointer<ProtocolManager> Ptr;
+
         ProtocolManager();
         virtual ~ProtocolManager();
 
@@ -23,24 +26,6 @@ namespace SIM
     private:
         QList<ProtocolPtr> m_protocols;
     };
-
-    class EXPORT ProtocolIterator
-    {
-    public:
-        ProtocolPtr operator++();
-        ProtocolIterator();
-        ~ProtocolIterator();
-        void reset();
-
-    private:
-        int m_index;
-        COPY_RESTRICTED(ProtocolIterator)
-    };
-
-
-    EXPORT ProtocolManager* getProtocolManager();
-    void EXPORT createProtocolManager();
-    void EXPORT destroyProtocolManager();
 }
 
 #endif

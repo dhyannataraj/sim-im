@@ -4,7 +4,6 @@
  *  Created on: Feb 10, 2012
  *      Author: todin
  */
-
 #include "standardjabbersocket.h"
 #include "log.h"
 
@@ -42,6 +41,7 @@ void StandardJabberSocket::startTls()
 
 void StandardJabberSocket::send(const QByteArray& data)
 {
+    log(L_DEBUG, "send: %s", data.data());
     m_socket.write(data);
 }
 

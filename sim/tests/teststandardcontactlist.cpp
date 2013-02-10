@@ -4,6 +4,7 @@
 #include "events/eventhub.h"
 #include "contacts/standardcontactlist.h"
 #include "contacts/contactlist.h"
+#include "simlib-testing.h"
 
 namespace
 {
@@ -13,8 +14,9 @@ namespace
     protected:
         virtual void SetUp()
         {
+            auto services = SIM::makeMockServices();
             SIM::createEventHub();
-            SIM::createContactList();
+            SIM::createContactList(services->profileManager(), services->clientManager());
         }
 
         virtual void TearDown()
