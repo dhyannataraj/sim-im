@@ -55,26 +55,49 @@ SplashPlugin::SplashPlugin(unsigned base, bool bStart)
     splash = NULL;
     m_bStart = bStart;
     if (m_bStart){
-        QPixmap pict(app_file("pict/splash.png"));
+        QPixmap pict(app_file("pict/sim-im-splash.png"));
 		// FIXME: better use QSplash with QSplashScreen::drawContents()
         if (!pict.isNull()){
-			KAboutData *about_data = getAboutData();
-			QString text = about_data->programName();
-			text += " ";
-			text += about_data->version();
+			QString version = VERSION;
+			QString build = "build ";
+#ifdef CVS_BUILD
+			build += "git ";
+			build +=  REVISION_NUMBER;
+			build += ", ";
+#endif
+// FIXME: Later we should better use cmake's string(TIMESTAMP ...) to get build date
+			// Example of __DATE__ string: "Jul 27 2012"
+			//                              01234567890
+			QString build_date;
+			QString raw_date = __DATE__;
+			QString months[] = {NULL,"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+			for (int i = 1; i<=12; i++)
+			{
+			  if (raw_date.contains(months[i]))
+			  {
+			    build_date = QString::number(i);
+			  }
+			}
+			if (build_date.length()<2) build_date = "0" + build_date;
+			build_date = "" + raw_date[4] + raw_date[5] + "." + build_date;
+			build_date += "." + raw_date[9] + raw_date[10];
+			build += build_date;
 			QPainter p(&pict);
-			QFont f = qApp->font();
-			f.setBold(true);
+			QFont f("Sans Serif",10);
+			f.setStyleHint(QFont::SansSerif);
+			f.setStyleStrategy(QFont::NoAntialias);
+			//f.setStyleStrategy(QFont::PreferBitmap); // FIXME May be this would be better for windows, as bitmap fonts are AFAIK disabled in Linux 
 			p.setFont(f);
-			QRect rc = p.boundingRect(0, 0, pict.width(), pict.height(), Qt::AlignLeft | Qt::AlignTop, text);
-			int x = pict.width() - 7 - rc.width();
-			int y = 7 + rc.height();
-			p.setPen(QColor(0x80, 0x80, 0x80));
-			p.drawText(x, y, text);
-			x -= 2;
-			y -= 2;
-			p.setPen(QColor(0xFF, 0xFF, 0xE0));
-			p.drawText(x, y, text);
+			int x = 104;
+			int y = 76;
+			p.setPen(QColor(0xa2, 0xa2, 0xa2));
+			
+			p.drawText(x, y, version);
+			y=91;
+			f.setPointSize(6);
+			p.setFont(f);
+			
+			p.drawText(x, y, build);
 			splash = new QWidget(NULL, "splash",
 								 QWidget::WType_TopLevel | QWidget::WStyle_Customize |
 								 QWidget::WStyle_NoBorderEx | QWidget::WStyle_StaysOnTop);

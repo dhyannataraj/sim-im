@@ -1,7 +1,7 @@
 // version
 #define PACKAGE "sim"
 #define VERSION "${Sim-IM_VERSION}"
-#define REVISION_NUMBER "${Sim-IM_WC_REVISION}"
+#define REVISION_NUMBER "${GIT_COMMIT_ID}"
 
 #define PREFIX "${CMAKE_INSTALL_PREFIX}"
 #define DATADIR "${DATADIR}"

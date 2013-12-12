@@ -3,6 +3,9 @@
 PROJECT(Sim-IM)
 SET(Sim-IM_VERSION "0.9.5 RC1")
 
+# Only since cmake 2.8.11:
+# TRING(TIMESTAMP BUILD_DATE "%d.%m.%y")
+
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4.4)
 if(COMMAND cmake_policy)
     cmake_policy(SET CMP0003 NEW)
@@ -185,6 +188,17 @@ IF(DEV_BUILD)
     MESSAGE(STATUS "This Sim-IM source package were created from SVN-repository revision ${Sim-IM_WC_REVISION}")
   ELSE(EXISTS "${CMAKE_MODULE_PATH}/StaticRevDefinition.cmake")
     # Get revision number from SVN
+    INCLUDE(FindGit)
+
+    FIND_PACKAGE(Git)
+
+   If(GIT_FOUND)
+     MESSAGE("git found: ${GIT_EXECUTABLE}")
+     EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log --pretty=format:%h -n 1  OUTPUT_VARIABLE GIT_COMMIT_ID)
+     MESSAGE("git found: ${GIT_COMMIT_ID}")
+   ENDIF()
+
+    
     FIND_PACKAGE(Subversion)
     IF(Subversion_FOUND)
       MESSAGE("-- Found Subversion ${Subversion_VERSION_SVN}")

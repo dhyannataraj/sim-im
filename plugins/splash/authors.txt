@@ -2,3 +2,5 @@
 Sim-IM logo: Author: Eldar Fazullin, for Alexey Panfilov (lehis) <sim-im@lehis.ru>
 
 sim-im-logo.svg: vectorized by risenshnobel at linux.org.ru: https://www.linux.org.ru/forum/talks/8837821?lastmod=1360768275246#comment-8842135 (Russian)
+
+sim-im-splash.[png|psd]: Author: Leonid Orlov
