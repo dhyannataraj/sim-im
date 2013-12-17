@@ -187,30 +187,12 @@ IF(DEV_BUILD)
     INCLUDE(StaticRevDefinition)
     MESSAGE(STATUS "This Sim-IM source package were created from SVN-repository revision ${Sim-IM_WC_REVISION}")
   ELSE(EXISTS "${CMAKE_MODULE_PATH}/StaticRevDefinition.cmake")
-    # Get revision number from SVN
+    # Get commit id from git
     INCLUDE(FindGit)
-
     FIND_PACKAGE(Git)
-
-   If(GIT_FOUND)
-     MESSAGE("git found: ${GIT_EXECUTABLE}")
-     EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log --pretty=format:%h -n 1  OUTPUT_VARIABLE GIT_COMMIT_ID)
-     MESSAGE("git found: ${GIT_COMMIT_ID}")
-   ENDIF()
-
-    
-    FIND_PACKAGE(Subversion)
-    IF(Subversion_FOUND)
-      MESSAGE("-- Found Subversion ${Subversion_VERSION_SVN}")
-      Subversion_WC_INFO(${PROJECT_SOURCE_DIR} Sim-IM)
-      IF(DEFINED Sim-IM_WC_REVISION)
-        SET(CMAKE_KVIRC_BUILD_REVISION ${Sim-IM_WC_REVISION})
-        MESSAGE("-- Current revision is ${Sim-IM_WC_REVISION}")
-      ELSE()
-        MESSAGE("-- No Subversion working copy found")
-      ENDIF()
-    ELSE()
-      MESSAGE("Subversion not found. No revision number will be used")
+    IF(GIT_FOUND)
+      EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log --pretty=format:%h -n 1  OUTPUT_VARIABLE GIT_COMMIT_ID)
+      MESSAGE(STATUS "Development build detected. Git commit id: ${GIT_COMMIT_ID}")
     ENDIF()
   ENDIF(EXISTS "${CMAKE_MODULE_PATH}/StaticRevDefinition.cmake")
 

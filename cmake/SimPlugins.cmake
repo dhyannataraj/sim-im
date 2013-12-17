@@ -4,7 +4,7 @@ MACRO(SIM_ADD_PLUGIN _name)
 
     ##################################################
     IF(${_name}_PLATFORMS)
-        SET(_src_types SRCS HDRS UICS LIBS FLEX MEDIA)
+        SET(_src_types SRCS HDRS UICS FLEX MEDIA)
 
         FOREACH(_src_type ${_src_types})
             SET(_${_src_type} "")
@@ -81,7 +81,7 @@ MACRO(SIM_ADD_PLUGIN _name)
 
         INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
-        TARGET_LINK_LIBRARIES(${_name} simlib ${_LIBS})
+        TARGET_LINK_LIBRARIES(${_name} simlib ${${_name}_LIBS})
 
         SET_TARGET_PROPERTIES(${_name} PROPERTIES PREFIX "")
 

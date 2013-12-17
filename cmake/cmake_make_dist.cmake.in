@@ -19,7 +19,7 @@ ENDIF(NOT EXISTS "${_manifest}")
 SET(_base_name "sim-im_@Sim-IM_VERSION@")
 SET(_dev @DEV_BUILD@)
 IF(_dev)
-  SET(_base_name "${_base_name}~svn@Sim-IM_WC_REVISION@")
+  SET(_base_name "${_base_name}~git@GIT_COMMIT_ID@")
 ENDIF(_dev)
 SET(_base_name "${_base_name}${_base_name_postfix}")
 
@@ -58,7 +58,7 @@ ENDFOREACH(file)
 IF(_dev)
   FILE(WRITE "@CMAKE_CURRENT_BINARY_DIR@/${_base_name}/cmake/StaticRevDefinition.cmake"
   "# This file were automaticly created by 'make dist' in order to remember sorce revision when all .svn files are lost\n"
-  "SET(Sim-IM_WC_REVISION \"@Sim-IM_WC_REVISION@\")\n"
+  "SET(GIT_COMMIT_ID \"@GIT_COMMIT_ID@\")\n"
   )
 ENDIF(_dev)
 

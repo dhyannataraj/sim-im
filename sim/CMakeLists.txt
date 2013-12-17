@@ -4,7 +4,7 @@ ADD_SUBDIRECTORY(png)
 # target sim library #
 ######################
 ADD_TO_DIST_TARGET("${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt")
-ADD_TO_DIST_TARGET("${CMAKE_CURRENT_SOURCE_DIR}/sim.desktop")
+ADD_TO_DIST_TARGET("${CMAKE_CURRENT_SOURCE_DIR}/sim-im.desktop")
 
 SET(sim_LIB_SRCS
         aboutdata.cpp
