@@ -215,7 +215,7 @@ void LoginDialog::profileChanged(int)
         clearInputs();
         buttonOk->setEnabled(false);
         btnDelete->setEnabled(false);
-        btnRename->hide();
+        btnRename->setEnabled(false);
         return;
     }
     buttonOk->setEnabled(true);
@@ -223,9 +223,9 @@ void LoginDialog::profileChanged(int)
         lblPasswd->hide();
         clearInputs();
         btnDelete->setEnabled(false);
-        btnRename->hide();
+        btnRename->setEnabled(false);
     }else{
-        btnRename->show();
+        btnRename->setEnabled(true);
         clearInputs();
 	QString save_profile = CorePlugin::m_plugin->getProfile(); // Let's remember current profile name
         CorePlugin::m_plugin->setProfile(CorePlugin::m_plugin->m_profiles[n]);
