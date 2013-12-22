@@ -2994,6 +2994,7 @@ bool CorePlugin::init(bool bInit)
         } else
            setRegNew(true);
     }
+show_login_dlg:
     if ((!bInit || getProfile().isEmpty() || !getNoShow() || !getSavePasswd()) && (cmd_line_profile.isEmpty() || (!cmd_line_profile.isEmpty() && !getSavePasswd()))){
         if (!bInit || m_profiles.size()){
             if (bInit)
@@ -3030,7 +3031,8 @@ bool CorePlugin::init(bool bInit)
               bool ok = false;
               name = QInputDialog::getText(i18n("Create Profile"), i18n("Please enter a new name for the profile."),         QLineEdit::Normal, name, &ok, NULL);
               if(!ok){
-                 EventPluginsLoad eAbort;
+		 if (m_profiles.size()) goto show_login_dlg; // Ugly hack that makes "Profile Dialog" to reappear after Cancel button pressed (unless this is not first run when no profile still created)
+                 EventPluginsLoad eAbort; // If it is a first run just exits
                  eAbort.process();
                  return false;
               }
