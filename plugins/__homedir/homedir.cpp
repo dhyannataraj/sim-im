@@ -112,14 +112,38 @@ QString HomeDirPlugin::defaultPath()
 {
     QString s;
 #ifndef WIN32
-    struct passwd *pwd = getpwuid(getuid());
-    if (pwd){
-        s = QFile::decodeName(pwd->pw_dir);
-    }else{
-        log(L_ERROR, "Can't get pwd");
+    QString xdg_config_home = getenv("XDG_CONFIG_HOME");
+    QString home = getenv("HOME");
+    if (home.isEmpty ()) {
+        struct passwd *pwd = getpwuid(getuid());
+        if (pwd){
+          home = QFile::decodeName(pwd->pw_dir);
+        }else{
+            log(L_ERROR, "Can't get pwd");
+        }
     }
-    if (!s.endsWith("/"))
-        s += '/';
+    if (!home.endsWith("/"))
+        home += '/';
+    if (xdg_config_home.isEmpty ())
+        xdg_config_home = home + ".config/";      //for details see http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+
+    if ( !xdg_config_home.endsWith("/"))
+        xdg_config_home += '/';
+
+    s = xdg_config_home + "sim-im";
+    if (!QDir(s).exists()) {
+        // Try old Sim-IM config location
+        // FIXME later config files should be moved by migrate plugin and this code -- removed
+        s = home + ".sim";
+        if (!QDir(s).exists()) {
+            // Maybe before there were sim-im-kde here
+            s = home + ".kde/share/apps/sim";
+            if (!QDir(s).exists()) {
+              // Than this is a first run on this computer, we should create a new config in proper place
+              s = xdg_config_home + "sim-im";
+            }
+        }
+    }
 #ifdef USE_KDE
     char *kdehome = getenv("KDEHOME");
     if (kdehome){
@@ -130,7 +154,7 @@ QString HomeDirPlugin::defaultPath()
     if (!s.endsWith("/"))
         s += '/';
     s += "share/apps/sim";
-#else
+#else  // USE_KDE
     
 #ifdef __OS2__
     char *os2home = getenv("HOME");
@@ -142,12 +166,11 @@ QString HomeDirPlugin::defaultPath()
     if ( access( s, F_OK ) != 0 ) {
     	mkdir( s, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH );
     }
-#else
-    s += ".sim";
-#endif
+#endif //__OS2__
 
-#endif
-#else
+#endif // USE_KDE
+#else  // !WIN32
+
     char szPath[1024];
     szPath[0] = 0;
     QString defPath;
@@ -191,7 +214,7 @@ QString HomeDirPlugin::defaultPath()
     }else{
         s = app_file("");
     }
-#endif
+#endif // !WIN32
 #ifdef HAVE_CHMOD
     chmod(QFile::encodeName(s), 0700);
 #endif
